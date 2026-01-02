@@ -59,7 +59,7 @@
     <div class="max-w-7xl mx-auto px-4 py-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-4">
-          <a href="../index.html" class="text-xl font-bold text-emerald-400 flex items-center gap-2">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
             <span>INEMA.Make</span>
           </a>
           <span class="text-neutral-500">|</span>
@@ -134,7 +134,7 @@
           <span class="text-emerald-400 font-bold text-lg">1.1</span>
           <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~30 min</span>
         </div>
-        <h3 class="text-xl font-bold mb-2">Introducao ao Mundo da Automacao</h3>
+        <h3 class="text-2xl font-bold mb-2 text-emerald-400">Introducao ao Mundo da Automacao</h3>
         <p class="text-neutral-400 text-sm">Entenda o que e automacao, conheca o Make.com e crie seu primeiro cenario.</p>
       </div>
 
@@ -324,7 +324,7 @@
           <span class="text-emerald-400 font-bold text-lg">1.2</span>
           <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~35 min</span>
         </div>
-        <h3 class="text-xl font-bold mb-2">Webhooks e Comunicacao Basica</h3>
+        <h3 class="text-2xl font-bold mb-2 text-emerald-400">Webhooks e Comunicacao Basica</h3>
         <p class="text-neutral-400 text-sm">Aprenda a usar webhooks para conectar sistemas externos ao Make.</p>
       </div>
 
@@ -569,9 +569,41 @@
       const overlay = document.getElementById('modal-overlay');
       overlay.classList.remove('hidden');
       overlay.classList.add('flex');
-      // Content would be loaded via fetch in production
-      document.getElementById('modal-title').textContent = 'Conteudo do Modulo';
-      document.getElementById('modal-content').innerHTML = '<p class="text-neutral-400">Conteudo completo seria carregado aqui via fetch.</p>';
+
+      // Map modal IDs to file names
+      const moduleFiles = {
+        'modal-1-1': 'modulo-1-1.html',
+        'modal-1-2': 'modulo-1-2.html'
+      };
+
+      const fileName = moduleFiles[modalId];
+      if (fileName) {
+        document.getElementById('modal-content').innerHTML = '<p class="text-neutral-400 text-center py-8">Carregando...</p>';
+
+        fetch(fileName)
+          .then(response => response.text())
+          .then(html => {
+            // Extract main content from the fetched page
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const main = doc.querySelector('main');
+            const header = doc.querySelector('header');
+
+            if (header) {
+              const title = header.querySelector('h1');
+              document.getElementById('modal-title').textContent = title ? title.textContent : 'Modulo';
+            }
+
+            if (main) {
+              document.getElementById('modal-content').innerHTML = main.innerHTML;
+            } else {
+              document.getElementById('modal-content').innerHTML = '<p class="text-neutral-400">Conteudo nao encontrado.</p>';
+            }
+          })
+          .catch(err => {
+            document.getElementById('modal-content').innerHTML = '<p class="text-red-400">Erro ao carregar conteudo. Use "Ver Completo" para abrir em nova pagina.</p>';
+          });
+      }
     }
 
     function closeModal() {
