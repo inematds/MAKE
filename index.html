@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INEMA.Make - Curso de Automacao com Make e IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#10b981'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-xl font-bold text-emerald-400 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="trilha1/index.html" class="px-4 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
+        Curso Completo de Automacao
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">
+        Automacao com <span class="text-emerald-400">Make</span> e <span class="text-purple-400">IA</span>
+      </h1>
+      <p class="text-xl text-neutral-400 mb-8 max-w-2xl mx-auto">
+        Domine automacao no-code desde o basico ate sistemas avancados com agentes de IA.
+        180 topicos em 3 trilhas progressivas.
+      </p>
+
+      <!-- Stats -->
+      <div class="flex flex-wrap justify-center gap-8 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-emerald-400">3</div>
+          <div class="text-sm text-neutral-500">Trilhas</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-400">30</div>
+          <div class="text-sm text-neutral-500">Modulos</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-400">180</div>
+          <div class="text-sm text-neutral-500">Topicos</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-amber-400">100+</div>
+          <div class="text-sm text-neutral-500">Blueprints</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Trilhas Section -->
+  <main class="max-w-6xl mx-auto px-4 pb-16">
+    <h2 class="text-2xl font-bold mb-8 text-center">Escolha sua Trilha</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- Trilha 1: Fundamentos -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 overflow-hidden hover:border-emerald-500/50 transition-colors">
+        <div class="p-6 border-b border-dark-600">
+          <div class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium mb-4">
+            TRILHA 1
+          </div>
+          <h3 class="text-xl font-bold text-emerald-400 mb-2">Fundamentos</h3>
+          <p class="text-neutral-400 text-sm">
+            Para quem esta comecando do zero. Aprenda os conceitos basicos de automacao com Make.com.
+          </p>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex justify-between text-sm">
+            <span class="text-neutral-500">Modulos</span>
+            <span class="text-emerald-400 font-medium">10</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-neutral-500">Topicos</span>
+            <span class="text-emerald-400 font-medium">60</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-neutral-500">Nivel</span>
+            <span class="text-emerald-400 font-medium">Iniciante</span>
+          </div>
+          <a href="trilha1/index.html" class="block w-full mt-4 px-4 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg text-center transition-colors">
+            Comecar Trilha 1
+          </a>
+        </div>
+      </div>
+
+      <!-- Trilha 2: Tecnicas -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 overflow-hidden hover:border-blue-500/50 transition-colors">
+        <div class="p-6 border-b border-dark-600">
+          <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium mb-4">
+            TRILHA 2
+          </div>
+          <h3 class="text-xl font-bold text-blue-400 mb-2">Conhecimentos Tecnicos</h3>
+          <p class="text-neutral-400 text-sm">
+            Nivel intermediario para quem ja domina o basico. Integracoes avancadas e IA.
+          </p>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex justify-between text-sm">
+            <span class="text-neutral-500">Modulos</span>
+            <span class="text-blue-400 font-medium">10</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-neutral-500">Topicos</span>
+            <span class="text-blue-400 font-medium">60</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-neutral-500">Nivel</span>
+            <span class="text-blue-400 font-medium">Intermediario</span>
+          </div>
+          <a href="trilha2/index.html" class="block w-full mt-4 px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg text-center transition-colors">
+            Comecar Trilha 2
+          </a>
+        </div>
+      </div>
+
+      <!-- Trilha 3: Avancado -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 overflow-hidden hover:border-purple-500/50 transition-colors">
+        <div class="p-6 border-b border-dark-600">
+          <div class="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium mb-4">
+            TRILHA 3
+          </div>
+          <h3 class="text-xl font-bold text-purple-400 mb-2">Sistemas Avancados</h3>
+          <p class="text-neutral-400 text-sm">
+            Para profissionais e criacao de produtos. Agentes de IA, RAG, SaaS.
+          </p>
+        </div>
+        <div class="p-6 space-y-4">
+          <div class="flex justify-between text-sm">
+            <span class="text-neutral-500">Modulos</span>
+            <span class="text-purple-400 font-medium">10</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-neutral-500">Topicos</span>
+            <span class="text-purple-400 font-medium">60</span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-neutral-500">Nivel</span>
+            <span class="text-purple-400 font-medium">Avancado</span>
+          </div>
+          <a href="trilha3/index.html" class="block w-full mt-4 px-4 py-3 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg text-center transition-colors">
+            Comecar Trilha 3
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>
