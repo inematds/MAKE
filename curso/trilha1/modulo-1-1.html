@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.1 - Introducao ao Mundo da Automacao | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#10b981'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-emerald-400 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-emerald-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a>
+      <span>/</span>
+      <span class="text-emerald-400">Modulo 1.1</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-emerald-400 font-bold text-xl">1.1</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium">
+        TRILHA 1 - FUNDAMENTOS
+      </span>
+      <span class="text-neutral-500 text-sm">~30 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">
+      Introducao ao Mundo da Automacao
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Aprenda os conceitos fundamentais de automacao e de uma primeira olhada no Make.com.
+      Este modulo cobre o basico necessario para criar seu primeiro cenario automatizado.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Iniciante</span>
+      <span>|</span>
+      <span>Pre-requisitos: Nenhum</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">O que e automacao e por que importa</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Automacao e o processo de fazer tarefas repetitivas serem executadas automaticamente por sistemas, sem intervencao humana constante. No contexto digital, significa conectar ferramentas e criar fluxos que trabalham 24/7.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Libera seu tempo para atividades estrategicas, elimina erros humanos em tarefas repetitivas, permite escalar operacoes sem aumentar equipe proporcionalmente.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Trigger (gatilho), Acao, Fluxo de trabalho, ROI de automacao, No-code/Low-code.
+            </p>
+          </div>
+        </div>
+
+        <!-- Example Box -->
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Exemplo Pratico</h4>
+          <p class="text-neutral-300 text-sm">
+            Imagine que voce recebe 50 leads por dia via formulario. Manualmente, voce gastaria horas cadastrando em planilha, enviando email de boas-vindas e notificando a equipe. Com automacao, tudo isso acontece em segundos, automaticamente.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Conhecendo o Make.com - Interface e navegacao</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Make.com (antigo Integromat) e uma plataforma visual de automacao que permite conectar apps e servicos atraves de cenarios. A interface usa modulos arrastando e soltando para criar fluxos.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              E a ferramenta principal do curso, usada em 90% das automacoes. Dominar a interface acelera drasticamente o desenvolvimento de cenarios complexos.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Dashboard, Cenarios, Modulos, Conexoes, Historico de execucoes, Operacoes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Interface Overview -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Areas Principais do Make.com</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">•</span>
+              <span><strong>Dashboard:</strong> Visao geral de todos os cenarios e estatisticas</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">•</span>
+              <span><strong>Scenarios:</strong> Onde voce cria e edita suas automacoes</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">•</span>
+              <span><strong>Connections:</strong> Gerenciamento de credenciais e integraces</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">•</span>
+              <span><strong>Templates:</strong> Cenarios pre-construidos para comecar rapido</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Conceitos basicos: Cenarios, Modulos e Conexoes</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Cenario e o fluxo completo de automacao. Modulos sao os blocos individuais (acoes/triggers). Conexoes sao as credenciais que autorizam acesso a servicos externos.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sao os fundamentos de qualquer automacao. Sem entender esses conceitos, impossivel criar ou debugar cenarios.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Scenario, Module, Connection, Trigger, Action, Router, Filter.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Estrutura de um Cenario</h4>
+          <div class="flex items-center justify-center gap-4 text-sm py-4">
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-4 py-2 text-emerald-400">
+              Trigger
+            </div>
+            <span class="text-neutral-500">→</span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-4 py-2 text-blue-400">
+              Modulo 1
+            </div>
+            <span class="text-neutral-500">→</span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-4 py-2 text-purple-400">
+              Modulo 2
+            </div>
+            <span class="text-neutral-500">→</span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-4 py-2 text-amber-400">
+              Acao Final
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Seu primeiro cenario: Hello World</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Um cenario simples que demonstra o fluxo basico: receber um webhook e enviar uma resposta. E o equivalente ao "Hello World" da programacao.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Pratica fundamental para entender o ciclo completo de uma automacao: trigger → processamento → acao.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Webhook trigger, HTTP response, Test run, Scheduling.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step by Step -->
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Passo a Passo</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+            <li>Crie um novo cenario no Make.com</li>
+            <li>Adicione um modulo "Webhooks" → "Custom webhook"</li>
+            <li>Copie a URL do webhook gerada</li>
+            <li>Adicione um modulo "Webhooks" → "Webhook response"</li>
+            <li>Configure a resposta: <code class="bg-dark-700 px-2 py-1 rounded">{"message": "Hello World!"}</code></li>
+            <li>Clique em "Run once" e teste enviando um request para a URL</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Entendendo Triggers e Acoes</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Triggers sao eventos que iniciam o cenario (novo email, webhook, schedule). Acoes sao o que o cenario faz em resposta (enviar email, criar registro, postar).
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Toda automacao segue o padrao trigger-acao. Entender isso permite decompor qualquer processo em automacao.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Instant trigger, Scheduled trigger, Polling, Watch, Create, Update, Delete.
+            </p>
+          </div>
+        </div>
+
+        <!-- Types Comparison -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-emerald-400 font-semibold mb-3">Tipos de Triggers</h4>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li><strong>Instant:</strong> Executa imediatamente (webhook)</li>
+              <li><strong>Scheduled:</strong> Executa em intervalos (cron)</li>
+              <li><strong>Polling:</strong> Verifica periodicamente por novos dados</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-blue-400 font-semibold mb-3">Tipos de Acoes</h4>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li><strong>Create:</strong> Cria novos registros</li>
+              <li><strong>Update:</strong> Atualiza existentes</li>
+              <li><strong>Delete:</strong> Remove registros</li>
+              <li><strong>Search:</strong> Busca informacoes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Executando e testando seu cenario</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Processo de rodar o cenario em modo de teste para verificar se funciona corretamente antes de ativar. Inclui analise de dados de entrada/saida de cada modulo.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Debug eficiente economiza horas. Saber testar permite identificar e corrigir problemas rapidamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Run once, Execution history, Input bundle, Output bundle, Error handling.
+            </p>
+          </div>
+        </div>
+
+        <!-- Debug Tips -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-3">Dicas de Debug</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">1.</span>
+              <span>Sempre use "Run once" antes de ativar o scheduling</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">2.</span>
+              <span>Clique em cada modulo para ver input/output apos execucao</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">3.</span>
+              <span>Verifique o "Execution history" para erros passados</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">4.</span>
+              <span>Use "Dev tools" para inspecionar dados intermediarios</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">1.2 - Webhooks e Comunicacao Basica</p>
+        </div>
+        <a href="modulo-1-2.html" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors">
+          Continuar →
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-start space-x-3 mt-8">
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        ← Voltar para Trilha 1
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>
