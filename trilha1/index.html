@@ -24,22 +24,16 @@
     }
   </script>
   <style>
-    /* Topic expansion */
     .topic-explanation { display: none; }
     .topic-explanation.active { display: block; }
 
-    /* Light mode overrides */
     html:not(.dark) {
       --bg-primary: #ffffff;
       --bg-secondary: #f3f4f6;
       --text-primary: #111827;
       --text-secondary: #4b5563;
     }
-
-    html:not(.dark) body {
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
-    }
-
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
     html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
     html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
@@ -95,14 +89,10 @@
       <div class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-medium mb-4">
         TRILHA 1
       </div>
-      <h1 class="text-3xl md:text-4xl font-bold mb-4">
-        Fundamentos
-      </h1>
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">Fundamentos</h1>
       <p class="text-lg text-neutral-400 mb-6">
         Para quem esta comecando do zero. Aprenda os conceitos basicos de automacao com Make.com, webhooks, integracoes Google e introducao a IA.
       </p>
-
-      <!-- Stats -->
       <div class="flex flex-wrap gap-6">
         <div class="flex items-center gap-2">
           <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold">10</span>
@@ -111,10 +101,6 @@
         <div class="flex items-center gap-2">
           <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold">60</span>
           <span class="text-neutral-400 text-sm">Topicos</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold">~6h</span>
-          <span class="text-neutral-400 text-sm">Duracao</span>
         </div>
         <div class="flex items-center gap-2">
           <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium">Iniciante</span>
@@ -128,7 +114,6 @@
 
     <!-- MODULO 1.1 -->
     <div class="bg-dark-800 rounded-xl border border-dark-600">
-      <!-- Module Header -->
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2">
           <span class="text-emerald-400 font-bold text-lg">1.1</span>
@@ -137,188 +122,94 @@
         <h3 class="text-2xl font-bold mb-2 text-emerald-400">Introducao ao Mundo da Automacao</h3>
         <p class="text-neutral-400 text-sm">Entenda o que e automacao, conheca o Make.com e crie seu primeiro cenario.</p>
       </div>
-
-      <!-- Topics -->
       <div class="divide-y divide-dark-600">
-
-        <!-- Topic 1 -->
         <div class="topic-item">
           <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
             <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-            <div class="flex-1">
-              <span class="font-medium">O que e automacao e por que importa</span>
-              <span class="text-neutral-500 text-sm ml-2">- Fundamentos essenciais</span>
-            </div>
+            <span class="font-medium">🎯 O que e automacao e por que importa</span>
           </button>
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Automacao e o processo de fazer tarefas repetitivas serem executadas automaticamente por sistemas, sem intervencao humana constante. No contexto digital, significa conectar ferramentas e criar fluxos que trabalham 24/7.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">Libera seu tempo para atividades estrategicas, elimina erros humanos em tarefas repetitivas, permite escalar operacoes sem aumentar equipe proporcionalmente.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">Trigger (gatilho), Acao, Fluxo de trabalho, ROI de automacao, No-code/Low-code.</p>
-              </div>
+              <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Automacao e o processo de fazer tarefas repetitivas serem executadas automaticamente por sistemas, sem intervencao humana constante.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Libera seu tempo para atividades estrategicas, elimina erros humanos em tarefas repetitivas.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Trigger, Acao, Fluxo de trabalho, ROI de automacao, No-code/Low-code.</p></div>
             </div>
           </div>
         </div>
-
-        <!-- Topic 2 -->
         <div class="topic-item">
           <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
             <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-            <div class="flex-1">
-              <span class="font-medium">Conhecendo o Make.com - Interface e navegacao</span>
-              <span class="text-neutral-500 text-sm ml-2">- Plataforma principal</span>
-            </div>
+            <span class="font-medium">🖥️ Conhecendo o Make.com - Interface e navegacao</span>
           </button>
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Make.com (antigo Integromat) e uma plataforma visual de automacao que permite conectar apps e servicos atraves de cenarios. A interface usa modulos arrastando e soltando para criar fluxos.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">E a ferramenta principal do curso, usada em 90% das automacoes. Dominar a interface acelera drasticamente o desenvolvimento de cenarios complexos.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">Dashboard, Cenarios, Modulos, Conexoes, Historico de execucoes, Operacoes.</p>
-              </div>
+              <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Make.com (antigo Integromat) e uma plataforma visual de automacao que permite conectar apps atraves de cenarios.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">E a ferramenta principal do curso, usada em 90% das automacoes.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Dashboard, Cenarios, Modulos, Conexoes, Historico de execucoes, Operacoes.</p></div>
             </div>
           </div>
         </div>
-
-        <!-- Topic 3 -->
         <div class="topic-item">
           <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
             <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-            <div class="flex-1">
-              <span class="font-medium">Conceitos basicos: Cenarios, Modulos e Conexoes</span>
-              <span class="text-neutral-500 text-sm ml-2">- Blocos de construcao</span>
-            </div>
+            <span class="font-medium">🔗 Conceitos basicos: Cenarios, Modulos e Conexoes</span>
           </button>
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Cenario e o fluxo completo de automacao. Modulos sao os blocos individuais (acoes/triggers). Conexoes sao as credenciais que autorizam acesso a servicos externos.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">Sao os fundamentos de qualquer automacao. Sem entender esses conceitos, impossivel criar ou debugar cenarios.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">Scenario, Module, Connection, Trigger, Action, Router, Filter.</p>
-              </div>
+              <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Cenario e o fluxo completo. Modulos sao blocos individuais. Conexoes sao credenciais.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sao os fundamentos de qualquer automacao.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Scenario, Module, Connection, Trigger, Action, Router, Filter.</p></div>
             </div>
           </div>
         </div>
-
-        <!-- Topic 4 -->
         <div class="topic-item">
           <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
             <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-            <div class="flex-1">
-              <span class="font-medium">Seu primeiro cenario: Hello World</span>
-              <span class="text-neutral-500 text-sm ml-2">- Pratica inicial</span>
-            </div>
+            <span class="font-medium">▶️ Seu primeiro cenario: Hello World</span>
           </button>
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Um cenario simples que demonstra o fluxo basico: receber um webhook e enviar uma resposta. E o equivalente ao "Hello World" da programacao.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">Pratica fundamental para entender o ciclo completo de uma automacao: trigger -> processamento -> acao.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">Webhook trigger, HTTP response, Test run, Scheduling.</p>
-              </div>
+              <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Um cenario simples: receber webhook e enviar resposta.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Pratica fundamental para entender o ciclo completo.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Webhook trigger, HTTP response, Test run, Scheduling.</p></div>
             </div>
           </div>
         </div>
-
-        <!-- Topic 5 -->
         <div class="topic-item">
           <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
             <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-            <div class="flex-1">
-              <span class="font-medium">Entendendo Triggers e Acoes</span>
-              <span class="text-neutral-500 text-sm ml-2">- Causa e efeito</span>
-            </div>
+            <span class="font-medium">⚡ Entendendo Triggers e Acoes</span>
           </button>
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Triggers sao eventos que iniciam o cenario (novo email, webhook, schedule). Acoes sao o que o cenario faz em resposta (enviar email, criar registro, postar).</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">Toda automacao segue o padrao trigger-acao. Entender isso permite decompor qualquer processo em automacao.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">Instant trigger, Scheduled trigger, Polling, Watch, Create, Update, Delete.</p>
-              </div>
+              <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Triggers iniciam o cenario. Acoes sao o que o cenario faz em resposta.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Toda automacao segue o padrao trigger-acao.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Instant trigger, Scheduled trigger, Polling, Watch, Create, Update, Delete.</p></div>
             </div>
           </div>
         </div>
-
-        <!-- Topic 6 -->
         <div class="topic-item">
           <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
             <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-            <div class="flex-1">
-              <span class="font-medium">Executando e testando seu cenario</span>
-              <span class="text-neutral-500 text-sm ml-2">- Debug eficiente</span>
-            </div>
+            <span class="font-medium">🧪 Executando e testando seu cenario</span>
           </button>
           <div class="topic-explanation px-6 pb-4">
             <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Processo de rodar o cenario em modo de teste para verificar se funciona corretamente antes de ativar. Inclui analise de dados de entrada/saida de cada modulo.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">Debug eficiente economiza horas. Saber testar permite identificar e corrigir problemas rapidamente.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">Run once, Execution history, Input bundle, Output bundle, Error handling.</p>
-              </div>
+              <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Rodar cenario em modo de teste antes de ativar.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Debug eficiente economiza horas.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Run once, Execution history, Input/Output bundle, Error handling.</p></div>
             </div>
           </div>
         </div>
-
       </div>
-
-      <!-- Module Footer with Buttons (LEFT aligned) -->
       <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-        <button onclick="openModal('modal-1-1')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">
-          Ver em Modal
-        </button>
-        <a href="modulo-1-1.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">
-          Ver Completo
-        </a>
+        <button onclick="openModal('modal-1-1')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">Ver em Modal</button>
+        <a href="modulo-1-1.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">Ver Completo</a>
       </div>
     </div>
 
     <!-- MODULO 1.2 -->
     <div class="bg-dark-800 rounded-xl border border-dark-600">
-      <!-- Module Header -->
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2">
           <span class="text-emerald-400 font-bold text-lg">1.2</span>
@@ -327,189 +218,210 @@
         <h3 class="text-2xl font-bold mb-2 text-emerald-400">Webhooks e Comunicacao Basica</h3>
         <p class="text-neutral-400 text-sm">Aprenda a usar webhooks para conectar sistemas externos ao Make.</p>
       </div>
-
-      <!-- Topics -->
       <div class="divide-y divide-dark-600">
-
-        <!-- Topic 1 -->
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-            <div class="flex-1">
-              <span class="font-medium">O que sao Webhooks e como funcionam</span>
-              <span class="text-neutral-500 text-sm ml-2">- Portas de entrada</span>
-            </div>
-          </button>
-          <div class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Webhooks sao URLs que recebem dados de outros sistemas em tempo real. Funcionam como "portas de entrada" para sua automacao, permitindo que sistemas externos ativem seus cenarios.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">Webhooks sao a base de 70% das automacoes. Permitem integrar qualquer sistema que envie HTTP requests.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">HTTP POST, Payload, Headers, Endpoint, JSON, Real-time.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Topic 2 -->
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-            <div class="flex-1">
-              <span class="font-medium">Criando seu primeiro Webhook no Make</span>
-              <span class="text-neutral-500 text-sm ml-2">- Configuracao pratica</span>
-            </div>
-          </button>
-          <div class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Processo de criar um modulo Webhook no Make que gera uma URL unica. Essa URL fica "escutando" requisicoes e inicia o cenario quando recebe dados.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">Habilidade essencial. Webhooks conectam Make a formularios, chatbots, sistemas externos, APIs de terceiros.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">Custom webhook, Webhook URL, Data structure, Determine data structure.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Topic 3 -->
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-            <div class="flex-1">
-              <span class="font-medium">Recebendo dados externos</span>
-              <span class="text-neutral-500 text-sm ml-2">- Parsing e mapeamento</span>
-            </div>
-          </button>
-          <div class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Configurar o webhook para interpretar corretamente os dados enviados - seja JSON, form-data, ou query parameters. Definir a estrutura de dados esperada.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">Dados mal interpretados causam erros em toda a automacao. Entender o formato de entrada e critico.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">JSON parsing, Form data, Query string, Content-Type, Data mapping.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Topic 4 -->
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-            <div class="flex-1">
-              <span class="font-medium">Respondendo a requisicoes</span>
-              <span class="text-neutral-500 text-sm ml-2">- HTTP Response</span>
-            </div>
-          </button>
-          <div class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Usar o modulo "Webhook response" para enviar uma resposta HTTP de volta ao sistema que chamou. Pode incluir dados processados, confirmacoes ou mensagens.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">Muitos sistemas esperam uma resposta. Sem ela, podem tentar reenviar ou marcar como erro.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">HTTP response, Status code, Response body, 200 OK, Timeout.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Topic 5 -->
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-            <div class="flex-1">
-              <span class="font-medium">Webhooks com formularios simples</span>
-              <span class="text-neutral-500 text-sm ml-2">- Captura de leads</span>
-            </div>
-          </button>
-          <div class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Conectar webhooks a formularios HTML ou de plataformas como Typeform, Google Forms, JotForm. Capturar submissoes automaticamente.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">Formularios sao a principal forma de capturar leads. Automatizar o processamento e essencial para marketing digital.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">Form submission, Lead capture, Field mapping, Auto-response.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Topic 6 -->
-        <div class="topic-item">
-          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left">
-            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-            <div class="flex-1">
-              <span class="font-medium">Debug e troubleshooting de webhooks</span>
-              <span class="text-neutral-500 text-sm ml-2">- Resolucao de problemas</span>
-            </div>
-          </button>
-          <div class="topic-explanation px-6 pb-4">
-            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10">
-              <div>
-                <span class="text-emerald-400 font-semibold">O que e:</span>
-                <p class="text-neutral-300 text-sm">Tecnicas para identificar e resolver problemas com webhooks: logs, ferramentas de teste (RequestBin, Postman), verificacao de headers e payloads.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Por que aprender:</span>
-                <p class="text-neutral-300 text-sm">Webhooks silenciosamente falham. Saber debugar economiza horas de frustracao.</p>
-              </div>
-              <div>
-                <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
-                <p class="text-neutral-300 text-sm">Request inspector, Postman, Console log, Error 4xx/5xx, Retry logic.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">🌐 O que sao Webhooks e como funcionam</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">URLs que recebem dados de outros sistemas em tempo real.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Base de 70% das automacoes.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">HTTP POST, Payload, Headers, Endpoint, JSON.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">🔧 Criando seu primeiro Webhook no Make</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Modulo Webhook que gera URL unica.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Habilidade essencial para integracoes.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Custom webhook, Webhook URL, Data structure.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">📥 Recebendo dados externos</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Interpretar dados enviados: JSON, form-data, query params.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dados mal interpretados causam erros.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">JSON parsing, Form data, Content-Type, Data mapping.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">↩️ Respondendo a requisicoes</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Enviar resposta HTTP de volta ao sistema.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Muitos sistemas esperam resposta.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">HTTP response, Status code, 200 OK, Timeout.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">📝 Webhooks com formularios simples</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Conectar a Typeform, Google Forms, JotForm.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Formularios capturam leads.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Form submission, Lead capture, Field mapping.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">🐛 Debug e troubleshooting de webhooks</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Tecnicas com RequestBin, Postman, logs.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Webhooks falham silenciosamente.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Request inspector, Error 4xx/5xx, Retry logic.</p></div></div></div></div>
       </div>
-
-      <!-- Module Footer with Buttons (LEFT aligned) -->
       <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-        <button onclick="openModal('modal-1-2')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">
-          Ver em Modal
-        </button>
-        <a href="modulo-1-2.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">
-          Ver Completo
-        </a>
+        <button onclick="openModal('modal-1-2')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">Ver em Modal</button>
+        <a href="modulo-1-2.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">Ver Completo</a>
       </div>
     </div>
 
-    <!-- Placeholder for remaining modules (1.3 - 1.10) -->
-    <div class="text-center py-8">
-      <p class="text-neutral-500">Modulos 1.3 a 1.10 seguem o mesmo padrao...</p>
-      <p class="text-neutral-600 text-sm mt-2">Google Workspace, Redes Sociais, Dados, Email, IA, Conteudo, Mensageria, Projeto Final</p>
+    <!-- MODULO 1.3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-emerald-400 font-bold text-lg">1.3</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~40 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-emerald-400">Google Workspace Essencial</h3>
+        <p class="text-neutral-400 text-sm">Integre Gmail, Sheets, Drive, Docs e Calendar ao Make.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">☁️ Configurando Google Cloud Console</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Criar credenciais OAuth para conectar Google Apps.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Pre-requisito para integracoes Google.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Project, OAuth consent, Credentials, API enable, Scope.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">📧 Conectando Gmail ao Make</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Ler, enviar e gerenciar emails automaticamente.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Email e o canal mais usado em negocios.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Watch emails, Send email, Labels, Attachments.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">📊 Integracao com Google Sheets</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Ler, adicionar, atualizar e excluir linhas.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sheets e o banco de dados mais acessivel.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Add row, Update row, Search rows, Spreadsheet ID.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">📁 Trabalhando com Google Drive</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Upload, download, organizacao de arquivos.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automatizar organizacao elimina trabalho tedioso.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Upload file, Create folder, File ID, Sharing.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">📄 Google Docs para geracao de documentos</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Templates com dados dinamicos.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Documentos personalizados em escala.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Template, Placeholder, Replace text, Export PDF.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">📅 Google Calendar para agendamentos</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Criar e monitorar eventos automaticamente.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automatizar calendario evita conflitos.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Create event, Watch events, Attendees, Reminders.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-1-3')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">Ver em Modal</button>
+        <a href="modulo-1-3.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 1.4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-emerald-400 font-bold text-lg">1.4</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-emerald-400">Redes Sociais Basico</h3>
+        <p class="text-neutral-400 text-sm">Conecte e automatize postagens no Facebook e Instagram.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">📱 Conectando Facebook e Instagram (META)</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Conexao OAuth com API do META.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">META domina redes sociais no Brasil.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Facebook Page, Instagram Business, Access Token, Graph API.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">✍️ Sua primeira postagem automatica</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Cenario que publica automaticamente.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Postagem manual consome horas.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Create post, Caption, Media upload, Schedule post.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">🖼️ Postando imagens nas redes</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Enviar imagens junto com postagens.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Posts com imagem tem 2.3x mais engajamento.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Image upload, Media ID, Aspect ratio, File size limits.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">✅ Validacao de posts antes de publicar</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema de aprovacao antes de publicar.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Evita erros embaracosos.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Approval workflow, Review queue, Status field.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">🗓️ Agendamento basico de publicacoes</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Cenarios para rodar em horarios especificos.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Consistencia e chave em redes sociais.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Schedule trigger, Cron expression, Time zone.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">📈 Metricas e acompanhamento</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Monitorar likes, comentarios, alcance.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem metricas, impossivel otimizar.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Insights API, Engagement rate, Reach, Impressions.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-1-4')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">Ver em Modal</button>
+        <a href="modulo-1-4.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 1.5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-emerald-400 font-bold text-lg">1.5</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~40 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-emerald-400">Trabalhando com Dados</h3>
+        <p class="text-neutral-400 text-sm">Airtable, Google Sheets, iteradores e agregadores.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">🗄️ Introducao ao Airtable</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Banco de dados visual com API poderosa.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Superior ao Sheets para dados estruturados.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Base, Table, Record, Field, View, Linked records.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">📋 Google Sheets como banco de dados</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Planilhas como repositorio de dados.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Solucao gratuita e acessivel.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Header row, Data range, CRUD operations.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">📝 Lendo e gravando dados</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Operacoes CRUD basicas.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Toda automacao util manipula dados.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Read, Write, Field mapping, Data types, Validation.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">🔍 Filtros e buscas</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Encontrar registros com criterios.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dados uteis precisam ser encontrados.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Filter conditions, Search query, AND/OR logic.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">🔄 Iteradores: processando listas</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Processar cada item de uma lista.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Maioria dos dados vem em listas.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Iterator module, Array, Bundle, Loop, Index.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">📊 Agregadores: consolidando resultados</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Combinar multiplos bundles em um.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Criar resumos e totalizadores.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Array aggregator, Text aggregator, Group by.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-1-5')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">Ver em Modal</button>
+        <a href="modulo-1-5.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 1.6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-emerald-400 font-bold text-lg">1.6</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-emerald-400">Email Marketing Basico</h3>
+        <p class="text-neutral-400 text-sm">Envio automatico, templates e newsletters.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">📤 Enviando emails automaticos</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Envio baseado em triggers.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Email automatico e expectativa basica.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">SMTP, Gmail API, Recipient, Subject, Body.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">📑 Templates de email</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Emails pre-formatados com variaveis.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Qualidade consistente em escala.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">HTML email, Template variables, Mail merge.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">🎯 Personalizacao de mensagens</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Inserir dados do destinatario.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Emails personalizados tem 29% mais abertura.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Dynamic fields, Merge tags, Conditional content.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">📋 Listas e segmentacao</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Organizar contatos em grupos.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Segmentacao aumenta relevancia.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Contact list, Segment, Tag, Filter criteria.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">📰 Newsletter automatica</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Coleta conteudo e envia periodicamente.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mantem audiencia engajada.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">RSS aggregation, Content curation, Digest email.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">📊 Acompanhamento de envios</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Monitorar abertura, cliques, bounces.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem metricas, impossivel melhorar.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Open rate, Click rate, Bounce rate, Unsubscribe.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-1-6')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">Ver em Modal</button>
+        <a href="modulo-1-6.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 1.7 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-emerald-400 font-bold text-lg">1.7</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~40 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-emerald-400">Introducao a IA</h3>
+        <p class="text-neutral-400 text-sm">OpenAI, prompts, roles e alternativas gratuitas.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">🤖 O que e Inteligencia Artificial</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">LLMs como GPT, Claude, DeepSeek.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">IA transforma automacoes simples em sistemas inteligentes.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">LLM, NLP, Generative AI, API, Token.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">🔌 Conectando OpenAI ao Make</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Conexao via API Key para usar GPT.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">OpenAI e o padrao da industria.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">API Key, OpenAI module, Model selection, Usage limits.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">💬 Seu primeiro prompt</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Instrucao enviada para a IA.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Qualidade do prompt = qualidade da resposta.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Prompt, Instruction, Context, Example, Output format.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">👥 Roles: System, User, Assistant</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Tres roles que estruturam a conversa.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Usar roles corretamente melhora respostas.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">System message, User message, Conversation history.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">✍️ Gerando texto com GPT</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Endpoint de completions para gerar textos.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Geracao de texto e o superpoder.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Text completion, Temperature, Max tokens, Top_p.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">💰 Alternativas gratuitas: Groq</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Acesso gratuito a modelos Llama.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Prototipagem sem custos.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Groq API, Llama, Mixtral, Free tier, Rate limits.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-1-7')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">Ver em Modal</button>
+        <a href="modulo-1-7.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 1.8 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-emerald-400 font-bold text-lg">1.8</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-emerald-400">Conteudo Automatico Nivel 1</h3>
+        <p class="text-neutral-400 text-sm">RSS, geracao de titulos com IA e postagem automatica.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">📡 RSS: agregando noticias</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Formato padrao para atualizacoes de sites.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Forma eficiente de monitorar conteudo.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">RSS feed, XML, Feed URL, Publication date.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">📲 RSS para Redes Sociais</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Automatizar postagem de conteudo RSS.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Manter redes ativas sem esforco.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">RSS trigger, Content transformation, Auto-posting.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">📝 Gerando titulos com IA</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">LLM cria titulos atraentes.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Titulos determinam se conteudo sera consumido.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Headline generation, A/B testing, Engagement hooks.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">✏️ Criando descricoes automaticas</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Gerar resumos e descricoes com IA.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Adaptar para cada plataforma automaticamente.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Text summarization, Character limit, Caption generation.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">🚀 Postagem automatica de noticias</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema completo: RSS -> IA -> posta.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Funciona indefinidamente apos configurar.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">End-to-end automation, Content pipeline.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">🔄 Controle de duplicatas</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Evitar postar mesmo conteudo duas vezes.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Duplicatas parecem spam.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Deduplication, Hash comparison, Published log.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-1-8')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">Ver em Modal</button>
+        <a href="modulo-1-8.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 1.9 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-emerald-400 font-bold text-lg">1.9</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-emerald-400">Mensageria Basica</h3>
+        <p class="text-neutral-400 text-sm">Telegram Bot e introducao ao WhatsApp.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">🤖 Introducao ao Telegram Bot</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Bots que interagem automaticamente.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">API gratuita e poderosa.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">BotFather, Bot token, Chat ID, Commands.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">📨 Recebendo mensagens</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Webhook para receber mensagens do bot.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Base de qualquer chatbot.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Message update, Text message, Media message, User info.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">💬 Enviando respostas automaticas</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Enviar mensagens de volta ao usuario.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Funcao primaria de um bot.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Send message, Reply markup, Inline keyboard.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">👥 Trabalhando com grupos</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Bots em grupos e canais.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Grupos multiplicam alcance.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Group chat, Channel, Admin rights, Mentions.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">📱 Introducao ao WhatsApp</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">WhatsApp Business API.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">WhatsApp e onde os clientes estao.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">WhatsApp Business, API providers, Message templates.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">🔌 Escolhendo provedor de WhatsApp</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Comparar Z-API, Evolution, Twilio.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Escolha errada custa caro.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Z-API, Evolution API, Twilio, Official vs Unofficial.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-1-9')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">Ver em Modal</button>
+        <a href="modulo-1-9.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 1.10 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-emerald-400 font-bold text-lg">1.10</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~45 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-emerald-400">Projeto Integrador Fundamentos</h3>
+        <p class="text-neutral-400 text-sm">Aplique tudo que aprendeu em um projeto real.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">📋 Definindo seu projeto</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Escolher problema real para resolver.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Projeto pratico consolida aprendizado.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Problem definition, Scope, Success metrics, MVP.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">🗺️ Mapeando o fluxo</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Desenhar processo antes de implementar.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Planejamento evita retrabalho.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Process mapping, Flowchart, Decision points.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">🔨 Construindo passo a passo</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Implementar incrementalmente.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Construcao incremental reduz erros.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Incremental development, Module testing.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">✅ Testando e validando</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Executar com dados reais.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Teste previne problemas em producao.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Test cases, Edge cases, Validation.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">🐛 Corrigindo erros comuns</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Resolver conexoes expiradas, rate limits.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber resolver diferencia profissional.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Error handling, Retry logic, Fallback, Logging.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">🚀 Publicando e monitorando</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Ativar cenario e monitorar.</p></div><div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automacao so gera valor quando roda.</p></div><div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Activation, Scheduling, Error notifications, Maintenance.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-1-10')" class="px-4 py-2 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors text-sm font-medium">Ver em Modal</button>
+        <a href="modulo-1-10.html" class="px-4 py-2 bg-dark-600 text-neutral-300 rounded-lg hover:bg-dark-500 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
     </div>
 
   </main>
@@ -517,21 +429,17 @@
   <!-- Footer -->
   <footer class="bg-dark-800 border-t border-dark-600 py-8">
     <div class="max-w-6xl mx-auto px-4 text-center">
-      <p class="text-neutral-500 text-sm">
-        INEMA.Make - Trilha 1: Fundamentos
-      </p>
+      <p class="text-neutral-500 text-sm">INEMA.Make - Trilha 1: Fundamentos</p>
     </div>
   </footer>
 
-  <!-- Modal Container -->
+  <!-- Modal -->
   <div id="modal-overlay" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
     <div class="bg-dark-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <div class="sticky top-0 bg-dark-800 p-4 border-b border-dark-600 flex justify-between items-center">
-        <h3 id="modal-title" class="text-lg font-bold"></h3>
+        <h3 id="modal-title" class="text-lg font-bold text-emerald-400"></h3>
         <button onclick="closeModal()" class="text-neutral-400 hover:text-white">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
       <div id="modal-content" class="p-6"></div>
@@ -542,16 +450,10 @@
     function toggleTopic(button) {
       const topicItem = button.closest('.topic-item');
       const explanation = topicItem.querySelector('.topic-explanation');
-
-      // Close others in same module
       const moduleCard = button.closest('.bg-dark-800');
       moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
-        if (exp !== explanation) {
-          exp.classList.remove('active');
-        }
+        if (exp !== explanation) exp.classList.remove('active');
       });
-
-      // Toggle current
       explanation.classList.toggle('active');
     }
 
@@ -569,41 +471,29 @@
       const overlay = document.getElementById('modal-overlay');
       overlay.classList.remove('hidden');
       overlay.classList.add('flex');
-
-      // Map modal IDs to file names
-      const moduleFiles = {
-        'modal-1-1': 'modulo-1-1.html',
-        'modal-1-2': 'modulo-1-2.html'
-      };
-
-      const fileName = moduleFiles[modalId];
-      if (fileName) {
-        document.getElementById('modal-content').innerHTML = '<p class="text-neutral-400 text-center py-8">Carregando...</p>';
-
-        fetch(fileName)
-          .then(response => response.text())
-          .then(html => {
-            // Extract main content from the fetched page
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const main = doc.querySelector('main');
-            const header = doc.querySelector('header');
-
-            if (header) {
-              const title = header.querySelector('h1');
-              document.getElementById('modal-title').textContent = title ? title.textContent : 'Modulo';
-            }
-
-            if (main) {
-              document.getElementById('modal-content').innerHTML = main.innerHTML;
-            } else {
-              document.getElementById('modal-content').innerHTML = '<p class="text-neutral-400">Conteudo nao encontrado.</p>';
-            }
-          })
-          .catch(err => {
-            document.getElementById('modal-content').innerHTML = '<p class="text-red-400">Erro ao carregar conteudo. Use "Ver Completo" para abrir em nova pagina.</p>';
-          });
-      }
+      const moduleNum = modalId.replace('modal-1-', '');
+      const fileName = `modulo-1-${moduleNum}.html`;
+      document.getElementById('modal-content').innerHTML = '<p class="text-neutral-400 text-center py-8">Carregando...</p>';
+      fetch(fileName)
+        .then(response => response.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const main = doc.querySelector('main');
+          const header = doc.querySelector('header');
+          if (header) {
+            const title = header.querySelector('h1');
+            document.getElementById('modal-title').textContent = title ? title.textContent : 'Modulo';
+          }
+          if (main) {
+            document.getElementById('modal-content').innerHTML = main.innerHTML;
+          } else {
+            document.getElementById('modal-content').innerHTML = '<p class="text-neutral-400">Conteudo nao encontrado.</p>';
+          }
+        })
+        .catch(err => {
+          document.getElementById('modal-content').innerHTML = '<p class="text-red-400">Erro ao carregar. Use "Ver Completo".</p>';
+        });
     }
 
     function closeModal() {

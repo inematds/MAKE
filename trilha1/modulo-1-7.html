@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.7 - Introducao a IA | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { dark: { 600: '#374151', 700: '#1f2937', 800: '#111827', 900: '#0d1117' }, primary: '#10b981' } } } }</script>
+  <style>
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4"><div class="flex items-center justify-between">
+      <div class="flex items-center space-x-4"><a href="../index.html" class="text-xl font-bold text-red-500">INEMA.Make</a><span class="text-neutral-500">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></div>
+      <div class="flex items-center space-x-4"><a href="index.html" class="px-4 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 font-medium">Fundamentos</a><a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Tecnicas</a><a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Avancado</a><button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600"><span id="theme-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></span></button></div>
+    </div></div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 py-4"><nav class="flex items-center space-x-2 text-sm text-neutral-500"><a href="../index.html" class="hover:text-emerald-400">Curso</a><span>/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span><span class="text-emerald-400">Modulo 1.7</span></nav></div>
+
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4"><span class="text-emerald-400 font-bold text-xl">1.7</span><span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium">TRILHA 1 - FUNDAMENTOS</span><span class="text-neutral-500 text-sm">~40 min</span></div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-emerald-400">Introducao a IA</h1>
+    <p class="text-lg text-neutral-400 mb-6">Seu primeiro contato com Inteligencia Artificial no Make. Conecte OpenAI, escreva prompts e descubra alternativas gratuitas como Groq.</p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500"><span>6 topicos</span><span>|</span><span>Nivel: Iniciante</span><span>|</span><span>Pre-requisito: Modulo 1.6</span></div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">1</span><h2 class="text-xl font-bold text-white">O que e Inteligencia Artificial</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">No contexto de automacao, IA refere-se principalmente a LLMs (Large Language Models) como GPT, Claude e DeepSeek. Sistemas que entendem, processam e geram texto de forma inteligente.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">IA transforma automacoes de simples "copiar-colar" para sistemas inteligentes que interpretam contexto, tomam decisoes e criam conteudo original.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">LLM, NLP, Machine Learning, Generative AI, API, Token, Context window.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Principais LLMs</h4>
+          <div class="grid md:grid-cols-3 gap-3 text-sm">
+            <div class="bg-emerald-500/10 rounded p-3 text-center"><div class="text-2xl mb-1">🤖</div><div class="font-bold text-white">GPT-4</div><p class="text-neutral-400">OpenAI</p></div>
+            <div class="bg-purple-500/10 rounded p-3 text-center"><div class="text-2xl mb-1">🧠</div><div class="font-bold text-white">Claude</div><p class="text-neutral-400">Anthropic</p></div>
+            <div class="bg-blue-500/10 rounded p-3 text-center"><div class="text-2xl mb-1">🔍</div><div class="font-bold text-white">DeepSeek</div><p class="text-neutral-400">China</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">2</span><h2 class="text-xl font-bold text-white">Conectando OpenAI ao Make</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Criar conexao entre Make e a API da OpenAI usando sua API Key. Permite usar GPT-3.5, GPT-4, GPT-4o e DALL-E diretamente dentro dos seus cenarios.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">OpenAI e o padrao da industria. A maioria dos tutoriais, recursos e comunidades usa GPT como referencia principal.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">API Key, OpenAI module, Model selection, Usage limits, Billing, Rate limits.</p></div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Como Obter API Key</h4>
+          <ol class="text-sm text-neutral-300 list-decimal list-inside space-y-1">
+            <li>Acesse platform.openai.com</li>
+            <li>Crie conta ou faca login</li>
+            <li>Va em API Keys → Create new secret key</li>
+            <li>Copie a key (so aparece uma vez!)</li>
+            <li>Adicione creditos de uso</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">3</span><h2 class="text-xl font-bold text-white">Seu primeiro prompt</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Prompt e a instrucao que voce envia para a IA. A qualidade do prompt determina a qualidade da resposta. E a arte e ciencia de comunicar efetivamente com LLMs.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Prompt e a interface com IA. Prompts ruins = resultados ruins. E a habilidade mais importante da era da Inteligencia Artificial.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Prompt, Instruction, Context, Example (few-shot), Output format, Constraints.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Estrutura de um Bom Prompt</h4>
+          <pre class="text-xs text-neutral-300 bg-dark-900 p-3 rounded overflow-x-auto"><code>PAPEL: Voce e um especialista em marketing digital.
+
+TAREFA: Crie 3 titulos para post no Instagram sobre
+{{tema}} para o publico {{audiencia}}.
+
+FORMATO: Liste os titulos numerados, com no maximo
+60 caracteres cada.
+
+EXEMPLO:
+1. Descubra o segredo dos top creators
+2. 5 erros que estao matando seu engajamento</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">4</span><h2 class="text-xl font-bold text-white">Roles: System, User, Assistant</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">A API da OpenAI usa tres roles para estruturar conversas: System (instrucoes de comportamento), User (mensagem do usuario) e Assistant (resposta da IA).</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Usar roles corretamente melhora dramaticamente as respostas. O System prompt e onde voce define a "personalidade" e comportamento da IA.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">System message, User message, Assistant message, Conversation history, Context window.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Exemplo de Roles</h4>
+          <div class="space-y-2 text-sm">
+            <div class="bg-purple-500/10 rounded p-2"><span class="text-purple-400 font-bold">System:</span><span class="text-neutral-300"> Voce e um assistente de vendas amigavel da loja XYZ.</span></div>
+            <div class="bg-blue-500/10 rounded p-2"><span class="text-blue-400 font-bold">User:</span><span class="text-neutral-300"> Qual o preco do produto ABC?</span></div>
+            <div class="bg-emerald-500/10 rounded p-2"><span class="text-emerald-400 font-bold">Assistant:</span><span class="text-neutral-300"> O produto ABC custa R$ 99,90! Posso ajudar com mais alguma coisa?</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">5</span><h2 class="text-xl font-bold text-white">Gerando texto com GPT</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Usar o endpoint de chat completions para gerar textos: emails, posts, resumos, traducoes, analises, roteiros. A aplicacao mais comum de LLMs.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Geracao de texto e o superpoder. Um prompt bem feito produz em segundos conteudo que levaria horas para escrever manualmente.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Text completion, Temperature, Max tokens, Top_p, Frequency penalty, Presence penalty.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Parametros Importantes</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li><strong class="text-white">Temperature (0-2):</strong> Criatividade. 0 = preciso, 1 = criativo</li>
+            <li><strong class="text-white">Max tokens:</strong> Limite de tamanho da resposta</li>
+            <li><strong class="text-white">Model:</strong> gpt-4o, gpt-4-turbo, gpt-3.5-turbo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">6</span><h2 class="text-xl font-bold text-white">Alternativas gratuitas: Groq</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Groq oferece acesso gratuito a modelos como Llama e Mixtral atraves de API compativel com OpenAI. Permite experimentar IA sem custos iniciais.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">OpenAI custa dinheiro. Groq permite prototipagem totalmente gratuita e, para muitos casos de uso, pode substituir completamente servicos pagos.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Groq API, Llama, Mixtral, Free tier, Rate limits, OpenAI-compatible endpoint.</p></div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">OpenAI vs Groq</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div><strong class="text-white">OpenAI GPT-4:</strong><p class="text-neutral-400">Melhor qualidade, pago (~$10/M tokens)</p></div>
+            <div><strong class="text-white">Groq Llama:</strong><p class="text-neutral-400">Gratuito, muito rapido, 80% da qualidade</p></div>
+          </div>
+        </div>
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Dica Pro</h4>
+          <p class="text-neutral-300 text-sm">Use Groq para desenvolvimento e testes, OpenAI para producao onde qualidade e critica. Economiza 90% dos custos!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6"><div class="flex items-center justify-between"><div><h3 class="font-bold text-lg mb-1">Proximo Modulo</h3><p class="text-neutral-400">1.8 - Conteudo Automatico Nivel 1</p></div><a href="modulo-1-8.html" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg">Continuar →</a></div></div>
+    <div class="flex justify-between mt-8"><a href="modulo-1-6.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">← Modulo 1.6</a><a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">Voltar para Trilha 1</a></div>
+  </main>
+
+  <footer class="bg-dark-800 border-t border-dark-600 py-8"><div class="max-w-6xl mx-auto px-4 text-center"><p class="text-neutral-500 text-sm">INEMA.Make - Baseado em 174 automacoes documentadas</p></div></footer>
+  <script>function toggleTheme(){document.documentElement.classList.toggle('dark');const i=document.getElementById('theme-icon');i.innerHTML=document.documentElement.classList.contains('dark')?'<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>':'<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';}</script>
+</body>
+</html>

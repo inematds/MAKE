@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.4 - Redes Sociais Basico | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { dark: { 600: '#374151', 700: '#1f2937', 800: '#111827', 900: '#0d1117' }, primary: '#10b981' } } }
+    }
+  </script>
+  <style>
+    html:not(.dark) { --bg-primary: #ffffff; --bg-secondary: #f3f4f6; }
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500">INEMA.Make</a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 font-medium">Fundamentos</a>
+          <a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Tecnicas</a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Avancado</a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600"><span id="theme-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></span></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-emerald-400">Curso</a><span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
+      <span class="text-emerald-400">Modulo 1.4</span>
+    </nav>
+  </div>
+
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-emerald-400 font-bold text-xl">1.4</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium">TRILHA 1 - FUNDAMENTOS</span>
+      <span class="text-neutral-500 text-sm">~35 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-emerald-400">Redes Sociais Basico</h1>
+    <p class="text-lg text-neutral-400 mb-6">Automatize sua presenca digital. Conecte Facebook, Instagram e comece a postar automaticamente com validacao e agendamento.</p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span><span>|</span><span>Nivel: Iniciante</span><span>|</span><span>Pre-requisito: Modulo 1.3</span>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">Conectando Facebook e Instagram (META)</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Configurar conexao OAuth com a API do META para gerenciar paginas Facebook e contas Business do Instagram atraves do Make. Exige conta Business e permissoes adequadas.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">META domina redes sociais no Brasil. Automatizar presenca nessas plataformas e obrigatorio para qualquer estrategia de marketing digital seria.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Facebook Page, Instagram Business, Access Token, Graph API, Permissions, Business Manager.</p></div>
+        </div>
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Requisitos</h4>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>• Pagina do Facebook (nao perfil pessoal)</li>
+            <li>• Conta Instagram Business ou Creator (conectada a pagina)</li>
+            <li>• Permissoes de administrador na pagina</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Sua primeira postagem automatica</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Criar um cenario que publica automaticamente no Facebook ou Instagram. Pode ser acionado por webhook, schedule, planilha ou qualquer outro trigger.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Postagem manual consome horas semanais. Automatizar libera tempo para estrategia, criacao de conteudo e analise de resultados.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Create post, Caption, Media upload, Publish, Container, Media object.</p></div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Fluxo Basico</h4>
+          <div class="flex flex-wrap items-center gap-2 text-sm text-neutral-300">
+            <span class="bg-dark-700 px-3 py-1 rounded">Trigger</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">Prepara texto</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">Upload imagem</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">Publica</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Postando imagens nas redes</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Enviar imagens junto com as postagens. Inclui upload de arquivo do Drive, URL de imagem publica, ou imagens geradas dinamicamente por IA.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Posts com imagem tem 2.3x mais engajamento que apenas texto. Dominar upload de midia e essencial para resultados.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Image upload, Media ID, Aspect ratio, Image URL, File size limits, JPEG/PNG.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Especificacoes por Plataforma</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <div class="font-semibold text-blue-400">Facebook</div>
+              <div class="text-neutral-400">1200x630px (link), 1080x1080 (post)</div>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <div class="font-semibold text-pink-400">Instagram</div>
+              <div class="text-neutral-400">1080x1080 (feed), 1080x1920 (story)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Validacao de posts antes de publicar</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Criar um sistema de aprovacao onde posts sao revisados antes de ir ao ar. Pode usar Airtable, Google Sheets, email ou Slack para aprovacao.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Evita erros embaracosos e permite que equipes colaborem com seguranca. Essencial para agencias e empresas com multiplos aprovadores.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Approval workflow, Review queue, Status field, Conditional publishing, Human-in-the-loop.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Workflow de Aprovacao</h4>
+          <div class="flex flex-col gap-2 text-sm">
+            <div class="flex items-center gap-3"><span class="bg-amber-500/20 text-amber-400 px-2 py-1 rounded">Pendente</span><span class="text-neutral-400">→ Aguardando revisao</span></div>
+            <div class="flex items-center gap-3"><span class="bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded">Aprovado</span><span class="text-neutral-400">→ Pronto para publicar</span></div>
+            <div class="flex items-center gap-3"><span class="bg-red-500/20 text-red-400 px-2 py-1 rounded">Rejeitado</span><span class="text-neutral-400">→ Precisa de ajustes</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Agendamento basico de publicacoes</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Configurar cenarios para rodar em horarios especificos usando scheduling do Make. Permite criar um calendario de conteudo que publica automaticamente.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Consistencia e chave em redes sociais. Agendamento garante presenca constante mesmo em fins de semana e feriados.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Schedule trigger, Cron expression, Time zone, Best posting times, Frequency.</p></div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Melhores Horarios (Brasil)</h4>
+          <div class="grid grid-cols-2 gap-4 text-sm text-neutral-300">
+            <div><strong>Instagram:</strong> 11h-13h e 19h-21h</div>
+            <div><strong>Facebook:</strong> 13h-16h</div>
+            <div><strong>LinkedIn:</strong> 7h-9h (dias uteis)</div>
+            <div><strong>Twitter:</strong> 12h-15h</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Metricas e acompanhamento</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Monitorar performance dos posts atraves da API. Coletar likes, comentarios, alcance, impressoes e armazenar para analise posterior.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Sem metricas, impossivel otimizar. Dados automatizados permitem decisoes baseadas em evidencia e melhoria continua.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Insights API, Engagement rate, Reach, Impressions, Analytics storage, KPIs.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Metricas Essenciais</h4>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div class="flex items-center gap-2"><span class="text-2xl">👁️</span><div><strong class="text-white">Alcance</strong><p class="text-neutral-400">Usuarios unicos que viram</p></div></div>
+            <div class="flex items-center gap-2"><span class="text-2xl">💬</span><div><strong class="text-white">Engajamento</strong><p class="text-neutral-400">Likes + Comentarios + Shares</p></div></div>
+            <div class="flex items-center gap-2"><span class="text-2xl">📊</span><div><strong class="text-white">Impressoes</strong><p class="text-neutral-400">Total de visualizacoes</p></div></div>
+            <div class="flex items-center gap-2"><span class="text-2xl">🔗</span><div><strong class="text-white">Cliques</strong><p class="text-neutral-400">Cliques em links/perfil</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div><h3 class="font-bold text-lg mb-1">Proximo Modulo</h3><p class="text-neutral-400">1.5 - Trabalhando com Dados</p></div>
+        <a href="modulo-1-5.html" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg">Continuar →</a>
+      </div>
+    </div>
+    <div class="flex justify-between mt-8">
+      <a href="modulo-1-3.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">← Modulo 1.3</a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">Voltar para Trilha 1</a>
+    </div>
+  </main>
+
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center"><p class="text-neutral-500 text-sm">INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram</p></div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      icon.innerHTML = document.documentElement.classList.contains('dark') ? '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>' : '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+    }
+  </script>
+</body>
+</html>

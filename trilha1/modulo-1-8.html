@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.8 - Conteudo Automatico Nivel 1 | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { dark: { 600: '#374151', 700: '#1f2937', 800: '#111827', 900: '#0d1117' }, primary: '#10b981' } } } }</script>
+  <style>
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4"><div class="flex items-center justify-between">
+      <div class="flex items-center space-x-4"><a href="../index.html" class="text-xl font-bold text-red-500">INEMA.Make</a><span class="text-neutral-500">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></div>
+      <div class="flex items-center space-x-4"><a href="index.html" class="px-4 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 font-medium">Fundamentos</a><a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Tecnicas</a><a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Avancado</a><button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600"><span id="theme-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></span></button></div>
+    </div></div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 py-4"><nav class="flex items-center space-x-2 text-sm text-neutral-500"><a href="../index.html" class="hover:text-emerald-400">Curso</a><span>/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span><span class="text-emerald-400">Modulo 1.8</span></nav></div>
+
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4"><span class="text-emerald-400 font-bold text-xl">1.8</span><span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium">TRILHA 1 - FUNDAMENTOS</span><span class="text-neutral-500 text-sm">~35 min</span></div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-emerald-400">Conteudo Automatico Nivel 1</h1>
+    <p class="text-lg text-neutral-400 mb-6">Use RSS, IA e automacao para criar e publicar conteudo automaticamente. O inicio da sua maquina de conteudo.</p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500"><span>6 topicos</span><span>|</span><span>Nivel: Iniciante</span><span>|</span><span>Pre-requisito: Modulo 1.7</span></div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">1</span><h2 class="text-xl font-bold text-white">RSS: agregando noticias</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">RSS (Really Simple Syndication) e um formato padrao para distribuir atualizacoes de sites. Permite monitorar dezenas de fontes de conteudo de uma so vez.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">RSS e a forma mais eficiente de monitorar conteudo. Um unico cenario pode acompanhar centenas de blogs, sites de noticias e portais.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">RSS feed, XML, Feed URL, Item, Publication date, Feed reader, Polling interval.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Como Encontrar Feeds RSS</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li><span class="text-emerald-400">•</span> Adicione <code class="bg-dark-900 px-2 py-1 rounded">/feed</code> ou <code class="bg-dark-900 px-2 py-1 rounded">/rss</code> na URL</li>
+            <li><span class="text-emerald-400">•</span> Procure icone RSS laranja no site</li>
+            <li><span class="text-emerald-400">•</span> Use extensoes como "Get RSS Feed URL"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">2</span><h2 class="text-xl font-bold text-white">RSS para Redes Sociais</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Automatizar postagem de conteudo de RSS nas redes sociais. Novo artigo publicado em um blog = novo post automatico no Instagram, Facebook ou LinkedIn.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Mantenha suas redes ativas sem esforco manual diario. Ideal para curadoria de conteudo de nicho e posicionamento como autoridade.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">RSS trigger, Content transformation, Auto-posting, Source attribution, Hashtags.</p></div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Fluxo Tipico</h4>
+          <div class="flex flex-wrap items-center gap-2 text-sm text-neutral-300">
+            <span class="bg-dark-700 px-3 py-1 rounded">RSS Watch</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">Formata texto</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">Adiciona hashtags</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">Posta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">3</span><h2 class="text-xl font-bold text-white">Gerando titulos com IA</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Usar LLM para criar titulos atraentes a partir do conteudo original. Gerar multiplas variantes otimizadas para engajamento e cliques.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Titulos determinam se conteudo sera consumido ou ignorado. IA gera opcoes criativas que humanos nao pensariam, aumentando engajamento.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Headline generation, Hook formulas, A/B testing, Click-through optimization, Engagement triggers.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Prompt para Titulos</h4>
+          <pre class="text-xs text-neutral-300 bg-dark-900 p-3 rounded overflow-x-auto"><code>Crie 3 titulos para redes sociais baseado neste artigo:
+{{conteudo_rss}}
+
+Requisitos:
+- Maximo 60 caracteres
+- Use gatilhos de curiosidade
+- Inclua numeros quando possivel</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">4</span><h2 class="text-xl font-bold text-white">Criando descricoes automaticas</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Gerar resumos e descricoes de conteudo usando IA. Adaptar texto longo para formato de redes sociais respeitando limites de caracteres.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Cada plataforma tem limite diferente. IA adapta conteudo automaticamente: 280 chars para Twitter, 2200 para Instagram, etc.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Text summarization, Character limit, Caption generation, Call-to-action, Emoji usage.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Limites por Plataforma</h4>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div class="flex justify-between"><span class="text-neutral-400">Instagram Caption</span><span class="text-white">2.200 chars</span></div>
+            <div class="flex justify-between"><span class="text-neutral-400">Twitter/X</span><span class="text-white">280 chars</span></div>
+            <div class="flex justify-between"><span class="text-neutral-400">LinkedIn Post</span><span class="text-white">3.000 chars</span></div>
+            <div class="flex justify-between"><span class="text-neutral-400">Facebook</span><span class="text-white">63.206 chars</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">5</span><h2 class="text-xl font-bold text-white">Postagem automatica de noticias</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Sistema completo: RSS detecta noticia nova → IA processa e adapta → Posta automaticamente nas redes. Totalmente autonomo, funciona 24/7.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">E o "Santo Graal" de conteudo automatico. Uma vez configurado, funciona indefinidamente sem intervencao, gerando engajamento constante.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">End-to-end automation, Content pipeline, Multi-platform posting, Autonomous system.</p></div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Pipeline Completo</h4>
+          <div class="flex flex-wrap items-center gap-2 text-sm text-neutral-300">
+            <span class="bg-dark-700 px-3 py-1 rounded">RSS</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">GPT Titulo</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">GPT Descricao</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">Valida</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">Posta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">6</span><h2 class="text-xl font-bold text-white">Controle de duplicatas</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Evitar postar o mesmo conteudo duas vezes. Usar banco de dados (Sheets, Airtable) para rastrear URLs ou IDs ja publicados.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Duplicatas parecem spam e prejudicam engajamento e credibilidade. Controle de duplicatas e obrigatorio para qualquer automacao de conteudo seria.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Deduplication, Hash comparison, Published log, Unique identifier, URL tracking.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Estrategias de Deduplicacao</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li><span class="text-emerald-400">1.</span> Salvar URL em planilha apos publicar</li>
+            <li><span class="text-emerald-400">2.</span> Antes de postar, buscar se URL ja existe</li>
+            <li><span class="text-emerald-400">3.</span> Se existe, pular; se nao, publicar e registrar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6"><div class="flex items-center justify-between"><div><h3 class="font-bold text-lg mb-1">Proximo Modulo</h3><p class="text-neutral-400">1.9 - Mensageria Basica</p></div><a href="modulo-1-9.html" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg">Continuar →</a></div></div>
+    <div class="flex justify-between mt-8"><a href="modulo-1-7.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">← Modulo 1.7</a><a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">Voltar para Trilha 1</a></div>
+  </main>
+
+  <footer class="bg-dark-800 border-t border-dark-600 py-8"><div class="max-w-6xl mx-auto px-4 text-center"><p class="text-neutral-500 text-sm">INEMA.Make - Baseado em 174 automacoes documentadas</p></div></footer>
+  <script>function toggleTheme(){document.documentElement.classList.toggle('dark');const i=document.getElementById('theme-icon');i.innerHTML=document.documentElement.classList.contains('dark')?'<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>':'<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';}</script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.10 - Projeto Integrador Fundamentos | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { dark: { 600: '#374151', 700: '#1f2937', 800: '#111827', 900: '#0d1117' }, primary: '#10b981' } } } }</script>
+  <style>
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4"><div class="flex items-center justify-between">
+      <div class="flex items-center space-x-4"><a href="../index.html" class="text-xl font-bold text-red-500">INEMA.Make</a><span class="text-neutral-500">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></div>
+      <div class="flex items-center space-x-4"><a href="index.html" class="px-4 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 font-medium">Fundamentos</a><a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Tecnicas</a><a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Avancado</a><button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600"><span id="theme-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></span></button></div>
+    </div></div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 py-4"><nav class="flex items-center space-x-2 text-sm text-neutral-500"><a href="../index.html" class="hover:text-emerald-400">Curso</a><span>/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span><span class="text-emerald-400">Modulo 1.10</span></nav></div>
+
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4"><span class="text-emerald-400 font-bold text-xl">1.10</span><span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium">TRILHA 1 - FUNDAMENTOS</span><span class="text-neutral-500 text-sm">~45 min</span></div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-emerald-400">Projeto Integrador Fundamentos</h1>
+    <p class="text-lg text-neutral-400 mb-6">Aplique tudo que aprendeu em um projeto real. Defina, construa, teste e publique sua primeira automacao completa.</p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500"><span>6 topicos</span><span>|</span><span>Nivel: Iniciante</span><span>|</span><span>Pre-requisito: Modulos 1.1-1.9</span></div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+    <!-- Celebration Banner -->
+    <div class="bg-gradient-to-r from-emerald-500/20 to-blue-500/20 border border-emerald-500/30 rounded-xl p-6 mb-8 text-center">
+      <div class="text-4xl mb-3">🎉</div>
+      <h2 class="text-xl font-bold text-white mb-2">Parabens! Voce chegou ao projeto final da Trilha 1</h2>
+      <p class="text-neutral-300">Hora de consolidar todo o conhecimento adquirido em uma automacao funcional e util.</p>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">1</span><h2 class="text-xl font-bold text-white">Definindo seu projeto</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Escolher um problema real do seu dia-a-dia ou trabalho para resolver com automacao. Definir escopo claro, objetivos especificos e metricas de sucesso.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Projeto pratico consolida aprendizado como nada mais. Resolver um problema real motiva, demonstra valor concreto e vai para seu portfolio.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Problem definition, Scope, Success metrics, MVP (Minimum Viable Product), Use case.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Ideias de Projetos</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li><span class="text-emerald-400">•</span> <strong>Lead Capture:</strong> Formulario → Planilha → Email de boas-vindas</li>
+            <li><span class="text-emerald-400">•</span> <strong>Curadoria de Conteudo:</strong> RSS → IA → Redes Sociais</li>
+            <li><span class="text-emerald-400">•</span> <strong>Bot de FAQ:</strong> Telegram recebe pergunta → GPT responde</li>
+            <li><span class="text-emerald-400">•</span> <strong>Backup de Emails:</strong> Gmail → Google Drive organizado</li>
+            <li><span class="text-emerald-400">•</span> <strong>Notificacao de Noticias:</strong> RSS → Filtro → WhatsApp/Telegram</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">2</span><h2 class="text-xl font-bold text-white">Mapeando o fluxo</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Desenhar o processo completo antes de implementar. Identificar todos os triggers, acoes, decisoes e integracoes necessarias em um diagrama visual.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Planejamento evita retrabalho. Um fluxo claro antes de comecar facilita a implementacao e torna o debug muito mais simples.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Process mapping, Flowchart, Decision points, Integration points, Data flow.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Template de Fluxo</h4>
+          <div class="flex flex-col gap-3 text-sm">
+            <div class="flex items-center gap-3"><span class="bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded font-mono">1</span><span class="text-neutral-300">TRIGGER: O que inicia a automacao?</span></div>
+            <div class="flex items-center gap-3"><span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded font-mono">2</span><span class="text-neutral-300">DADOS: Que informacoes preciso?</span></div>
+            <div class="flex items-center gap-3"><span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded font-mono">3</span><span class="text-neutral-300">PROCESSO: O que faco com os dados?</span></div>
+            <div class="flex items-center gap-3"><span class="bg-amber-500/20 text-amber-400 px-3 py-1 rounded font-mono">4</span><span class="text-neutral-300">ACAO: Qual o resultado final?</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">3</span><h2 class="text-xl font-bold text-white">Construindo passo a passo</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Implementar o cenario de forma incremental. Comecar com a parte mais simples, testar, depois adicionar complexidade gradualmente ate completar.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Construcao incremental reduz erros dramaticamente. E muito mais facil debugar partes pequenas do que um sistema completo quebrado.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Incremental development, Module testing, Integration testing, Iteration.</p></div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Metodologia Recomendada</h4>
+          <ol class="text-sm text-neutral-300 list-decimal list-inside space-y-1">
+            <li>Configure o trigger e teste se recebe dados</li>
+            <li>Adicione um modulo, teste</li>
+            <li>Adicione proximo modulo, teste</li>
+            <li>Repita ate completar o fluxo</li>
+            <li>Teste o fluxo completo end-to-end</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">4</span><h2 class="text-xl font-bold text-white">Testando e validando</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Executar o cenario com dados reais e verificar se o resultado e exatamente o esperado. Testar casos normais, casos limite e casos de erro.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Teste previne problemas em producao. Um cenario nao testado adequadamente e uma bomba-relogio esperando para explodir.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Test cases, Edge cases, Validation, Expected vs Actual, Regression testing.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Checklist de Teste</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li class="flex items-center gap-2"><span class="text-emerald-400">☐</span> Caso feliz funciona corretamente</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">☐</span> Dados faltantes sao tratados</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">☐</span> Caracteres especiais nao quebram</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">☐</span> Erros de API sao capturados</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">☐</span> Performance e aceitavel</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">5</span><h2 class="text-xl font-bold text-white">Corrigindo erros comuns</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Identificar e resolver os problemas mais tipicos: conexoes expiradas, dados faltantes, rate limits, formatacao incorreta, timeouts.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Erros sao inevitaveis em qualquer projeto. Saber resolver rapidamente diferencia o amador do profissional.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Error handling, Retry logic, Fallback, Logging, Monitoring, Debug techniques.</p></div>
+        </div>
+        <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+          <h4 class="text-red-400 font-semibold mb-3">Erros Mais Frequentes</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li><strong class="text-white">Conexao expirada:</strong> Reconecte a integracao nas configuracoes</li>
+            <li><strong class="text-white">Campo vazio:</strong> Use ifempty() ou set default value</li>
+            <li><strong class="text-white">Rate limit:</strong> Adicione Sleep entre requisicoes</li>
+            <li><strong class="text-white">Timeout:</strong> Otimize ou quebre em cenarios menores</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">6</span><h2 class="text-xl font-bold text-white">Publicando e monitorando</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Ativar o cenario para rodar automaticamente em producao. Configurar notificacoes de erro, monitorar execucoes e ajustar conforme necessario.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Automacao so gera valor quando esta rodando. Monitoramento adequado garante que continue funcionando e voce seja alertado se algo quebrar.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Activation, Scheduling, Error notifications, Execution history, Maintenance, Iteration.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Setup de Producao</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li class="flex items-center gap-2"><span class="text-emerald-400">1.</span> Ative o scheduling (ou deixe em "Immediately" para webhooks)</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">2.</span> Configure email de notificacao de erros</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">3.</span> Documente o que o cenario faz</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">4.</span> Verifique execution history periodicamente</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Completion Banner -->
+    <div class="bg-gradient-to-r from-emerald-500/30 to-emerald-600/30 border border-emerald-500/50 rounded-xl p-8 text-center mb-6">
+      <div class="text-5xl mb-4">🏆</div>
+      <h2 class="text-2xl font-bold text-white mb-3">Trilha 1 Concluida!</h2>
+      <p class="text-neutral-300 mb-6">Voce dominou os fundamentos de automacao com Make.com. Agora esta pronto para a Trilha 2: Conhecimentos Tecnicos.</p>
+      <a href="../trilha2/index.html" class="inline-block px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg text-lg transition-colors">
+        Iniciar Trilha 2 - Tecnicas →
+      </a>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-1-9.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">← Modulo 1.9</a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">Voltar para Trilha 1</a>
+    </div>
+  </main>
+
+  <footer class="bg-dark-800 border-t border-dark-600 py-8"><div class="max-w-6xl mx-auto px-4 text-center"><p class="text-neutral-500 text-sm">INEMA.Make - Baseado em 174 automacoes documentadas</p></div></footer>
+  <script>function toggleTheme(){document.documentElement.classList.toggle('dark');const i=document.getElementById('theme-icon');i.innerHTML=document.documentElement.classList.contains('dark')?'<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>':'<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';}</script>
+</body>
+</html>

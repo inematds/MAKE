@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.2 - Webhooks e Comunicacao Basica | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#10b981'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-emerald-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a>
+      <span>/</span>
+      <span class="text-emerald-400">Modulo 1.2</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-emerald-400 font-bold text-xl">1.2</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium">
+        TRILHA 1 - FUNDAMENTOS
+      </span>
+      <span class="text-neutral-500 text-sm">~35 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-emerald-400">
+      Webhooks e Comunicacao Basica
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Domine webhooks, a espinha dorsal das integracoes modernas. Aprenda a receber dados externos,
+      responder requisicoes e conectar qualquer sistema ao Make.com.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Iniciante</span>
+      <span>|</span>
+      <span>Pre-requisito: Modulo 1.1</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">O que sao Webhooks e como funcionam</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Webhooks sao URLs que recebem dados de outros sistemas em tempo real. Funcionam como "portas de entrada" para sua automacao, permitindo que sistemas externos ativem seus cenarios instantaneamente quando algo acontece.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Webhooks sao a base de 70% das automacoes modernas. Permitem integrar qualquer sistema que envie HTTP requests - de formularios a APIs complexas.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              HTTP POST, Payload, Headers, Endpoint, JSON, Real-time, Request/Response.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Como Funciona um Webhook</h4>
+          <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-sm py-4">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-4 py-3 text-blue-400 text-center">
+              <div class="font-bold">Sistema Externo</div>
+              <div class="text-xs text-neutral-400">Formulario, API, App</div>
+            </div>
+            <div class="flex flex-col items-center">
+              <span class="text-neutral-500">HTTP POST</span>
+              <span class="text-2xl">→</span>
+              <span class="text-xs text-neutral-500">JSON payload</span>
+            </div>
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-4 py-3 text-emerald-400 text-center">
+              <div class="font-bold">Webhook Make</div>
+              <div class="text-xs text-neutral-400">URL unica</div>
+            </div>
+            <span class="text-neutral-500">→</span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-4 py-3 text-purple-400 text-center">
+              <div class="font-bold">Cenario</div>
+              <div class="text-xs text-neutral-400">Processa dados</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example -->
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Exemplo Real</h4>
+          <p class="text-neutral-300 text-sm">
+            Usuario preenche formulario no seu site → Formulario envia dados para webhook → Make recebe instantaneamente → Adiciona lead no CRM, envia email de boas-vindas e notifica vendedor no Slack. Tudo em segundos!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Criando seu primeiro Webhook no Make</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Processo de criar um modulo Webhook no Make que gera uma URL unica. Essa URL fica "escutando" requisicoes 24/7 e inicia o cenario quando recebe dados.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Habilidade essencial e fundamental. Webhooks conectam Make a formularios, chatbots, sistemas externos, APIs de terceiros - praticamente qualquer servico web.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Custom webhook, Webhook URL, Data structure, Determine data structure, IP restriction.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step by Step -->
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Passo a Passo</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+            <li>Crie um novo cenario no Make.com</li>
+            <li>Clique no <code class="bg-dark-700 px-2 py-1 rounded">+</code> e busque "Webhooks"</li>
+            <li>Selecione <code class="bg-dark-700 px-2 py-1 rounded">Custom webhook</code></li>
+            <li>Clique em "Add" para criar novo webhook</li>
+            <li>De um nome descritivo (ex: "Formulario-Contato")</li>
+            <li>Copie a URL gerada - ela comeca com <code class="bg-dark-700 px-2 py-1 rounded">hook.make.com/...</code></li>
+            <li>Clique em "Run once" para deixar escutando</li>
+            <li>Envie dados para a URL para definir estrutura</li>
+          </ol>
+        </div>
+
+        <!-- URL Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Exemplo de URL Webhook</h4>
+          <code class="text-sm text-neutral-300 break-all">
+            https://hook.make.com/abc123xyz789def456
+          </code>
+          <p class="text-xs text-neutral-500 mt-2">Cada webhook tem URL unica e permanente</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Recebendo dados externos</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Configurar o webhook para interpretar corretamente os dados enviados - seja JSON, form-data, ou query parameters. Definir a estrutura de dados esperada para usar nos proximos modulos.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Dados mal interpretados causam erros em toda a automacao. Entender o formato de entrada e critico para mapear corretamente os campos.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              JSON parsing, Form data, Query string, Content-Type, Data mapping, Headers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Data Formats -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-emerald-400 font-semibold mb-3">Formato JSON</h4>
+            <pre class="text-xs text-neutral-300 bg-dark-900 p-3 rounded overflow-x-auto"><code>{
+  "nome": "Maria",
+  "email": "maria@email.com",
+  "telefone": "11999999999"
+}</code></pre>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-blue-400 font-semibold mb-3">Form Data</h4>
+            <pre class="text-xs text-neutral-300 bg-dark-900 p-3 rounded overflow-x-auto"><code>nome=Maria
+email=maria@email.com
+telefone=11999999999</code></pre>
+          </div>
+        </div>
+
+        <!-- Tip -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Dica Importante</h4>
+          <p class="text-neutral-300 text-sm">
+            Sempre use "Re-determine data structure" quando o formato dos dados mudar. Isso garante que novos campos sejam reconhecidos pelo Make.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Respondendo a requisicoes</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Usar o modulo "Webhook response" para enviar uma resposta HTTP de volta ao sistema que chamou. Pode incluir dados processados, confirmacoes, ou mensagens de sucesso/erro.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Muitos sistemas esperam uma resposta para confirmar que os dados foram recebidos. Sem ela, podem tentar reenviar repetidamente ou marcar como erro.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              HTTP response, Status code, Response body, 200 OK, 400 Bad Request, Timeout.
+            </p>
+          </div>
+        </div>
+
+        <!-- Status Codes -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Codigos de Status HTTP</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-center gap-2">
+              <span class="bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded text-xs font-mono">200</span>
+              <span>OK - Sucesso, tudo funcionou</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs font-mono">201</span>
+              <span>Created - Recurso criado com sucesso</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="bg-amber-500/20 text-amber-400 px-2 py-1 rounded text-xs font-mono">400</span>
+              <span>Bad Request - Dados invalidos</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="bg-red-500/20 text-red-400 px-2 py-1 rounded text-xs font-mono">500</span>
+              <span>Server Error - Erro no servidor</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Example Response -->
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Exemplo de Resposta</h4>
+          <pre class="text-xs text-neutral-300 bg-dark-900 p-3 rounded overflow-x-auto"><code>{
+  "success": true,
+  "message": "Lead recebido com sucesso!",
+  "id": "lead_12345"
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Webhooks com formularios simples</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Conectar webhooks a formularios HTML ou de plataformas como Typeform, Google Forms, JotForm. Capturar submissoes automaticamente assim que usuario envia.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Formularios sao a principal forma de capturar leads e dados de usuarios. Automatizar o processamento e essencial para marketing e vendas.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Form submission, Lead capture, Field mapping, Auto-response, Form validation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Integration Options -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Plataformas Compativeis</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <div class="text-2xl mb-1">📋</div>
+              <div class="text-sm text-neutral-300">Typeform</div>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <div class="text-2xl mb-1">📝</div>
+              <div class="text-sm text-neutral-300">Google Forms</div>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <div class="text-2xl mb-1">📄</div>
+              <div class="text-sm text-neutral-300">JotForm</div>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <div class="text-2xl mb-1">🌐</div>
+              <div class="text-sm text-neutral-300">HTML Nativo</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HTML Example -->
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Formulario HTML Basico</h4>
+          <pre class="text-xs text-neutral-300 bg-dark-900 p-3 rounded overflow-x-auto"><code>&lt;form action="URL_DO_WEBHOOK" method="POST"&gt;
+  &lt;input type="text" name="nome" required&gt;
+  &lt;input type="email" name="email" required&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Debug e troubleshooting de webhooks</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-emerald-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Tecnicas para identificar e resolver problemas com webhooks: logs, ferramentas de teste (RequestBin, Postman), verificacao de headers e payloads quando algo nao funciona.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Webhooks podem falhar silenciosamente. Saber debugar economiza horas de frustracao e permite resolver problemas rapidamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-emerald-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Request inspector, Postman, Console log, Error 4xx/5xx, Retry logic, Timeout.
+            </p>
+          </div>
+        </div>
+
+        <!-- Debug Tools -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Ferramentas de Debug</h4>
+          <ul class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">•</span>
+              <div>
+                <strong>Postman:</strong> Envie requests de teste para seu webhook e veja a resposta
+              </div>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">•</span>
+              <div>
+                <strong>RequestBin:</strong> Capture e inspecione requests para entender o formato
+              </div>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">•</span>
+              <div>
+                <strong>Make History:</strong> Verifique execucoes anteriores no historico do cenario
+              </div>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">•</span>
+              <div>
+                <strong>Browser DevTools:</strong> Aba Network para ver requests do navegador
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Common Errors -->
+        <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+          <h4 class="text-red-400 font-semibold mb-3">Erros Comuns e Solucoes</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li><strong>Webhook nao dispara:</strong> Verifique se cenario esta ativo e URL correta</li>
+            <li><strong>Dados nao aparecem:</strong> Re-determine a estrutura de dados</li>
+            <li><strong>Erro 403:</strong> Verifique restricoes de IP no webhook</li>
+            <li><strong>Timeout:</strong> Responda em menos de 40 segundos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">1.3 - Google Workspace Essencial</p>
+        </div>
+        <a href="modulo-1-3.html" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors">
+          Continuar →
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-1-1.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        ← Modulo 1.1
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 1
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

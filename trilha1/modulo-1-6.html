@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.6 - Email Marketing Basico | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { dark: { 600: '#374151', 700: '#1f2937', 800: '#111827', 900: '#0d1117' }, primary: '#10b981' } } } }</script>
+  <style>
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4"><div class="flex items-center justify-between">
+      <div class="flex items-center space-x-4"><a href="../index.html" class="text-xl font-bold text-red-500">INEMA.Make</a><span class="text-neutral-500">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></div>
+      <div class="flex items-center space-x-4"><a href="index.html" class="px-4 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 font-medium">Fundamentos</a><a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Tecnicas</a><a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Avancado</a><button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600"><span id="theme-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></span></button></div>
+    </div></div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 py-4"><nav class="flex items-center space-x-2 text-sm text-neutral-500"><a href="../index.html" class="hover:text-emerald-400">Curso</a><span>/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span><span class="text-emerald-400">Modulo 1.6</span></nav></div>
+
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4"><span class="text-emerald-400 font-bold text-xl">1.6</span><span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium">TRILHA 1 - FUNDAMENTOS</span><span class="text-neutral-500 text-sm">~35 min</span></div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-emerald-400">Email Marketing Basico</h1>
+    <p class="text-lg text-neutral-400 mb-6">Automatize envio de emails, crie templates personalizados, segmente listas e acompanhe metricas de campanhas.</p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500"><span>6 topicos</span><span>|</span><span>Nivel: Iniciante</span><span>|</span><span>Pre-requisito: Modulo 1.5</span></div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">1</span><h2 class="text-xl font-bold text-white">Enviando emails automaticos</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Configurar envio automatico de emails baseado em triggers. Confirmacao de cadastro, boas-vindas, notificacoes de status, lembretes - tudo enviado automaticamente.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Email automatico e expectativa basica dos usuarios modernos. Confirmacoes instantaneas aumentam confianca e reduzem suporte.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">SMTP, Gmail API, Email trigger, Recipient, Subject, Body, HTML email.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Tipos de Email Automatico</h4>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div class="bg-dark-600/50 rounded p-3"><span class="text-2xl">✉️</span><div class="font-bold text-white mt-1">Transacional</div><p class="text-neutral-400">Confirmacoes, recibos</p></div>
+            <div class="bg-dark-600/50 rounded p-3"><span class="text-2xl">👋</span><div class="font-bold text-white mt-1">Boas-vindas</div><p class="text-neutral-400">Onboarding de novos usuarios</p></div>
+            <div class="bg-dark-600/50 rounded p-3"><span class="text-2xl">🔔</span><div class="font-bold text-white mt-1">Notificacao</div><p class="text-neutral-400">Alertas e atualizacoes</p></div>
+            <div class="bg-dark-600/50 rounded p-3"><span class="text-2xl">⏰</span><div class="font-bold text-white mt-1">Lembrete</div><p class="text-neutral-400">Eventos, pagamentos</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">2</span><h2 class="text-xl font-bold text-white">Templates de email</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Criar emails pre-formatados com espacos para dados dinamicos. Manter consistencia visual da marca enquanto personaliza conteudo para cada destinatario.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Templates garantem qualidade consistente e profissional. Escalam envios personalizados sem sacrificar identidade visual.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">HTML email, Template variables, Placeholder, Mail merge, Design system, Inline CSS.</p></div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Exemplo de Template</h4>
+          <pre class="text-xs text-neutral-300 bg-dark-900 p-3 rounded overflow-x-auto"><code>&lt;h1&gt;Ola, {{nome}}!&lt;/h1&gt;
+&lt;p&gt;Seu pedido #{{numero_pedido}} foi confirmado.&lt;/p&gt;
+&lt;p&gt;Total: R$ {{valor}}&lt;/p&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">3</span><h2 class="text-xl font-bold text-white">Personalizacao de mensagens</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Inserir dados especificos do destinatario no email: nome, empresa, historico de compras, interesses. Criar sensacao de email individual mesmo em envios em massa.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Emails personalizados tem 29% mais taxa de abertura e 41% mais cliques. Personalizacao escala relacionamento sem esforco manual.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Dynamic fields, Merge tags, Conditional content, Personalization tokens, A/B testing.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Niveis de Personalizacao</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li><strong class="text-white">Basico:</strong> Nome, email, empresa</li>
+            <li><strong class="text-white">Intermediario:</strong> Historico de compras, preferencias</li>
+            <li><strong class="text-white">Avancado:</strong> Conteudo condicional baseado em comportamento</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">4</span><h2 class="text-xl font-bold text-white">Listas e segmentacao</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Organizar contatos em grupos baseados em caracteristicas, comportamentos ou interesses. Enviar mensagens relevantes para cada segmento especifico.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Segmentacao aumenta relevancia dramaticamente. Emails relevantes convertem mais, cancelam menos e constroem relacionamento real.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Contact list, Segment, Tag, Filter criteria, Audience, Subscription status.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Exemplos de Segmentos</h4>
+          <div class="flex flex-wrap gap-2 text-sm">
+            <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full">Leads Novos</span>
+            <span class="bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full">Clientes Ativos</span>
+            <span class="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full">Inativos 30d</span>
+            <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full">Compradores VIP</span>
+            <span class="bg-red-500/20 text-red-400 px-3 py-1 rounded-full">Carrinho Abandonado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">5</span><h2 class="text-xl font-bold text-white">Newsletter automatica</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Sistema que coleta conteudo de fontes (RSS, blog, curadoria) e envia periodicamente para assinantes em formato de newsletter bem formatada.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Newsletters mantem audiencia engajada e top-of-mind. Automatizar curadoria e envio economiza horas semanais de trabalho repetitivo.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">RSS aggregation, Content curation, Digest email, Send schedule, Subscriber management.</p></div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Fluxo de Newsletter</h4>
+          <div class="flex flex-wrap items-center gap-2 text-sm text-neutral-300">
+            <span class="bg-dark-700 px-3 py-1 rounded">RSS/Blog</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">Agrega conteudo</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">Formata template</span><span>→</span>
+            <span class="bg-dark-700 px-3 py-1 rounded">Envia semanalmente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">6</span><h2 class="text-xl font-bold text-white">Acompanhamento de envios</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Monitorar taxa de abertura, cliques, bounces e unsubscribes. Armazenar dados para analisar performance e otimizar campanhas futuras.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Sem metricas, impossivel melhorar. Dados de email guiam estrategia de comunicacao e mostram o que funciona vs o que nao funciona.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Open rate, Click rate (CTR), Bounce rate, Unsubscribe rate, Delivery rate.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Benchmarks de Mercado</h4>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div class="flex justify-between"><span class="text-neutral-400">Taxa de Abertura</span><span class="text-emerald-400">15-25%</span></div>
+            <div class="flex justify-between"><span class="text-neutral-400">Taxa de Clique</span><span class="text-emerald-400">2-5%</span></div>
+            <div class="flex justify-between"><span class="text-neutral-400">Bounce Rate</span><span class="text-amber-400">&lt;2%</span></div>
+            <div class="flex justify-between"><span class="text-neutral-400">Unsubscribe</span><span class="text-amber-400">&lt;0.5%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6"><div class="flex items-center justify-between"><div><h3 class="font-bold text-lg mb-1">Proximo Modulo</h3><p class="text-neutral-400">1.7 - Introducao a IA</p></div><a href="modulo-1-7.html" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg">Continuar →</a></div></div>
+    <div class="flex justify-between mt-8"><a href="modulo-1-5.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">← Modulo 1.5</a><a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">Voltar para Trilha 1</a></div>
+  </main>
+
+  <footer class="bg-dark-800 border-t border-dark-600 py-8"><div class="max-w-6xl mx-auto px-4 text-center"><p class="text-neutral-500 text-sm">INEMA.Make - Baseado em 174 automacoes documentadas</p></div></footer>
+  <script>function toggleTheme(){document.documentElement.classList.toggle('dark');const i=document.getElementById('theme-icon');i.innerHTML=document.documentElement.classList.contains('dark')?'<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>':'<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';}</script>
+</body>
+</html>

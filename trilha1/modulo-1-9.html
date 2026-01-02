@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1.9 - Mensageria Basica | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { dark: { 600: '#374151', 700: '#1f2937', 800: '#111827', 900: '#0d1117' }, primary: '#10b981' } } } }</script>
+  <style>
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4"><div class="flex items-center justify-between">
+      <div class="flex items-center space-x-4"><a href="../index.html" class="text-xl font-bold text-red-500">INEMA.Make</a><span class="text-neutral-500">|</span><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></div>
+      <div class="flex items-center space-x-4"><a href="index.html" class="px-4 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 font-medium">Fundamentos</a><a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Tecnicas</a><a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 font-medium">Avancado</a><button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600"><span id="theme-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></span></button></div>
+    </div></div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 py-4"><nav class="flex items-center space-x-2 text-sm text-neutral-500"><a href="../index.html" class="hover:text-emerald-400">Curso</a><span>/</span><a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span><span class="text-emerald-400">Modulo 1.9</span></nav></div>
+
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4"><span class="text-emerald-400 font-bold text-xl">1.9</span><span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium">TRILHA 1 - FUNDAMENTOS</span><span class="text-neutral-500 text-sm">~35 min</span></div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-emerald-400">Mensageria Basica</h1>
+    <p class="text-lg text-neutral-400 mb-6">Crie bots de Telegram, entenda WhatsApp Business e escolha o provedor certo. O inicio da automacao de atendimento.</p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500"><span>6 topicos</span><span>|</span><span>Nivel: Iniciante</span><span>|</span><span>Pre-requisito: Modulo 1.8</span></div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">1</span><h2 class="text-xl font-bold text-white">Introducao ao Telegram Bot</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Telegram permite criar bots que interagem automaticamente com usuarios. API totalmente gratuita, poderosa e bem documentada - perfeita para aprender chatbots.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Telegram e muito popular no Brasil e tem a API mais acessivel do mercado. Perfeito para prototipar chatbots antes de ir para WhatsApp (mais complexo e caro).</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">BotFather, Bot token, Chat ID, Telegram API, Commands, Inline keyboards.</p></div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Criando um Bot</h4>
+          <ol class="text-sm text-neutral-300 list-decimal list-inside space-y-1">
+            <li>Abra @BotFather no Telegram</li>
+            <li>Envie /newbot</li>
+            <li>Escolha nome e username</li>
+            <li>Copie o token gerado</li>
+            <li>Use no Make para conectar</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">2</span><h2 class="text-xl font-bold text-white">Recebendo mensagens</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Configurar webhook no Make para receber mensagens enviadas ao bot. Processar texto, imagens, arquivos, audios e outros tipos de midia dos usuarios.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Recepcao de mensagens e a base de qualquer chatbot. Sem receber e processar input do usuario, impossivel criar interacao util.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Message update, Text message, Media message, User info, Chat type, Message ID.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Dados Recebidos</h4>
+          <pre class="text-xs text-neutral-300 bg-dark-900 p-3 rounded overflow-x-auto"><code>{
+  "message": {
+    "chat": {"id": 123456789},
+    "from": {"first_name": "Maria"},
+    "text": "Ola, preciso de ajuda!"
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">3</span><h2 class="text-xl font-bold text-white">Enviando respostas automaticas</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Usar modulo Telegram no Make para enviar mensagens de volta ao usuario. Pode ser texto simples, imagens, documentos, ou mensagens com botoes interativos.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Resposta automatica e a funcao primaria de qualquer bot. E onde a magica da automacao de atendimento realmente acontece.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Send message, Reply markup, Inline keyboard, Parse mode (HTML/Markdown), Photo/Document.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Tipos de Resposta</h4>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div class="bg-dark-600/50 rounded p-3"><span class="text-2xl">💬</span><div class="font-bold text-white mt-1">Texto</div><p class="text-neutral-400">Mensagem simples</p></div>
+            <div class="bg-dark-600/50 rounded p-3"><span class="text-2xl">🖼️</span><div class="font-bold text-white mt-1">Imagem</div><p class="text-neutral-400">Foto com legenda</p></div>
+            <div class="bg-dark-600/50 rounded p-3"><span class="text-2xl">📄</span><div class="font-bold text-white mt-1">Documento</div><p class="text-neutral-400">PDF, arquivos</p></div>
+            <div class="bg-dark-600/50 rounded p-3"><span class="text-2xl">⌨️</span><div class="font-bold text-white mt-1">Botoes</div><p class="text-neutral-400">Menu interativo</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">4</span><h2 class="text-xl font-bold text-white">Trabalhando com grupos</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Bots podem participar de grupos e canais do Telegram. Comportamento diferente: precisa ser mencionado ou ter permissao de admin para ver todas mensagens.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Grupos multiplicam o alcance do bot. Um unico bot pode atender centenas de usuarios simultaneamente em grupos de comunidade.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Group chat, Channel, Admin rights, Privacy mode, Mentions, Group ID vs Chat ID.</p></div>
+        </div>
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Importante</h4>
+          <p class="text-neutral-300 text-sm">Em grupos, bots so recebem mensagens quando sao mencionados (@seubot) ou quando tem "Privacy mode" desativado nas configuracoes do BotFather.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">5</span><h2 class="text-xl font-bold text-white">Introducao ao WhatsApp</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">WhatsApp Business API permite automacoes similares ao Telegram, porem com custos, regras mais rigidas e complexidade maior. E o canal dominante no Brasil.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">WhatsApp e onde 99% dos clientes brasileiros estao. Automacao de WhatsApp tem o maior impacto comercial real no Brasil.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">WhatsApp Business API, Message templates, Session messages, 24h window, Opt-in.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">WhatsApp vs Telegram</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div><strong class="text-emerald-400">Telegram:</strong><p class="text-neutral-400">Gratis, facil, menos usuarios</p></div>
+            <div><strong class="text-emerald-400">WhatsApp:</strong><p class="text-neutral-400">Pago, complexo, mais usuarios</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center">6</span><h2 class="text-xl font-bold text-white">Escolhendo provedor de WhatsApp</h2></div></div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div><span class="text-emerald-400 font-semibold">O que e:</span><p class="text-neutral-300 mt-1">Comparar opcoes de API WhatsApp: Z-API, Evolution API, Twilio, Meta Business API. Cada um com custos, recursos e complexidades diferentes.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 mt-1">Escolha errada custa caro ou limita funcionalidades. Entender as opcoes evita retrabalho e surpresas desagradaveis no futuro.</p></div>
+          <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 mt-1">Z-API, Evolution API, Twilio, Official API, Unofficial API, Pricing models.</p></div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Comparativo de Provedores</h4>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between items-center"><span class="text-white font-medium">Z-API</span><span class="text-neutral-400">R$49+/mes | Facil | Nao-oficial</span></div>
+            <div class="flex justify-between items-center"><span class="text-white font-medium">Evolution API</span><span class="text-neutral-400">Self-hosted | Gratuito | Nao-oficial</span></div>
+            <div class="flex justify-between items-center"><span class="text-white font-medium">Twilio</span><span class="text-neutral-400">$0.005/msg | Oficial | Complexo</span></div>
+            <div class="flex justify-between items-center"><span class="text-white font-medium">Meta Cloud</span><span class="text-neutral-400">1000 gratis | Oficial | Templates</span></div>
+          </div>
+        </div>
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Recomendacao para Iniciantes</h4>
+          <p class="text-neutral-300 text-sm">Comece com <strong>Z-API</strong> pela facilidade de setup. Migre para Evolution (self-hosted) quando escalar, ou Meta Cloud API para casos que exigem API oficial.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6"><div class="flex items-center justify-between"><div><h3 class="font-bold text-lg mb-1">Proximo Modulo</h3><p class="text-neutral-400">1.10 - Projeto Integrador Fundamentos</p></div><a href="modulo-1-10.html" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg">Continuar →</a></div></div>
+    <div class="flex justify-between mt-8"><a href="modulo-1-8.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">← Modulo 1.8</a><a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300">Voltar para Trilha 1</a></div>
+  </main>
+
+  <footer class="bg-dark-800 border-t border-dark-600 py-8"><div class="max-w-6xl mx-auto px-4 text-center"><p class="text-neutral-500 text-sm">INEMA.Make - Baseado em 174 automacoes documentadas</p></div></footer>
+  <script>function toggleTheme(){document.documentElement.classList.toggle('dark');const i=document.getElementById('theme-icon');i.innerHTML=document.documentElement.classList.contains('dark')?'<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>':'<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';}</script>
+</body>
+</html>
