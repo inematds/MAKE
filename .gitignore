@@ -1,0 +1,22 @@
+# Arquivos de mídia
+*.mp4
+*.MP4
+
+# Documentação com secrets
+doc/
+
+# Dependências
+node_modules/
+
+# Arquivos do sistema
+.DS_Store
+*.log
+
+# Arquivos de configuração local
+.claude/
+.bmad-core/
+ref/
+
+# NPM
+package-lock.json
+package.json
