@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.5 - Geracao de Imagens com IA | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#3b82f6'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-blue-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Modulo 2.5</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-blue-400 font-bold text-xl">2.5</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">
+        TRILHA 2 - TECNICAS
+      </span>
+      <span class="text-neutral-500 text-sm">~40 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-blue-400">
+      Geracao de Imagens com IA
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Crie imagens incriveis com IA diretamente no Make. Domine DALL-E 3, Flux via Replicate,
+      personalizacao com LoRA, geracao em massa e otimizacao de custos.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Intermediario</span>
+      <span>|</span>
+      <span>Pre-requisitos: Trilha 1 completa</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">DALL-E 3 no Make</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Usar a API do DALL-E 3 para gerar imagens a partir de descricoes em texto. Integra diretamente com cenarios Make atraves do modulo OpenAI.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Imagens customizadas sem precisar de designer. Ideal para social media, thumbnails, ilustracoes e qualquer conteudo visual automatizado.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Image generation, Text-to-image, DALL-E API, Image resolution, Style prompts.
+            </p>
+          </div>
+        </div>
+
+        <!-- API Example -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Chamada de API no Make</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>{
+  "model": "dall-e-3",
+  "prompt": "Um gato programador usando oculos,
+             estilo cartoon, fundo colorido",
+  "size": "1024x1024",
+  "quality": "standard",
+  "n": 1
+}</code></pre>
+        </div>
+
+        <!-- Size Options -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Tamanhos Disponiveis</h4>
+          <div class="grid grid-cols-3 gap-3 text-sm">
+            <div class="bg-dark-800 rounded-lg p-3 text-center">
+              <div class="text-emerald-400 font-bold">1024x1024</div>
+              <div class="text-xs text-neutral-500">Quadrado</div>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3 text-center">
+              <div class="text-purple-400 font-bold">1792x1024</div>
+              <div class="text-xs text-neutral-500">Paisagem</div>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3 text-center">
+              <div class="text-amber-400 font-bold">1024x1792</div>
+              <div class="text-xs text-neutral-500">Retrato</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Flux via Replicate</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Flux e um modelo de geracao de imagem com qualidade superior em certos casos. Acessivel via Replicate, uma plataforma que hospeda modelos de IA.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Para casos que exigem fotorrealismo ou estilos artisticos especificos, Flux frequentemente supera DALL-E. Mais opcoes = melhores resultados.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Flux model, Replicate API, Model parameters, Quality vs speed.
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">DALL-E 3 vs Flux</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
+              <h5 class="text-emerald-400 font-medium mb-2">DALL-E 3</h5>
+              <ul class="text-neutral-300 space-y-1 text-xs">
+                <li>+ Melhor para ilustracoes</li>
+                <li>+ Segue instrucoes precisamente</li>
+                <li>+ Integracao nativa Make</li>
+                <li>- Mais caro</li>
+              </ul>
+            </div>
+            <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3">
+              <h5 class="text-purple-400 font-medium mb-2">Flux</h5>
+              <ul class="text-neutral-300 space-y-1 text-xs">
+                <li>+ Fotorrealismo superior</li>
+                <li>+ Mais barato em volume</li>
+                <li>+ Suporta LoRA</li>
+                <li>- Requer HTTP module</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replicate Integration -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Integracao via HTTP</h4>
+          <p class="text-neutral-300 text-sm">
+            No Make, use HTTP module para POST em api.replicate.com. Passe o modelo (flux), prompt e parametros. O resultado retorna uma URL da imagem gerada.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Personalizacao com LoRA</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              LoRA (Low-Rank Adaptation) permite treinar geradores de imagem para criar imagens de pessoas, produtos ou estilos especificos consistentemente.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Imagens genericas nao funcionam para marca. LoRA permite consistencia de personagem, produto ou estilo visual em todas as imagens geradas.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              LoRA training, Custom model, Character consistency, Style transfer.
+            </p>
+          </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Casos de Uso para LoRA</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-pink-400">*</span>
+              <span><strong>Mascote da marca:</strong> Gerar o mesmo personagem em diferentes situacoes</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-pink-400">*</span>
+              <span><strong>Fotos de produto:</strong> Criar variacoes de produto em diferentes cenarios</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-pink-400">*</span>
+              <span><strong>Estilo artistico:</strong> Manter consistencia visual em todo conteudo</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-pink-400">*</span>
+              <span><strong>Avatar pessoal:</strong> Criar imagens de si mesmo em contextos variados</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Training Tip -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Dica de Treinamento</h4>
+          <p class="text-neutral-300 text-sm">
+            Para treinar um LoRA de qualidade, use 15-20 fotos variadas do sujeito (diferentes angulos, iluminacoes, expressoes). Servicos como Replicate e Fal.ai oferecem treinamento de LoRA por API.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Imagens para redes sociais</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Gerar imagens ja otimizadas para cada plataforma: Instagram quadrado, Story vertical, capa do LinkedIn, thumbnail do YouTube.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Cada plataforma tem requisitos especificos. Automatizar geracao no formato correto elimina ajustes manuais e economiza tempo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Image sizing, Aspect ratios, Platform requirements, Visual optimization.
+            </p>
+          </div>
+        </div>
+
+        <!-- Platform Sizes -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Tamanhos por Plataforma</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+            <div class="bg-pink-500/10 border border-pink-500/30 rounded-lg p-3 text-center">
+              <div class="text-pink-400 font-bold">Instagram</div>
+              <div class="text-xs text-neutral-400">Feed: 1:1</div>
+              <div class="text-xs text-neutral-400">Story: 9:16</div>
+            </div>
+            <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-center">
+              <div class="text-red-400 font-bold">YouTube</div>
+              <div class="text-xs text-neutral-400">Thumb: 16:9</div>
+              <div class="text-xs text-neutral-400">1280x720</div>
+            </div>
+            <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 text-center">
+              <div class="text-blue-400 font-bold">LinkedIn</div>
+              <div class="text-xs text-neutral-400">Post: 1.91:1</div>
+              <div class="text-xs text-neutral-400">1200x627</div>
+            </div>
+            <div class="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3 text-center">
+              <div class="text-cyan-400 font-bold">Twitter/X</div>
+              <div class="text-xs text-neutral-400">Card: 2:1</div>
+              <div class="text-xs text-neutral-400">1200x600</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Planilha para geracao em massa</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema onde uma planilha contem prompts e o cenario do Make gera imagens para todos automaticamente. Produz dezenas de imagens de uma vez.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Conteudo visual em escala. Uma hora de configuracao de planilha pode gerar semanas de conteudo visual para suas redes.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Batch processing, Prompt spreadsheet, Mass generation, Image pipeline.
+            </p>
+          </div>
+        </div>
+
+        <!-- Spreadsheet Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Estrutura da Planilha</h4>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="text-neutral-400 border-b border-dark-600">
+                <tr>
+                  <th class="text-left py-2 px-2">ID</th>
+                  <th class="text-left py-2 px-2">Prompt</th>
+                  <th class="text-left py-2 px-2">Tamanho</th>
+                  <th class="text-left py-2 px-2">Status</th>
+                </tr>
+              </thead>
+              <tbody class="text-neutral-300">
+                <tr class="border-b border-dark-700">
+                  <td class="py-2 px-2">001</td>
+                  <td class="py-2 px-2">Gato laranja programando...</td>
+                  <td class="py-2 px-2">1:1</td>
+                  <td class="py-2 px-2 text-emerald-400">Gerado</td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="py-2 px-2">002</td>
+                  <td class="py-2 px-2">Paisagem futurista com...</td>
+                  <td class="py-2 px-2">16:9</td>
+                  <td class="py-2 px-2 text-amber-400">Processando</td>
+                </tr>
+                <tr>
+                  <td class="py-2 px-2">003</td>
+                  <td class="py-2 px-2">Logo minimalista para...</td>
+                  <td class="py-2 px-2">1:1</td>
+                  <td class="py-2 px-2 text-neutral-500">Pendente</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Flow -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Fluxo de Geracao em Massa</h4>
+          <div class="flex items-center justify-center gap-2 text-sm py-2 flex-wrap">
+            <div class="bg-emerald-500/20 rounded px-3 py-1 text-emerald-400">Planilha</div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-blue-500/20 rounded px-3 py-1 text-blue-400">Iterator</div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 rounded px-3 py-1 text-purple-400">DALL-E/Flux</div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 rounded px-3 py-1 text-amber-400">Google Drive</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Otimizacao de custos</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Estrategias para reduzir gastos com geracao de imagem: escolher resolucao adequada, usar cache, selecionar modelos mais economicos para cada caso.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Geracao de imagem pode ser cara em escala. Otimizacao inteligente pode reduzir custos em ate 70% sem perder qualidade perceptivel.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Resolution optimization, Model selection, Caching, Cost per image.
+            </p>
+          </div>
+        </div>
+
+        <!-- Cost Comparison -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Custo por Imagem (aproximado)</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+            <div class="bg-dark-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-red-400">$0.04</div>
+              <div class="text-xs text-neutral-500">DALL-E 3 HD</div>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-amber-400">$0.02</div>
+              <div class="text-xs text-neutral-500">DALL-E 3 Std</div>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-emerald-400">$0.01</div>
+              <div class="text-xs text-neutral-500">Flux Dev</div>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-blue-400">$0.005</div>
+              <div class="text-xs text-neutral-500">Flux Schnell</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optimization Tips -->
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Estrategias de Economia</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">1.</span>
+              <span><strong>Use Standard, nao HD:</strong> A diferenca e minima em telas pequenas</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">2.</span>
+              <span><strong>Cache de imagens:</strong> Nao gere a mesma imagem duas vezes</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">3.</span>
+              <span><strong>Modelos por caso:</strong> Flux Schnell para testes, DALL-E para final</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">4.</span>
+              <span><strong>Resolucao minima:</strong> Gere no tamanho que sera usado, nao maior</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">2.6 - Video e Multimidia</p>
+        </div>
+        <a href="modulo-2-6.html" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-2-4.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Modulo 2.4
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Trilha 2
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

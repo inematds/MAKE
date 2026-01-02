@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.4 - Automacao de Email Avancada | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#3b82f6'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-blue-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Modulo 2.4</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-blue-400 font-bold text-xl">2.4</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">
+        TRILHA 2 - TECNICAS
+      </span>
+      <span class="text-neutral-500 text-sm">~40 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-blue-400">
+      Automacao de Email Avancada
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Leve seu email ao proximo nivel com IA. Aprenda resposta automatica inteligente, classificacao,
+      RAG para emails, processamento de faturas e integracao completa com CRM.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Intermediario</span>
+      <span>|</span>
+      <span>Pre-requisitos: Trilha 1 completa</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">Resposta automatica com IA</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema que le emails recebidos, entende o contexto usando LLM e gera respostas apropriadas. Pode funcionar com ou sem aprovacao humana antes do envio.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Email consome horas diarias de trabalho. IA pode responder emails rotineiros automaticamente, liberando tempo para tarefas mais importantes.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Email parsing, Intent detection, Response generation, Human-in-the-loop.
+            </p>
+          </div>
+        </div>
+
+        <!-- Flow Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Fluxo de Resposta Automatica</h4>
+          <div class="flex items-center justify-center gap-2 text-sm py-4 flex-wrap">
+            <div class="bg-red-500/20 border border-red-500/50 rounded-lg px-3 py-2 text-red-400">
+              Email Recebido
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              IA Analisa
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              Gera Resposta
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400">
+              Aprova/Envia
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Prompt -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Exemplo de System Prompt</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>Voce e o assistente de email da empresa XYZ.
+Ao receber um email, analise e responda seguindo:
+
+1. Identifique a intencao (duvida, reclamacao, pedido)
+2. Responda de forma profissional e cordial
+3. Se for assunto complexo, diga que encaminhara
+4. Use o nome do remetente na saudacao
+
+Email recebido:
+{{email.body}}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Classificacao de emails</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Usar IA para categorizar emails automaticamente em categorias como urgente, spam, suporte, vendas. Roteia cada email para o destino correto.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Inbox zero automatizado. Emails chegam ja organizados e priorizados, economizando tempo de triagem manual.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Email classification, Intent detection, Priority scoring, Auto-labeling.
+            </p>
+          </div>
+        </div>
+
+        <!-- Classification Categories -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Categorias Tipicas</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+            <div class="bg-red-500/10 border border-red-500/30 rounded px-3 py-2 text-red-400 text-center">Urgente</div>
+            <div class="bg-emerald-500/10 border border-emerald-500/30 rounded px-3 py-2 text-emerald-400 text-center">Vendas</div>
+            <div class="bg-blue-500/10 border border-blue-500/30 rounded px-3 py-2 text-blue-400 text-center">Suporte</div>
+            <div class="bg-purple-500/10 border border-purple-500/30 rounded px-3 py-2 text-purple-400 text-center">Financeiro</div>
+            <div class="bg-amber-500/10 border border-amber-500/30 rounded px-3 py-2 text-amber-400 text-center">Newsletter</div>
+            <div class="bg-pink-500/10 border border-pink-500/30 rounded px-3 py-2 text-pink-400 text-center">Parceria</div>
+            <div class="bg-neutral-500/10 border border-neutral-500/30 rounded px-3 py-2 text-neutral-400 text-center">Spam</div>
+            <div class="bg-cyan-500/10 border border-cyan-500/30 rounded px-3 py-2 text-cyan-400 text-center">Outros</div>
+          </div>
+        </div>
+
+        <!-- Output Format -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Formato de Saida (JSON Mode)</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>{
+  "categoria": "suporte",
+  "prioridade": "alta",
+  "sentimento": "negativo",
+  "resumo": "Cliente reclama de atraso na entrega",
+  "acao_sugerida": "Verificar status do pedido #12345"
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">RAG para emails</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Retrieval Augmented Generation aplicado a emails. A IA busca emails antigos relevantes para dar contexto as respostas, como "conforme conversamos em marco...".
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Respostas com contexto historico sao muito melhores. A IA pode referenciar conversas anteriores e manter continuidade no relacionamento.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              RAG, Email embedding, Context retrieval, Conversation history.
+            </p>
+          </div>
+        </div>
+
+        <!-- RAG Flow -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Como RAG Funciona em Emails</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-blue-400 font-bold">1.</span>
+              <span>Email chega e e convertido em embedding (vetor)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-400 font-bold">2.</span>
+              <span>Busca emails similares no banco de vetores (Pinecone)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-400 font-bold">3.</span>
+              <span>Emails relevantes sao adicionados ao contexto do prompt</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-400 font-bold">4.</span>
+              <span>LLM gera resposta considerando historico</span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Example -->
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-2">Exemplo de Resposta com RAG</h4>
+          <p class="text-neutral-300 text-sm">
+            "Ola Joao, conforme conversamos no email de 15/12, o prazo para entrega do projeto seria ate o dia 20/01.
+            Verificando o status atual, estamos no caminho para cumprir esse prazo. Precisa de algum detalhe adicional?"
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Processamento de faturas</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Extrair automaticamente dados de faturas recebidas por email: valores, datas de vencimento, fornecedores. Automatiza registro no sistema financeiro.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Processamento manual de faturas e lento e propenso a erros. Automacao garante precisao e evita atrasos em pagamentos.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Invoice parsing, OCR, Data extraction, Accounts payable automation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Extraction Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Dados Extraidos Automaticamente</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-dark-800 rounded-lg p-3">
+              <pre class="text-neutral-300 text-xs overflow-x-auto"><code>{
+  "fornecedor": "AWS",
+  "cnpj": "12.345.678/0001-90",
+  "valor": 1250.00,
+  "vencimento": "2026-01-15",
+  "numero_nota": "NF-2024-00123",
+  "categoria": "Infraestrutura"
+}</code></pre>
+            </div>
+            <div class="space-y-2">
+              <h5 class="text-purple-400 font-medium">Acoes Automaticas</h5>
+              <ul class="text-neutral-300 space-y-1 text-xs">
+                <li>* Registra no sistema financeiro</li>
+                <li>* Agenda pagamento</li>
+                <li>* Notifica responsavel</li>
+                <li>* Arquiva documento no Drive</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tip -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Dica: Vision para PDFs</h4>
+          <p class="text-neutral-300 text-sm">
+            Use GPT-4 Vision ou Claude Vision para extrair dados de faturas em PDF anexo. Converta o PDF em imagem e envie para a API de visao.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Follow-up automatico</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema que envia follow-ups automaticos quando nao ha resposta a um email. Sequencias configuradas por tipo de email e objetivo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              80% das vendas acontecem apos o 5o contato. Follow-up manual e facilmente esquecido; automatico garante persistencia consistente.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Email sequences, Drip campaign, Response tracking, Escalation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sequence Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Exemplo de Sequencia de Follow-up</h4>
+          <div class="space-y-3">
+            <div class="flex items-center gap-4 text-sm">
+              <div class="w-20 text-neutral-500">Dia 0</div>
+              <div class="flex-1 bg-emerald-500/10 border border-emerald-500/30 rounded px-3 py-2 text-emerald-400">
+                Email inicial - Proposta comercial
+              </div>
+            </div>
+            <div class="flex items-center gap-4 text-sm">
+              <div class="w-20 text-neutral-500">Dia 3</div>
+              <div class="flex-1 bg-blue-500/10 border border-blue-500/30 rounded px-3 py-2 text-blue-400">
+                Follow-up 1 - "Conseguiu ver a proposta?"
+              </div>
+            </div>
+            <div class="flex items-center gap-4 text-sm">
+              <div class="w-20 text-neutral-500">Dia 7</div>
+              <div class="flex-1 bg-purple-500/10 border border-purple-500/30 rounded px-3 py-2 text-purple-400">
+                Follow-up 2 - Adiciona valor (case study)
+              </div>
+            </div>
+            <div class="flex items-center gap-4 text-sm">
+              <div class="w-20 text-neutral-500">Dia 14</div>
+              <div class="flex-1 bg-amber-500/10 border border-amber-500/30 rounded px-3 py-2 text-amber-400">
+                Follow-up 3 - Ultimo contato
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Integracao com CRM</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sincronizar todos os emails com registros do CRM. Cada email enviado ou recebido fica registrado no historico do cliente automaticamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Contexto completo em um lugar. Qualquer pessoa da equipe pode assumir uma conversa sem perder historico ou contexto.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Email-CRM sync, Activity logging, Contact matching, Timeline view.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sync Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Sincronizacao Bidirecional</h4>
+          <div class="flex items-center justify-center gap-4 text-sm py-4">
+            <div class="bg-red-500/20 border border-red-500/50 rounded-lg px-4 py-3 text-red-400 text-center">
+              Gmail<br/><span class="text-xs text-neutral-500">Emails</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <span class="text-neutral-500">-> Recebido</span>
+              <span class="text-neutral-500"><- Enviado</span>
+            </div>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-4 py-3 text-blue-400 text-center">
+              Make<br/><span class="text-xs text-neutral-500">Automacao</span>
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-4 py-3 text-emerald-400 text-center">
+              Airtable<br/><span class="text-xs text-neutral-500">CRM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 class="text-emerald-400 font-semibold mb-3">Beneficios da Integracao</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">*</span>
+              <span>Historico completo de comunicacao em um lugar</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">*</span>
+              <span>Equipe pode assumir conversas sem perder contexto</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">*</span>
+              <span>Metricas de engajamento por email (aberturas, cliques)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">*</span>
+              <span>Triggers baseados em atividade de email</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">2.5 - Geracao de Imagens com IA</p>
+        </div>
+        <a href="modulo-2-5.html" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-2-3.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Modulo 2.3
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Trilha 2
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

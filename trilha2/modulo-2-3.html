@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.3 - CRM e Gestao de Clientes | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#3b82f6'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-blue-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Modulo 2.3</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-blue-400 font-bold text-xl">2.3</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">
+        TRILHA 2 - TECNICAS
+      </span>
+      <span class="text-neutral-500 text-sm">~40 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-blue-400">
+      CRM e Gestao de Clientes
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Construa sistemas completos de CRM com Airtable e WhatsApp. Aprenda gestao de leads,
+      pipeline de vendas, notificacoes automaticas e relatorios em tempo real.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Intermediario</span>
+      <span>|</span>
+      <span>Pre-requisitos: Trilha 1 completa</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">CRM com Airtable</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Construir um sistema de CRM completo usando Airtable como banco de dados. Inclui views personalizadas, formularios de captura e automacoes nativas.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              CRM e essencial para vendas. Airtable permite criar um CRM totalmente personalizado sem codigo e sem os custos altos de CRMs tradicionais.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Contact management, Deal pipeline, Lead scoring, Custom fields.
+            </p>
+          </div>
+        </div>
+
+        <!-- CRM Structure -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Estrutura Basica do CRM</h4>
+          <div class="grid md:grid-cols-3 gap-4 text-sm">
+            <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
+              <h5 class="text-emerald-400 font-medium mb-2">Contatos</h5>
+              <ul class="text-neutral-300 space-y-1 text-xs">
+                <li>* Nome, Email, Telefone</li>
+                <li>* Empresa, Cargo</li>
+                <li>* Origem do lead</li>
+                <li>* Data de cadastro</li>
+              </ul>
+            </div>
+            <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3">
+              <h5 class="text-purple-400 font-medium mb-2">Negocios</h5>
+              <ul class="text-neutral-300 space-y-1 text-xs">
+                <li>* Valor do deal</li>
+                <li>* Estagio do pipeline</li>
+                <li>* Responsavel</li>
+                <li>* Previsao de fechamento</li>
+              </ul>
+            </div>
+            <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+              <h5 class="text-amber-400 font-medium mb-2">Atividades</h5>
+              <ul class="text-neutral-300 space-y-1 text-xs">
+                <li>* Historico de contatos</li>
+                <li>* Tarefas pendentes</li>
+                <li>* Notas e observacoes</li>
+                <li>* Proximos passos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">CRM com WhatsApp</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Integrar a comunicacao do WhatsApp ao CRM. Registrar conversas automaticamente, qualificar leads via chat e acompanhar o pipeline diretamente pelo WhatsApp.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Vendas no Brasil acontecem pelo WhatsApp. Um CRM sem integracao com WhatsApp esta incompleto e desconectado da realidade do mercado.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              WhatsApp integration, Conversation logging, Lead qualification, Chat CRM.
+            </p>
+          </div>
+        </div>
+
+        <!-- Integration Flow -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Fluxo de Integracao WhatsApp + CRM</h4>
+          <div class="flex items-center justify-center gap-2 text-sm py-4 flex-wrap">
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-3 py-2 text-emerald-400">
+              Mensagem WhatsApp
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Webhook Make
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              Busca/Cria Contato
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400">
+              Registra Atividade
+            </div>
+          </div>
+        </div>
+
+        <!-- Tip Box -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Dica Pratica</h4>
+          <p class="text-neutral-300 text-sm">
+            Use o numero de telefone como identificador unico para vincular conversas ao contato no CRM. Normalize o formato (+55 11 99999-9999 -> 5511999999999) para evitar duplicatas.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Gestao de leads</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema completo para capturar, qualificar e nurturar leads. Inclui automacao de follow-up, scoring de leads e distribuicao automatica para vendedores.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Leads nao gerenciados sao leads desperdicados. Automacao garante que nenhum lead fique esquecido e que todos recebam atencao adequada.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Lead capture, Lead scoring, Lead nurturing, Lead distribution, Conversion tracking.
+            </p>
+          </div>
+        </div>
+
+        <!-- Lead Scoring -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Exemplo de Lead Scoring</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <h5 class="text-emerald-400 font-medium mb-2">Acoes Positivas (+pontos)</h5>
+              <ul class="text-neutral-300 space-y-1">
+                <li>* Abriu email: +5</li>
+                <li>* Clicou link: +10</li>
+                <li>* Visitou pricing: +20</li>
+                <li>* Solicitou demo: +50</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="text-red-400 font-medium mb-2">Acoes Negativas (-pontos)</h5>
+              <ul class="text-neutral-300 space-y-1">
+                <li>* Cancelou inscricao: -30</li>
+                <li>* Inativo 30 dias: -10</li>
+                <li>* Email bounce: -20</li>
+                <li>* Marcou spam: -50</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Pipeline de vendas</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Visualizacao e automacao das etapas do processo de venda. Move deals automaticamente entre estagios, notifica responsaveis e acompanha metricas.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Pipeline claro aumenta previsibilidade de receita. Automacao acelera o ciclo de vendas e evita que oportunidades fiquem paradas.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Sales stages, Deal progression, Win/loss tracking, Forecast, Bottleneck analysis.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pipeline Stages -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Estagios Tipicos de Pipeline</h4>
+          <div class="flex items-center justify-between gap-2 text-xs py-4 overflow-x-auto">
+            <div class="bg-neutral-500/20 border border-neutral-500/50 rounded-lg px-3 py-2 text-neutral-400 text-center min-w-[80px]">
+              Lead<br/><span class="text-xs">0%</span>
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400 text-center min-w-[80px]">
+              Qualificado<br/><span class="text-xs">20%</span>
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400 text-center min-w-[80px]">
+              Proposta<br/><span class="text-xs">50%</span>
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400 text-center min-w-[80px]">
+              Negociacao<br/><span class="text-xs">75%</span>
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-3 py-2 text-emerald-400 text-center min-w-[80px]">
+              Fechado<br/><span class="text-xs">100%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Notificacoes automaticas</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Alertas automaticos quando eventos importantes acontecem: novo lead, deal parado, cliente inativo. Enviados via email, Slack, WhatsApp ou Telegram.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Informacao atrasada e informacao inutil. Notificacoes em tempo real garantem acao rapida e oportunidades nao perdidas.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Alert triggers, Notification channels, Escalation rules, SLA monitoring.
+            </p>
+          </div>
+        </div>
+
+        <!-- Notification Types -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Tipos de Notificacoes</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400">*</span>
+              <span><strong>Novo lead:</strong> Notifica vendedor responsavel imediatamente</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">*</span>
+              <span><strong>Deal parado:</strong> Alerta se nao houver atividade em X dias</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-400">*</span>
+              <span><strong>SLA estourado:</strong> Escala para gerente se prazo for excedido</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">*</span>
+              <span><strong>Deal fechado:</strong> Celebra vitoria e notifica equipe</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Example Automation -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Automacao de Escalacao</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>SE deal.dias_sem_atividade > 3
+  E deal.valor > 10000
+  ENTAO
+    - Notifica vendedor (WhatsApp)
+    - Cria tarefa urgente
+
+SE deal.dias_sem_atividade > 7
+  ENTAO
+    - Escala para gerente (Email + Slack)</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Relatorios e dashboards</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Visualizacoes automaticas de metricas de vendas. Dashboards atualizados em tempo real a partir dos dados do CRM, sem trabalho manual.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Gestao sem dados e achismo. Dashboards permitem decisoes baseadas em evidencia e identificacao rapida de problemas.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              KPIs, Metrics tracking, Data visualization, Real-time updates, Report automation.
+            </p>
+          </div>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">KPIs Essenciais de Vendas</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="bg-dark-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-emerald-400">R$ 150k</div>
+              <div class="text-xs text-neutral-500">Pipeline Total</div>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-blue-400">23</div>
+              <div class="text-xs text-neutral-500">Deals Abertos</div>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-purple-400">32%</div>
+              <div class="text-xs text-neutral-500">Taxa Conversao</div>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3 text-center">
+              <div class="text-2xl font-bold text-amber-400">18 dias</div>
+              <div class="text-xs text-neutral-500">Ciclo Medio</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-3">Ferramentas para Dashboards</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">*</span>
+              <span><strong>Airtable Interfaces:</strong> Nativo, sem integracao extra</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">*</span>
+              <span><strong>Google Data Studio:</strong> Gratuito, conecta via Google Sheets</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">*</span>
+              <span><strong>Metabase:</strong> Open source, mais flexivel</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">2.4 - Automacao de Email Avancada</p>
+        </div>
+        <a href="modulo-2-4.html" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-2-2.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Modulo 2.2
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Trilha 2
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

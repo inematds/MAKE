@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha 2 - Conhecimentos Tecnicos | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="max-w-6xl mx-auto px-4 py-16 text-center">
+    <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium mb-6">
+      TRILHA 2 - INTERMEDIARIO
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold mb-6">
+      <span class="text-blue-400">Conhecimentos Tecnicos</span>
+    </h1>
+    <p class="text-xl text-neutral-400 max-w-3xl mx-auto mb-8">
+      Nivel intermediario para quem ja domina o basico. Aprenda integracao avancada com LLMs,
+      raspagem de dados, CRM, geracao de imagens e video com IA, WhatsApp avancado e muito mais.
+    </p>
+    <div class="flex items-center justify-center gap-6 text-neutral-500">
+      <span>10 Modulos</span>
+      <span>|</span>
+      <span>60 Topicos</span>
+      <span>|</span>
+      <span>~7 horas</span>
+    </div>
+  </header>
+
+  <!-- Pre-requisites -->
+  <section class="max-w-4xl mx-auto px-4 mb-12">
+    <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
+      <h3 class="text-blue-400 font-bold text-lg mb-2">Pre-requisitos</h3>
+      <p class="text-neutral-300">
+        Conclusao da Trilha 1 (Fundamentos) ou conhecimento equivalente em Make.com, webhooks,
+        Google Workspace, redes sociais e introducao a IA.
+      </p>
+    </div>
+  </section>
+
+  <!-- Modules Grid -->
+  <main class="max-w-6xl mx-auto px-4 pb-16">
+    <h2 class="text-2xl font-bold mb-8 text-center">Modulos da Trilha</h2>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- Module 2.1 -->
+      <a href="modulo-2-1.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.1</span>
+          <span class="text-neutral-500 text-sm">~40 min</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Integracao Avancada com LLMs</h3>
+        <p class="text-neutral-400 text-sm mb-4">OpenAI avancado, DeepSeek, OpenRouter, Prompt Engineering e Tom de Voz.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">OpenAI API</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">DeepSeek</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Prompts</span>
+        </div>
+      </a>
+
+      <!-- Module 2.2 -->
+      <a href="modulo-2-2.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.2</span>
+          <span class="text-neutral-500 text-sm">~45 min</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Raspagem e Extracao de Dados</h3>
+        <p class="text-neutral-400 text-sm mb-4">Web Scraping, Apify, raspagem de Instagram, YouTube e blogs.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Scraping</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Apify</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Dados</span>
+        </div>
+      </a>
+
+      <!-- Module 2.3 -->
+      <a href="modulo-2-3.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.3</span>
+          <span class="text-neutral-500 text-sm">~40 min</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">CRM e Gestao de Clientes</h3>
+        <p class="text-neutral-400 text-sm mb-4">CRM com Airtable e WhatsApp, gestao de leads, pipeline de vendas.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">CRM</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Leads</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Vendas</span>
+        </div>
+      </a>
+
+      <!-- Module 2.4 -->
+      <a href="modulo-2-4.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.4</span>
+          <span class="text-neutral-500 text-sm">~40 min</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Automacao de Email Avancada</h3>
+        <p class="text-neutral-400 text-sm mb-4">Resposta automatica com IA, classificacao, RAG para emails, faturas.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Email IA</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">RAG</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Follow-up</span>
+        </div>
+      </a>
+
+      <!-- Module 2.5 -->
+      <a href="modulo-2-5.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.5</span>
+          <span class="text-neutral-500 text-sm">~40 min</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Geracao de Imagens com IA</h3>
+        <p class="text-neutral-400 text-sm mb-4">DALL-E 3, Flux via Replicate, LoRA, imagens para redes sociais.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">DALL-E</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Flux</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">LoRA</span>
+        </div>
+      </a>
+
+      <!-- Module 2.6 -->
+      <a href="modulo-2-6.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.6</span>
+          <span class="text-neutral-500 text-sm">~45 min</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Video e Multimidia</h3>
+        <p class="text-neutral-400 text-sm mb-4">Videos com Leonardo, JSON2Videos, legendas, transcricao, cortes YouTube.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Video IA</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Legendas</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Shorts</span>
+        </div>
+      </a>
+
+      <!-- Module 2.7 -->
+      <a href="modulo-2-7.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.7</span>
+          <span class="text-neutral-500 text-sm">~40 min</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Voz e Audio com IA</h3>
+        <p class="text-neutral-400 text-sm mb-4">Eleven Labs, clonagem de voz, TTS avancado, dublagem automatica.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">ElevenLabs</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">TTS</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Clonagem</span>
+        </div>
+      </a>
+
+      <!-- Module 2.8 -->
+      <a href="modulo-2-8.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.8</span>
+          <span class="text-neutral-500 text-sm">~45 min</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">WhatsApp Avancado</h3>
+        <p class="text-neutral-400 text-sm mb-4">WhatsApp Business API, chatbot com IA, agendamento, atendimento automatizado.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">WhatsApp</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Chatbot</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">CRM</span>
+        </div>
+      </a>
+
+      <!-- Module 2.9 -->
+      <a href="modulo-2-9.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.9</span>
+          <span class="text-neutral-500 text-sm">~40 min</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Fluxos Multi-Plataforma</h3>
+        <p class="text-neutral-400 text-sm mb-4">Instagram para YouTube, carrossel do YouTube, repostagem inteligente.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Cross-post</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Carrossel</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Calendario</span>
+        </div>
+      </a>
+
+      <!-- Module 2.10 -->
+      <a href="modulo-2-10.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.10</span>
+          <span class="text-neutral-500 text-sm">~50 min</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Projeto Integrador Tecnico</h3>
+        <p class="text-neutral-400 text-sm mb-4">Escopo tecnico, arquitetura, multiplas APIs, error handling, deploy.</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Projeto</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Arquitetura</span>
+          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Deploy</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Next Track -->
+    <div class="mt-12 bg-dark-800 rounded-xl border border-dark-600 p-8 text-center">
+      <p class="text-neutral-400 mb-4">Proximo passo</p>
+      <h3 class="text-2xl font-bold mb-4">
+        <span class="text-purple-400">Trilha 3: Sistemas e Recursos Avancados</span>
+      </h3>
+      <p class="text-neutral-400 mb-6">Agentes de IA, RAG, assistentes de voz, Micro SaaS e orquestracao multi-agente.</p>
+      <a href="../trilha3/index.html" class="inline-block px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg transition-colors">
+        Ver Trilha 3 →
+      </a>
+    </div>
+
+    <!-- Back Navigation -->
+    <div class="flex justify-start mt-8">
+      <a href="../index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        ← Voltar para o Curso
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

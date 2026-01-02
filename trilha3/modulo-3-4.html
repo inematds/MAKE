@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.4 - Chamadas Telefonicas com IA | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#a855f7'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-purple-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a>
+      <span>/</span>
+      <span class="text-purple-400">Modulo 3.4</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-purple-400 font-bold text-xl">3.4</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium">
+        TRILHA 3 - AVANCADO
+      </span>
+      <span class="text-neutral-500 text-sm">~45 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-purple-400">
+      Chamadas Telefonicas com IA
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Aprenda a criar sistemas de chamadas telefonicas automatizadas com IA para vendas, agendamento e suporte.
+      Escale operacoes de outbound e inbound com agentes de voz inteligentes.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Avancado</span>
+      <span>|</span>
+      <span>Pre-requisitos: Modulo 3.3</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">Bland AI para ligacoes</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Bland AI e uma plataforma especializada em ligacoes telefonicas outbound com IA. Perfeita para vendas, pesquisas, confirmacoes e cobrancas automaticas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Ligacoes outbound em escala massiva. Um sistema Bland pode fazer centenas de ligacoes por hora que levariam dias para humanos.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Bland AI, Outbound calls, Phone API, Call scripts, Response handling.
+            </p>
+          </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Casos de Uso Bland AI</h4>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div class="p-3 bg-dark-800 rounded-lg">
+              <span class="text-emerald-400 font-semibold">Vendas Outbound</span>
+              <p class="text-neutral-300 mt-1">Liga para leads, apresenta oferta, agenda reuniao</p>
+            </div>
+            <div class="p-3 bg-dark-800 rounded-lg">
+              <span class="text-blue-400 font-semibold">Confirmacao</span>
+              <p class="text-neutral-300 mt-1">Confirma agendamentos, entregas, consultas</p>
+            </div>
+            <div class="p-3 bg-dark-800 rounded-lg">
+              <span class="text-amber-400 font-semibold">Pesquisa/NPS</span>
+              <p class="text-neutral-300 mt-1">Coleta satisfacao, feedback pos-venda</p>
+            </div>
+            <div class="p-3 bg-dark-800 rounded-lg">
+              <span class="text-pink-400 font-semibold">Cobranca</span>
+              <p class="text-neutral-300 mt-1">Lembra pagamentos, negocia dividas</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- API Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Iniciando Ligacao via API</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>POST https://api.bland.ai/v1/calls
+{
+  "phone_number": "+5511999999999",
+  "task": "Ligar para confirmar consulta amanha as 14h",
+  "voice": "maya",
+  "webhook": "https://make.com/seu-webhook",
+  "max_duration": 5,
+  "first_sentence": "Ola, aqui e da Clinica Saude. Estou ligando para confirmar sua consulta."
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Synthflow agentes de voz</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Synthflow cria agentes de voz conversacionais para atendimento telefonico. Foco em fluxos complexos com multiplas ramificacoes.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Alternativa ao Retell e Bland com pricing diferente. Comparar permite escolher a melhor ferramenta para cada caso de uso.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Synthflow platform, Voice flows, Conversation design, Integration options.
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Comparativo de Plataformas</h4>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-neutral-300">
+              <thead>
+                <tr class="border-b border-dark-600">
+                  <th class="text-left py-2 text-neutral-400">Plataforma</th>
+                  <th class="text-left py-2 text-neutral-400">Foco</th>
+                  <th class="text-left py-2 text-neutral-400">Pricing</th>
+                  <th class="text-left py-2 text-neutral-400">Melhor para</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-dark-700">
+                  <td class="py-2 text-purple-400">Bland AI</td>
+                  <td class="py-2">Outbound</td>
+                  <td class="py-2">Por minuto</td>
+                  <td class="py-2">Campanhas em massa</td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="py-2 text-blue-400">Retell</td>
+                  <td class="py-2">Inbound/Outbound</td>
+                  <td class="py-2">Por minuto</td>
+                  <td class="py-2">Setup rapido</td>
+                </tr>
+                <tr class="border-b border-dark-700">
+                  <td class="py-2 text-emerald-400">Synthflow</td>
+                  <td class="py-2">Fluxos complexos</td>
+                  <td class="py-2">Plano mensal</td>
+                  <td class="py-2">Logica elaborada</td>
+                </tr>
+                <tr>
+                  <td class="py-2 text-amber-400">VAPI</td>
+                  <td class="py-2">Customizacao</td>
+                  <td class="py-2">Por minuto</td>
+                  <td class="py-2">Controle total</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Synthflow Features -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Diferenciais Synthflow</h4>
+          <ul class="space-y-1 text-neutral-300 text-sm">
+            <li>- Interface visual para criar fluxos de conversa</li>
+            <li>- Integracao nativa com Calendly, HubSpot, Salesforce</li>
+            <li>- Analise de sentimento em tempo real</li>
+            <li>- Plano mensal ilimitado (por agente)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Agente de vendas por telefone</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Bot de voz especializado em vendas: qualifica leads, apresenta oferta, trata objecoes, agenda reuniao ou fecha venda diretamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              SDR virtual que trabalha 24/7 sem folga. Escala operacao de vendas outbound sem contratar equipe maior.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Sales voice agent, Qualification script, Objection handling, Appointment booking.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sales Script Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Estrutura do Script de Vendas</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+            <li><strong>Abertura:</strong> Se apresenta, confirma que esta falando com a pessoa certa</li>
+            <li><strong>Qualificacao:</strong> Faz perguntas para entender dor/necessidade</li>
+            <li><strong>Apresentacao:</strong> Explica solucao de forma breve e impactante</li>
+            <li><strong>Objecoes:</strong> Responde duvidas e preocupacoes comuns</li>
+            <li><strong>Fechamento:</strong> Agenda reuniao ou direciona para compra</li>
+          </ol>
+        </div>
+
+        <!-- Prompt Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">System Prompt do Agente SDR</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>Voce e um SDR virtual da empresa TechSolutions.
+
+Objetivo: Qualificar leads e agendar reunioes com o time de vendas.
+
+Fluxo:
+1. Confirme nome e empresa do lead
+2. Pergunte qual o maior desafio de [area] atualmente
+3. Se o desafio encaixar com nossa solucao, apresente brevemente
+4. Oferca uma reuniao de 15 min com especialista
+5. Colete melhor horario e email para confirmacao
+
+Objecoes comuns:
+- "Nao tenho tempo" -> Ofereca horario curto ou envio de material
+- "Ja tenho solucao" -> Pergunte se esta satisfeito, oferca comparativo
+- "Muito caro" -> Foque no ROI, oferca diagnostico gratuito
+
+Tom: Profissional mas amigavel. Nao seja invasivo.</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Agendamento por voz</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema que permite agendar servicos por telefone conversando com IA. Verifica disponibilidade, confirma dados, envia confirmacao.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Muitos clientes preferem telefone para agendar. Agendamento por voz atende 24/7 sem secretaria ou call center.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Voice booking, Calendar sync, Availability check, Confirmation call.
+            </p>
+          </div>
+        </div>
+
+        <!-- Integration Flow -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Fluxo de Agendamento</h4>
+          <div class="flex flex-col items-center gap-3 text-sm py-2">
+            <div class="flex items-center gap-4 flex-wrap justify-center">
+              <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400 text-center">
+                Cliente liga
+              </div>
+              <span class="text-neutral-500">&rarr;</span>
+              <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400 text-center">
+                Agente pergunta servico
+              </div>
+              <span class="text-neutral-500">&rarr;</span>
+              <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400 text-center">
+                Consulta Google Calendar
+              </div>
+            </div>
+            <span class="text-neutral-500">&darr;</span>
+            <div class="flex items-center gap-4 flex-wrap justify-center">
+              <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-3 py-2 text-emerald-400 text-center">
+                Oferece horarios
+              </div>
+              <span class="text-neutral-500">&rarr;</span>
+              <div class="bg-pink-500/20 border border-pink-500/50 rounded-lg px-3 py-2 text-pink-400 text-center">
+                Cliente escolhe
+              </div>
+              <span class="text-neutral-500">&rarr;</span>
+              <div class="bg-indigo-500/20 border border-indigo-500/50 rounded-lg px-3 py-2 text-indigo-400 text-center">
+                Cria evento + SMS
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools Needed -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Ferramentas Necessarias no Agente</h4>
+          <ul class="space-y-1 text-neutral-300 text-sm">
+            <li><code class="bg-dark-800 px-2 py-0.5 rounded text-xs">verificar_disponibilidade(data, hora)</code> - Consulta calendario</li>
+            <li><code class="bg-dark-800 px-2 py-0.5 rounded text-xs">criar_agendamento(servico, data, hora, cliente)</code> - Cria evento</li>
+            <li><code class="bg-dark-800 px-2 py-0.5 rounded text-xs">enviar_confirmacao(telefone, detalhes)</code> - Envia SMS/WhatsApp</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Assistentes estaticos vs dinamicos</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Estatico segue script rigido com opcoes pre-definidas. Dinamico usa LLM para conversa flexivel e natural. Ha trade-off entre controle e naturalidade.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Escolha errada frustra usuarios ou causa erros criticos. Entender a diferenca permite decisao correta para cada caso.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Static flows, Dynamic LLM, Hybrid approach, Use case matching.
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-blue-400 font-semibold mb-3">Assistente Estatico</h4>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400">+</span>
+                <span>Previsivel e controlavel</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400">+</span>
+                <span>Mais barato (sem LLM)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400">+</span>
+                <span>Ideal para compliance estrito</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">-</span>
+                <span>Limitado a opcoes previstas</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">-</span>
+                <span>Experiencia "robotica"</span>
+              </li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-purple-400 font-semibold mb-3">Assistente Dinamico</h4>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400">+</span>
+                <span>Conversa natural e flexivel</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400">+</span>
+                <span>Lida com imprevistos</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400">+</span>
+                <span>Experiencia superior</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">-</span>
+                <span>Custo por chamada maior</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">-</span>
+                <span>Pode "alucinar" ou fugir do script</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-3">Quando Usar Cada Tipo</h4>
+          <div class="space-y-2 text-neutral-300 text-sm">
+            <p><strong class="text-blue-400">Estatico:</strong> Confirmacao simples, pesquisa NPS, cobranca padronizada, compliance financeiro.</p>
+            <p><strong class="text-purple-400">Dinamico:</strong> Vendas consultivas, suporte tecnico, atendimento geral, qualificacao de leads.</p>
+            <p><strong class="text-emerald-400">Hibrido:</strong> Estrutura estatica com LLM para tratar desvios. Melhor dos dois mundos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Integracao com CRM</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Conectar sistema de chamadas ao CRM. Registrar ligacoes automaticamente, atualizar status de deals, triggar follow-ups baseado em resultado.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Ligacao sem registro e informacao perdida. Integracao garante que dados alimentam pipeline e historico do cliente.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Call logging, CRM sync, Deal updates, Activity tracking.
+            </p>
+          </div>
+        </div>
+
+        <!-- Data to Sync -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Dados para Sincronizar</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400 font-mono text-xs">call_summary</span>
+              <span>Resumo gerado por IA da conversa</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400 font-mono text-xs">call_outcome</span>
+              <span>Resultado: agendou, nao atendeu, sem interesse, etc.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400 font-mono text-xs">call_duration</span>
+              <span>Duracao da ligacao</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400 font-mono text-xs">call_transcript</span>
+              <span>Transcricao completa</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400 font-mono text-xs">call_sentiment</span>
+              <span>Sentimento do cliente (positivo/negativo/neutro)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400 font-mono text-xs">next_action</span>
+              <span>Proxima acao sugerida</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Make Scenario -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Cenario Make de Integracao</h4>
+          <div class="flex flex-wrap items-center gap-2 text-xs">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded px-2 py-1 text-blue-400">Webhook Bland/Retell</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded px-2 py-1 text-amber-400">Busca Lead no CRM</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded px-2 py-1 text-purple-400">GPT Analisa Resultado</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded px-2 py-1 text-emerald-400">Atualiza CRM</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-pink-500/20 border border-pink-500/50 rounded px-2 py-1 text-pink-400">Cria Task Follow-up</div>
+          </div>
+        </div>
+
+        <!-- CRMs Supported -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">CRMs com Integracao Facil</h4>
+          <p class="text-neutral-300 text-sm">
+            HubSpot, Salesforce, Pipedrive, Airtable, Notion, Monday.com, Zoho CRM. Todos tem modulos nativos no Make ou API REST.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">3.5 - Extensoes Chrome com IA</p>
+        </div>
+        <a href="modulo-3-5.html" class="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg transition-colors">
+          Continuar
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-3-3.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Modulo Anterior
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 3
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

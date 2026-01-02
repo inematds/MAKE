@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.9 - Orquestracao Multi-Agente | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#a855f7'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-purple-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a>
+      <span>/</span>
+      <span class="text-purple-400">Modulo 3.9</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-purple-400 font-bold text-xl">3.9</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium">
+        TRILHA 3 - AVANCADO
+      </span>
+      <span class="text-neutral-500 text-sm">~50 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-purple-400">
+      Orquestracao Multi-Agente
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Construa sistemas com multiplos agentes de IA trabalhando em conjunto. Aprenda a criar,
+      coordenar e supervisionar um exercito de agentes especializados.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Avancado</span>
+      <span>|</span>
+      <span>Pre-requisitos: Modulo 3.8</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">Exercito de Agentes</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema com multiplos agentes de IA especializados trabalhando em conjunto. Cada agente tem funcao especifica (pesquisador, escritor, revisor, publicador) e colaboram para completar tarefas complexas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Problemas complexos exigem especializacao. Um unico agente generico e limitado. Multi-agente permite divisao de trabalho inteligente e resultados superiores.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Multi-agent system, Agent specialization, Task distribution, Coordination, Collaborative AI.
+            </p>
+          </div>
+        </div>
+
+        <!-- Agent Types -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Tipos de Agentes em um Sistema</h4>
+          <div class="grid md:grid-cols-3 gap-3 text-sm">
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-blue-400 font-semibold mb-2">Pesquisador</h5>
+              <ul class="space-y-1 text-neutral-300 text-xs">
+                <li>- Busca informacoes</li>
+                <li>- Web scraping</li>
+                <li>- Analise de dados</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-green-400 font-semibold mb-2">Criador</h5>
+              <ul class="space-y-1 text-neutral-300 text-xs">
+                <li>- Gera conteudo</li>
+                <li>- Escreve textos</li>
+                <li>- Cria imagens</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-amber-400 font-semibold mb-2">Revisor</h5>
+              <ul class="space-y-1 text-neutral-300 text-xs">
+                <li>- Valida qualidade</li>
+                <li>- Corrige erros</li>
+                <li>- Aprova/rejeita</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-pink-400 font-semibold mb-2">Executor</h5>
+              <ul class="space-y-1 text-neutral-300 text-xs">
+                <li>- Publica conteudo</li>
+                <li>- Envia emails</li>
+                <li>- Atualiza CRM</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-cyan-400 font-semibold mb-2">Monitor</h5>
+              <ul class="space-y-1 text-neutral-300 text-xs">
+                <li>- Acompanha metricas</li>
+                <li>- Detecta problemas</li>
+                <li>- Envia alertas</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-purple-400 font-semibold mb-2">Orquestrador</h5>
+              <ul class="space-y-1 text-neutral-300 text-xs">
+                <li>- Coordena agentes</li>
+                <li>- Distribui tarefas</li>
+                <li>- Resolve conflitos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Arquitetura Multi-Agente</h4>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs overflow-x-auto"><code class="text-neutral-300">                    [Orquestrador]
+                          |
+        +-----------------+------------------+
+        |                 |                  |
+  [Pesquisador]     [Criador]          [Executor]
+        |                 |                  |
+        +-------->[Revisor]<---------+
+                          |
+                    [Monitor]</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">10 Niveis de Automacao IA</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Framework que categoriza automacoes de simples a complexas em 10 niveis. Cada nivel adiciona capacidades: de regras basicas ate sistemas autonomos que aprendem e evoluem.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Entender onde voce esta e para onde pode ir. Framework orienta aprendizado e permite planejar evolucao das automacoes de forma estruturada.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Automation maturity, Level progression, Capability assessment, Roadmap planning.
+            </p>
+          </div>
+        </div>
+
+        <!-- Levels -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Os 10 Niveis</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center gap-3 p-2 rounded bg-dark-600/30">
+              <span class="w-8 h-8 rounded-full bg-gray-500/20 text-gray-400 text-xs font-bold flex items-center justify-center">1</span>
+              <div>
+                <span class="text-gray-400 font-medium">Manual:</span>
+                <span class="text-neutral-400"> Sem automacao, tudo feito a mao</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded bg-dark-600/30">
+              <span class="w-8 h-8 rounded-full bg-gray-500/20 text-gray-400 text-xs font-bold flex items-center justify-center">2</span>
+              <div>
+                <span class="text-gray-400 font-medium">Trigger-Action:</span>
+                <span class="text-neutral-400"> If-this-then-that simples</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded bg-dark-600/30">
+              <span class="w-8 h-8 rounded-full bg-green-500/20 text-green-400 text-xs font-bold flex items-center justify-center">3</span>
+              <div>
+                <span class="text-green-400 font-medium">Multi-Step:</span>
+                <span class="text-neutral-400"> Fluxos com multiplas acoes sequenciais</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded bg-dark-600/30">
+              <span class="w-8 h-8 rounded-full bg-green-500/20 text-green-400 text-xs font-bold flex items-center justify-center">4</span>
+              <div>
+                <span class="text-green-400 font-medium">Branching:</span>
+                <span class="text-neutral-400"> Routers e logica condicional</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded bg-dark-600/30">
+              <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center">5</span>
+              <div>
+                <span class="text-blue-400 font-medium">AI-Enhanced:</span>
+                <span class="text-neutral-400"> LLM para processamento de texto</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded bg-dark-600/30">
+              <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold flex items-center justify-center">6</span>
+              <div>
+                <span class="text-blue-400 font-medium">RAG:</span>
+                <span class="text-neutral-400"> IA com conhecimento contextual</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded bg-dark-600/30">
+              <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center">7</span>
+              <div>
+                <span class="text-purple-400 font-medium">Single Agent:</span>
+                <span class="text-neutral-400"> Agente autonomo com tools</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded bg-dark-600/30">
+              <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center">8</span>
+              <div>
+                <span class="text-purple-400 font-medium">Multi-Agent:</span>
+                <span class="text-neutral-400"> Agentes colaborando entre si</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded bg-dark-600/30">
+              <span class="w-8 h-8 rounded-full bg-pink-500/20 text-pink-400 text-xs font-bold flex items-center justify-center">9</span>
+              <div>
+                <span class="text-pink-400 font-medium">Self-Improving:</span>
+                <span class="text-neutral-400"> Sistema que aprende com feedback</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded bg-dark-600/30">
+              <span class="w-8 h-8 rounded-full bg-pink-500/20 text-pink-400 text-xs font-bold flex items-center justify-center">10</span>
+              <div>
+                <span class="text-pink-400 font-medium">Autonomous:</span>
+                <span class="text-neutral-400"> Sistema que define proprios objetivos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Agentes especializados</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Criar agentes focados em tarefas especificas com prompts, tools e conhecimento dedicados. Um agente pesquisador, outro escritor, outro revisor - cada um excelente em uma coisa.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Agente generalista e mediocre em tudo. Agente especialista e excelente em algo. Composicao de especialistas gera excelencia geral.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Agent roles, Specialization design, Task boundaries, Expertise focus, System prompt engineering.
+            </p>
+          </div>
+        </div>
+
+        <!-- Agent Templates -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Templates de Agentes Especializados</h4>
+          <div class="space-y-4">
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-blue-400 font-semibold mb-2">Agente Pesquisador</h5>
+              <pre class="bg-dark-900 rounded-lg p-2 text-xs overflow-x-auto"><code class="text-neutral-300">System Prompt:
+Voce e um pesquisador especializado em [nicho].
+Sua funcao e encontrar informacoes precisas e atuais.
+SEMPRE cite fontes. NUNCA invente dados.
+Tools: web_search, scrape_url, read_document</code></pre>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-green-400 font-semibold mb-2">Agente Escritor</h5>
+              <pre class="bg-dark-900 rounded-lg p-2 text-xs overflow-x-auto"><code class="text-neutral-300">System Prompt:
+Voce e um copywriter especializado em [tipo].
+Escreva de forma clara, engajante e persuasiva.
+Siga o tom de voz: [descricao do tom].
+Tools: generate_text, rewrite, expand_outline</code></pre>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-amber-400 font-semibold mb-2">Agente Revisor</h5>
+              <pre class="bg-dark-900 rounded-lg p-2 text-xs overflow-x-auto"><code class="text-neutral-300">System Prompt:
+Voce e um editor rigoroso.
+Verifique: gramatica, clareza, tom, fatos.
+Aponte problemas especificos com sugestoes.
+Output: lista de correcoes ou "APROVADO"</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Coordenacao entre agentes</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistemas e padroes para agentes passarem tarefas entre si, compartilharem contexto, resolverem conflitos e trabalharem em harmonia. O "cola" que une o exercito.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Multi-agente sem coordenacao e caos. Orquestracao transforma caos em fluxo. A diferenca entre time disfuncional e time de alta performance.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Agent communication, Task handoff, Shared memory, Conflict resolution, State management.
+            </p>
+          </div>
+        </div>
+
+        <!-- Coordination Patterns -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Padroes de Coordenacao</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-blue-400 font-semibold mb-2">Pipeline</h5>
+              <p class="text-neutral-400 text-xs mb-2">Agentes em sequencia, output vira input do proximo</p>
+              <div class="text-neutral-300 text-xs">A -> B -> C -> D</div>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-green-400 font-semibold mb-2">Hub-and-Spoke</h5>
+              <p class="text-neutral-400 text-xs mb-2">Orquestrador central distribui e coleta</p>
+              <div class="text-neutral-300 text-xs">O <-> A, B, C, D</div>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-amber-400 font-semibold mb-2">Voting</h5>
+              <p class="text-neutral-400 text-xs mb-2">Multiplos agentes dao opiniao, maioria vence</p>
+              <div class="text-neutral-300 text-xs">A, B, C -> Vote -> Result</div>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-pink-400 font-semibold mb-2">Debate</h5>
+              <p class="text-neutral-400 text-xs mb-2">Agentes discutem ate consenso</p>
+              <div class="text-neutral-300 text-xs">A <-> B until agree</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Make Implementation -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Implementacao no Make</h4>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs overflow-x-auto"><code class="text-neutral-300">Cenario Orquestrador:
+1. Webhook recebe tarefa
+2. Chama cenario "Pesquisador" via HTTP
+3. Com resultado, chama cenario "Escritor"
+4. Resultado vai para cenario "Revisor"
+5. Se aprovado -> cenario "Publicador"
+   Se rejeitado -> volta para "Escritor"
+6. Retorna status final
+
+Cada agente = cenario separado
+Comunicacao = webhooks + HTTP requests</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">GPT que fala com Make</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Custom GPT na OpenAI que usa function calling para executar acoes no Make. Usuario conversa naturalmente com o GPT, que traduz em chamadas de webhook que disparam automacoes.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Interface mais natural para automacoes. Usuario conversa, sistema executa. Democratiza acesso a automacoes complexas para qualquer pessoa.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Custom GPT, Function calling, Make actions, Conversational interface, OpenAPI schema.
+            </p>
+          </div>
+        </div>
+
+        <!-- Setup -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Como Configurar</h4>
+          <ol class="space-y-3 text-neutral-300 text-sm list-decimal list-inside">
+            <li>Crie cenario Make com webhook que aceita POST</li>
+            <li>Defina parametros esperados (ex: acao, dados)</li>
+            <li>Crie Custom GPT no ChatGPT</li>
+            <li>Em "Actions", adicione schema OpenAPI apontando para webhook</li>
+            <li>Configure system prompt explicando as acoes disponiveis</li>
+            <li>Teste conversando com o GPT</li>
+          </ol>
+        </div>
+
+        <!-- Schema Example -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Exemplo de Schema OpenAPI</h4>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs overflow-x-auto"><code class="text-neutral-300">{
+  "openapi": "3.0.0",
+  "info": {"title": "Make Actions", "version": "1.0"},
+  "servers": [{"url": "https://hook.us1.make.com"}],
+  "paths": {
+    "/xxxx": {
+      "post": {
+        "operationId": "executeAction",
+        "summary": "Executa acao no Make",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {"type": "string"},
+                  "parameters": {"type": "object"}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Autonomia e supervisao</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Balancear quanto agentes podem fazer sozinhos vs quando precisam de aprovacao humana. Definir guardrails, limites e checkpoints para controle sem eliminar beneficios da automacao.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Autonomia total e arriscado (erros caros). Supervisao total anula beneficios (muito trabalho). Equilibrio correto maximiza valor com risco controlado.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Human-in-the-loop, Approval workflows, Risk thresholds, Guardrails, Escalation rules.
+            </p>
+          </div>
+        </div>
+
+        <!-- Autonomy Levels -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Matriz de Autonomia</h4>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-neutral-400 border-b border-dark-600">
+                  <th class="text-left py-2">Acao</th>
+                  <th class="text-left py-2">Risco</th>
+                  <th class="text-left py-2">Autonomia</th>
+                </tr>
+              </thead>
+              <tbody class="text-neutral-300">
+                <tr class="border-b border-dark-600/50">
+                  <td class="py-2">Gerar rascunho de post</td>
+                  <td class="py-2 text-green-400">Baixo</td>
+                  <td class="py-2">Automatico</td>
+                </tr>
+                <tr class="border-b border-dark-600/50">
+                  <td class="py-2">Publicar em redes</td>
+                  <td class="py-2 text-amber-400">Medio</td>
+                  <td class="py-2">Aprovacao rapida</td>
+                </tr>
+                <tr class="border-b border-dark-600/50">
+                  <td class="py-2">Responder cliente</td>
+                  <td class="py-2 text-amber-400">Medio</td>
+                  <td class="py-2">Aprovacao/template</td>
+                </tr>
+                <tr class="border-b border-dark-600/50">
+                  <td class="py-2">Enviar proposta comercial</td>
+                  <td class="py-2 text-red-400">Alto</td>
+                  <td class="py-2">Sempre humano</td>
+                </tr>
+                <tr>
+                  <td class="py-2">Transacao financeira</td>
+                  <td class="py-2 text-red-400">Muito Alto</td>
+                  <td class="py-2">Multi-aprovacao</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Guardrails -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-3">Guardrails Essenciais</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">1.</span>
+              <span><strong>Limites de valor:</strong> Acima de X, precisa aprovacao</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">2.</span>
+              <span><strong>Rate limits:</strong> Max N acoes por hora/dia</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">3.</span>
+              <span><strong>Blacklist:</strong> Acoes/palavras que sempre bloqueiam</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">4.</span>
+              <span><strong>Logging:</strong> Tudo registrado para auditoria</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">5.</span>
+              <span><strong>Kill switch:</strong> Botao para parar tudo imediatamente</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">3.10 - Projeto Final: Sistema Completo</p>
+        </div>
+        <a href="modulo-3-10.html" class="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-3-8.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Modulo 3.8
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 3
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

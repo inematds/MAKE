@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.7 - Apps e Produtos Digitais | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#a855f7'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-purple-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a>
+      <span>/</span>
+      <span class="text-purple-400">Modulo 3.7</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-purple-400 font-bold text-xl">3.7</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium">
+        TRILHA 3 - AVANCADO
+      </span>
+      <span class="text-neutral-500 text-sm">~45 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-purple-400">
+      Apps e Produtos Digitais
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Descubra as ferramentas de desenvolvimento acelerado por IA e como integra-las com Make
+      para criar produtos digitais completos em tempo recorde.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Avancado</span>
+      <span>|</span>
+      <span>Pre-requisitos: Modulo 3.6</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">App de vendas com IA</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Aplicacao focada em vendas que usa IA para qualificacao de leads, geracao automatica de propostas, follow-up inteligente e analise de pipeline. Multiplica a capacidade do time comercial.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Vendas e a area com maior ROI de automacao. App especializado gera valor imediato e mensuravel - mais conversoes, menos tempo perdido.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Sales automation, Lead scoring, Proposal generation, Pipeline automation, Conversion tracking.
+            </p>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Funcionalidades de um App de Vendas IA</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <ul class="space-y-2 text-neutral-300">
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400">1.</span>
+                <span>Qualificacao automatica de leads (score)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400">2.</span>
+                <span>Pesquisa de empresa/contato via IA</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400">3.</span>
+                <span>Geracao de emails personalizados</span>
+              </li>
+            </ul>
+            <ul class="space-y-2 text-neutral-300">
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400">4.</span>
+                <span>Propostas dinamicas com dados do lead</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400">5.</span>
+                <span>Follow-up automatico inteligente</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400">6.</span>
+                <span>Dashboard de conversao e metricas</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Architecture -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Arquitetura do App</h4>
+          <div class="flex items-center justify-center gap-2 text-xs py-4 flex-wrap">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Lead Entry
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              IA Enrich
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-green-500/20 border border-green-500/50 rounded-lg px-3 py-2 text-green-400">
+              Score + Route
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400">
+              Nurture/Close
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Replit AI Agents</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Replit Agents permite criar aplicacoes completas conversando com IA. Voce descreve o que quer, a IA escreve o codigo, configura o ambiente e faz deploy - tudo automaticamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Revoluciona prototipagem. Ideias viram apps funcionais em horas, nao semanas. Mesmo sem saber programar, voce consegue criar software.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Replit platform, AI coding agents, Rapid prototyping, Deploy automation, Code iteration.
+            </p>
+          </div>
+        </div>
+
+        <!-- How to Use -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Como Usar Replit Agents</h4>
+          <ol class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center flex-shrink-0">1</span>
+              <span>Acesse replit.com e crie um novo Repl com Agent</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center flex-shrink-0">2</span>
+              <span>Descreva em linguagem natural o que quer construir</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center flex-shrink-0">3</span>
+              <span>Agent cria arquivos, instala dependencias, escreve codigo</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center flex-shrink-0">4</span>
+              <span>Teste e peca ajustes conversando com o Agent</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-xs font-bold flex items-center justify-center flex-shrink-0">5</span>
+              <span>Deploy automatico com URL publica</span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Integration with Make -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Integrando Replit com Make</h4>
+          <p class="text-neutral-300 text-sm mb-3">
+            Apps criados no Replit podem se conectar ao Make via webhooks, criando um sistema poderoso:
+          </p>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs overflow-x-auto"><code class="text-neutral-300">// No app Replit (exemplo Python/Flask)
+@app.route('/api/process', methods=['POST'])
+def process():
+    data = request.json
+    # Chama webhook do Make
+    response = requests.post(
+        'https://hook.us1.make.com/xxx',
+        json=data
+    )
+    return response.json()</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Bolt.new + Make</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Bolt.new (da StackBlitz) cria frontends completos com IA usando React/Vue/etc. Voce descreve a interface, IA gera o codigo. Combinar com Make para backend cria stack completo sem codigo manual.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Frontend era o gargalo para no-coders. Bolt elimina essa barreira. Agora voce pode criar interfaces profissionais conversando com IA.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Bolt.new, AI frontend generation, Make backend, Full-stack no-code, React/Vue.
+            </p>
+          </div>
+        </div>
+
+        <!-- Stack -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Stack Bolt.new + Make</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-blue-400 font-semibold mb-2">Bolt.new (Frontend)</h5>
+              <ul class="space-y-1 text-neutral-300">
+                <li>- Interface React/Vue gerada por IA</li>
+                <li>- Componentes responsivos</li>
+                <li>- Deploy instantaneo</li>
+                <li>- Iteracao por conversa</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-purple-400 font-semibold mb-2">Make (Backend)</h5>
+              <ul class="space-y-1 text-neutral-300">
+                <li>- Webhooks como API</li>
+                <li>- Logica de negocio</li>
+                <li>- Integracao com servicos</li>
+                <li>- IA (OpenAI, Claude)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Prompt -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Exemplo de Prompt para Bolt.new</h4>
+          <div class="bg-dark-900 rounded-lg p-3 text-sm">
+            <p class="text-neutral-300 italic">
+              "Crie um dashboard de metricas de vendas com:
+              - Header com logo e menu
+              - Cards mostrando MRR, leads, conversao
+              - Grafico de vendas dos ultimos 6 meses
+              - Tabela de ultimos leads com status
+              - Formulario para adicionar novo lead
+              - Design moderno, dark mode, cores roxas"
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">DeepSite com webhooks</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              DeepSite e construtor de sites com IA integrado ao Hugging Face. Gera sites completos a partir de prompts e integra nativamente com webhooks para captura de leads e automacoes.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sites precisam de backend para formularios e acoes. Webhook e a ponte mais simples entre site e automacao Make.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              DeepSite builder, Form webhooks, Site automation, Lead capture, Landing pages.
+            </p>
+          </div>
+        </div>
+
+        <!-- Integration Flow -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Fluxo de Integracao</h4>
+          <div class="flex items-center justify-center gap-2 text-xs py-4 flex-wrap">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Visitante
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-pink-500/20 border border-pink-500/50 rounded-lg px-3 py-2 text-pink-400">
+              Form DeepSite
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              Webhook Make
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-green-500/20 border border-green-500/50 rounded-lg px-3 py-2 text-green-400">
+              CRM + Email
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Casos de Uso DeepSite + Make</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">-</span>
+              <span><strong>Landing page de captura:</strong> Form envia para Make, que salva em Airtable e envia email</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">-</span>
+              <span><strong>Agendamento:</strong> Formulario de booking dispara criacao de evento no Calendar</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">-</span>
+              <span><strong>Quiz/Calculadora:</strong> Respostas vao para Make que processa com IA e retorna resultado</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">-</span>
+              <span><strong>Contato:</strong> Mensagem vai para Slack + email + CRM simultaneamente</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Chatbots DeepSite</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Embedar chatbot no site DeepSite que conecta ao Make. O chat aparece como widget flutuante e cada mensagem dispara cenario no Make que processa com IA e responde.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Chatbot no site captura visitantes indecisos. Integracao com Make permite respostas inteligentes e acoes reais (agendar, qualificar, vender).
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Embedded chatbot, Widget integration, Site engagement, Conversation handling, Lead qualification.
+            </p>
+          </div>
+        </div>
+
+        <!-- Architecture -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Arquitetura do Chatbot</h4>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs overflow-x-auto"><code class="text-neutral-300">Site DeepSite
+    |
+    v
+Widget Chat (Typebot/Voiceflow/Custom)
+    |
+    v
+Webhook Make (cada mensagem)
+    |
+    v
+OpenAI/Claude (processa e gera resposta)
+    |
+    v
+Webhook Response (resposta ao chat)
+    |
+    v
+[Opcional] Salva em CRM, envia notificacao</code></pre>
+        </div>
+
+        <!-- Chatbot Types -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Opcoes de Widget de Chat</h4>
+          <div class="grid md:grid-cols-3 gap-3 text-sm">
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <h5 class="text-blue-400 font-semibold mb-1">Typebot</h5>
+              <p class="text-neutral-400 text-xs">Fluxos visuais, integracao nativa com Make</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <h5 class="text-green-400 font-semibold mb-1">Voiceflow</h5>
+              <p class="text-neutral-400 text-xs">Conversas complexas, NLU avancado</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <h5 class="text-amber-400 font-semibold mb-1">Crisp/Intercom</h5>
+              <p class="text-neutral-400 text-xs">Chat + suporte humano, handoff</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Vibe Coding</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Vibe Coding e uma abordagem de desenvolvimento onde IA gera codigo baseado em descricoes de alto nivel. Voce descreve a "vibe" do que quer, IA traduz em codigo funcional.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Muda o paradigma de desenvolvimento. Descrever e iterar e mais rapido que programar para muitos casos. Foco no "o que" em vez do "como".
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              AI-assisted coding, Natural language programming, Code generation, Iteration cycles, Prompt engineering.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Ferramentas de Vibe Coding</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-blue-400 font-semibold mb-2">IDEs com IA</h5>
+              <ul class="space-y-1 text-neutral-300">
+                <li>- Cursor (VS Code + IA)</li>
+                <li>- Windsurf</li>
+                <li>- GitHub Copilot</li>
+                <li>- Codeium</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-green-400 font-semibold mb-2">Plataformas</h5>
+              <ul class="space-y-1 text-neutral-300">
+                <li>- Replit Agents</li>
+                <li>- Bolt.new</li>
+                <li>- v0.dev (Vercel)</li>
+                <li>- Claude Artifacts</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-3">Dicas para Vibe Coding Efetivo</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">1.</span>
+              <span><strong>Seja especifico:</strong> "Dashboard com grafico de barras mostrando vendas por mes" > "dashboard de vendas"</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">2.</span>
+              <span><strong>Itere rapido:</strong> Comece simples, adicione complexidade em camadas</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">3.</span>
+              <span><strong>De contexto:</strong> Explique o proposito, nao so a funcionalidade</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">4.</span>
+              <span><strong>Use exemplos:</strong> "Como o dashboard do Stripe" ou "estilo Notion"</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">5.</span>
+              <span><strong>Revise output:</strong> IA erra - sempre teste e valide o codigo gerado</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Example -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Exemplo de Prompt Vibe Coding</h4>
+          <div class="bg-dark-900 rounded-lg p-3 text-sm">
+            <p class="text-neutral-300 italic">
+              "Quero um componente React de cartao de preco estilo SaaS moderno.
+              Deve ter 3 planos: Starter, Pro, Enterprise.
+              Cada cartao mostra preco, features em lista, botao CTA.
+              Pro deve ser destacado como 'mais popular'.
+              Design clean, cores neutras com accent roxo, hover effects suaves.
+              Mobile first, responsivo."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">3.8 - Escala e Automacao em Massa</p>
+        </div>
+        <a href="modulo-3-8.html" class="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-3-6.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Modulo 3.6
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 3
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

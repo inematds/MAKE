@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.3 - Assistentes de Voz | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#a855f7'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-purple-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a>
+      <span>/</span>
+      <span class="text-purple-400">Modulo 3.3</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-purple-400 font-bold text-xl">3.3</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium">
+        TRILHA 3 - AVANCADO
+      </span>
+      <span class="text-neutral-500 text-sm">~45 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-purple-400">
+      Assistentes de Voz
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Aprenda a criar assistentes de voz com IA que conversam naturalmente por telefone e WhatsApp.
+      Dominar Voice AI abre portas para atendimento 24/7 e escalabilidade sem precedentes.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Avancado</span>
+      <span>|</span>
+      <span>Pre-requisitos: Modulo 3.1</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">Introducao a Voice AI</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistemas que permitem interacao por voz com IA. Combinam reconhecimento de fala (STT), processamento por LLM e sintese de voz (TTS) em tempo real.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Voz e a interface mais natural para humanos. Voice AI permite criar assistentes que conversam como pessoas, disponoveis 24/7.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Voice AI, STT (Speech-to-Text), TTS (Text-to-Speech), Conversational AI, Voice interface.
+            </p>
+          </div>
+        </div>
+
+        <!-- Voice AI Flow -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Arquitetura Voice AI</h4>
+          <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-sm py-4">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-4 py-2 text-blue-400 text-center">
+              Audio (Voz Humana)
+            </div>
+            <span class="text-neutral-500 hidden md:block">&rarr;</span>
+            <span class="text-neutral-500 md:hidden">&darr;</span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-4 py-2 text-amber-400 text-center">
+              STT (Whisper)
+            </div>
+            <span class="text-neutral-500 hidden md:block">&rarr;</span>
+            <span class="text-neutral-500 md:hidden">&darr;</span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-4 py-2 text-purple-400 text-center">
+              LLM (GPT/Claude)
+            </div>
+            <span class="text-neutral-500 hidden md:block">&rarr;</span>
+            <span class="text-neutral-500 md:hidden">&darr;</span>
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-4 py-2 text-emerald-400 text-center">
+              TTS (ElevenLabs)
+            </div>
+            <span class="text-neutral-500 hidden md:block">&rarr;</span>
+            <span class="text-neutral-500 md:hidden">&darr;</span>
+            <div class="bg-pink-500/20 border border-pink-500/50 rounded-lg px-4 py-2 text-pink-400 text-center">
+              Audio (Voz IA)
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Casos de Uso</h4>
+          <ul class="space-y-1 text-neutral-300 text-sm">
+            <li>- SDR virtual para qualificacao de leads</li>
+            <li>- Agendamento de consultas e servicos</li>
+            <li>- Suporte ao cliente nivel 1</li>
+            <li>- Pesquisas de satisfacao por telefone</li>
+            <li>- Confirmacao de agendamentos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Retell AI basico</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Retell e uma plataforma para criar agentes de voz que fazem e recebem ligacoes telefonicas. Interface visual intuitiva com integracao facil ao Make.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Ligacoes automatizadas com qualidade humana. Um agente Retell pode fazer o trabalho de um SDR 24/7 sem pausa.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Retell platform, Voice agent, Call handling, Webhook integration.
+            </p>
+          </div>
+        </div>
+
+        <!-- Setup Steps -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Configurando Retell + Make</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+            <li>Crie conta no Retell AI (retellai.com)</li>
+            <li>Configure um "Agent" com prompt e voz</li>
+            <li>Vincule um numero de telefone (Twilio integrado)</li>
+            <li>Configure webhook para enviar eventos ao Make</li>
+            <li>No Make, receba dados e execute acoes (CRM, email, etc)</li>
+          </ol>
+        </div>
+
+        <!-- Webhook Events -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Eventos de Webhook Retell</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-mono text-xs bg-dark-800 px-2 py-0.5 rounded">call_started</span>
+              <span>Ligacao iniciada</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-400 font-mono text-xs bg-dark-800 px-2 py-0.5 rounded">call_ended</span>
+              <span>Ligacao finalizada (com transcricao)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400 font-mono text-xs bg-dark-800 px-2 py-0.5 rounded">call_analyzed</span>
+              <span>Analise pos-chamada (sentimento, resumo)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Multi-agentes Retell</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema com multiplos agentes especializados que transferem ligacoes entre si. Exemplo: Recepcionista &rarr; Vendas &rarr; Suporte Tecnico.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Um agente unico nao resolve todos os casos. Multi-agente permite especializacao e experiencia superior para o cliente.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Agent routing, Call transfer, Specialization, Agent orchestration.
+            </p>
+          </div>
+        </div>
+
+        <!-- Multi-Agent Flow -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Fluxo Multi-Agente</h4>
+          <div class="flex flex-col items-center gap-3 text-sm py-4">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-4 py-2 text-blue-400">
+              Cliente Liga
+            </div>
+            <span class="text-neutral-500">&darr;</span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-4 py-2 text-purple-400">
+              Agente Recepcionista (identifica intencao)
+            </div>
+            <div class="flex gap-4 mt-2">
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-neutral-500">&swarr;</span>
+                <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-3 py-2 text-emerald-400 text-xs">
+                  Agente Vendas
+                </div>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-neutral-500">&darr;</span>
+                <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400 text-xs">
+                  Agente Suporte
+                </div>
+              </div>
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-neutral-500">&searr;</span>
+                <div class="bg-pink-500/20 border border-pink-500/50 rounded-lg px-3 py-2 text-pink-400 text-xs">
+                  Agente Financeiro
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Implementation -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Como Implementar</h4>
+          <p class="text-neutral-300 text-sm">
+            No Retell, use a funcao "Transfer Call" no prompt do agente. Defina regras claras: "Se cliente pedir suporte tecnico, transfira para agente_suporte". Cada agente tem seu proprio prompt especializado.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">VAPI: Voice API</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              VAPI e uma plataforma de Voice AI com API flexivel e altamente customizavel. Oferece mais controle que Retell, com curva de aprendizado maior.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Para casos que exigem customizacao profunda ou integracao com sistemas especificos, VAPI oferece flexibilidade superior.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              VAPI platform, Custom prompts, Voice settings, Webhook events.
+            </p>
+          </div>
+        </div>
+
+        <!-- VAPI vs Retell -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-blue-400 font-semibold mb-3">Retell AI</h4>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li>+ Interface visual intuitiva</li>
+              <li>+ Setup mais rapido</li>
+              <li>+ Bom para casos padrao</li>
+              <li>- Menos customizavel</li>
+              <li>- Pricing pode ser maior</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-purple-400 font-semibold mb-3">VAPI</h4>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li>+ API muito flexivel</li>
+              <li>+ Customizacao profunda</li>
+              <li>+ Escolha de providers</li>
+              <li>- Curva maior</li>
+              <li>- Requer mais codigo</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- VAPI Config Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Configuracao VAPI</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>{
+  "assistant": {
+    "model": {
+      "provider": "openai",
+      "model": "gpt-4-turbo"
+    },
+    "voice": {
+      "provider": "elevenlabs",
+      "voiceId": "rachel"
+    },
+    "firstMessage": "Ola! Sou a assistente virtual. Como posso ajudar?",
+    "systemPrompt": "Voce e uma atendente de clinica..."
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Assistente multilingua</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Voice AI que atende em multiplos idiomas. Pode detectar idioma automaticamente ou permitir que cliente escolha no inicio.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Mercado global exige multilinguismo. Um assistente que fala portugues, espanhol e ingles atende toda a America Latina.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Language detection, Multi-language TTS, Translation, Locale handling.
+            </p>
+          </div>
+        </div>
+
+        <!-- Strategies -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Estrategias de Implementacao</h4>
+          <div class="space-y-3 text-neutral-300 text-sm">
+            <div class="p-3 bg-dark-800 rounded-lg">
+              <strong class="text-emerald-400">1. Deteccao Automatica</strong>
+              <p class="mt-1">Use STT com deteccao de idioma. Responda no mesmo idioma detectado.</p>
+            </div>
+            <div class="p-3 bg-dark-800 rounded-lg">
+              <strong class="text-blue-400">2. Menu Inicial</strong>
+              <p class="mt-1">"Para portugues, pressione 1. For English, press 2. Para espanol, presione 3."</p>
+            </div>
+            <div class="p-3 bg-dark-800 rounded-lg">
+              <strong class="text-purple-400">3. Numero por Idioma</strong>
+              <p class="mt-1">Numeros diferentes para cada idioma. Roteamento na origem.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Idiomas Bem Suportados</h4>
+          <p class="text-neutral-300 text-sm">
+            ElevenLabs e OpenAI TTS suportam bem: Portugues (BR e PT), Ingles, Espanhol, Frances, Alemao, Italiano, Japones, Coreano, Chines (Mandarim), Hindi, Arabe.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">VAPI + WhatsApp</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Integrar Voice AI do VAPI com WhatsApp. Receber mensagens de audio, processar com IA e responder por voz ou texto.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Audio no WhatsApp e muito usado no Brasil. Voice AI melhora drasticamente o atendimento por mensagens de voz.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              WhatsApp voice, Audio processing, Voice response, Multi-modal interaction.
+            </p>
+          </div>
+        </div>
+
+        <!-- Integration Flow -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Fluxo de Integracao</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+            <li>Cliente envia audio no WhatsApp</li>
+            <li>Z-API/Evolution recebe e envia ao Make via webhook</li>
+            <li>Make baixa o arquivo de audio</li>
+            <li>Envia ao Whisper (OpenAI) para transcricao</li>
+            <li>Processa texto com LLM (gera resposta)</li>
+            <li>Converte resposta em audio com ElevenLabs/OpenAI TTS</li>
+            <li>Envia audio de volta pelo WhatsApp</li>
+          </ol>
+        </div>
+
+        <!-- Code Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Cenario Make Simplificado</h4>
+          <div class="flex flex-wrap items-center gap-2 text-xs">
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded px-2 py-1 text-emerald-400">Z-API Webhook</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded px-2 py-1 text-blue-400">Download Audio</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded px-2 py-1 text-amber-400">Whisper STT</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded px-2 py-1 text-purple-400">GPT-4</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-pink-500/20 border border-pink-500/50 rounded px-2 py-1 text-pink-400">ElevenLabs TTS</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded px-2 py-1 text-emerald-400">Z-API Send Audio</div>
+          </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-3">Dicas de Performance</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>Use OpenAI TTS para respostas rapidas (menor latencia)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>ElevenLabs para vozes mais naturais (maior latencia)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>Limite audios de resposta a 20-30 segundos</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>Oferca opcao de resposta por texto para usuarios surdos</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">3.4 - Chamadas Telefonicas com IA</p>
+        </div>
+        <a href="modulo-3-4.html" class="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg transition-colors">
+          Continuar
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-3-2.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Modulo Anterior
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 3
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

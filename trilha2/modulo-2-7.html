@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.7 - Voz e Audio com IA | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#3b82f6'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-blue-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Modulo 2.7</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-blue-400 font-bold text-xl">2.7</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">
+        TRILHA 2 - TECNICAS
+      </span>
+      <span class="text-neutral-500 text-sm">~40 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-blue-400">
+      Voz e Audio com IA
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Explore o poder da sintese de voz com Eleven Labs, clonagem de voz, TTS avancado,
+      processamento de notas de voz, dublagem automatica e melhoria de audio para podcasts.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Intermediario</span>
+      <span>|</span>
+      <span>Pre-requisitos: Modulo 2.6</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">Introducao ao Eleven Labs</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Eleven Labs e a principal plataforma de sintese de voz com IA do mercado. Oferece vozes naturais, suporte a multiplos idiomas e alta customizacao de parametros de fala.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Voz sintetica de qualidade permite criar podcasts, audiobooks, assistentes virtuais e narracoes sem depender de locutores humanos. Escala infinita com custo previsivel.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Text-to-speech, Voice synthesis, Voice settings, Eleven Labs API, Voice library, Multilingual support.
+            </p>
+          </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">29+</div>
+            <div class="text-neutral-400 text-sm">Idiomas suportados</div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">100+</div>
+            <div class="text-neutral-400 text-sm">Vozes pre-configuradas</div>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4 text-center">
+            <div class="text-3xl mb-2">~1s</div>
+            <div class="text-neutral-400 text-sm">Latencia media</div>
+          </div>
+        </div>
+
+        <!-- Example Box -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Casos de Uso</h4>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Narracao de videos e apresentacoes</li>
+            <li>- Audiobooks e conteudo educacional</li>
+            <li>- Assistentes virtuais e chatbots</li>
+            <li>- Locucao para anuncios e comerciais</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Clonagem de voz</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Criar uma voz sintetica personalizada baseada em amostras de uma voz real. A IA aprende tom, cadencia, sotaque e caracteristicas unicas para replica-los em novo conteudo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Sua voz em escala infinita. Grave uma vez, use para sempre. Ideal para criadores de conteudo que querem manter identidade vocal sem gravar cada peca manualmente.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Voice cloning, Sample requirements, Voice training, Instant clone vs Professional clone, Voice consent.
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Tipos de Clonagem</h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-dark-800 rounded-lg p-3">
+              <h5 class="text-green-400 font-medium mb-2">Instant Clone</h5>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- 1-5 minutos de audio</li>
+                <li>- Resultado em segundos</li>
+                <li>- Qualidade boa</li>
+                <li>- Ideal para testes</li>
+              </ul>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3">
+              <h5 class="text-purple-400 font-medium mb-2">Professional Clone</h5>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- 30+ minutos de audio</li>
+                <li>- Treinamento dedicado</li>
+                <li>- Qualidade superior</li>
+                <li>- Para uso comercial</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Warning Box -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Importante: Etica e Consentimento</h4>
+          <p class="text-neutral-300 text-sm">
+            Sempre obtenha consentimento explicito antes de clonar a voz de alguem. Use apenas sua propria voz ou vozes para as quais tenha autorizacao por escrito.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Text-to-Speech avancado</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Controlar parametros avancados de sintese de voz como velocidade, estabilidade, clareza e emocao. Permite ajustar o resultado para soar mais natural e expressivo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              TTS basico soa robotico e artificial. Dominar parametros avancados produz audio praticamente indistinguivel de gravacao humana real.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Voice parameters, Stability, Similarity boost, Style exaggeration, SSML tags, Prosody control.
+            </p>
+          </div>
+        </div>
+
+        <!-- Parameters Guide -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Parametros Principais</h4>
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-neutral-300 text-sm">Stability</span>
+                <span class="text-neutral-500 text-xs">0.0 - 1.0</span>
+              </div>
+              <div class="w-full bg-dark-600 rounded-full h-2">
+                <div class="bg-blue-500 h-2 rounded-full" style="width: 50%"></div>
+              </div>
+              <p class="text-neutral-500 text-xs mt-1">Maior = mais consistente, Menor = mais expressivo</p>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-neutral-300 text-sm">Similarity Boost</span>
+                <span class="text-neutral-500 text-xs">0.0 - 1.0</span>
+              </div>
+              <div class="w-full bg-dark-600 rounded-full h-2">
+                <div class="bg-purple-500 h-2 rounded-full" style="width: 75%"></div>
+              </div>
+              <p class="text-neutral-500 text-xs mt-1">Quanto a voz se aproxima da original clonada</p>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-neutral-300 text-sm">Style</span>
+                <span class="text-neutral-500 text-xs">0.0 - 1.0</span>
+              </div>
+              <div class="w-full bg-dark-600 rounded-full h-2">
+                <div class="bg-green-500 h-2 rounded-full" style="width: 30%"></div>
+              </div>
+              <p class="text-neutral-500 text-xs mt-1">Intensidade da expressividade emocional</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code Example -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Exemplo de Configuracao</h4>
+          <pre class="text-neutral-300 text-sm bg-dark-700 p-3 rounded overflow-x-auto"><code>{
+  "voice_id": "sua_voz_id",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "style": 0.3,
+    "use_speaker_boost": true
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Notas de voz para texto</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema que recebe mensagens de audio (WhatsApp, Telegram), transcreve automaticamente e processa o conteudo. Pode responder por texto ou executar acoes baseadas no que foi dito.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Usuarios adoram enviar audio - e mais rapido e natural. Processar voz automaticamente atende essa preferencia sem sobrecarregar atendentes humanos.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Voice message processing, Audio download, Transcription API, Action extraction, Intent detection.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Fluxo de Processamento</h4>
+          <div class="flex items-center justify-center gap-3 text-sm py-4 flex-wrap">
+            <div class="bg-green-500/20 border border-green-500/50 rounded-lg px-3 py-2 text-green-400">
+              Audio WhatsApp
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Download
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              Whisper
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400">
+              Texto + Acao
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Box -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Exemplo de Automacao</h4>
+          <div class="text-neutral-300 text-sm space-y-2">
+            <p><strong>Audio recebido:</strong> "Quero agendar uma consulta para sexta-feira as 14 horas"</p>
+            <p><strong>Transcricao:</strong> Texto extraido via Whisper</p>
+            <p><strong>Acao:</strong> IA identifica intencao -> verifica agenda -> confirma horario</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Dublagem automatica</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Traduzir e dublar conteudo de video para outros idiomas automaticamente. A IA preserva o tom de voz original e pode ate sincronizar com movimentos labiais.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Alcance global sem custo de locucao profissional para cada idioma. Um video pode atingir 10+ mercados diferentes com investimento minimo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              AI dubbing, Voice preservation, Lip sync, Multi-language content, Translation accuracy, Cultural adaptation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Language Grid -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Idiomas Populares para Dublagem</h4>
+          <div class="grid grid-cols-3 md:grid-cols-6 gap-2">
+            <div class="bg-dark-800 rounded px-3 py-2 text-center text-sm">
+              <span class="text-neutral-300">Ingles</span>
+            </div>
+            <div class="bg-dark-800 rounded px-3 py-2 text-center text-sm">
+              <span class="text-neutral-300">Espanhol</span>
+            </div>
+            <div class="bg-dark-800 rounded px-3 py-2 text-center text-sm">
+              <span class="text-neutral-300">Frances</span>
+            </div>
+            <div class="bg-dark-800 rounded px-3 py-2 text-center text-sm">
+              <span class="text-neutral-300">Alemao</span>
+            </div>
+            <div class="bg-dark-800 rounded px-3 py-2 text-center text-sm">
+              <span class="text-neutral-300">Japones</span>
+            </div>
+            <div class="bg-dark-800 rounded px-3 py-2 text-center text-sm">
+              <span class="text-neutral-300">Chines</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tip Box -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Dica de Qualidade</h4>
+          <p class="text-neutral-300 text-sm">
+            Para melhores resultados, revise a traducao antes da dublagem. Traducoes literais podem soar estranhas - adapte para o contexto cultural do idioma-alvo.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Podcast enhancement</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Melhorar qualidade de audio usando IA: remover ruido de fundo, equalizar frequencias, normalizar volume e reduzir eco. Ferramentas como Adobe Podcast Enhance oferecem isso gratuitamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Audio de baixa qualidade afasta ouvintes imediatamente. Enhancement transforma gravacao amadora feita em casa em audio com qualidade profissional de estudio.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Noise removal, Audio enhancement, Normalization, Adobe Podcast, Descript, Background noise, Echo reduction.
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Antes vs Depois do Enhancement</h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+              <h5 class="text-red-400 font-medium mb-2">Antes</h5>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- Ruido de ar condicionado</li>
+                <li>- Volume inconsistente</li>
+                <li>- Eco do ambiente</li>
+                <li>- Qualidade de microfone ruim</li>
+              </ul>
+            </div>
+            <div class="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+              <h5 class="text-green-400 font-medium mb-2">Depois</h5>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- Audio limpo e claro</li>
+                <li>- Volume normalizado</li>
+                <li>- Sem reverberacao</li>
+                <li>- Qualidade de estudio</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools Box -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Ferramentas Recomendadas</h4>
+          <div class="grid md:grid-cols-3 gap-3 text-sm">
+            <div>
+              <span class="text-green-400 font-medium">Adobe Podcast</span>
+              <p class="text-neutral-400 text-xs">Gratuito, web-based</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-medium">Descript</span>
+              <p class="text-neutral-400 text-xs">Edicao + enhancement</p>
+            </div>
+            <div>
+              <span class="text-blue-400 font-medium">Auphonic</span>
+              <p class="text-neutral-400 text-xs">Automatizado via API</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">2.8 - WhatsApp Avancado</p>
+        </div>
+        <a href="modulo-2-8.html" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between space-x-3 mt-8">
+      <a href="modulo-2-6.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Modulo 2.6
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 2
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

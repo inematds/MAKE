@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.2 - Raspagem e Extracao de Dados | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#3b82f6'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-blue-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Modulo 2.2</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-blue-400 font-bold text-xl">2.2</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">
+        TRILHA 2 - TECNICAS
+      </span>
+      <span class="text-neutral-500 text-sm">~45 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-blue-400">
+      Raspagem e Extracao de Dados
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Aprenda a extrair dados de qualquer site da web. Domine Web Scraping com Apify, raspagem de Instagram,
+      YouTube e blogs, e transforme dados brutos em informacao estruturada.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Intermediario</span>
+      <span>|</span>
+      <span>Pre-requisitos: Trilha 1 completa</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">Introducao ao Web Scraping</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Web scraping e a tecnica de extrair dados de sites automaticamente. Transforma paginas web em dados estruturados que podem ser usados em automacoes.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Dados sao o novo petroleo. Scraping permite coletar informacoes valiosas de sites que nao oferecem API, abrindo infinitas possibilidades de automacao.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Scraping, Parsing, Selectors, HTML extraction, Legal considerations.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Fluxo de Web Scraping</h4>
+          <div class="flex items-center justify-center gap-2 text-sm py-4 flex-wrap">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Pagina Web
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              Scraper
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400">
+              Parse HTML
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-3 py-2 text-emerald-400">
+              JSON/CSV
+            </div>
+          </div>
+        </div>
+
+        <!-- Warning Box -->
+        <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+          <h4 class="text-red-400 font-semibold mb-2">Consideracoes Legais</h4>
+          <p class="text-neutral-300 text-sm">
+            Sempre verifique os Termos de Servico do site antes de raspar. Respeite o robots.txt, nao sobrecarregue servidores e nunca colete dados pessoais sem consentimento.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Apify: plataforma de raspagem</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Apify e uma plataforma que oferece scrapers prontos (chamados Actors) para sites populares. Integra diretamente com Make atraves de modulo nativo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Construir scraper do zero e complexo e demorado. Apify oferece solucoes prontas, testadas e com manutencao inclusa quando sites mudam.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Apify Actors, Proxy, Datasets, Scheduling, Anti-bot bypass.
+            </p>
+          </div>
+        </div>
+
+        <!-- Popular Actors -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Actors Populares no Apify</h4>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+            <div class="bg-pink-500/10 border border-pink-500/30 rounded px-3 py-2 text-pink-400">Instagram Scraper</div>
+            <div class="bg-red-500/10 border border-red-500/30 rounded px-3 py-2 text-red-400">YouTube Scraper</div>
+            <div class="bg-blue-500/10 border border-blue-500/30 rounded px-3 py-2 text-blue-400">LinkedIn Scraper</div>
+            <div class="bg-amber-500/10 border border-amber-500/30 rounded px-3 py-2 text-amber-400">Amazon Scraper</div>
+            <div class="bg-emerald-500/10 border border-emerald-500/30 rounded px-3 py-2 text-emerald-400">Google Maps</div>
+            <div class="bg-purple-500/10 border border-purple-500/30 rounded px-3 py-2 text-purple-400">Web Scraper</div>
+          </div>
+        </div>
+
+        <!-- Integration Example -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Integracao com Make</h4>
+          <p class="text-neutral-300 text-sm">
+            No Make, adicione o modulo "Apify" > "Run Actor". Configure o Actor ID, input parameters e aguarde o resultado. Os dados retornam em JSON pronto para processar.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Raspagem de Instagram</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Extrair posts, comentarios, seguidores e hashtags de perfis do Instagram. Dados valiosos para analise competitiva, curadoria de conteudo e pesquisa de mercado.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              O Instagram nao oferece esses dados via API oficial. Scraping e a unica forma de obter informacoes detalhadas sobre perfis e conteudos.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Profile scraper, Post scraper, Hashtag scraper, Rate limiting.
+            </p>
+          </div>
+        </div>
+
+        <!-- Data Available -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Dados Extraiveis do Instagram</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <h5 class="text-pink-400 font-medium mb-2">Perfil</h5>
+              <ul class="text-neutral-300 space-y-1">
+                <li>* Numero de seguidores/seguindo</li>
+                <li>* Bio e links</li>
+                <li>* Total de posts</li>
+                <li>* Tipo de conta (business/pessoal)</li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="text-pink-400 font-medium mb-2">Posts</h5>
+              <ul class="text-neutral-300 space-y-1">
+                <li>* URL das imagens/videos</li>
+                <li>* Caption completo</li>
+                <li>* Likes e comentarios</li>
+                <li>* Data de publicacao</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Raspagem de YouTube</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Coletar videos, transcricoes, comentarios e metricas de canais do YouTube. Base fundamental para analise de conteudo e criacao de estrategias.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              YouTube e a segunda maior ferramenta de busca do mundo. Dados de la sao ouro para estrategia de conteudo, SEO e analise de concorrencia.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Video scraper, Transcript extraction, Channel analytics, Comment mining.
+            </p>
+          </div>
+        </div>
+
+        <!-- Use Cases -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Casos de Uso com Dados do YouTube</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-red-400">*</span>
+              <span><strong>Transcricoes para RAG:</strong> Indexar conteudo de videos para busca semantica</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-400">*</span>
+              <span><strong>Analise de tendencias:</strong> Identificar topicos em alta no seu nicho</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-400">*</span>
+              <span><strong>Geracao de conteudo:</strong> Usar transcricoes como base para artigos/posts</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-red-400">*</span>
+              <span><strong>Monitoramento:</strong> Acompanhar mencoes da marca em videos</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Raspagem de blogs e sites</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Extrair artigos, precos, produtos e informacoes de sites variados. Cada site pode exigir configuracao especifica de seletores CSS ou XPath.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Permite monitoramento de concorrencia, agregacao de conteudo, pesquisa de mercado automatizada e muito mais.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Content extraction, Price monitoring, News aggregation, Custom selectors.
+            </p>
+          </div>
+        </div>
+
+        <!-- Selector Example -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Exemplo de Seletores CSS</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>{
+  "titulo": "h1.post-title",
+  "conteudo": "div.post-content p",
+  "data": "time.published",
+  "autor": "span.author-name",
+  "preco": "span.price-value"
+}</code></pre>
+        </div>
+
+        <!-- Tips -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-3">Dicas para Raspagem de Sites</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">1.</span>
+              <span>Use o DevTools do navegador (F12) para encontrar seletores</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">2.</span>
+              <span>Prefira seletores de classe em vez de posicao (mais estaveis)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">3.</span>
+              <span>Adicione delays entre requisicoes para nao sobrecarregar o servidor</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Estruturando dados extraidos</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Transformar dados brutos de scraping em formato utilizavel. Inclui limpar, normalizar e armazenar dados de forma adequada para analise e automacao.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Dados brutos sao inuteis. E a estruturacao que permite analise, busca e acao sobre as informacoes coletadas.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Data cleaning, Normalization, Schema design, JSON transformation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Transformation Flow -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Pipeline de Transformacao</h4>
+          <div class="flex items-center justify-center gap-2 text-sm py-4 flex-wrap">
+            <div class="bg-red-500/20 border border-red-500/50 rounded-lg px-3 py-2 text-red-400">
+              Dados Brutos
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400">
+              Limpeza
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Normalizacao
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-3 py-2 text-emerald-400">
+              Armazenamento
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Transformation -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+            <h4 class="text-red-400 font-semibold mb-2">Antes (Dados Brutos)</h4>
+            <pre class="text-neutral-300 text-xs overflow-x-auto"><code>{
+  "price": "R$ 1.299,99",
+  "date": "12/01/2026",
+  "title": "  Produto XYZ  ",
+  "available": "sim"
+}</code></pre>
+          </div>
+          <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+            <h4 class="text-emerald-400 font-semibold mb-2">Depois (Estruturado)</h4>
+            <pre class="text-neutral-300 text-xs overflow-x-auto"><code>{
+  "price": 1299.99,
+  "date": "2026-01-12",
+  "title": "Produto XYZ",
+  "available": true
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">2.3 - CRM e Gestao de Clientes</p>
+        </div>
+        <a href="modulo-2-3.html" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-2-1.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Modulo 2.1
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Trilha 2
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

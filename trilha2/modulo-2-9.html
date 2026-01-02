@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.9 - Fluxos Multi-Plataforma | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#3b82f6'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-blue-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Modulo 2.9</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-blue-400 font-bold text-xl">2.9</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">
+        TRILHA 2 - TECNICAS
+      </span>
+      <span class="text-neutral-500 text-sm">~40 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-blue-400">
+      Fluxos Multi-Plataforma
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Aprenda a criar fluxos que conectam Instagram, YouTube e LinkedIn. Transforme videos em carrosseis,
+      implemente repostagem inteligente, sistemas de aprovacao e calendarios de conteudo unificados.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Intermediario</span>
+      <span>|</span>
+      <span>Pre-requisitos: Modulo 2.8</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">Instagram para YouTube</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema automatizado que reposta conteudo do Instagram no YouTube. Adapta formato, descricao e hashtags para as especificidades de cada plataforma.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Maximiza alcance do seu conteudo. O mesmo esforco de criacao atinge multiplos canais de distribuicao, multiplicando seu impacto sem trabalho adicional.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Cross-posting, Content adaptation, Platform optimization, Aspect ratio conversion, Metadata transformation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Fluxo de Conversao</h4>
+          <div class="flex items-center justify-center gap-3 text-sm py-4 flex-wrap">
+            <div class="bg-pink-500/20 border border-pink-500/50 rounded-lg px-3 py-2 text-pink-400">
+              Reels (9:16)
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Make (Adapta)
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-red-500/20 border border-red-500/50 rounded-lg px-3 py-2 text-red-400">
+              Shorts (9:16)
+            </div>
+          </div>
+        </div>
+
+        <!-- Adaptations -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Adaptacoes Necessarias</h4>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div>
+              <span class="text-neutral-300 font-medium">Instagram -> YouTube:</span>
+              <ul class="text-neutral-400 mt-1 space-y-1">
+                <li>- Hashtags -> Tags de video</li>
+                <li>- Caption curta -> Descricao longa</li>
+                <li>- Mencoes -> Links</li>
+              </ul>
+            </div>
+            <div>
+              <span class="text-neutral-300 font-medium">Formato:</span>
+              <ul class="text-neutral-400 mt-1 space-y-1">
+                <li>- Reels 9:16 -> Shorts 9:16</li>
+                <li>- Feed 1:1 -> Video 16:9</li>
+                <li>- Stories -> Shorts</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">YouTube para LinkedIn</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Extrair trechos relevantes ou resumos de videos do YouTube e postar no LinkedIn. Adapta a linguagem para contexto profissional e formato da plataforma.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              LinkedIn e B2B e tem audiencia profissional diferente. Reaproveitar conteudo YouTube adaptado para esse contexto expande significativamente seu alcance corporativo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Content repurposing, Professional tone, LinkedIn video, Article extraction, B2B adaptation, Thought leadership.
+            </p>
+          </div>
+        </div>
+
+        <!-- Transformation Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Transformacao de Conteudo</h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+              <h5 class="text-red-400 font-medium mb-2">YouTube Original</h5>
+              <p class="text-neutral-300 text-sm">
+                "E ai galera! No video de hoje vou mostrar 5 dicas insanas para vender mais..."
+              </p>
+            </div>
+            <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+              <h5 class="text-blue-400 font-medium mb-2">LinkedIn Adaptado</h5>
+              <p class="text-neutral-300 text-sm">
+                "Compartilho 5 estrategias comprovadas para aumentar conversao em vendas B2B..."
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formats -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Formatos para LinkedIn</h4>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Video nativo (ate 10 min para melhor engajamento)</li>
+            <li>- Post texto com link do video</li>
+            <li>- Documento/PDF com slides do conteudo</li>
+            <li>- Artigo longo com transcricao editada</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Carrossel do YouTube</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Transformar um video do YouTube em carrossel para Instagram. Extrai frames-chave, cria slides com os pontos principais e formata para o formato quadrado ou vertical.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Carrossel tem altissimo engajamento no Instagram. Converter video existente em carrossel multiplica seu conteudo sem esforco de criacao adicional.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Frame extraction, Slide generation, Carousel format, Key points summary, Visual design, Template system.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Pipeline de Conversao</h4>
+          <div class="flex items-center justify-center gap-2 text-sm py-4 flex-wrap">
+            <div class="bg-red-500/20 border border-red-500/50 rounded-lg px-3 py-2 text-red-400">
+              Video YT
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Transcricao
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              Extrai Pontos
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-green-500/20 border border-green-500/50 rounded-lg px-3 py-2 text-green-400">
+              Gera Slides
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-pink-500/20 border border-pink-500/50 rounded-lg px-3 py-2 text-pink-400">
+              Carrossel
+            </div>
+          </div>
+        </div>
+
+        <!-- Structure -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Estrutura do Carrossel</h4>
+          <div class="grid grid-cols-5 gap-2 text-xs text-center">
+            <div class="bg-dark-700 rounded p-2">
+              <span class="text-blue-400 block font-medium">Slide 1</span>
+              <span class="text-neutral-400">Gancho</span>
+            </div>
+            <div class="bg-dark-700 rounded p-2">
+              <span class="text-blue-400 block font-medium">Slide 2-8</span>
+              <span class="text-neutral-400">Conteudo</span>
+            </div>
+            <div class="bg-dark-700 rounded p-2">
+              <span class="text-blue-400 block font-medium">Slide 9</span>
+              <span class="text-neutral-400">Resumo</span>
+            </div>
+            <div class="bg-dark-700 rounded p-2">
+              <span class="text-blue-400 block font-medium">Slide 10</span>
+              <span class="text-neutral-400">CTA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Repostagem inteligente</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema que decide inteligentemente quando e onde repostar conteudo baseado em performance. Evita fadiga de audiencia enquanto maximiza alcance de conteudo evergreen.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Repostar sem estrategia irrita seguidores e parece spam. Repostagem inteligente baseada em dados aumenta alcance sem prejudicar experiencia.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Smart reposting, Performance-based scheduling, Audience fatigue, Evergreen content, Decay rate, Optimal timing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Rules -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Regras de Repostagem</h4>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 text-xs">OK</span>
+              <span class="text-neutral-300 text-sm">Post com alta performance + 30+ dias desde ultima postagem</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 text-xs">OK</span>
+              <span class="text-neutral-300 text-sm">Conteudo evergreen relevante para audiencia atual</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center text-red-400 text-xs">X</span>
+              <span class="text-neutral-300 text-sm">Mesmo post em menos de 2 semanas</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center text-red-400 text-xs">X</span>
+              <span class="text-neutral-300 text-sm">Conteudo datado ou promocional expirado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tip Box -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Dica Pro</h4>
+          <p class="text-neutral-300 text-sm">
+            Mantenha banco de dados de performance por post. Atualize apos cada repostagem. Posts que perdem engajamento apos 2-3 reposts devem ser aposentados.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Postagem com aprovacao</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Workflow onde posts gerados automaticamente passam por revisao humana antes de serem publicados. Sistema de aprovacao que garante controle de qualidade.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Automacao total pode gerar erros embaracosos. Aprovacao humana e uma rede de seguranca essencial para conteudo sensivel ou de marca.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Approval workflow, Review queue, Status tracking, Publish on approval, Rejection handling, Revision cycles.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Fluxo de Aprovacao</h4>
+          <div class="flex items-center justify-center gap-2 text-sm py-4 flex-wrap">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              IA Gera
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400">
+              Fila Review
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              Humano Revisa
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-green-500/20 border border-green-500/50 rounded-lg px-3 py-2 text-green-400">
+              Publica
+            </div>
+          </div>
+        </div>
+
+        <!-- Implementation -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Implementacao Pratica</h4>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>1. Posts gerados vao para Airtable com status "Pendente"</li>
+            <li>2. Notificacao via Slack/Email para revisor</li>
+            <li>3. Interface de aprovacao (Airtable/Softr)</li>
+            <li>4. Aprovado -> Agenda postagem | Rejeitado -> Notifica IA</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Calendario de conteudo</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema centralizado que gerencia a agenda de publicacoes em todas as plataformas. Oferece visao unificada do que sera postado, quando e onde.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Consistencia exige planejamento. Calendario de conteudo permite estrategia de longo prazo, evita gaps e garante presenca constante.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Content calendar, Editorial planning, Multi-platform schedule, Batch creation, Content pillars, Seasonal planning.
+            </p>
+          </div>
+        </div>
+
+        <!-- Calendar View -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Estrutura do Calendario</h4>
+          <div class="grid grid-cols-7 gap-1 text-xs">
+            <div class="text-center text-neutral-500 p-2">Seg</div>
+            <div class="text-center text-neutral-500 p-2">Ter</div>
+            <div class="text-center text-neutral-500 p-2">Qua</div>
+            <div class="text-center text-neutral-500 p-2">Qui</div>
+            <div class="text-center text-neutral-500 p-2">Sex</div>
+            <div class="text-center text-neutral-500 p-2">Sab</div>
+            <div class="text-center text-neutral-500 p-2">Dom</div>
+
+            <div class="bg-pink-500/20 rounded p-1 text-pink-400 text-center">IG</div>
+            <div class="bg-blue-500/20 rounded p-1 text-blue-400 text-center">LI</div>
+            <div class="bg-pink-500/20 rounded p-1 text-pink-400 text-center">IG</div>
+            <div class="bg-red-500/20 rounded p-1 text-red-400 text-center">YT</div>
+            <div class="bg-pink-500/20 rounded p-1 text-pink-400 text-center">IG</div>
+            <div class="bg-dark-600 rounded p-1 text-neutral-500 text-center">-</div>
+            <div class="bg-dark-600 rounded p-1 text-neutral-500 text-center">-</div>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Ferramentas Recomendadas</h4>
+          <div class="grid md:grid-cols-3 gap-3 text-sm">
+            <div>
+              <span class="text-green-400 font-medium">Airtable</span>
+              <p class="text-neutral-400 text-xs">Flexivel, integracao Make</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-medium">Notion Calendar</span>
+              <p class="text-neutral-400 text-xs">Visual, colaborativo</p>
+            </div>
+            <div>
+              <span class="text-blue-400 font-medium">Metricool</span>
+              <p class="text-neutral-400 text-xs">Scheduling + Analytics</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Melhores Praticas</h4>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Defina pilares de conteudo (educativo, entretenimento, promocional)</li>
+            <li>- Planeje com 2-4 semanas de antecedencia</li>
+            <li>- Deixe espaco para conteudo reativo/trending</li>
+            <li>- Revise performance semanalmente e ajuste</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">2.10 - Projeto Integrador Tecnico</p>
+        </div>
+        <a href="modulo-2-10.html" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between space-x-3 mt-8">
+      <a href="modulo-2-8.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Modulo 2.8
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 2
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

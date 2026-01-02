@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.2 - RAG (Retrieval Augmented Generation) | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#a855f7'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-purple-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a>
+      <span>/</span>
+      <span class="text-purple-400">Modulo 3.2</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-purple-400 font-bold text-xl">3.2</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium">
+        TRILHA 3 - AVANCADO
+      </span>
+      <span class="text-neutral-500 text-sm">~50 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-purple-400">
+      RAG (Retrieval Augmented Generation)
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Aprenda a criar sistemas de IA que buscam informacoes na sua base de conhecimento antes de responder.
+      RAG permite criar assistentes especializados no seu dominio com respostas precisas e atualizadas.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Avancado</span>
+      <span>|</span>
+      <span>Pre-requisitos: Modulo 3.1</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">Conceitos de RAG</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              RAG combina busca de informacoes (Retrieval) com geracao de texto (Generation). A IA busca contexto relevante na sua base de conhecimento antes de responder, gerando respostas fundamentadas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              LLMs tem conhecimento limitado e desatualizado. RAG permite criar IA especialista no seu dominio, com informacoes precisas e atuais.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Retrieval, Augmentation, Generation, Knowledge base, Context injection.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Fluxo do RAG</h4>
+          <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-sm py-4">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-4 py-2 text-blue-400 text-center">
+              Pergunta do Usuario
+            </div>
+            <span class="text-neutral-500 hidden md:block">&rarr;</span>
+            <span class="text-neutral-500 md:hidden">&darr;</span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-4 py-2 text-amber-400 text-center">
+              Busca Semantica
+            </div>
+            <span class="text-neutral-500 hidden md:block">&rarr;</span>
+            <span class="text-neutral-500 md:hidden">&darr;</span>
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-4 py-2 text-emerald-400 text-center">
+              Contexto Relevante
+            </div>
+            <span class="text-neutral-500 hidden md:block">&rarr;</span>
+            <span class="text-neutral-500 md:hidden">&darr;</span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-4 py-2 text-purple-400 text-center">
+              LLM + Contexto
+            </div>
+            <span class="text-neutral-500 hidden md:block">&rarr;</span>
+            <span class="text-neutral-500 md:hidden">&darr;</span>
+            <div class="bg-pink-500/20 border border-pink-500/50 rounded-lg px-4 py-2 text-pink-400 text-center">
+              Resposta Precisa
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Box -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Exemplo Pratico</h4>
+          <p class="text-neutral-300 text-sm">
+            Cliente pergunta: "Qual e a politica de devolucao?" O sistema busca no vetor DB os trechos do manual que falam de devolucao, injeta como contexto no prompt, e o LLM responde com base nas regras reais da empresa.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Embeddings e vetores</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Embeddings transformam texto em vetores numericos que capturam significado semantico. Textos com significados similares tem vetores proximos no espaco vetorial.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Embeddings sao a base de busca semantica. Sem entender como funcionam, impossivel implementar RAG corretamente ou debugar problemas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Text embedding, Vector representation, Semantic similarity, Embedding models.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Como Embeddings Funcionam</h4>
+          <div class="space-y-3 text-sm">
+            <div class="flex items-center gap-4">
+              <span class="text-neutral-400 w-32">"Cachorro feliz"</span>
+              <span class="text-neutral-500">&rarr;</span>
+              <code class="text-emerald-400 bg-dark-800 px-2 py-1 rounded">[0.12, 0.87, -0.34, ...]</code>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-neutral-400 w-32">"Cao contente"</span>
+              <span class="text-neutral-500">&rarr;</span>
+              <code class="text-emerald-400 bg-dark-800 px-2 py-1 rounded">[0.11, 0.85, -0.32, ...]</code>
+              <span class="text-emerald-400 text-xs">Similar!</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-neutral-400 w-32">"Carro vermelho"</span>
+              <span class="text-neutral-500">&rarr;</span>
+              <code class="text-amber-400 bg-dark-800 px-2 py-1 rounded">[0.78, -0.23, 0.56, ...]</code>
+              <span class="text-amber-400 text-xs">Diferente</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Models -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Modelos de Embedding Populares</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">-</span>
+              <span><strong>text-embedding-3-small:</strong> OpenAI, 1536 dimensoes, barato</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">-</span>
+              <span><strong>text-embedding-3-large:</strong> OpenAI, 3072 dimensoes, mais preciso</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">-</span>
+              <span><strong>voyage-2:</strong> Voyage AI, excelente para codigo</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">-</span>
+              <span><strong>jina-embeddings-v2:</strong> Open source, multilingue</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Pinecone como Vector DB</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Pinecone e um banco de dados especializado em armazenar e buscar vetores de forma eficiente. Essencial para RAG em escala, com busca em milissegundos.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Vector DB permite busca em milhoes de documentos instantaneamente. Pre-requisito para RAG serio em producao.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Vector database, Index, Upsert, Query, Similarity search.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pinecone Structure -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Estrutura do Pinecone</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>{
+  "id": "doc-123",
+  "values": [0.12, 0.87, -0.34, ...],  // vetor embedding
+  "metadata": {
+    "text": "Conteudo original do chunk",
+    "source": "manual-empresa.pdf",
+    "page": 5,
+    "date": "2024-01-15"
+  }
+}</code></pre>
+        </div>
+
+        <!-- Make Integration -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Integracao com Make</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+            <li>Crie conta gratuita no Pinecone (ate 100K vetores)</li>
+            <li>Crie um Index com dimensao do seu modelo (ex: 1536)</li>
+            <li>Use modulo HTTP no Make para chamar API Pinecone</li>
+            <li>Endpoints: /vectors/upsert (gravar), /query (buscar)</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Indexando documentos</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Processo de dividir documentos em chunks, gerar embeddings para cada um e armazenar no vector DB. Essa preparacao e essencial para busca posterior.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Indexacao correta determina qualidade do RAG. Chunks errados ou muito grandes resultam em respostas ruins ou imprecisas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Document chunking, Chunk size, Overlap, Metadata, Batch indexing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Chunking Strategies -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Estrategias de Chunking</h4>
+          <div class="space-y-3 text-neutral-300 text-sm">
+            <div class="p-3 bg-dark-800 rounded-lg">
+              <strong class="text-emerald-400">Tamanho Fixo (500-1000 tokens)</strong>
+              <p class="mt-1">Simples, funciona bem para maioria dos casos. Use overlap de 10-20%.</p>
+            </div>
+            <div class="p-3 bg-dark-800 rounded-lg">
+              <strong class="text-blue-400">Por Paragrafo/Secao</strong>
+              <p class="mt-1">Preserva contexto natural do documento. Ideal para manuais e artigos.</p>
+            </div>
+            <div class="p-3 bg-dark-800 rounded-lg">
+              <strong class="text-purple-400">Semantico</strong>
+              <p class="mt-1">Agrupa por significado usando IA. Mais complexo, melhores resultados.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pipeline -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Pipeline de Indexacao no Make</h4>
+          <div class="flex flex-wrap items-center gap-2 text-sm">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded px-3 py-1 text-blue-400">Documento</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded px-3 py-1 text-amber-400">Extrair Texto</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded px-3 py-1 text-emerald-400">Chunkar</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded px-3 py-1 text-purple-400">Embeddings</div>
+            <span class="text-neutral-500">&rarr;</span>
+            <div class="bg-pink-500/20 border border-pink-500/50 rounded px-3 py-1 text-pink-400">Pinecone</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Busca semantica</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Buscar documentos por significado, nao apenas palavras-chave. "Como cancelar" encontra trechos sobre "processo de cancelamento" mesmo sem match exato.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Busca tradicional falha com linguagem natural. Busca semantica entende intencao e encontra informacao relevante.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Semantic search, Query embedding, Top-K retrieval, Relevance ranking.
+            </p>
+          </div>
+        </div>
+
+        <!-- Query Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Exemplo de Query no Pinecone</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>// 1. Gerar embedding da pergunta
+pergunta = "Qual o prazo para devolucao?"
+embedding = openai.embeddings.create(pergunta)
+
+// 2. Buscar no Pinecone
+POST https://index-name.pinecone.io/query
+{
+  "vector": embedding,
+  "topK": 5,
+  "includeMetadata": true
+}
+
+// 3. Resultado: 5 chunks mais relevantes
+[
+  {"score": 0.92, "text": "O prazo para devolucao e de 30 dias..."},
+  {"score": 0.87, "text": "Politica de troca e devolucao..."},
+  ...
+]</code></pre>
+        </div>
+
+        <!-- Comparison -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-red-400 font-semibold mb-3">Busca por Palavra-chave</h4>
+            <p class="text-neutral-300 text-sm">
+              Query: "devolucao"<br>
+              <span class="text-red-400">Nao encontra:</span> "politica de retorno", "trocar produto", "reembolso"
+            </p>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-emerald-400 font-semibold mb-3">Busca Semantica</h4>
+            <p class="text-neutral-300 text-sm">
+              Query: "devolucao"<br>
+              <span class="text-emerald-400">Encontra:</span> "politica de retorno", "trocar produto", "reembolso", "devolver compra"
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">RAG para emails</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Implementar RAG especificamente para base de emails. A IA busca emails anteriores relevantes para dar contexto as respostas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Aplicacao pratica e valiosa. Respostas podem referenciar: "Como discutimos no email de marco..." baseado em emails reais.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Email indexing, Conversation retrieval, Reply generation, Context relevance.
+            </p>
+          </div>
+        </div>
+
+        <!-- Email RAG Flow -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Fluxo RAG para Emails</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+            <li><strong>Indexacao:</strong> Novo email chega &rarr; gera embedding &rarr; salva no Pinecone com metadata (remetente, data, assunto)</li>
+            <li><strong>Resposta:</strong> Email recebido &rarr; busca emails similares do mesmo remetente &rarr; injeta contexto no prompt</li>
+            <li><strong>Geracao:</strong> LLM responde considerando historico da conversa</li>
+          </ol>
+        </div>
+
+        <!-- Prompt Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Prompt com Contexto RAG</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>Voce e um assistente de email. Responda ao email abaixo
+considerando o historico de conversas anteriores.
+
+## Emails Anteriores Relevantes:
+{chunks_do_pinecone}
+
+## Email Atual:
+De: cliente@empresa.com
+Assunto: Re: Proposta comercial
+Corpo: Gostaria de saber se podemos renegociar os prazos...
+
+## Resposta:</code></pre>
+        </div>
+
+        <!-- Tips -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-3">Dicas para RAG de Email</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>Filtre por remetente para buscar apenas emails da mesma conversa</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>Inclua data nos metadados para priorizar emails recentes</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>Remova assinaturas e headers antes de indexar</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>Limite o contexto a 3-5 emails para nao sobrecarregar</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">3.3 - Assistentes de Voz</p>
+        </div>
+        <a href="modulo-3-3.html" class="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg transition-colors">
+          Continuar
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-3-1.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Modulo Anterior
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 3
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

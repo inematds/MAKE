@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.1 - Agentes de IA no Make | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#a855f7'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-purple-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a>
+      <span>/</span>
+      <span class="text-purple-400">Modulo 3.1</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-purple-400 font-bold text-xl">3.1</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium">
+        TRILHA 3 - AVANCADO
+      </span>
+      <span class="text-neutral-500 text-sm">~45 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-purple-400">
+      Agentes de IA no Make
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Aprenda a construir agentes de IA autonomos que tomam decisoes, usam ferramentas e executam tarefas complexas.
+      Este modulo cobre desde os conceitos fundamentais ate a implementacao pratica no Make.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Avancado</span>
+      <span>|</span>
+      <span>Pre-requisitos: Trilha 2</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">O que sao Agentes de IA</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Agentes sao sistemas de IA que podem tomar decisoes, usar ferramentas e executar tarefas autonomamente. Vao alem de simplesmente responder perguntas - eles agem no mundo real.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Agentes sao o proximo nivel de automacao. Podem lidar com tarefas complexas que exigiriam multiplos cenarios ou intervencao humana constante.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              AI Agent, Autonomy, Tool use, Decision making, Goal-oriented behavior.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Arquitetura de um Agente</h4>
+          <div class="flex flex-col items-center gap-4 text-sm py-4">
+            <div class="flex items-center gap-4">
+              <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-4 py-2 text-purple-400">
+                Objetivo/Goal
+              </div>
+            </div>
+            <span class="text-neutral-500">|</span>
+            <div class="flex items-center gap-4">
+              <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-4 py-2 text-blue-400">
+                LLM (Cerebro)
+              </div>
+            </div>
+            <span class="text-neutral-500">|</span>
+            <div class="flex items-center gap-4">
+              <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-4 py-2 text-amber-400">
+                Tools (Acoes)
+              </div>
+              <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-4 py-2 text-emerald-400">
+                Memory
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Box -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Exemplo Pratico</h4>
+          <p class="text-neutral-300 text-sm">
+            Um agente de suporte ao cliente recebe: "Quero cancelar minha assinatura". Ele decide: verificar status da conta (tool), buscar politica de cancelamento (tool), processar o cancelamento (tool), e enviar confirmacao por email (tool). Tudo autonomamente.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Agente vs Automacao: quando usar</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Entender quando automacao tradicional (if-then) e suficiente vs quando agente autonomo e necessario. Sao abordagens complementares, nao substitutas.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Usar agente para tudo e overkill e caro. Saber escolher otimiza custo, complexidade e manutencao do sistema.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Rule-based vs AI, Complexity threshold, Cost-benefit, Use case analysis.
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-emerald-400 font-semibold mb-3">Use Automacao Tradicional quando:</h4>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400">-</span>
+                <span>Fluxo e previsivel e linear</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400">-</span>
+                <span>Regras sao claras e finitas</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400">-</span>
+                <span>Inputs sao estruturados</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400">-</span>
+                <span>Custo de erro e baixo</span>
+              </li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-purple-400 font-semibold mb-3">Use Agente quando:</h4>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400">-</span>
+                <span>Decisoes dependem de contexto</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400">-</span>
+                <span>Inputs sao linguagem natural</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400">-</span>
+                <span>Multiplas ferramentas podem ser necessarias</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-purple-400">-</span>
+                <span>Fluxo nao e previsivel</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Criando seu primeiro agente</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Implementar um agente basico no Make: LLM com system prompt definindo comportamento, ferramentas conectadas, e loop de decisao para execucao.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Pratica fundamental. O primeiro agente funcional ensina conceitos na pratica e serve como base para projetos mais complexos.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Agent setup, System prompt, Tool definition, Action loop.
+            </p>
+          </div>
+        </div>
+
+        <!-- Code Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">System Prompt do Agente</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>Voce e um agente de atendimento ao cliente.
+
+Seu objetivo: Resolver solicitacoes do cliente de forma autonoma.
+
+Ferramentas disponiveis:
+- buscar_cliente(email): Retorna dados do cliente
+- verificar_pedido(id): Retorna status do pedido
+- criar_ticket(assunto, descricao): Cria ticket de suporte
+- enviar_email(para, assunto, corpo): Envia email
+
+Regras:
+1. Sempre identifique o cliente primeiro
+2. Busque informacoes antes de responder
+3. Crie ticket apenas se nao conseguir resolver
+4. Seja cordial e objetivo</code></pre>
+        </div>
+
+        <!-- Step by Step -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Passo a Passo no Make</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+            <li>Crie webhook para receber mensagens do cliente</li>
+            <li>Configure modulo OpenAI com system prompt do agente</li>
+            <li>Habilite function calling com suas tools definidas</li>
+            <li>Adicione Router para direcionar cada tool</li>
+            <li>Implemente cada tool como ramo do router</li>
+            <li>Retorne resultado ao LLM para proxima decisao</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Ferramentas (Tools) para agentes</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Definir funcoes que o agente pode chamar: buscar dados, enviar email, criar registro. Tools sao os "bracos" do agente - permitem acao no mundo real.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Agente sem tools apenas pensa mas nao age. Tools transformam raciocinio em acao concreta e resultados tangíveis.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Function calling, Tool definition, Parameter schema, Tool execution.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tool Definition Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Definicao de Tool (JSON Schema)</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>{
+  "name": "buscar_cliente",
+  "description": "Busca informacoes de um cliente pelo email",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "email": {
+        "type": "string",
+        "description": "Email do cliente a buscar"
+      }
+    },
+    "required": ["email"]
+  }
+}</code></pre>
+        </div>
+
+        <!-- Tools Examples -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Exemplos de Tools Comuns</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">1.</span>
+              <span><strong>Buscar dados:</strong> Consultar banco de dados, API externa, planilha</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">2.</span>
+              <span><strong>Criar registros:</strong> Adicionar lead, criar ticket, registrar pedido</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">3.</span>
+              <span><strong>Comunicar:</strong> Enviar email, SMS, mensagem WhatsApp</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">4.</span>
+              <span><strong>Calcular:</strong> Preco, desconto, prazo de entrega</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-purple-400">5.</span>
+              <span><strong>Agendar:</strong> Criar evento, reservar horario, marcar reuniao</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Memoria e contexto</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistemas para agente lembrar conversas anteriores e informacoes importantes. Inclui memoria de curto prazo (sessao) e longo prazo (persistente).
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Agente sem memoria trata cada interacao como nova. Memoria permite continuidade, personalizacao e contexto historico.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Conversation memory, Vector memory, Context window, Memory retrieval.
+            </p>
+          </div>
+        </div>
+
+        <!-- Memory Types -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-blue-400 font-semibold mb-3">Memoria de Curto Prazo</h4>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li><strong>O que:</strong> Historico da conversa atual</li>
+              <li><strong>Onde:</strong> Context window do LLM</li>
+              <li><strong>Limite:</strong> Tokens do modelo</li>
+              <li><strong>Uso:</strong> Manter contexto da sessao</li>
+            </ul>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-purple-400 font-semibold mb-3">Memoria de Longo Prazo</h4>
+            <ul class="space-y-2 text-neutral-300 text-sm">
+              <li><strong>O que:</strong> Informacoes persistentes</li>
+              <li><strong>Onde:</strong> Vector DB (Pinecone, Weaviate)</li>
+              <li><strong>Limite:</strong> Armazenamento do DB</li>
+              <li><strong>Uso:</strong> Preferencias, historico, conhecimento</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Implementation -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Implementacao no Make</h4>
+          <p class="text-neutral-300 text-sm">
+            Use Airtable ou Google Sheets para memoria simples. Para memoria semantica avancada, use Pinecone: indexe interacoes importantes, busque contexto relevante antes de cada resposta do agente.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">7 Passos para Agentes Make</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Framework pratico para construir agentes no Make: definir objetivo, criar tools, configurar LLM, implementar loop de execucao.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Framework estruturado acelera desenvolvimento. Evita erros comuns de quem aprende sozinho e garante consistencia.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Agent framework, Step-by-step build, Best practices, Common patterns.
+            </p>
+          </div>
+        </div>
+
+        <!-- 7 Steps -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Os 7 Passos</h4>
+          <ol class="space-y-3 text-neutral-300 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/30 text-purple-400 text-xs font-bold flex items-center justify-center shrink-0">1</span>
+              <span><strong>Defina o Objetivo:</strong> O que o agente deve realizar? Seja especifico.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/30 text-purple-400 text-xs font-bold flex items-center justify-center shrink-0">2</span>
+              <span><strong>Liste as Tools:</strong> Quais acoes ele precisa executar para atingir o objetivo?</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/30 text-purple-400 text-xs font-bold flex items-center justify-center shrink-0">3</span>
+              <span><strong>Defina o Schema:</strong> Parametros de entrada/saida de cada tool.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/30 text-purple-400 text-xs font-bold flex items-center justify-center shrink-0">4</span>
+              <span><strong>Escreva o System Prompt:</strong> Personalidade, regras, limitacoes do agente.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/30 text-purple-400 text-xs font-bold flex items-center justify-center shrink-0">5</span>
+              <span><strong>Configure o LLM:</strong> OpenAI com function calling habilitado.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/30 text-purple-400 text-xs font-bold flex items-center justify-center shrink-0">6</span>
+              <span><strong>Implemente as Tools:</strong> Cada tool como cenario ou ramo no Make.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 rounded-full bg-purple-500/30 text-purple-400 text-xs font-bold flex items-center justify-center shrink-0">7</span>
+              <span><strong>Crie o Loop:</strong> Resultado da tool volta ao LLM ate tarefa concluir.</span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Tips -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-3">Dicas de Implementacao</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>Comece com 2-3 tools e expanda gradualmente</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>Limite o numero de loops para evitar custos excessivos</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>Logue todas as decisoes para debug</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">-</span>
+              <span>Adicione fallback para quando agente nao souber o que fazer</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">3.2 - RAG (Retrieval Augmented Generation)</p>
+        </div>
+        <a href="modulo-3-2.html" class="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg transition-colors">
+          Continuar
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-start space-x-3 mt-8">
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 3
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

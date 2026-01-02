@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.8 - WhatsApp Avancado | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#3b82f6'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-blue-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Modulo 2.8</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-blue-400 font-bold text-xl">2.8</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">
+        TRILHA 2 - TECNICAS
+      </span>
+      <span class="text-neutral-500 text-sm">~45 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-blue-400">
+      WhatsApp Avancado
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Domine o WhatsApp Business API com chatbots inteligentes usando IA, agendamento automatizado,
+      atendimento 24/7, gestao de grupos, broadcast e integracao completa com CRM.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Intermediario</span>
+      <span>|</span>
+      <span>Pre-requisitos: Modulo 2.7</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">Configurando WhatsApp Business</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Setup completo do WhatsApp Business API: escolha do provedor de API, configuracao do numero, verificacao do negocio, integracao com Make e criacao de templates de mensagem aprovados.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              WhatsApp e o canal dominante no Brasil. Configuracao correta desde o inicio evita bloqueios, problemas de entrega e custos desnecessarios.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Business API, Phone number setup, Provider selection, Verification, Message templates, Session messages.
+            </p>
+          </div>
+        </div>
+
+        <!-- Provider Comparison -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Provedores de API</h4>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-dark-800 rounded-lg p-3">
+              <h5 class="text-green-400 font-medium mb-2">Z-API</h5>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- Brasileiro</li>
+                <li>- Setup rapido</li>
+                <li>- Suporte local</li>
+                <li>- Custo acessivel</li>
+              </ul>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3">
+              <h5 class="text-purple-400 font-medium mb-2">Evolution API</h5>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- Open source</li>
+                <li>- Self-hosted</li>
+                <li>- Sem custo mensal</li>
+                <li>- Mais controle</li>
+              </ul>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3">
+              <h5 class="text-blue-400 font-medium mb-2">Official Cloud</h5>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- API oficial Meta</li>
+                <li>- Sem intermediario</li>
+                <li>- 1000 msg gratis/mes</li>
+                <li>- Maior conformidade</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Warning Box -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Atencao: Evite Bloqueios</h4>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Use apenas mensagens template para iniciar conversas</li>
+            <li>- Respeite opt-in e opt-out dos usuarios</li>
+            <li>- Nao envie spam ou mensagens em massa sem segmentacao</li>
+            <li>- Mantenha taxa de resposta alta</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Chatbot com IA</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Bot que entende linguagem natural e responde contextualmente usando LLM (GPT, Claude, DeepSeek). Vai muito alem de menus e palavras-chave, entendendo intencao e contexto.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Usuarios esperam respostas inteligentes. Bots baseados em regras frustram; chatbots com IA encantam e resolvem problemas reais de forma natural.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              NLU chatbot, Context management, Conversation flow, Fallback handling, Intent detection, Entity extraction.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Arquitetura do Chatbot IA</h4>
+          <div class="flex items-center justify-center gap-3 text-sm py-4 flex-wrap">
+            <div class="bg-green-500/20 border border-green-500/50 rounded-lg px-3 py-2 text-green-400">
+              Mensagem
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Contexto
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              LLM
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400">
+              Resposta
+            </div>
+          </div>
+        </div>
+
+        <!-- Code Example -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">System Prompt para Atendimento</h4>
+          <pre class="text-neutral-300 text-sm bg-dark-700 p-3 rounded overflow-x-auto"><code>Voce e um assistente de atendimento da [Empresa].
+Seja cordial, objetivo e prestativo.
+Informacoes disponiveis:
+- Horario: Seg-Sex 9h-18h
+- Produtos: [lista]
+- Formas de pagamento: PIX, cartao
+
+Se nao souber a resposta, diga que vai
+transferir para um atendente humano.</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Agendamento por WhatsApp</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema onde cliente agenda servicos conversando naturalmente com o bot no WhatsApp. Integra com Google Calendar ou outro sistema de agenda para verificar disponibilidade em tempo real.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Agendamento por chat e a preferencia dos usuarios modernos. Elimina necessidade de telefone, funciona 24/7 e reduz drasticamente no-shows com lembretes automaticos.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Booking bot, Calendar integration, Availability check, Confirmation messages, Reminder automation, Rescheduling.
+            </p>
+          </div>
+        </div>
+
+        <!-- Flow Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Fluxo de Agendamento</h4>
+          <div class="space-y-3 text-sm">
+            <div class="flex items-start gap-3">
+              <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs w-20 text-center">Cliente</span>
+              <span class="text-neutral-300">"Quero agendar um corte para sabado"</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs w-20 text-center">Bot</span>
+              <span class="text-neutral-300">"Temos horarios disponiveis: 9h, 11h, 14h. Qual prefere?"</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs w-20 text-center">Cliente</span>
+              <span class="text-neutral-300">"14h"</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs w-20 text-center">Bot</span>
+              <span class="text-neutral-300">"Confirmado! Sabado as 14h. Enviarei lembrete 1h antes."</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Integration -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Integracoes Comuns</h4>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+              <span class="text-neutral-300">Google Calendar</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+              <span class="text-neutral-300">Calendly</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+              <span class="text-neutral-300">Cal.com</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+              <span class="text-neutral-300">Airtable (custom)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Atendimento automatizado</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Bot que resolve duvidas frequentes, qualifica leads, coleta informacoes e encaminha para atendente humano quando necessario. Funciona 24/7 sem pausas.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Atendimento humano nao escala. Bot resolve 80% das questoes automaticamente, liberando humanos para focar nos 20% de casos complexos que realmente precisam de atencao.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              FAQ bot, Lead qualification, Human handoff, Service hours, Escalation rules, SLA monitoring.
+            </p>
+          </div>
+        </div>
+
+        <!-- Stats Box -->
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-green-500/10 border border-green-500/30 rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold text-green-400">80%</div>
+            <div class="text-neutral-400 text-sm">Questoes resolvidas por bot</div>
+          </div>
+          <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold text-blue-400">24/7</div>
+            <div class="text-neutral-400 text-sm">Disponibilidade</div>
+          </div>
+          <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold text-purple-400">&lt;5s</div>
+            <div class="text-neutral-400 text-sm">Tempo de resposta</div>
+          </div>
+        </div>
+
+        <!-- Handoff Example -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Quando Transferir para Humano</h4>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>- Cliente pede explicitamente ("quero falar com atendente")</li>
+            <li>- Assunto fora do escopo do bot (reclamacoes serias)</li>
+            <li>- Bot nao consegue resolver apos 2-3 tentativas</li>
+            <li>- Transacoes de alto valor ou sensibilidade</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Grupos e broadcast</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Automacoes para gerenciar grupos de WhatsApp e listas de transmissao. Enviar mensagens em massa de forma segmentada, moderar grupos e gerenciar membros automaticamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Grupos sao comunidades poderosas; broadcast e comunicacao direta em escala. Ambos sao essenciais para engajamento e relacionamento com clientes.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Group management, Broadcast list, Message templates, Opt-in/opt-out, Segmentation, Rate limiting.
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Grupos vs Broadcast</h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-dark-800 rounded-lg p-3">
+              <h5 class="text-green-400 font-medium mb-2">Grupos</h5>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>+ Interacao entre membros</li>
+                <li>+ Senso de comunidade</li>
+                <li>- Pode virar barulho</li>
+                <li>- Requer moderacao</li>
+              </ul>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3">
+              <h5 class="text-blue-400 font-medium mb-2">Broadcast</h5>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>+ Comunicacao direta</li>
+                <li>+ Parece pessoal</li>
+                <li>+ Sem interferencia</li>
+                <li>- Requer opt-in</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Melhores Praticas para Broadcast</h4>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>1. Sempre tenha opt-in explicito do usuario</li>
+            <li>2. Segmente por interesse/comportamento</li>
+            <li>3. Limite frequencia (max 2-3x por semana)</li>
+            <li>4. Ofereca opcao clara de opt-out</li>
+            <li>5. Personalize com nome quando possivel</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Integracao com CRM</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sincronizar todas as conversas do WhatsApp com seu CRM. Cada interacao fica registrada no historico do cliente, permitindo contexto completo em tempo real.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Conversa sem contexto e frustrante para o cliente. CRM integrado permite atendimento personalizado - qualquer pessoa da equipe sabe o historico completo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              WhatsApp-CRM sync, Contact enrichment, Conversation history, Team inbox, Deal tracking, Activity logging.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Fluxo de Integracao</h4>
+          <div class="flex items-center justify-center gap-3 text-sm py-4 flex-wrap">
+            <div class="bg-green-500/20 border border-green-500/50 rounded-lg px-3 py-2 text-green-400">
+              WhatsApp
+            </div>
+            <span class="text-neutral-500">&lt;-&gt;</span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Make
+            </div>
+            <span class="text-neutral-500">&lt;-&gt;</span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              CRM
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Points -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Dados Sincronizados</h4>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div>
+              <span class="text-neutral-300 font-medium">Do WhatsApp para CRM:</span>
+              <ul class="text-neutral-400 mt-1 space-y-1">
+                <li>- Mensagens recebidas/enviadas</li>
+                <li>- Dados do contato</li>
+                <li>- Timestamps de interacao</li>
+                <li>- Status de leitura</li>
+              </ul>
+            </div>
+            <div>
+              <span class="text-neutral-300 font-medium">Do CRM para WhatsApp:</span>
+              <ul class="text-neutral-400 mt-1 space-y-1">
+                <li>- Dados do cliente para personalizacao</li>
+                <li>- Status do deal/lead</li>
+                <li>- Historico de compras</li>
+                <li>- Tags e segmentos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">2.9 - Fluxos Multi-Plataforma</p>
+        </div>
+        <a href="modulo-2-9.html" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between space-x-3 mt-8">
+      <a href="modulo-2-7.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Modulo 2.7
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 2
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

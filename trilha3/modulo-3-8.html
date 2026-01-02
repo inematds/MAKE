@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3.8 - Escala e Automacao em Massa | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#a855f7'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-purple-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a>
+      <span>/</span>
+      <span class="text-purple-400">Modulo 3.8</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-purple-400 font-bold text-xl">3.8</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium">
+        TRILHA 3 - AVANCADO
+      </span>
+      <span class="text-neutral-500 text-sm">~45 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-purple-400">
+      Escala e Automacao em Massa
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Aprenda a multiplicar sua producao de conteudo e operacoes em 100x. Sistemas que processam
+      milhares de itens automaticamente para crescimento acelerado.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Avancado</span>
+      <span>|</span>
+      <span>Pre-requisitos: Modulo 3.7</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">100x Redes Sociais</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema para multiplicar producao de conteudo para redes sociais. Um input (artigo, video, ideia) gera dezenas de variacoes para multiplas plataformas automaticamente.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Volume e chave para alcance organico. Sistema 100x permite presenca consistente em escala sem aumentar time ou horas de trabalho.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Content multiplication, Template variation, Batch creation, Multi-format output, Content atomization.
+            </p>
+          </div>
+        </div>
+
+        <!-- Multiplication Matrix -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Matriz de Multiplicacao 100x</h4>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-neutral-400 border-b border-dark-600">
+                  <th class="text-left py-2">Input</th>
+                  <th class="text-left py-2">Variacoes</th>
+                  <th class="text-left py-2">Plataformas</th>
+                  <th class="text-left py-2">Total</th>
+                </tr>
+              </thead>
+              <tbody class="text-neutral-300">
+                <tr class="border-b border-dark-600/50">
+                  <td class="py-2">1 Artigo</td>
+                  <td class="py-2">5 angulos</td>
+                  <td class="py-2">4 redes</td>
+                  <td class="py-2 text-purple-400 font-bold">20 posts</td>
+                </tr>
+                <tr class="border-b border-dark-600/50">
+                  <td class="py-2">1 Video</td>
+                  <td class="py-2">10 cortes</td>
+                  <td class="py-2">3 redes</td>
+                  <td class="py-2 text-purple-400 font-bold">30 shorts</td>
+                </tr>
+                <tr>
+                  <td class="py-2">1 Thread</td>
+                  <td class="py-2">7 tweets</td>
+                  <td class="py-2">2 formatos</td>
+                  <td class="py-2 text-purple-400 font-bold">14 posts</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Example Flow -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Fluxo de Multiplicacao</h4>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs overflow-x-auto"><code class="text-neutral-300">1 Artigo Blog
+    |
+    v
+[IA: Extrai 5 ideias principais]
+    |
+    v
+Para cada ideia:
+  - 1 post LinkedIn (formato longo)
+  - 1 post Instagram (formato visual)
+  - 1 thread Twitter (7 tweets)
+  - 1 carrossel (10 slides)
+  - 1 short script (60s)
+    |
+    v
+25 pecas de conteudo
+x 4 variacoes de copy
+= 100 posts</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Posts virais ilimitados</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema que analisa conteudo viral do seu nicho, extrai padroes (hooks, estruturas, formatos) e gera posts com alto potencial de engajamento usando esses padroes.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Viralidade tem padroes identificaveis. Automacao que aplica esses padroes sistematicamente aumenta drasticamente as chances de engajamento.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Viral patterns, Hook formulas, Engagement optimization, Trend analysis, A/B testing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Viral Patterns -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Padroes de Posts Virais</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-blue-400 font-semibold mb-2">Hooks que Funcionam</h5>
+              <ul class="space-y-1 text-neutral-300">
+                <li>- "Ninguem fala sobre isso, mas..."</li>
+                <li>- "Eu gastei R$X para descobrir..."</li>
+                <li>- "Em 2024 eu faturei Y fazendo Z"</li>
+                <li>- "O erro que 99% cometem..."</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-green-400 font-semibold mb-2">Estruturas que Engajam</h5>
+              <ul class="space-y-1 text-neutral-300">
+                <li>- Lista numerada (5 dicas, 7 erros)</li>
+                <li>- Antes/Depois</li>
+                <li>- Controversia controlada</li>
+                <li>- Historia + licao</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Architecture -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Sistema de Posts Virais</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+            <li>Scrape posts virais do nicho (Apify + filtro engajamento)</li>
+            <li>IA analisa e extrai padroes (hooks, estrutura, CTAs)</li>
+            <li>Armazena padroes em banco de templates</li>
+            <li>Gera novos posts aplicando padroes ao seu conteudo</li>
+            <li>Testa variacoes e mede performance</li>
+            <li>Alimenta loop de aprendizado (o que funcionou volta)</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">100X YouTube Growth</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Conjunto de automacoes para crescimento acelerado no YouTube: otimizacao de titulos/thumbnails com IA, geracao de shorts a partir de longos, cross-posting, SEO automatico.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              YouTube e buscador e plataforma. Crescimento la impacta todo o ecossistema digital - site, vendas, autoridade. Automacao acelera o que levaria anos.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              YouTube SEO, Thumbnail automation, Shorts repurposing, Channel optimization, Analytics tracking.
+            </p>
+          </div>
+        </div>
+
+        <!-- Growth Stack -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Stack de Crescimento YouTube</h4>
+          <div class="grid md:grid-cols-3 gap-3 text-sm">
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-blue-400 font-semibold mb-2">Titulos</h5>
+              <ul class="space-y-1 text-neutral-300 text-xs">
+                <li>- IA gera 10 variacoes</li>
+                <li>- Analisa CTR historico</li>
+                <li>- Sugere melhor opcao</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-pink-400 font-semibold mb-2">Thumbnails</h5>
+              <ul class="space-y-1 text-neutral-300 text-xs">
+                <li>- Templates automaticos</li>
+                <li>- Texto dinamico</li>
+                <li>- A/B testing</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-green-400 font-semibold mb-2">Shorts</h5>
+              <ul class="space-y-1 text-neutral-300 text-xs">
+                <li>- Detecta highlights</li>
+                <li>- Corta automatico</li>
+                <li>- Legenda + formato</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Automation Flow -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-2">Fluxo Automatizado</h4>
+          <div class="flex items-center justify-center gap-2 text-xs py-4 flex-wrap">
+            <div class="bg-red-500/20 border border-red-500/50 rounded-lg px-3 py-2 text-red-400">
+              Video Upload
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              Transcreve
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              SEO + Desc
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-pink-500/20 border border-pink-500/50 rounded-lg px-3 py-2 text-pink-400">
+              10 Shorts
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-green-500/20 border border-green-500/50 rounded-lg px-3 py-2 text-green-400">
+              Cross-post
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Raspagem em escala</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistemas de scraping que processam milhares ou milhoes de paginas. Requer infraestrutura especifica: proxies rotativos, rate limiting, armazenamento em escala, filas de processamento.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Dados em escala exigem infraestrutura. Scraping amador falha em volume - bloqueios, timeouts, dados incompletos. Profissional funciona 24/7.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Large-scale scraping, Proxy rotation, Rate limiting, Data storage, Queue management, Distributed processing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Infrastructure -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Infraestrutura para Escala</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-blue-400 font-semibold mb-2">Componentes</h5>
+              <ul class="space-y-1 text-neutral-300">
+                <li>- Apify (orquestracao)</li>
+                <li>- Proxies residenciais</li>
+                <li>- Redis (fila)</li>
+                <li>- PostgreSQL/BigQuery (dados)</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-amber-400 font-semibold mb-2">Boas Praticas</h5>
+              <ul class="space-y-1 text-neutral-300">
+                <li>- Respeite robots.txt</li>
+                <li>- Rate limit adequado</li>
+                <li>- Rotacao de headers</li>
+                <li>- Retry com backoff</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Numbers -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Numeros de Referencia</h4>
+          <div class="grid md:grid-cols-3 gap-4 text-center text-sm">
+            <div>
+              <div class="text-3xl font-bold text-purple-400">10k</div>
+              <div class="text-neutral-400">paginas/hora com Apify</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-blue-400">$50</div>
+              <div class="text-neutral-400">custo medio/milhao paginas</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-green-400">99%</div>
+              <div class="text-neutral-400">success rate com proxies</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Conteudo viral automatico</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Pipeline completo e autonomo: detecta tendencia em tempo real, gera conteudo relevante, posta nas redes, monitora performance, itera automaticamente. Sistema que aprende e melhora.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Trend-jacking automatizado. Captura ondas virais sem monitoramento manual constante. Primeiro a postar sobre tendencia ganha alcance.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Trend detection, Auto-generation, Performance monitoring, Iteration loop, Real-time processing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pipeline -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Pipeline de Conteudo Viral</h4>
+          <pre class="bg-dark-900 rounded-lg p-3 text-xs overflow-x-auto"><code class="text-neutral-300">DETECCAO
+  |-- Google Trends API
+  |-- Twitter Trending
+  |-- Reddit Rising
+  |-- News APIs
+      |
+      v
+FILTRAGEM
+  |-- Relevancia para nicho
+  |-- Potencial viral (score)
+  |-- Janela de oportunidade
+      |
+      v
+GERACAO
+  |-- LLM cria conteudo
+  |-- Aplica templates virais
+  |-- Gera imagens/videos
+      |
+      v
+PUBLICACAO
+  |-- Multi-plataforma
+  |-- Horarios otimizados
+  |-- Hashtags trending
+      |
+      v
+MONITORAMENTO
+  |-- Engajamento real-time
+  |-- Feedback para IA
+  |-- Ajuste de estrategia</code></pre>
+        </div>
+
+        <!-- Tools -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Ferramentas para Deteccao</h4>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div class="flex items-center gap-2 text-neutral-300">
+              <span class="text-purple-400">-</span>
+              <span><strong>Google Trends:</strong> API via SerpAPI</span>
+            </div>
+            <div class="flex items-center gap-2 text-neutral-300">
+              <span class="text-purple-400">-</span>
+              <span><strong>Twitter:</strong> Trending topics API</span>
+            </div>
+            <div class="flex items-center gap-2 text-neutral-300">
+              <span class="text-purple-400">-</span>
+              <span><strong>Reddit:</strong> Rising/hot subreddits</span>
+            </div>
+            <div class="flex items-center gap-2 text-neutral-300">
+              <span class="text-purple-400">-</span>
+              <span><strong>NewsAPI:</strong> Breaking news por nicho</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Social Agency com Metricool</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-purple-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema para gerenciar redes sociais de multiplos clientes. Metricool para scheduling e analytics, Make para automacao de conteudo e fluxos. Modelo de agencia escalavel.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Modelo de agencia escala com automacao. Um sistema bem construido serve dezenas de clientes com esforco marginal adicional.
+            </p>
+          </div>
+          <div>
+            <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Multi-client management, Metricool integration, Agency workflow, White-label, Client reporting.
+            </p>
+          </div>
+        </div>
+
+        <!-- Agency Stack -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Stack de Agencia Social</h4>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-blue-400 font-semibold mb-2">Metricool</h5>
+              <ul class="space-y-1 text-neutral-300">
+                <li>- Scheduling multi-conta</li>
+                <li>- Analytics unificado</li>
+                <li>- Relatorios automaticos</li>
+                <li>- Inbox social</li>
+              </ul>
+            </div>
+            <div class="bg-dark-600/50 rounded-lg p-3">
+              <h5 class="text-purple-400 font-semibold mb-2">Make</h5>
+              <ul class="space-y-1 text-neutral-300">
+                <li>- Geracao de conteudo IA</li>
+                <li>- Fluxos de aprovacao</li>
+                <li>- Integracao com CRM</li>
+                <li>- Automacao de relatorios</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Workflow -->
+        <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Workflow de Agencia</h4>
+          <ol class="space-y-2 text-neutral-300 text-sm list-decimal list-inside">
+            <li>Cliente envia briefing (form/email)</li>
+            <li>Make processa e gera sugestoes de posts com IA</li>
+            <li>Posts vao para fila de aprovacao (Airtable)</li>
+            <li>Cliente aprova via portal ou email</li>
+            <li>Aprovados vao automaticamente para Metricool</li>
+            <li>Metricool posta nos horarios otimizados</li>
+            <li>Performance e consolidada em relatorio semanal</li>
+            <li>Relatorio enviado automaticamente ao cliente</li>
+          </ol>
+        </div>
+
+        <!-- Scaling Tips -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-3">Dicas para Escalar Agencia</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">1.</span>
+              <span><strong>Padronize processos:</strong> Todo cliente segue mesmo fluxo</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">2.</span>
+              <span><strong>Templates por nicho:</strong> Acelera criacao de conteudo</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">3.</span>
+              <span><strong>Self-service:</strong> Cliente aprova sem precisar de call</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">4.</span>
+              <span><strong>Pricing por resultado:</strong> Escala valor, nao horas</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">3.9 - Orquestracao Multi-Agente</p>
+        </div>
+        <a href="modulo-3-9.html" class="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-8">
+      <a href="modulo-3-7.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Modulo 3.7
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 3
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

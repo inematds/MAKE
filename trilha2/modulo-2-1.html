@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.1 - Integracao Avancada com LLMs | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#3b82f6'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-blue-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Modulo 2.1</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-blue-400 font-bold text-xl">2.1</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">
+        TRILHA 2 - TECNICAS
+      </span>
+      <span class="text-neutral-500 text-sm">~40 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-blue-400">
+      Integracao Avancada com LLMs
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Domine as APIs de IA mais poderosas do mercado. Aprenda a usar OpenAI avancado, DeepSeek, OpenRouter,
+      otimizar custos e criar prompts que geram resultados profissionais.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Intermediario</span>
+      <span>|</span>
+      <span>Pre-requisitos: Trilha 1 completa</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">OpenAI API avancado</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Uso avancado da API OpenAI: function calling, JSON mode, vision, embeddings. Recursos alem do chat basico que permitem construir sistemas inteligentes e autonomos.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Recursos avancados desbloqueiam casos de uso complexos. Function calling permite que a IA controle suas automacoes e tome decisoes em tempo real.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Function calling, JSON mode, GPT-4 Vision, Structured output, Tools.
+            </p>
+          </div>
+        </div>
+
+        <!-- Example Box -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Exemplo de Function Calling</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>{
+  "model": "gpt-4",
+  "messages": [...],
+  "functions": [{
+    "name": "buscar_cliente",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "email": {"type": "string"}
+      }
+    }
+  }]
+}</code></pre>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Fluxo de Function Calling</h4>
+          <div class="flex items-center justify-center gap-2 text-sm py-4 flex-wrap">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Usuario pergunta
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              GPT decide funcao
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400">
+              Make executa
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-emerald-500/20 border border-emerald-500/50 rounded-lg px-3 py-2 text-emerald-400">
+              GPT responde
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">Conectando DeepSeek</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              DeepSeek e um LLM chines com excelente custo-beneficio. A API e compativel com OpenAI, tornando a integracao simples e direta no Make.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Ate 27x mais barato que GPT-4 para muitos casos de uso. Otimiza custos drasticamente sem sacrificar qualidade em tarefas comuns.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              DeepSeek R1, API compatibility, Cost optimization, Model comparison.
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Comparativo de Custos (por 1M tokens)</h4>
+          <div class="grid grid-cols-3 gap-4 text-sm">
+            <div class="text-neutral-400">Modelo</div>
+            <div class="text-neutral-400">Input</div>
+            <div class="text-neutral-400">Output</div>
+            <div class="text-white font-medium">GPT-4</div>
+            <div class="text-red-400">$30.00</div>
+            <div class="text-red-400">$60.00</div>
+            <div class="text-white font-medium">DeepSeek</div>
+            <div class="text-emerald-400">$0.14</div>
+            <div class="text-emerald-400">$0.28</div>
+          </div>
+        </div>
+
+        <!-- Tip Box -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Dica de Integracao</h4>
+          <p class="text-neutral-300 text-sm">
+            No Make, use o modulo HTTP para chamar a API DeepSeek. Basta trocar a URL base de api.openai.com para api.deepseek.com e usar sua API key DeepSeek.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">OpenRouter: multiplos modelos</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              OpenRouter e um agregador que da acesso a dezenas de LLMs (GPT, Claude, Llama, Mistral, Gemini) atraves de uma unica API padronizada.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Flexibilidade para escolher o melhor modelo para cada tarefa. Permite fallback automatico se um modelo falhar e billing unificado.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Model routing, API aggregation, Fallback, Model selection, Unified billing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Models Grid -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Modelos Disponiveis via OpenRouter</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+            <div class="bg-emerald-500/10 border border-emerald-500/30 rounded px-3 py-2 text-emerald-400 text-center">GPT-4o</div>
+            <div class="bg-purple-500/10 border border-purple-500/30 rounded px-3 py-2 text-purple-400 text-center">Claude 3.5</div>
+            <div class="bg-blue-500/10 border border-blue-500/30 rounded px-3 py-2 text-blue-400 text-center">Gemini Pro</div>
+            <div class="bg-amber-500/10 border border-amber-500/30 rounded px-3 py-2 text-amber-400 text-center">Llama 3</div>
+            <div class="bg-pink-500/10 border border-pink-500/30 rounded px-3 py-2 text-pink-400 text-center">Mistral</div>
+            <div class="bg-cyan-500/10 border border-cyan-500/30 rounded px-3 py-2 text-cyan-400 text-center">DeepSeek</div>
+            <div class="bg-orange-500/10 border border-orange-500/30 rounded px-3 py-2 text-orange-400 text-center">Qwen</div>
+            <div class="bg-indigo-500/10 border border-indigo-500/30 rounded px-3 py-2 text-indigo-400 text-center">+100 mais</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Comparando custos e performance</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Analise de custo por token, qualidade de resposta e velocidade de cada modelo. Metodologia para escolher o melhor modelo para cada caso de uso especifico.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Usar GPT-4 para tudo e desperdicio de dinheiro. Otimizacao inteligente de modelos pode reduzir custos em ate 90% sem perder qualidade.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Cost per token, Latency, Quality benchmark, Use case matching.
+            </p>
+          </div>
+        </div>
+
+        <!-- Use Case Matching -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Modelo Recomendado por Caso de Uso</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-blue-400">*</span>
+              <span><strong>Classificacao simples:</strong> GPT-3.5 ou DeepSeek (barato e rapido)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-400">*</span>
+              <span><strong>Geracao de texto longo:</strong> Claude 3.5 Sonnet (melhor contexto)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-400">*</span>
+              <span><strong>Raciocinio complexo:</strong> GPT-4o ou Claude 3 Opus</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-400">*</span>
+              <span><strong>Analise de imagens:</strong> GPT-4 Vision ou Claude Vision</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Prompt Engineering</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              A ciencia de criar prompts que geram melhores resultados. Inclui tecnicas como few-shot learning, chain-of-thought e role-playing para maximizar a qualidade das respostas.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              O mesmo modelo com prompts diferentes gera resultados drasticamente diferentes. Prompt engineering e o multiplicador de qualidade mais acessivel.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Few-shot learning, Chain-of-thought, Role prompting, Prompt templates.
+            </p>
+          </div>
+        </div>
+
+        <!-- Technique Examples -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-blue-400 font-semibold mb-3">Few-Shot Learning</h4>
+            <pre class="text-neutral-300 text-xs overflow-x-auto"><code>Classifique o sentimento:
+
+"Adorei o produto!" -> Positivo
+"Pessimo atendimento" -> Negativo
+"Ok, nada demais" -> Neutro
+
+"Superou minhas expectativas!" -> </code></pre>
+          </div>
+          <div class="bg-dark-700/50 rounded-lg p-4">
+            <h4 class="text-purple-400 font-semibold mb-3">Chain-of-Thought</h4>
+            <pre class="text-neutral-300 text-xs overflow-x-auto"><code>Analise passo a passo:
+
+1. Primeiro, identifique o problema
+2. Liste as possiveis causas
+3. Avalie cada causa
+4. Proponha solucao
+
+Problema: [descricao]</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Tom de Voz personalizado</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Configurar a IA para escrever no estilo especifico da sua marca ou persona. Garante consistencia de comunicacao em todas as automacoes que usam IA.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Marcas precisam de voz consistente. IA sem direcao escreve de forma generica e sem personalidade, prejudicando a identidade da marca.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Brand voice, Style guide, Tone consistency, Persona, Writing samples.
+            </p>
+          </div>
+        </div>
+
+        <!-- Example Prompt -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Exemplo de System Prompt com Tom de Voz</h4>
+          <pre class="text-neutral-300 text-sm overflow-x-auto"><code>Voce e o assistente virtual da marca XYZ.
+
+Tom de voz:
+- Informal mas profissional
+- Use "voce" nunca "senhor/senhora"
+- Adicione emojis com moderacao
+- Seja direto, evite rodeios
+- Demonstre entusiasmo genuino
+
+Palavras a evitar: "na verdade", "basicamente"
+Palavras preferidas: "show", "perfeito", "vamos la"</code></pre>
+        </div>
+
+        <!-- Tips -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-3">Dicas para Definir Tom de Voz</h4>
+          <ul class="space-y-2 text-neutral-300 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">1.</span>
+              <span>Forneca 3-5 exemplos de textos no tom desejado</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">2.</span>
+              <span>Liste palavras e expressoes caracteristicas da marca</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">3.</span>
+              <span>Defina o que NUNCA deve ser dito ou feito</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-amber-400">4.</span>
+              <span>Teste com diferentes cenarios e refine o prompt</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">2.2 - Raspagem e Extracao de Dados</p>
+        </div>
+        <a href="modulo-2-2.html" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-start space-x-3 mt-8">
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Voltar para Trilha 2
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>

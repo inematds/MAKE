@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2.6 - Video e Multimidia | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              600: '#374151',
+              700: '#1f2937',
+              800: '#111827',
+              900: '#0d1117'
+            },
+            primary: '#3b82f6'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Light mode overrides */
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
+
+    html:not(.dark) body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    }
+
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="../index.html" class="text-xl font-bold text-red-500 flex items-center gap-2">
+            <span>INEMA.Make</span>
+          </a>
+          <span class="text-neutral-500">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">
+            INEMA.CLUB
+          </a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="../trilha1/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Fundamentos</span>
+          </a>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
+            <span class="font-medium">Tecnicas</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-4 py-2 rounded-lg text-neutral-400 hover:bg-dark-700 transition-colors">
+            <span class="font-medium">Avancado</span>
+          </a>
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+            <span id="theme-icon">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <nav class="flex items-center space-x-2 text-sm text-neutral-500">
+      <a href="../index.html" class="hover:text-blue-400">Curso</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a>
+      <span>/</span>
+      <span class="text-blue-400">Modulo 2.6</span>
+    </nav>
+  </div>
+
+  <!-- Module Header -->
+  <header class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-blue-400 font-bold text-xl">2.6</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">
+        TRILHA 2 - TECNICAS
+      </span>
+      <span class="text-neutral-500 text-sm">~45 min</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-blue-400">
+      Video e Multimidia
+    </h1>
+    <p class="text-lg text-neutral-400 mb-6">
+      Domine a criacao automatizada de videos com IA usando Leonardo, JSON2Videos, legendas automaticas,
+      transcricao, cortes de YouTube e geracao de roteiros. Transforme sua producao audiovisual.
+    </p>
+    <div class="flex items-center gap-4 text-sm text-neutral-500">
+      <span>6 topicos</span>
+      <span>|</span>
+      <span>Nivel: Intermediario</span>
+      <span>|</span>
+      <span>Pre-requisitos: Modulo 2.5</span>
+    </div>
+  </header>
+
+  <!-- Topics Content -->
+  <main class="max-w-4xl mx-auto px-4 pb-16">
+
+    <!-- Topic 1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">1</span>
+          <h2 class="text-xl font-bold text-white">Criando videos com Leonardo</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Leonardo AI oferece geracao de video a partir de prompts de texto. A plataforma integra diretamente com Make para automacao completa, permitindo criar videos curtos com apenas uma descricao textual.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Video e o formato de maior engajamento nas redes sociais. Geracao automatica permite escala impossivel de atingir manualmente, liberando tempo para estrategia e criatividade.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Video generation, AI video, Motion prompts, Duration control, Frame rate, Resolution settings.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Fluxo de Geracao Leonardo</h4>
+          <div class="flex items-center justify-center gap-4 text-sm py-4 flex-wrap">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-4 py-2 text-blue-400">
+              Prompt Texto
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-4 py-2 text-purple-400">
+              Leonardo API
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-4 py-2 text-amber-400">
+              Video MP4
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Box -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Exemplo de Prompt</h4>
+          <code class="text-neutral-300 text-sm bg-dark-700 px-3 py-2 rounded block">
+            "Cinematic view of ocean waves at sunset, slow motion, 4K quality, warm colors"
+          </code>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">2</span>
+          <h2 class="text-xl font-bold text-white">JSON2Videos - Templates dinamicos</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              JSON2Videos e um servico que gera videos a partir de templates pre-definidos e dados JSON. Ideal para criar videos padronizados com dados dinamicos como precos, nomes de produtos ou informacoes de clientes.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Videos de produto, anuncios, recaps e relatorios podem ser gerados automaticamente em escala. Um template bem feito pode produzir milhares de videos unicos.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Video templates, JSON data, Automated video, Rendering API, Scene composition, Dynamic text.
+            </p>
+          </div>
+        </div>
+
+        <!-- Code Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Exemplo de JSON para Video</h4>
+          <pre class="text-neutral-300 text-sm bg-dark-800 p-3 rounded overflow-x-auto"><code>{
+  "template_id": "product-showcase",
+  "data": {
+    "product_name": "Notebook Pro X1",
+    "price": "R$ 4.999,00",
+    "features": ["16GB RAM", "512GB SSD", "15.6 FHD"],
+    "logo_url": "https://example.com/logo.png"
+  },
+  "output": {
+    "format": "mp4",
+    "resolution": "1080p"
+  }
+}</code></pre>
+        </div>
+
+        <!-- Tip Box -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Dica Pro</h4>
+          <p class="text-neutral-300 text-sm">
+            Crie templates para cada tipo de video que voce produz regularmente. O investimento inicial em design se paga rapidamente com a escala da automacao.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">3</span>
+          <h2 class="text-xl font-bold text-white">Legendas automaticas</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Gerar legendas para videos automaticamente usando transcricao por IA. Os resultados sao exportados em formatos padrao como SRT ou VTT, prontos para upload em qualquer plataforma.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              85% dos videos no Facebook sao vistos sem som. Legenda e obrigatorio para alcance maximo. Alem disso, melhora acessibilidade e SEO dos videos.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Auto-captioning, Transcription, SRT format, VTT format, Caption styling, Timing sync.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Pipeline de Legendas</h4>
+          <div class="flex items-center justify-center gap-3 text-sm py-4 flex-wrap">
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg px-3 py-2 text-blue-400">
+              Video/Audio
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-green-500/20 border border-green-500/50 rounded-lg px-3 py-2 text-green-400">
+              Whisper API
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-purple-500/20 border border-purple-500/50 rounded-lg px-3 py-2 text-purple-400">
+              Arquivo SRT
+            </div>
+            <span class="text-neutral-500">-></span>
+            <div class="bg-amber-500/20 border border-amber-500/50 rounded-lg px-3 py-2 text-amber-400">
+              Video Legendado
+            </div>
+          </div>
+        </div>
+
+        <!-- SRT Example -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Formato SRT</h4>
+          <pre class="text-neutral-300 text-sm bg-dark-700 p-3 rounded"><code>1
+00:00:00,000 --> 00:00:03,500
+Bem-vindos ao nosso tutorial
+
+2
+00:00:03,500 --> 00:00:07,200
+Hoje vamos aprender sobre automacao</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">4</span>
+          <h2 class="text-xl font-bold text-white">Transcricao de audio</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Converter audio em texto usando APIs como Whisper da OpenAI. A transcricao serve como base para resumos, busca textual, legendas e analise de conteudo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Audio e video sao impossiveis de buscar sem transcricao. Texto permite todas as automacoes de NLP: resumos, traducao, analise de sentimento, extracao de informacoes.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Whisper API, Speech-to-text, Transcription accuracy, Speaker diarization, Language detection, Timestamps.
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Comparacao de Servicos</h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-dark-800 rounded-lg p-3">
+              <h5 class="text-green-400 font-medium mb-2">Whisper (OpenAI)</h5>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- Alta precisao</li>
+                <li>- Multiplos idiomas</li>
+                <li>- Custo por minuto</li>
+              </ul>
+            </div>
+            <div class="bg-dark-800 rounded-lg p-3">
+              <h5 class="text-purple-400 font-medium mb-2">AssemblyAI</h5>
+              <ul class="text-neutral-300 text-sm space-y-1">
+                <li>- Speaker diarization</li>
+                <li>- Deteccao de topicos</li>
+                <li>- Summarization nativo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Box -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Exemplo Pratico</h4>
+          <p class="text-neutral-300 text-sm">
+            Um podcast de 1 hora pode ser transcrito em minutos, gerando automaticamente: resumo executivo, lista de topicos, citacoes destacadas e posts para redes sociais.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">5</span>
+          <h2 class="text-xl font-bold text-white">Cortes de YouTube</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Sistema que identifica momentos interessantes em videos longos e extrai como shorts ou clips. Pode ser feito manualmente com marcacoes ou automaticamente com IA que detecta highlights.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Shorts e Reels tem alcance organico massivo. Reaproveitar conteudo longo em formato curto e a estrategia mais eficiente de multiplicacao de conteudo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Video clipping, Highlight detection, Repurposing, Shorts format, Vertical video, Engagement peaks.
+            </p>
+          </div>
+        </div>
+
+        <!-- Visual Diagram -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Estrategia de Cortes</h4>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-24 h-8 bg-blue-500/30 rounded flex items-center justify-center text-blue-400 text-xs">Video 30min</div>
+              <span class="text-neutral-500">-></span>
+              <div class="flex gap-2">
+                <div class="w-16 h-8 bg-green-500/30 rounded flex items-center justify-center text-green-400 text-xs">Short 1</div>
+                <div class="w-16 h-8 bg-green-500/30 rounded flex items-center justify-center text-green-400 text-xs">Short 2</div>
+                <div class="w-16 h-8 bg-green-500/30 rounded flex items-center justify-center text-green-400 text-xs">Short 3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tip Box -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 class="text-amber-400 font-semibold mb-2">Melhores Praticas</h4>
+          <ul class="text-neutral-300 text-sm space-y-1">
+            <li>1. Busque momentos de alta energia ou emocao</li>
+            <li>2. Priorize trechos com valor autonomo (facil entender sem contexto)</li>
+            <li>3. Adicione legendas - essencial para formato curto</li>
+            <li>4. Use gancho nos primeiros 3 segundos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6 overflow-hidden">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center">6</span>
+          <h2 class="text-xl font-bold text-white">Roteiros automaticos</h2>
+        </div>
+      </div>
+      <div class="p-6 space-y-6">
+        <div class="bg-dark-700/50 rounded-lg p-4 space-y-4">
+          <div>
+            <span class="text-blue-400 font-semibold">O que e:</span>
+            <p class="text-neutral-300 mt-1">
+              Usar IA para gerar roteiros de video a partir de topicos, briefings ou conteudo existente. Inclui estrutura, ganchos de atencao, pontos principais e CTAs otimizados.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Por que aprender:</span>
+            <p class="text-neutral-300 mt-1">
+              Roteiro e frequentemente o maior gargalo na producao de video. IA pode acelerar ou eliminar completamente essa etapa, permitindo produzir muito mais conteudo.
+            </p>
+          </div>
+          <div>
+            <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
+            <p class="text-neutral-300 mt-1">
+              Script generation, Hook writing, Structure templates, CTA optimization, Tone of voice, Duration targeting.
+            </p>
+          </div>
+        </div>
+
+        <!-- Template Example -->
+        <div class="bg-dark-700/50 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-3">Estrutura de Roteiro</h4>
+          <div class="space-y-3 text-sm">
+            <div class="flex items-start gap-3">
+              <span class="bg-red-500/20 text-red-400 px-2 py-1 rounded text-xs">HOOK</span>
+              <span class="text-neutral-300">Primeiros 3 segundos - captura atencao</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs">INTRO</span>
+              <span class="text-neutral-300">Contexto e promessa do video</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">BODY</span>
+              <span class="text-neutral-300">Conteudo principal em 3-5 pontos</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="bg-purple-500/20 text-purple-400 px-2 py-1 rounded text-xs">CTA</span>
+              <span class="text-neutral-300">Chamada para acao clara</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example Box -->
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 class="text-blue-400 font-semibold mb-2">Prompt para Roteiro</h4>
+          <code class="text-neutral-300 text-sm bg-dark-700 px-3 py-2 rounded block">
+            "Crie um roteiro de 60 segundos sobre [TOPICO]. Inclua: gancho provocativo, 3 pontos principais, CTA para seguir. Tom: conversacional e energico."
+          </code>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Footer -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-lg mb-1">Proximo Modulo</h3>
+          <p class="text-neutral-400">2.7 - Voz e Audio com IA</p>
+        </div>
+        <a href="modulo-2-7.html" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors">
+          Continuar ->
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between space-x-3 mt-8">
+      <a href="modulo-2-5.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        <- Modulo 2.5
+      </a>
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        Voltar para Trilha 2
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 text-sm">
+        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+      </p>
+      <p class="text-neutral-600 text-xs mt-2">
+        Ultima atualizacao: Janeiro 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      const icon = document.getElementById('theme-icon');
+      if (document.documentElement.classList.contains('dark')) {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
+      } else {
+        icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
+      }
+    }
+  </script>
+</body>
+</html>
