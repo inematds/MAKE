@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trilha 2 - Conhecimentos Tecnicos | INEMA.Make</title>
+  <title>Trilha 2: Conhecimentos Tecnicos - INEMA.Make</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -16,13 +16,23 @@
               700: '#1f2937',
               800: '#111827',
               900: '#0d1117'
-            }
+            },
+            primary: '#3b82f6'
           }
         }
       }
     }
   </script>
   <style>
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    html:not(.dark) {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+    }
     html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
     html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
@@ -73,194 +83,263 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="max-w-6xl mx-auto px-4 py-16 text-center">
-    <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium mb-6">
-      TRILHA 2 - INTERMEDIARIO
-    </div>
-    <h1 class="text-4xl md:text-5xl font-bold mb-6">
-      <span class="text-blue-400">Conhecimentos Tecnicos</span>
-    </h1>
-    <p class="text-xl text-neutral-400 max-w-3xl mx-auto mb-8">
-      Nivel intermediario para quem ja domina o basico. Aprenda integracao avancada com LLMs,
-      raspagem de dados, CRM, geracao de imagens e video com IA, WhatsApp avancado e muito mais.
-    </p>
-    <div class="flex items-center justify-center gap-6 text-neutral-500">
-      <span>10 Modulos</span>
-      <span>|</span>
-      <span>60 Topicos</span>
-      <span>|</span>
-      <span>~7 horas</span>
+  <!-- Header -->
+  <header class="py-12 px-4 border-b border-dark-700">
+    <div class="max-w-4xl mx-auto">
+      <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium mb-4">
+        TRILHA 2
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">Conhecimentos Tecnicos</h1>
+      <p class="text-lg text-neutral-400 mb-6">
+        Nivel intermediario para quem ja domina o basico. Aprenda integracao avancada com LLMs, raspagem de dados, CRM, geracao de imagens e video com IA, WhatsApp avancado e muito mais.
+      </p>
+      <div class="flex flex-wrap gap-6">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold">10</span>
+          <span class="text-neutral-400 text-sm">Modulos</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm font-bold">60</span>
+          <span class="text-neutral-400 text-sm">Topicos</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">Intermediario</span>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- Pre-requisites -->
-  <section class="max-w-4xl mx-auto px-4 mb-12">
-    <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
-      <h3 class="text-blue-400 font-bold text-lg mb-2">Pre-requisitos</h3>
-      <p class="text-neutral-300">
-        Conclusao da Trilha 1 (Fundamentos) ou conhecimento equivalente em Make.com, webhooks,
-        Google Workspace, redes sociais e introducao a IA.
-      </p>
+  <!-- Modules -->
+  <main class="max-w-4xl mx-auto px-4 py-8 space-y-8">
+
+    <!-- MODULO 2.1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold text-lg">2.1</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~40 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-blue-400">Integracao Avancada com LLMs</h3>
+        <p class="text-neutral-400 text-sm">OpenAI avancado, DeepSeek, OpenRouter, Prompt Engineering e Tom de Voz.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">🧠 OpenAI API avancado</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Uso avancado da API OpenAI: function calling, JSON mode, vision, embeddings. Recursos alem do chat basico.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Recursos avancados desbloqueiam casos de uso complexos. Function calling permite IA controlar automacoes.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Function calling, JSON mode, GPT-4 Vision, Structured output, Tools.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">🔗 Conectando DeepSeek</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">DeepSeek e um LLM chines com excelente custo-beneficio. API compativel com OpenAI, facil de integrar.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">27x mais barato que GPT-4 para muitos casos. Otimiza custos sem sacrificar qualidade.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">DeepSeek R1, API compatibility, Cost optimization, Model comparison.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">🌐 OpenRouter: multiplos modelos</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">OpenRouter e um agregador que da acesso a dezenas de LLMs (GPT, Claude, Llama, Mistral) atraves de uma unica API.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Flexibilidade para escolher melhor modelo para cada tarefa. Fallback automatico se um falhar.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Model routing, API aggregation, Fallback, Model selection, Unified billing.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">💰 Comparando custos e performance</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Analise de custo por token, qualidade de resposta, velocidade de cada modelo. Escolher o melhor para cada caso de uso.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Usar GPT-4 para tudo e desperdicio. Otimizacao de modelo pode reduzir custos em 90%.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cost per token, Latency, Quality benchmark, Use case matching.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">✍️ Prompt Engineering</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Ciencia de criar prompts que geram melhores resultados. Tecnicas: few-shot, chain-of-thought, role-playing.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mesmo modelo, prompts diferentes = resultados drasticamente diferentes. E multiplicador de qualidade.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Few-shot learning, Chain-of-thought, Role prompting, Prompt templates.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">🎭 Tom de Voz personalizado</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Configurar IA para escrever no estilo especifico da marca ou pessoa. Consistencia de comunicacao automatizada.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Marca precisa de voz consistente. IA sem direcao escreve generico e sem personalidade.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Brand voice, Style guide, Tone consistency, Persona, Writing samples.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-1.html" class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
     </div>
-  </section>
 
-  <!-- Modules Grid -->
-  <main class="max-w-6xl mx-auto px-4 pb-16">
-    <h2 class="text-2xl font-bold mb-8 text-center">Modulos da Trilha</h2>
+    <!-- MODULO 2.2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold text-lg">2.2</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~45 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-blue-400">Raspagem e Extracao de Dados</h3>
+        <p class="text-neutral-400 text-sm">Web Scraping, Apify, raspagem de Instagram, YouTube e blogs.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">🕷️ Introducao ao Web Scraping</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Web scraping e a tecnica de extrair dados de sites automaticamente. Transforma paginas web em dados estruturados.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dados sao o novo petroleo. Scraping permite coletar informacoes que nao tem API.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Scraping, Parsing, Selectors, HTML extraction, Legal considerations.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">🔧 Apify: plataforma de raspagem</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Apify e uma plataforma que oferece scrapers prontos (Actors) para sites populares. Integra diretamente com Make.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Construir scraper do zero e complexo. Apify oferece solucoes prontas e manutencao inclusa.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Apify Actors, Proxy, Datasets, Scheduling, Anti-bot bypass.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">📸 Raspagem de Instagram</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Extrair posts, comentarios, seguidores, hashtags de perfis Instagram. Dados para analise competitiva ou conteudo.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Instagram nao oferece esses dados via API oficial. Scraping e a unica forma de obter.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Profile scraper, Post scraper, Hashtag scraper, Rate limiting.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">📺 Raspagem de YouTube</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Coletar videos, transcricoes, comentarios, metricas de canais YouTube. Base para analise e criacao de conteudo.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">YouTube e a segunda maior ferramenta de busca. Dados de la sao ouro para estrategia.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Video scraper, Transcript extraction, Channel analytics, Comment mining.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">📰 Raspagem de blogs e sites</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Extrair artigos, precos, produtos de sites variados. Cada site pode exigir configuracao especifica.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Monitoramento de concorrencia, agregacao de conteudo, pesquisa de mercado automatizada.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Content extraction, Price monitoring, News aggregation, Custom selectors.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">📊 Estruturando dados extraidos</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Transformar dados brutos de scraping em formato utilizavel. Limpar, normalizar, armazenar adequadamente.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dados brutos sao inuteis. Estruturacao e o que permite analise e acao.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Data cleaning, Normalization, Schema design, JSON transformation.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-2.html" class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
 
-    <div class="grid md:grid-cols-2 gap-6">
+    <!-- MODULO 2.3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold text-lg">2.3</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~40 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2 text-blue-400">CRM e Gestao de Clientes</h3>
+        <p class="text-neutral-400 text-sm">CRM com Airtable e WhatsApp, gestao de leads, pipeline de vendas.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">📇 CRM com Airtable</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Construir um sistema de CRM completo usando Airtable como banco de dados. Views, formularios, automacoes nativas.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">CRM e essencial para vendas. Airtable permite criar um personalizado sem codigo e sem custo alto.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Contact management, Deal pipeline, Lead scoring, Custom fields.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">📱 CRM com WhatsApp</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Integrar comunicacao WhatsApp ao CRM. Registrar conversas, qualificar leads, acompanhar pipeline via chat.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Vendas no Brasil acontecem no WhatsApp. CRM sem WhatsApp e incompleto.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">WhatsApp integration, Conversation logging, Lead qualification, Chat CRM.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">🎯 Gestao de leads</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema para capturar, qualificar e nurturar leads. Automacao de follow-up, scoring, distribuicao.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Leads nao gerenciados sao desperdicados. Automacao garante que nenhum fique esquecido.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Lead capture, Lead scoring, Lead nurturing, Lead distribution, Conversion tracking.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">📈 Pipeline de vendas</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Visualizacao e automacao das etapas do processo de venda. Mover deals automaticamente, notificar responsaveis.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Pipeline claro aumenta previsibilidade. Automacao acelera ciclo de vendas.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Sales stages, Deal progression, Win/loss tracking, Forecast, Bottleneck analysis.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">🔔 Notificacoes automaticas</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Alertas quando eventos importantes acontecem: novo lead, deal parado, cliente inativo. Via email, Slack, WhatsApp.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Informacao atrasada e informacao inutil. Notificacoes garantem acao rapida.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Alert triggers, Notification channels, Escalation rules, SLA monitoring.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">📊 Relatorios e dashboards</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Visualizacoes automaticas de metricas de vendas. Atualizadas em tempo real a partir dos dados do CRM.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Gestao sem dados e achismo. Dashboards permitem decisoes baseadas em evidencia.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">KPIs, Metrics tracking, Data visualization, Real-time updates, Report automation.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-3.html" class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
 
-      <!-- Module 2.1 -->
-      <a href="modulo-2-1.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.1</span>
-          <span class="text-neutral-500 text-sm">~40 min</span>
+    <!-- MODULO 2.4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold text-lg">2.4</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~40 min</span>
         </div>
-        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Integracao Avancada com LLMs</h3>
-        <p class="text-neutral-400 text-sm mb-4">OpenAI avancado, DeepSeek, OpenRouter, Prompt Engineering e Tom de Voz.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">OpenAI API</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">DeepSeek</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Prompts</span>
-        </div>
-      </a>
+        <h3 class="text-2xl font-bold mb-2 text-blue-400">Automacao de Email Avancada</h3>
+        <p class="text-neutral-400 text-sm">Resposta automatica com IA, classificacao, RAG para emails, faturas.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">🤖 Resposta automatica com IA</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema que le emails recebidos, entende o contexto e gera respostas apropriadas usando LLM. Requer ou nao aprovacao humana.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Email consome horas diarias. IA pode responder rotinas, liberando tempo para emails importantes.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Email parsing, Intent detection, Response generation, Human-in-the-loop.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">📁 Classificacao de emails</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Usar IA para categorizar emails automaticamente: urgente, spam, suporte, vendas. Rotear para destino correto.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Inbox zero automatizado. Emails chegam ja organizados e priorizados.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Email classification, Intent detection, Priority scoring, Auto-labeling.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">🧠 RAG para emails</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Retrieval Augmented Generation aplicado a emails. IA busca emails antigos para dar contexto a respostas.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Respostas com contexto historico sao muito melhores. "Como discutimos no email de marco..."</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">RAG, Email embedding, Context retrieval, Conversation history.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">💰 Processamento de faturas</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Extrair dados de faturas recebidas por email: valores, datas, fornecedores. Automatizar registro e pagamento.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Processamento manual de faturas e lento e propenso a erros. Automacao garante precisao.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Invoice parsing, OCR, Data extraction, Accounts payable automation.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">📨 Follow-up automatico</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema que envia follow-ups automaticos quando nao ha resposta. Sequencias configuradas por tipo de email.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">80% das vendas acontecem apos o 5o contato. Follow-up manual e esquecido; automatico e consistente.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Email sequences, Drip campaign, Response tracking, Escalation.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">🔗 Integracao com CRM</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sincronizar emails com registros do CRM. Toda comunicacao fica registrada no historico do cliente.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Contexto completo em um lugar. Qualquer pessoa da equipe pode assumir conversa.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Email-CRM sync, Activity logging, Contact matching, Timeline view.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-4.html" class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
 
-      <!-- Module 2.2 -->
-      <a href="modulo-2-2.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.2</span>
-          <span class="text-neutral-500 text-sm">~45 min</span>
+    <!-- MODULO 2.5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold text-lg">2.5</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~40 min</span>
         </div>
-        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Raspagem e Extracao de Dados</h3>
-        <p class="text-neutral-400 text-sm mb-4">Web Scraping, Apify, raspagem de Instagram, YouTube e blogs.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Scraping</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Apify</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Dados</span>
-        </div>
-      </a>
+        <h3 class="text-2xl font-bold mb-2 text-blue-400">Geracao de Imagens com IA</h3>
+        <p class="text-neutral-400 text-sm">DALL-E 3, Flux via Replicate, LoRA, imagens para redes sociais.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">🎨 DALL-E 3 no Make</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Usar API do DALL-E 3 para gerar imagens a partir de texto. Integra diretamente com cenarios Make.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Imagens customizadas sem designer. Ideal para social media, thumbnails, ilustracoes.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Image generation, Text-to-image, DALL-E API, Image resolution, Style prompts.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">🌊 Flux via Replicate</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Flux e modelo de geracao de imagem com qualidade superior ao DALL-E. Acessivel via Replicate.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Para casos que exigem fotorrealismo ou estilos especificos, Flux supera DALL-E.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Flux model, Replicate API, Model parameters, Quality vs speed.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">🎭 Personalizacao com LoRA</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">LoRA (Low-Rank Adaptation) permite treinar geradores para criar imagens de pessoas, produtos ou estilos especificos.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Imagens genericas nao funcionam para marca. LoRA permite consistencia de personagem/produto.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">LoRA training, Custom model, Character consistency, Style transfer.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">📱 Imagens para redes sociais</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Gerar imagens otimizadas para cada plataforma: Instagram quadrado, Story vertical, capa LinkedIn.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Cada plataforma tem requisitos. Automatizar geracao no formato correto economiza ajustes.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Image sizing, Aspect ratios, Platform requirements, Visual optimization.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">📋 Planilha para geracao em massa</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema onde planilha contem prompts e o cenario gera imagens para todos automaticamente. Produz dezenas por vez.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Conteudo visual em escala. Uma hora de configuracao, semanas de conteudo.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Batch processing, Prompt spreadsheet, Mass generation, Image pipeline.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">💰 Otimizacao de custos</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Estrategias para reduzir gastos com geracao de imagem: resolucao adequada, cache, modelos economicos.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Geracao de imagem e cara. Otimizacao pode reduzir custos em 70% sem perder qualidade.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Resolution optimization, Model selection, Caching, Cost per image.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-5.html" class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
 
-      <!-- Module 2.3 -->
-      <a href="modulo-2-3.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.3</span>
-          <span class="text-neutral-500 text-sm">~40 min</span>
+    <!-- MODULO 2.6 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold text-lg">2.6</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~45 min</span>
         </div>
-        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">CRM e Gestao de Clientes</h3>
-        <p class="text-neutral-400 text-sm mb-4">CRM com Airtable e WhatsApp, gestao de leads, pipeline de vendas.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">CRM</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Leads</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Vendas</span>
-        </div>
-      </a>
+        <h3 class="text-2xl font-bold mb-2 text-blue-400">Video e Multimidia</h3>
+        <p class="text-neutral-400 text-sm">Videos com Leonardo, JSON2Videos, legendas, transcricao, cortes YouTube.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">🎬 Criando videos com Leonardo</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Leonardo AI oferece geracao de video a partir de prompts. Integra com Make para automacao.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Video e o formato de maior engajamento. Geracao automatica permite escala impossivel manualmente.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Video generation, AI video, Motion prompts, Duration control.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">🎞️ JSON2Videos</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Servico que gera videos a partir de templates e dados JSON. Ideal para videos padronizados com dados dinamicos.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Videos de produto, anuncios, recaps podem ser gerados automaticamente em escala.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Video templates, JSON data, Automated video, Rendering API.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">📝 Legendas automaticas</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Gerar legendas para videos automaticamente usando transcricao. Formato SRT/VTT para plataformas.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">85% dos videos no Facebook sao vistos sem som. Legenda e obrigatorio para alcance.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Auto-captioning, Transcription, SRT format, Caption styling.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">🎤 Transcricao de audio</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Converter audio em texto usando APIs como Whisper. Base para resumos, busca, legendas.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Audio e busca impossivel sem transcricao. Texto permite todas as automacoes de NLP.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Whisper API, Speech-to-text, Transcription accuracy, Speaker diarization.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">✂️ Cortes de YouTube</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema que identifica momentos interessantes em videos longos e extrai como shorts. Manual ou com IA.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Shorts/Reels tem alcance organico massivo. Reaproveitar conteudo longo e estrategia eficiente.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Video clipping, Highlight detection, Repurposing, Shorts format.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">📜 Roteiros automaticos</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Usar IA para gerar roteiros de video a partir de topicos ou conteudo existente. Estrutura, ganchos, CTAs.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Roteiro e o maior gargalo de producao de video. IA acelera ou elimina essa etapa.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Script generation, Hook writing, Structure templates, CTA optimization.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-6.html" class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
 
-      <!-- Module 2.4 -->
-      <a href="modulo-2-4.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.4</span>
-          <span class="text-neutral-500 text-sm">~40 min</span>
+    <!-- MODULO 2.7 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold text-lg">2.7</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~40 min</span>
         </div>
-        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Automacao de Email Avancada</h3>
-        <p class="text-neutral-400 text-sm mb-4">Resposta automatica com IA, classificacao, RAG para emails, faturas.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Email IA</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">RAG</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Follow-up</span>
-        </div>
-      </a>
+        <h3 class="text-2xl font-bold mb-2 text-blue-400">Voz e Audio com IA</h3>
+        <p class="text-neutral-400 text-sm">Eleven Labs, clonagem de voz, TTS avancado, dublagem automatica.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">🔊 Introducao ao Eleven Labs</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Eleven Labs e a principal plataforma de sintese de voz com IA. Vozes naturais, multilingues, customizaveis.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Voz sintetica de qualidade permite podcasts, audiobooks, assistentes sem locutor humano.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Text-to-speech, Voice synthesis, Voice settings, Eleven Labs API.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">🎙️ Clonagem de voz</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Criar uma voz sintetica baseada em amostras de uma voz real. A IA replica tom, cadencia, sotaque.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sua voz em escala. Gravar uma vez, usar infinitamente para qualquer conteudo.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Voice cloning, Sample requirements, Voice training, Instant clone vs Professional.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">🗣️ Text-to-Speech avancado</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Controlar parametros avancados de sintese: velocidade, estabilidade, clareza, emocao. Resultado mais natural.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">TTS basico soa robotico. Parametros avancados produzem audio indistinguivel de humano.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Voice parameters, Stability, Similarity, Style, SSML tags.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">📱 Notas de voz para texto</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema que recebe audio (WhatsApp, Telegram), transcreve e processa. Responde por texto ou executa acoes.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Usuarios preferem enviar audio. Processar voz automaticamente atende essa preferencia.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Voice message processing, Audio download, Transcription, Action extraction.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">🌍 Dublagem automatica</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Traduzir e dublar conteudo para outros idiomas automaticamente. Preserva tom e sincronizacao.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Alcance global sem custo de locucao. Um video pode atingir 10 mercados.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">AI dubbing, Voice preservation, Lip sync, Multi-language content.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">🎧 Podcast enhancement</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Melhorar qualidade de audio usando IA: remover ruido, equalizar, normalizar volume. Adobe Podcast Enhance e gratuito.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Audio ruim afasta ouvintes. Enhancement transforma gravacao amadora em profissional.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Noise removal, Audio enhancement, Normalization, Adobe Podcast.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-7.html" class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
 
-      <!-- Module 2.5 -->
-      <a href="modulo-2-5.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.5</span>
-          <span class="text-neutral-500 text-sm">~40 min</span>
+    <!-- MODULO 2.8 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold text-lg">2.8</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~45 min</span>
         </div>
-        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Geracao de Imagens com IA</h3>
-        <p class="text-neutral-400 text-sm mb-4">DALL-E 3, Flux via Replicate, LoRA, imagens para redes sociais.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">DALL-E</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Flux</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">LoRA</span>
-        </div>
-      </a>
+        <h3 class="text-2xl font-bold mb-2 text-blue-400">WhatsApp Avancado</h3>
+        <p class="text-neutral-400 text-sm">WhatsApp Business API, chatbot com IA, agendamento, atendimento automatizado.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">📲 Configurando WhatsApp Business</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Setup completo de WhatsApp Business API: escolha de provedor, configuracao de numero, integracao com Make.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">WhatsApp e o canal dominante no Brasil. Configuracao correta evita bloqueios e problemas.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Business API, Phone number, Provider setup, Verification, Message templates.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">🤖 Chatbot com IA</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Bot que entende linguagem natural e responde contextualmente usando LLM. Vai alem de menus e palavras-chave.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Usuarios esperam respostas inteligentes. Bot baseado em regras frustra; IA encanta.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">NLU chatbot, Context management, Conversation flow, Fallback handling.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">📅 Agendamento por WhatsApp</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema onde cliente agenda servicos conversando com bot no WhatsApp. Integra com Google Calendar ou outro.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Agendamento por chat e preferencia do usuario. Elimina telefone e reduz no-show.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Booking bot, Calendar integration, Availability check, Confirmation messages.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">💼 Atendimento automatizado</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Bot que resolve duvidas frequentes, qualifica leads, encaminha para humano quando necessario. 24/7.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Atendimento humano nao escala. Bot resolve 80% das questoes, humanos focam em 20% complexas.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">FAQ bot, Lead qualification, Human handoff, Service hours.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">👥 Grupos e broadcast</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Automacoes para gerenciar grupos e listas de transmissao. Enviar mensagens em massa de forma segmentada.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Grupos sao comunidades; broadcast e comunicacao direta. Ambos essenciais para engajamento.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Group management, Broadcast list, Message templates, Opt-in/opt-out.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">🔄 Integracao com CRM</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sincronizar todas as conversas WhatsApp com CRM. Historico completo, contexto em tempo real.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Conversa sem contexto e frustrante. CRM integrado permite atendimento personalizado.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">WhatsApp-CRM sync, Contact enrichment, Conversation history, Team inbox.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-8.html" class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
 
-      <!-- Module 2.6 -->
-      <a href="modulo-2-6.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.6</span>
-          <span class="text-neutral-500 text-sm">~45 min</span>
+    <!-- MODULO 2.9 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold text-lg">2.9</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~40 min</span>
         </div>
-        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Video e Multimidia</h3>
-        <p class="text-neutral-400 text-sm mb-4">Videos com Leonardo, JSON2Videos, legendas, transcricao, cortes YouTube.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Video IA</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Legendas</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Shorts</span>
-        </div>
-      </a>
+        <h3 class="text-2xl font-bold mb-2 text-blue-400">Fluxos Multi-Plataforma</h3>
+        <p class="text-neutral-400 text-sm">Instagram para YouTube, carrossel do YouTube, repostagem inteligente.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">📸 Instagram para YouTube</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema que reposta conteudo do Instagram no YouTube. Adapta formato, descricao, hashtags para cada plataforma.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Maximiza alcance do conteudo. Mesmo esforco de criacao, multiplos canais de distribuicao.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cross-posting, Content adaptation, Platform optimization, Aspect ratio conversion.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">📺 YouTube para LinkedIn</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Extrair trechos ou resumos de videos YouTube e postar no LinkedIn. Adapta linguagem para contexto profissional.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">LinkedIn e B2B. Reaproveitar conteudo YouTube para audiencia profissional expande alcance.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Content repurposing, Professional tone, LinkedIn video, Article extraction.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">🎠 Carrossel do YouTube</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Transformar video YouTube em carrossel Instagram. Extrai frames, cria slides com pontos principais.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Carrossel tem alto engajamento no Instagram. Converter video em carrossel multiplica conteudo.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Frame extraction, Slide generation, Carousel format, Key points summary.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">🔁 Repostagem inteligente</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema que decide quando e onde repostar baseado em performance. Evita fadiga de audiencia, maximiza alcance.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Repostar sem estrategia irrita. Repostagem inteligente aumenta alcance sem spam.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Smart reposting, Performance-based scheduling, Audience fatigue, Evergreen content.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">✅ Postagem com aprovacao</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Workflow onde posts gerados automaticamente passam por aprovacao humana antes de publicar. Controle de qualidade.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automacao total pode errar. Aprovacao humana e rede de seguranca para conteudo sensivel.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Approval workflow, Review queue, Status tracking, Publish on approval.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">📆 Calendario de conteudo</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Sistema centralizado que gerencia agenda de publicacoes em todas as plataformas. Visao unificada.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Consistencia exige planejamento. Calendario permite estrategia de longo prazo.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Content calendar, Editorial planning, Multi-platform schedule, Batch creation.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-9.html" class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
+    </div>
 
-      <!-- Module 2.7 -->
-      <a href="modulo-2-7.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.7</span>
-          <span class="text-neutral-500 text-sm">~40 min</span>
+    <!-- MODULO 2.10 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-blue-400 font-bold text-lg">2.10</span>
+          <span class="text-xs text-neutral-500 bg-dark-700 px-2 py-1 rounded">~50 min</span>
         </div>
-        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Voz e Audio com IA</h3>
-        <p class="text-neutral-400 text-sm mb-4">Eleven Labs, clonagem de voz, TTS avancado, dublagem automatica.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">ElevenLabs</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">TTS</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Clonagem</span>
-        </div>
-      </a>
-
-      <!-- Module 2.8 -->
-      <a href="modulo-2-8.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.8</span>
-          <span class="text-neutral-500 text-sm">~45 min</span>
-        </div>
-        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">WhatsApp Avancado</h3>
-        <p class="text-neutral-400 text-sm mb-4">WhatsApp Business API, chatbot com IA, agendamento, atendimento automatizado.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">WhatsApp</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Chatbot</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">CRM</span>
-        </div>
-      </a>
-
-      <!-- Module 2.9 -->
-      <a href="modulo-2-9.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.9</span>
-          <span class="text-neutral-500 text-sm">~40 min</span>
-        </div>
-        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Fluxos Multi-Plataforma</h3>
-        <p class="text-neutral-400 text-sm mb-4">Instagram para YouTube, carrossel do YouTube, repostagem inteligente.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Cross-post</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Carrossel</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Calendario</span>
-        </div>
-      </a>
-
-      <!-- Module 2.10 -->
-      <a href="modulo-2-10.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/50 transition-all group">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center">2.10</span>
-          <span class="text-neutral-500 text-sm">~50 min</span>
-        </div>
-        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">Projeto Integrador Tecnico</h3>
-        <p class="text-neutral-400 text-sm mb-4">Escopo tecnico, arquitetura, multiplas APIs, error handling, deploy.</p>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Projeto</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Arquitetura</span>
-          <span class="px-2 py-1 bg-dark-700 rounded text-xs text-neutral-400">Deploy</span>
-        </div>
-      </a>
-
+        <h3 class="text-2xl font-bold mb-2 text-blue-400">Projeto Integrador Tecnico</h3>
+        <p class="text-neutral-400 text-sm">Escopo tecnico, arquitetura, multiplas APIs, error handling, deploy.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="font-medium">📐 Definindo escopo tecnico</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Especificar requisitos tecnicos do projeto: APIs necessarias, volume de dados, performance esperada.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Escopo claro evita scope creep. Requisitos definidos permitem estimativa e planejamento.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Technical requirements, API dependencies, Data volume, Performance targets.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="font-medium">🏗️ Arquitetura do sistema</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Desenhar como os diferentes cenarios e componentes se conectam. Fluxo de dados, dependencias, pontos de falha.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sistemas complexos precisam de arquitetura. Sem ela, manutencao vira pesadelo.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">System architecture, Data flow, Component diagram, Dependency mapping.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="font-medium">🔌 Integrando multiplas APIs</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Conectar diversos servicos em um fluxo coeso. Gerenciar autenticacao, formatos de dados, rate limits.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sistemas reais usam multiplas APIs. Integracao correta e diferencial profissional.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">API orchestration, Data transformation, Authentication management, Error propagation.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="font-medium">⚠️ Error handling avancado</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Implementar tratamento robusto de erros: retry, fallback, notificacoes, logging. Sistema resiliente.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Erros acontecem. Sistema sem tratamento para com primeiro problema; sistema robusto se recupera.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Error handlers, Retry logic, Circuit breaker, Fallback scenarios, Error logging.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="font-medium">⚡ Otimizacao de performance</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Identificar e resolver gargalos: paralelizacao, cache, reducao de operacoes desnecessarias.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Performance ruim custa caro (operacoes) e frustra usuarios. Otimizacao e economia e qualidade.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Parallel execution, Caching, Operation reduction, Batch processing, Profiling.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center gap-4 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="font-medium">🚀 Deploy e monitoramento</span></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-10"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Colocar sistema em producao com monitoramento adequado. Alertas, dashboards, backup de configuracoes.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sistema em producao exige observabilidade. Sem monitoramento, problemas sao descobertos por usuarios.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Production deployment, Monitoring setup, Alerting rules, Configuration backup.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-2-10.html" class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors text-sm font-medium">Ver Completo</a>
+      </div>
     </div>
 
     <!-- Next Track -->
@@ -293,6 +372,11 @@
   </footer>
 
   <script>
+    function toggleTopic(button) {
+      const explanation = button.nextElementSibling;
+      explanation.classList.toggle('active');
+    }
+
     function toggleTheme() {
       document.documentElement.classList.toggle('dark');
       const icon = document.getElementById('theme-icon');

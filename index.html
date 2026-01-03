@@ -24,6 +24,74 @@
     }
   </script>
   <style>
+    /* Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); }
+    }
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .animate-gradient {
+      background-size: 200% 200%;
+      animation: gradient-shift 3s ease infinite;
+    }
+    .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+    .animation-delay-200 { animation-delay: 0.2s; }
+    .animation-delay-400 { animation-delay: 0.4s; }
+    .animation-delay-600 { animation-delay: 0.6s; }
+
+    /* Gradient backgrounds */
+    .gradient-emerald { background: linear-gradient(135deg, #10b981, #059669); }
+    .gradient-blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+    .gradient-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+    .gradient-hero { background: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #8b5cf6 100%); }
+
+    /* Glass effect */
+    .glass {
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Card hover effects */
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Progress bar */
+    .progress-step {
+      position: relative;
+    }
+    .progress-step::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, currentColor, transparent);
+      transform: translateY(-50%);
+    }
+    .progress-step:last-child::after {
+      display: none;
+    }
+
     /* Light mode overrides */
     html:not(.dark) {
       --bg-primary: #ffffff;
@@ -46,12 +114,16 @@
     html:not(.dark) .text-neutral-500 { color: #9ca3af; }
     html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
     html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .glass {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
   </style>
 </head>
 <body class="bg-dark-900 text-white min-h-screen">
 
   <!-- Navigation -->
-  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+  <nav class="bg-dark-800/80 backdrop-blur-md border-b border-dark-600 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-4">
@@ -86,149 +158,564 @@
   </nav>
 
   <!-- Hero Section -->
-  <header class="py-16 px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      <div class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
-        Curso Completo de Automacao
-      </div>
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">
-        Automacao com <span class="text-emerald-400">Make</span> e <span class="text-purple-400">IA</span>
-      </h1>
-      <p class="text-xl text-neutral-400 mb-8 max-w-2xl mx-auto">
-        Domine automacao no-code desde o basico ate sistemas avancados com agentes de IA.
-        180 topicos em 3 trilhas progressivas.
-      </p>
+  <header class="relative py-20 px-4 overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl"></div>
+      <div class="absolute top-40 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 left-1/3 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+    </div>
 
-      <!-- Stats -->
-      <div class="flex flex-wrap justify-center gap-8 mt-12">
-        <div class="text-center">
-          <div class="text-3xl font-bold text-emerald-400">3</div>
-          <div class="text-sm text-neutral-500">Trilhas</div>
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/20 via-blue-500/20 to-purple-500/20 border border-emerald-500/30 text-emerald-400 text-sm font-medium mb-8 animate-fade-in-up">
+          Curso Completo de Automacao No-Code
         </div>
-        <div class="text-center">
-          <div class="text-3xl font-bold text-blue-400">30</div>
-          <div class="text-sm text-neutral-500">Modulos</div>
+
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up animation-delay-200">
+          Domine <span class="bg-gradient-to-r from-emerald-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient">Automacao</span>
+          <br>com <span class="text-emerald-400">Make</span> e <span class="text-purple-400">IA</span>
+        </h1>
+
+        <p class="text-xl md:text-2xl text-neutral-400 mb-10 max-w-3xl mx-auto animate-fade-in-up animation-delay-400">
+          Do zero absoluto ate sistemas complexos com agentes de IA.
+          <span class="text-white font-medium">180 topicos praticos</span> em 3 trilhas progressivas.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4 animate-fade-in-up animation-delay-600">
+          <a href="trilha1/index.html" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all hover:scale-105 animate-pulse-glow">
+            Comecar Agora - Gratis
+          </a>
+          <a href="#trilhas" class="px-8 py-4 bg-dark-700 hover:bg-dark-600 text-white font-medium rounded-xl border border-dark-600 transition-all hover:scale-105">
+            Ver Conteudo
+          </a>
         </div>
-        <div class="text-center">
-          <div class="text-3xl font-bold text-purple-400">180</div>
-          <div class="text-sm text-neutral-500">Topicos</div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
+        <div class="glass rounded-2xl p-6 text-center card-hover">
+          <div class="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">3</div>
+          <div class="text-neutral-400 mt-2">Trilhas de Aprendizado</div>
+          <div class="text-xs text-neutral-500 mt-1">Progressao estruturada</div>
         </div>
-        <div class="text-center">
-          <div class="text-3xl font-bold text-amber-400">100+</div>
-          <div class="text-sm text-neutral-500">Blueprints</div>
+        <div class="glass rounded-2xl p-6 text-center card-hover">
+          <div class="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">30</div>
+          <div class="text-neutral-400 mt-2">Modulos Completos</div>
+          <div class="text-xs text-neutral-500 mt-1">Teoria + pratica</div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center card-hover">
+          <div class="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">180</div>
+          <div class="text-neutral-400 mt-2">Topicos Detalhados</div>
+          <div class="text-xs text-neutral-500 mt-1">Expandiveis e interativos</div>
+        </div>
+        <div class="glass rounded-2xl p-6 text-center card-hover">
+          <div class="text-4xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">100+</div>
+          <div class="text-neutral-400 mt-2">Blueprints Prontos</div>
+          <div class="text-xs text-neutral-500 mt-1">Copie e use</div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Trilhas Section -->
-  <main class="max-w-6xl mx-auto px-4 pb-16">
-    <h2 class="text-2xl font-bold mb-8 text-center">Escolha sua Trilha</h2>
+  <!-- Learning Path Section -->
+  <section class="py-20 px-4 bg-dark-800/50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Sua Jornada de Aprendizado</h2>
+        <p class="text-neutral-400 text-lg max-w-2xl mx-auto">
+          Uma progressao clara do basico ao avancado. Cada trilha constroi sobre a anterior.
+        </p>
+      </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <!-- Trilha 1: Fundamentos -->
-      <div class="bg-dark-800 rounded-xl border border-dark-600 overflow-hidden hover:border-emerald-500/50 transition-colors">
-        <div class="p-6 border-b border-dark-600">
-          <div class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium mb-4">
-            TRILHA 1
+      <!-- Progress Timeline -->
+      <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0 mb-16">
+        <div class="flex flex-col items-center progress-step text-emerald-400 md:pr-20">
+          <div class="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center mb-4">
+            <span class="text-2xl font-bold">1</span>
           </div>
-          <h3 class="text-xl font-bold text-emerald-400 mb-2">Fundamentos</h3>
-          <p class="text-neutral-400 text-sm">
-            Para quem esta comecando do zero. Aprenda os conceitos basicos de automacao com Make.com.
-          </p>
+          <span class="font-medium">Fundamentos</span>
+          <span class="text-xs text-neutral-500">Iniciante</span>
         </div>
-        <div class="p-6 space-y-4">
-          <div class="flex justify-between text-sm">
-            <span class="text-neutral-500">Modulos</span>
-            <span class="text-emerald-400 font-medium">10</span>
+        <div class="flex flex-col items-center progress-step text-blue-400 md:px-20">
+          <div class="w-16 h-16 rounded-full bg-blue-500/20 border-2 border-blue-500 flex items-center justify-center mb-4">
+            <span class="text-2xl font-bold">2</span>
           </div>
-          <div class="flex justify-between text-sm">
-            <span class="text-neutral-500">Topicos</span>
-            <span class="text-emerald-400 font-medium">60</span>
+          <span class="font-medium">Tecnicas</span>
+          <span class="text-xs text-neutral-500">Intermediario</span>
+        </div>
+        <div class="flex flex-col items-center text-purple-400 md:pl-20">
+          <div class="w-16 h-16 rounded-full bg-purple-500/20 border-2 border-purple-500 flex items-center justify-center mb-4">
+            <span class="text-2xl font-bold">3</span>
           </div>
-          <div class="flex justify-between text-sm">
-            <span class="text-neutral-500">Nivel</span>
-            <span class="text-emerald-400 font-medium">Iniciante</span>
-          </div>
-          <a href="trilha1/index.html" class="block w-full mt-4 px-4 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg text-center transition-colors">
-            Comecar Trilha 1
-          </a>
+          <span class="font-medium">Avancado</span>
+          <span class="text-xs text-neutral-500">Profissional</span>
         </div>
       </div>
 
-      <!-- Trilha 2: Tecnicas -->
-      <div class="bg-dark-800 rounded-xl border border-dark-600 overflow-hidden hover:border-blue-500/50 transition-colors">
-        <div class="p-6 border-b border-dark-600">
-          <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium mb-4">
-            TRILHA 2
+      <!-- Features Grid -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass rounded-xl p-6 card-hover">
+          <div class="w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
           </div>
-          <h3 class="text-xl font-bold text-blue-400 mb-2">Conhecimentos Tecnicos</h3>
-          <p class="text-neutral-400 text-sm">
-            Nivel intermediario para quem ja domina o basico. Integracoes avancadas e IA.
-          </p>
+          <h3 class="text-lg font-bold mb-2">Aprendizado Pratico</h3>
+          <p class="text-neutral-400 text-sm">Cada topico tem explicacao clara do "O que e", "Por que aprender" e "Conceitos-chave". Sem enrolacao.</p>
         </div>
-        <div class="p-6 space-y-4">
-          <div class="flex justify-between text-sm">
-            <span class="text-neutral-500">Modulos</span>
-            <span class="text-blue-400 font-medium">10</span>
+        <div class="glass rounded-xl p-6 card-hover">
+          <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+            </svg>
           </div>
-          <div class="flex justify-between text-sm">
-            <span class="text-neutral-500">Topicos</span>
-            <span class="text-blue-400 font-medium">60</span>
-          </div>
-          <div class="flex justify-between text-sm">
-            <span class="text-neutral-500">Nivel</span>
-            <span class="text-blue-400 font-medium">Intermediario</span>
-          </div>
-          <a href="trilha2/index.html" class="block w-full mt-4 px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg text-center transition-colors">
-            Comecar Trilha 2
-          </a>
+          <h3 class="text-lg font-bold mb-2">Blueprints Prontos</h3>
+          <p class="text-neutral-400 text-sm">Mais de 100 automacoes documentadas do grupo Telegram. Copie, adapte e use no seu negocio.</p>
         </div>
-      </div>
-
-      <!-- Trilha 3: Avancado -->
-      <div class="bg-dark-800 rounded-xl border border-dark-600 overflow-hidden hover:border-purple-500/50 transition-colors">
-        <div class="p-6 border-b border-dark-600">
-          <div class="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium mb-4">
-            TRILHA 3
+        <div class="glass rounded-xl p-6 card-hover">
+          <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
           </div>
-          <h3 class="text-xl font-bold text-purple-400 mb-2">Sistemas Avancados</h3>
-          <p class="text-neutral-400 text-sm">
-            Para profissionais e criacao de produtos. Agentes de IA, RAG, SaaS.
-          </p>
-        </div>
-        <div class="p-6 space-y-4">
-          <div class="flex justify-between text-sm">
-            <span class="text-neutral-500">Modulos</span>
-            <span class="text-purple-400 font-medium">10</span>
-          </div>
-          <div class="flex justify-between text-sm">
-            <span class="text-neutral-500">Topicos</span>
-            <span class="text-purple-400 font-medium">60</span>
-          </div>
-          <div class="flex justify-between text-sm">
-            <span class="text-neutral-500">Nivel</span>
-            <span class="text-purple-400 font-medium">Avancado</span>
-          </div>
-          <a href="trilha3/index.html" class="block w-full mt-4 px-4 py-3 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg text-center transition-colors">
-            Comecar Trilha 3
-          </a>
+          <h3 class="text-lg font-bold mb-2">IA Integrada</h3>
+          <p class="text-neutral-400 text-sm">Aprenda a criar agentes de IA, RAG, e sistemas inteligentes que automatizam decisoes complexas.</p>
         </div>
       </div>
-
     </div>
-  </main>
+  </section>
+
+  <!-- Trilhas Section -->
+  <section id="trilhas" class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Escolha sua Trilha</h2>
+        <p class="text-neutral-400 text-lg max-w-2xl mx-auto">
+          Cada trilha foi desenhada para um nivel especifico. Comece do seu ponto atual.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Trilha 1: Fundamentos -->
+        <div class="bg-dark-800 rounded-2xl border border-dark-600 overflow-hidden card-hover hover:border-emerald-500/50 group">
+          <div class="h-2 gradient-emerald"></div>
+          <div class="p-8">
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium mb-4">
+              TRILHA 1 - INICIANTE
+            </div>
+            <h3 class="text-2xl font-bold text-emerald-400 mb-3">Fundamentos</h3>
+            <p class="text-neutral-400 mb-6">
+              Para quem esta comecando do zero absoluto. Construa uma base solida em automacao no-code.
+            </p>
+
+            <div class="space-y-3 mb-6">
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">Interface e conceitos basicos do Make</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">Primeiras automacoes funcionais</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">Manipulacao de dados com JSON</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">Tratamento de erros e boas praticas</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-t border-dark-600 mb-6">
+              <div class="text-center">
+                <div class="text-xl font-bold text-emerald-400">10</div>
+                <div class="text-xs text-neutral-500">Modulos</div>
+              </div>
+              <div class="text-center">
+                <div class="text-xl font-bold text-emerald-400">60</div>
+                <div class="text-xs text-neutral-500">Topicos</div>
+              </div>
+              <div class="text-center">
+                <div class="text-xl font-bold text-emerald-400">30+</div>
+                <div class="text-xs text-neutral-500">Blueprints</div>
+              </div>
+            </div>
+
+            <a href="trilha1/index.html" class="block w-full px-6 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-center transition-all group-hover:scale-105">
+              Comecar Trilha 1
+            </a>
+          </div>
+        </div>
+
+        <!-- Trilha 2: Tecnicas -->
+        <div class="bg-dark-800 rounded-2xl border border-dark-600 overflow-hidden card-hover hover:border-blue-500/50 group">
+          <div class="h-2 gradient-blue"></div>
+          <div class="p-8">
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium mb-4">
+              TRILHA 2 - INTERMEDIARIO
+            </div>
+            <h3 class="text-2xl font-bold text-blue-400 mb-3">Conhecimentos Tecnicos</h3>
+            <p class="text-neutral-400 mb-6">
+              Para quem ja domina o basico. Aprenda integracoes avancadas e comece com IA.
+            </p>
+
+            <div class="space-y-3 mb-6">
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">APIs REST e Webhooks avancados</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">Introducao a IA generativa (GPT, Claude)</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">Bancos de dados e armazenamento</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">Automacoes empresariais reais</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-t border-dark-600 mb-6">
+              <div class="text-center">
+                <div class="text-xl font-bold text-blue-400">10</div>
+                <div class="text-xs text-neutral-500">Modulos</div>
+              </div>
+              <div class="text-center">
+                <div class="text-xl font-bold text-blue-400">60</div>
+                <div class="text-xs text-neutral-500">Topicos</div>
+              </div>
+              <div class="text-center">
+                <div class="text-xl font-bold text-blue-400">40+</div>
+                <div class="text-xs text-neutral-500">Blueprints</div>
+              </div>
+            </div>
+
+            <a href="trilha2/index.html" class="block w-full px-6 py-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-xl text-center transition-all group-hover:scale-105">
+              Comecar Trilha 2
+            </a>
+          </div>
+        </div>
+
+        <!-- Trilha 3: Avancado -->
+        <div class="bg-dark-800 rounded-2xl border border-dark-600 overflow-hidden card-hover hover:border-purple-500/50 group">
+          <div class="h-2 gradient-purple"></div>
+          <div class="p-8">
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-xs font-medium mb-4">
+              TRILHA 3 - AVANCADO
+            </div>
+            <h3 class="text-2xl font-bold text-purple-400 mb-3">Sistemas Avancados</h3>
+            <p class="text-neutral-400 mb-6">
+              Para profissionais. Crie produtos, agentes de IA e sistemas que geram receita.
+            </p>
+
+            <div class="space-y-3 mb-6">
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-purple-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">Agentes de IA autonomos</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-purple-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">RAG e bases de conhecimento</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-purple-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">Criacao de SaaS e produtos</span>
+              </div>
+              <div class="flex items-center gap-3 text-sm">
+                <svg class="w-5 h-5 text-purple-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-neutral-300">Monetizacao e escalabilidade</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between py-4 border-t border-dark-600 mb-6">
+              <div class="text-center">
+                <div class="text-xl font-bold text-purple-400">10</div>
+                <div class="text-xs text-neutral-500">Modulos</div>
+              </div>
+              <div class="text-center">
+                <div class="text-xl font-bold text-purple-400">60</div>
+                <div class="text-xs text-neutral-500">Topicos</div>
+              </div>
+              <div class="text-center">
+                <div class="text-xl font-bold text-purple-400">30+</div>
+                <div class="text-xs text-neutral-500">Blueprints</div>
+              </div>
+            </div>
+
+            <a href="trilha3/index.html" class="block w-full px-6 py-4 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-xl text-center transition-all group-hover:scale-105">
+              Comecar Trilha 3
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- What You'll Learn Section -->
+  <section class="py-20 px-4 bg-dark-800/50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">O Que Voce Vai Aprender</h2>
+        <p class="text-neutral-400 text-lg max-w-2xl mx-auto">
+          Conteudo pratico e aplicavel imediatamente no seu trabalho.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-dark-800 rounded-xl p-6 border border-dark-600 card-hover">
+          <div class="text-3xl mb-4">⚡</div>
+          <h3 class="font-bold mb-2">Automacao No-Code</h3>
+          <p class="text-neutral-400 text-sm">Crie fluxos complexos sem escrever codigo. Make.com visual e intuitivo.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-6 border border-dark-600 card-hover">
+          <div class="text-3xl mb-4">🔗</div>
+          <h3 class="font-bold mb-2">Integracoes</h3>
+          <p class="text-neutral-400 text-sm">Conecte centenas de apps: Google, Microsoft, Notion, WhatsApp, CRMs e mais.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-6 border border-dark-600 card-hover">
+          <div class="text-3xl mb-4">🤖</div>
+          <h3 class="font-bold mb-2">Inteligencia Artificial</h3>
+          <p class="text-neutral-400 text-sm">GPT, Claude, analise de imagens, transcricao de audio e geracao de conteudo.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl p-6 border border-dark-600 card-hover">
+          <div class="text-3xl mb-4">💰</div>
+          <h3 class="font-bold mb-2">Monetizacao</h3>
+          <p class="text-neutral-400 text-sm">Venda automacoes, crie SaaS e produtos digitais que geram receita recorrente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modules Preview -->
+  <section class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">30 Modulos Completos</h2>
+        <p class="text-neutral-400 text-lg max-w-2xl mx-auto">
+          Uma visao geral de tudo que voce vai dominar ao longo das 3 trilhas.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Trilha 1 Modules -->
+        <div>
+          <h3 class="text-lg font-bold text-emerald-400 mb-4 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-sm">1</span>
+            Fundamentos
+          </h3>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400 transition-colors">
+              <span class="text-emerald-500">1.1</span> Introducao ao Make
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400 transition-colors">
+              <span class="text-emerald-500">1.2</span> Sua Primeira Automacao
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400 transition-colors">
+              <span class="text-emerald-500">1.3</span> Conectores Essenciais
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400 transition-colors">
+              <span class="text-emerald-500">1.4</span> Trabalhando com Dados
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400 transition-colors">
+              <span class="text-emerald-500">1.5</span> Logica e Decisoes
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400 transition-colors">
+              <span class="text-emerald-500">1.6</span> Loops e Iteracoes
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400 transition-colors">
+              <span class="text-emerald-500">1.7</span> Tratamento de Erros
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400 transition-colors">
+              <span class="text-emerald-500">1.8</span> Variaveis e Armazenamento
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400 transition-colors">
+              <span class="text-emerald-500">1.9</span> Debugging e Otimizacao
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-emerald-400 transition-colors">
+              <span class="text-emerald-500">1.10</span> Projeto Final
+            </div>
+          </div>
+        </div>
+
+        <!-- Trilha 2 Modules -->
+        <div>
+          <h3 class="text-lg font-bold text-blue-400 mb-4 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-sm">2</span>
+            Tecnicas
+          </h3>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-blue-400 transition-colors">
+              <span class="text-blue-500">2.1</span> HTTP e APIs REST
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-blue-400 transition-colors">
+              <span class="text-blue-500">2.2</span> Webhooks Avancados
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-blue-400 transition-colors">
+              <span class="text-blue-500">2.3</span> JSON e Dados Complexos
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-blue-400 transition-colors">
+              <span class="text-blue-500">2.4</span> Regex e Text Parser
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-blue-400 transition-colors">
+              <span class="text-blue-500">2.5</span> Bancos de Dados
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-blue-400 transition-colors">
+              <span class="text-blue-500">2.6</span> Introducao a IA
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-blue-400 transition-colors">
+              <span class="text-blue-500">2.7</span> Prompts e GPT
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-blue-400 transition-colors">
+              <span class="text-blue-500">2.8</span> Multimidia e OCR
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-blue-400 transition-colors">
+              <span class="text-blue-500">2.9</span> Casos Empresariais
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-blue-400 transition-colors">
+              <span class="text-blue-500">2.10</span> Projeto Intermediario
+            </div>
+          </div>
+        </div>
+
+        <!-- Trilha 3 Modules -->
+        <div>
+          <h3 class="text-lg font-bold text-purple-400 mb-4 flex items-center gap-2">
+            <span class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-sm">3</span>
+            Avancado
+          </h3>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-purple-400 transition-colors">
+              <span class="text-purple-500">3.1</span> Agentes de IA
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-purple-400 transition-colors">
+              <span class="text-purple-500">3.2</span> RAG e Embeddings
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-purple-400 transition-colors">
+              <span class="text-purple-500">3.3</span> Multi-Agentes
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-purple-400 transition-colors">
+              <span class="text-purple-500">3.4</span> Workflows Complexos
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-purple-400 transition-colors">
+              <span class="text-purple-500">3.5</span> Custom Apps
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-purple-400 transition-colors">
+              <span class="text-purple-500">3.6</span> Performance
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-purple-400 transition-colors">
+              <span class="text-purple-500">3.7</span> Seguranca
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-purple-400 transition-colors">
+              <span class="text-purple-500">3.8</span> Vendendo Automacoes
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-purple-400 transition-colors">
+              <span class="text-purple-500">3.9</span> Criando SaaS
+            </div>
+            <div class="flex items-center gap-2 text-sm text-neutral-400 hover:text-purple-400 transition-colors">
+              <span class="text-purple-500">3.10</span> Projeto Final Pro
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="glass rounded-3xl p-12 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-blue-500/10 to-purple-500/10"></div>
+        <div class="relative z-10">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Pronto para Automatizar?</h2>
+          <p class="text-neutral-400 text-lg mb-8 max-w-xl mx-auto">
+            Comece agora mesmo. Todo o conteudo e gratuito e foi criado pela comunidade INEMA.CLUB.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="trilha1/index.html" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all hover:scale-105">
+              Comecar do Zero
+            </a>
+            <a href="https://inema.club" target="_blank" class="px-8 py-4 bg-dark-700 hover:bg-dark-600 text-white font-medium rounded-xl border border-dark-600 transition-all hover:scale-105">
+              Conhecer a Comunidade
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer class="bg-dark-800 border-t border-dark-600 py-8">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <p class="text-neutral-500 text-sm">
-        INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
-      </p>
-      <p class="text-neutral-600 text-xs mt-2">
-        Ultima atualizacao: Janeiro 2026
-      </p>
+  <footer class="bg-dark-800 border-t border-dark-600 py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 class="text-lg font-bold text-red-500 mb-4">INEMA.Make</h3>
+          <p class="text-neutral-400 text-sm">
+            Curso completo de automacao com Make.com e Inteligencia Artificial. Criado pela comunidade para a comunidade.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Trilhas</h4>
+          <div class="space-y-2">
+            <a href="trilha1/index.html" class="block text-neutral-400 hover:text-emerald-400 text-sm transition-colors">Fundamentos</a>
+            <a href="trilha2/index.html" class="block text-neutral-400 hover:text-blue-400 text-sm transition-colors">Tecnicas</a>
+            <a href="trilha3/index.html" class="block text-neutral-400 hover:text-purple-400 text-sm transition-colors">Avancado</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Comunidade</h4>
+          <div class="space-y-2">
+            <a href="https://inema.club" target="_blank" class="block text-neutral-400 hover:text-sky-400 text-sm transition-colors">INEMA.CLUB</a>
+            <a href="https://t.me/inemamake" target="_blank" class="block text-neutral-400 hover:text-sky-400 text-sm transition-colors">Telegram</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4">Recursos</h4>
+          <div class="space-y-2">
+            <span class="block text-neutral-400 text-sm">180 Topicos</span>
+            <span class="block text-neutral-400 text-sm">100+ Blueprints</span>
+            <span class="block text-neutral-400 text-sm">Acesso Gratuito</span>
+          </div>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-dark-600 text-center">
+        <p class="text-neutral-500 text-sm">
+          INEMA.Make - Baseado em 174 automacoes documentadas do grupo Telegram
+        </p>
+        <p class="text-neutral-600 text-xs mt-2">
+          Ultima atualizacao: Janeiro 2026
+        </p>
+      </div>
     </div>
   </footer>
 
@@ -242,6 +729,25 @@
         icon.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path></svg>';
       }
     }
+
+    // Add scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.card-hover').forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
   </script>
 </body>
 </html>
