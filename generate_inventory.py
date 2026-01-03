@@ -11,7 +11,8 @@ from collections import Counter
 from datetime import datetime
 import re
 
-DOC_PATH = Path("doc/2277358326")
+# Usa assets/workflows que e o caminho publicado no GitHub Pages
+ASSETS_PATH = Path("assets/workflows")
 OUTPUT_FILE = "workflow_inventory.json"
 
 # Categorias baseadas nos modulos Make.com
@@ -95,18 +96,20 @@ def detect_categories(name, modules):
     return list(categories) if categories else ["Outros"]
 
 def find_images(folder):
-    """Encontra imagens no folder"""
+    """Encontra imagens no folder - retorna caminhos relativos para web"""
     images = []
     seen = set()
 
-    for ext in ['*.jpg', '*.jpeg', '*.png', '*.gif']:
+    for ext in ['*.jpg', '*.jpeg', '*.png', '*.gif', '*.JPG', '*.JPEG', '*.PNG', '*.GIF']:
         for img in folder.glob(ext):
             # Evita duplicatas (alguns arquivos tem sufixos diferentes)
-            base_name = re.sub(r'_\d+\.', '.', img.name)
+            base_name = re.sub(r'_\d+\.', '.', img.name.lower())
             if base_name not in seen:
                 seen.add(base_name)
+                # Caminho relativo para funcionar na web (ex: assets/workflows/1/photo.jpg)
+                relative_path = str(img.relative_to(Path(".")))
                 images.append({
-                    "path": str(img),
+                    "path": relative_path,
                     "name": img.name
                 })
 
@@ -139,9 +142,9 @@ def main():
     all_categories = Counter()
     all_apps = Counter()
 
-    print(f"Escaneando {DOC_PATH}...")
+    print(f"Escaneando {ASSETS_PATH}...")
 
-    folders = sorted([d for d in DOC_PATH.iterdir() if d.is_dir()])
+    folders = sorted([d for d in ASSETS_PATH.iterdir() if d.is_dir()])
     print(f"Encontradas {len(folders)} pastas")
 
     found_count = 0
@@ -183,11 +186,13 @@ def main():
                 images = find_images(topic_dir)
 
                 # Monta objeto do workflow
+                # Caminho relativo para web
+                relative_bp_path = str(bp_file.relative_to(Path(".")))
                 workflow = {
                     "id": f"{topic_dir.name}_{bp_file.stem}",
                     "name": name,
                     "file": bp_file.name,
-                    "path": str(bp_file),
+                    "path": relative_bp_path,
                     "folder": topic_dir.name,
                     "topic_id": topic_meta.get("topic_id", topic_dir.name),
                     "node_count": len(flow),
