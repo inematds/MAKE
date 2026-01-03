@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indice de Topicos | INEMA.Make</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: { 600: '#374151', 700: '#1f2937', 800: '#111827', 900: '#0d1117' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html:not(.dark) body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%); }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .text-white { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+  </style>
+</head>
+<body class="bg-dark-900 text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-dark-800 border-b border-dark-600 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="text-xl font-bold text-red-500">INEMA.Make</a>
+          <span class="text-neutral-500">|</span>
+          <span class="text-blue-400 font-medium">Indice de Topicos</span>
+        </div>
+        <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="max-w-6xl mx-auto px-4 py-12 text-center">
+    <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium mb-6">
+      174 TOPICOS CATALOGADOS
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">
+      <span class="text-blue-400">Indice de Topicos</span> do Telegram
+    </h1>
+    <p class="text-xl text-neutral-400 max-w-3xl mx-auto mb-8">
+      Todos os topicos documentados do grupo INEMA.Make organizados por categoria.
+    </p>
+
+    <!-- VIP Banner -->
+    <a href="https://t.me/+dN1X5kYnfgFkNmQx" target="_blank"
+       class="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-amber-500/20 border border-amber-500/30 hover:border-amber-400/60 transition-all hover:scale-105 group">
+      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center shadow-lg shadow-amber-500/30">
+        <svg class="w-5 h-5 text-dark-900" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/>
+        </svg>
+      </div>
+      <div class="text-left">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-white group-hover:text-amber-300 transition-colors">INEMA.Make VIP</span>
+          <span class="px-2 py-0.5 text-xs font-bold rounded bg-gradient-to-r from-amber-400 to-yellow-500 text-dark-900">VIP</span>
+        </div>
+        <span class="text-sm text-neutral-400 group-hover:text-neutral-300">Acesse o grupo exclusivo no Telegram</span>
+      </div>
+      <svg class="w-5 h-5 text-amber-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 pb-16">
+
+    <!-- Infraestrutura -->
+    <section class="mb-12">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-emerald-400">Infraestrutura</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-emerald-500/50 transition-colors">
+          <span class="text-xs text-emerald-400 font-mono">#1</span>
+          <h3 class="font-bold text-white mt-1">General</h3>
+          <p class="text-sm text-neutral-400 mt-1">Chat principal da comunidade</p>
+          <span class="text-xs text-neutral-500">3.515 mensagens</span>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-emerald-500/50 transition-colors">
+          <span class="text-xs text-emerald-400 font-mono">#808</span>
+          <h3 class="font-bold text-white mt-1">Videos Aula Basico</h3>
+          <p class="text-sm text-neutral-400 mt-1">Material didatico inicial</p>
+          <span class="text-xs text-neutral-500">110 mensagens</span>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-emerald-500/50 transition-colors">
+          <span class="text-xs text-emerald-400 font-mono">#938</span>
+          <h3 class="font-bold text-white mt-1">Duvidas de Automacao</h3>
+          <p class="text-sm text-neutral-400 mt-1">Suporte tecnico</p>
+          <span class="text-xs text-neutral-500">808 mensagens</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conexoes -->
+    <section class="mb-12">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-blue-400">Conexoes</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-blue-500/50 transition-colors">
+          <span class="text-xs text-blue-400 font-mono">#84</span>
+          <h3 class="font-bold text-white mt-1">Conexoes MAKE</h3>
+          <p class="text-sm text-neutral-400 mt-1">Guia geral de conexoes</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-blue-500/50 transition-colors">
+          <span class="text-xs text-blue-400 font-mono">#2088</span>
+          <h3 class="font-bold text-white mt-1">WhatsApp</h3>
+          <p class="text-sm text-neutral-400 mt-1">Z-API, Evolution</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-blue-500/50 transition-colors">
+          <span class="text-xs text-blue-400 font-mono">#2141</span>
+          <h3 class="font-bold text-white mt-1">OpenAI</h3>
+          <p class="text-sm text-neutral-400 mt-1">GPT API</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-blue-500/50 transition-colors">
+          <span class="text-xs text-blue-400 font-mono">#2151</span>
+          <h3 class="font-bold text-white mt-1">DeepSeek</h3>
+          <p class="text-sm text-neutral-400 mt-1">LLM alternativo</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-blue-500/50 transition-colors">
+          <span class="text-xs text-blue-400 font-mono">#2078</span>
+          <h3 class="font-bold text-white mt-1">Google Gmail</h3>
+          <p class="text-sm text-neutral-400 mt-1">OAuth setup</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-blue-500/50 transition-colors">
+          <span class="text-xs text-blue-400 font-mono">#2093</span>
+          <h3 class="font-bold text-white mt-1">META</h3>
+          <p class="text-sm text-neutral-400 mt-1">Facebook/Instagram</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-blue-500/50 transition-colors">
+          <span class="text-xs text-blue-400 font-mono">#2175</span>
+          <h3 class="font-bold text-white mt-1">Apify</h3>
+          <p class="text-sm text-neutral-400 mt-1">Web scraping</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-blue-500/50 transition-colors">
+          <span class="text-xs text-blue-400 font-mono">#3147</span>
+          <h3 class="font-bold text-white mt-1">Youtube API V3</h3>
+          <p class="text-sm text-neutral-400 mt-1">Video platform</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Automacoes Basicas -->
+    <section class="mb-12">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-yellow-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-yellow-400">Automacoes Basicas (N)</h2>
+      </div>
+      <div class="bg-dark-800 rounded-xl border border-dark-600 overflow-hidden">
+        <table class="w-full">
+          <thead class="bg-dark-700">
+            <tr>
+              <th class="px-4 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Codigo</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-neutral-400 uppercase">Titulo</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-dark-600">
+            <tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-yellow-400 font-mono text-sm">n1</td><td class="px-4 py-3 text-white">Ebooks</td></tr>
+            <tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-yellow-400 font-mono text-sm">n3</td><td class="px-4 py-3 text-white">Insta para Youtube - Redes Sociais</td></tr>
+            <tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-yellow-400 font-mono text-sm">n8</td><td class="px-4 py-3 text-white">Webchat e WebHooks simples</td></tr>
+            <tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-yellow-400 font-mono text-sm">n10</td><td class="px-4 py-3 text-white">Insta-Youtube-linkedin</td></tr>
+            <tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-yellow-400 font-mono text-sm">n27</td><td class="px-4 py-3 text-white">Redes Sociais Basico</td></tr>
+            <tr class="hover:bg-dark-700/50"><td class="px-4 py-3 text-yellow-400 font-mono text-sm">n28</td><td class="px-4 py-3 text-white">Webhooks - Bold</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Automacoes Make Nativo -->
+    <section class="mb-12">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-orange-400">Make Nativo (NM)</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="bg-dark-800 rounded-lg border border-dark-600 p-3 hover:border-orange-500/50 transition-colors">
+          <span class="text-orange-400 font-mono text-sm">nm1</span>
+          <span class="text-neutral-300 ml-2">Posta RSS para Facebook</span>
+        </div>
+        <div class="bg-dark-800 rounded-lg border border-dark-600 p-3 hover:border-orange-500/50 transition-colors">
+          <span class="text-orange-400 font-mono text-sm">nm2</span>
+          <span class="text-neutral-300 ml-2">Planilha para Redes Sociais</span>
+        </div>
+        <div class="bg-dark-800 rounded-lg border border-dark-600 p-3 hover:border-orange-500/50 transition-colors">
+          <span class="text-orange-400 font-mono text-sm">nm6</span>
+          <span class="text-neutral-300 ml-2">RSS para face com GROQ (free)</span>
+        </div>
+        <div class="bg-dark-800 rounded-lg border border-dark-600 p-3 hover:border-orange-500/50 transition-colors">
+          <span class="text-orange-400 font-mono text-sm">nm8</span>
+          <span class="text-neutral-300 ml-2">Google Drive para Redes Sociais</span>
+        </div>
+        <div class="bg-dark-800 rounded-lg border border-dark-600 p-3 hover:border-orange-500/50 transition-colors">
+          <span class="text-orange-400 font-mono text-sm">nm12</span>
+          <span class="text-neutral-300 ml-2">INEMA Digital Coach</span>
+        </div>
+        <div class="bg-dark-800 rounded-lg border border-dark-600 p-3 hover:border-orange-500/50 transition-colors">
+          <span class="text-orange-400 font-mono text-sm">nm15</span>
+          <span class="text-neutral-300 ml-2">Bolt com Make</span>
+        </div>
+        <div class="bg-dark-800 rounded-lg border border-dark-600 p-3 hover:border-orange-500/50 transition-colors">
+          <span class="text-orange-400 font-mono text-sm">nm20</span>
+          <span class="text-neutral-300 ml-2">DeepSite com Webhooks</span>
+        </div>
+        <div class="bg-dark-800 rounded-lg border border-dark-600 p-3 hover:border-orange-500/50 transition-colors">
+          <span class="text-orange-400 font-mono text-sm">nm32</span>
+          <span class="text-neutral-300 ml-2">Ebook com Formulario PDF</span>
+        </div>
+        <div class="bg-dark-800 rounded-lg border border-dark-600 p-3 hover:border-orange-500/50 transition-colors">
+          <span class="text-orange-400 font-mono text-sm">nm40</span>
+          <span class="text-neutral-300 ml-2">Publicao Nivel de Conciencia</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Automacoes Avancadas -->
+    <section class="mb-12">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-purple-400">Avancadas - RAG/SaaS (J)</h2>
+        <span class="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full">50+ automacoes</span>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Agentes e RAG</h4>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2"><span class="text-purple-400 font-mono">j58</span><span class="text-neutral-300">RAG - Gerencia seus emails com IA</span></li>
+            <li class="flex items-center gap-2"><span class="text-purple-400 font-mono">j61</span><span class="text-neutral-300">Cliente AI - RAG - Atualizacao</span></li>
+            <li class="flex items-center gap-2"><span class="text-purple-400 font-mono">j65</span><span class="text-neutral-300">Agentes IA - Automatize QQ Coisa</span></li>
+            <li class="flex items-center gap-2"><span class="text-purple-400 font-mono">j84</span><span class="text-neutral-300">Criando Agente MAKE em 7 Passos</span></li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+          <h4 class="text-purple-400 font-semibold mb-3">Micro SaaS</h4>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2"><span class="text-purple-400 font-mono">j45</span><span class="text-neutral-300">Criando um Micro SaaS</span></li>
+            <li class="flex items-center gap-2"><span class="text-purple-400 font-mono">j46</span><span class="text-neutral-300">Micro SaaS - Notas Voz e Imagem</span></li>
+            <li class="flex items-center gap-2"><span class="text-purple-400 font-mono">j47</span><span class="text-neutral-300">Copiloto SaaS Extensao</span></li>
+            <li class="flex items-center gap-2"><span class="text-purple-400 font-mono">j38</span><span class="text-neutral-300">AI-Powered Client Dashboard</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Voice AI -->
+    <section class="mb-12">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-pink-400">Voice AI (EAV)</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-pink-500/50 transition-colors">
+          <span class="text-pink-400 font-mono text-sm">eav1</span>
+          <h3 class="font-bold text-white mt-1">Introducao Retell AI</h3>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-pink-500/50 transition-colors">
+          <span class="text-pink-400 font-mono text-sm">eav2</span>
+          <h3 class="font-bold text-white mt-1">Multi Agente Retell AI</h3>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-pink-500/50 transition-colors">
+          <span class="text-pink-400 font-mono text-sm">eavapi1</span>
+          <h3 class="font-bold text-white mt-1">Introducao Voz VAPI</h3>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-pink-500/50 transition-colors">
+          <span class="text-pink-400 font-mono text-sm">eavapi2</span>
+          <h3 class="font-bold text-white mt-1">Assistente MultiLingua</h3>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-pink-500/50 transition-colors">
+          <span class="text-pink-400 font-mono text-sm">eavapi3</span>
+          <h3 class="font-bold text-white mt-1">Estaticos x Dinamicos</h3>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4 hover:border-pink-500/50 transition-colors">
+          <span class="text-pink-400 font-mono text-sm">eavapi4</span>
+          <h3 class="font-bold text-white mt-1">VAPI e WhatsApp</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="mt-16">
+      <div class="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-2xl border border-blue-500/20 p-8">
+        <div class="flex items-center justify-center gap-2 mb-6">
+          <span class="px-3 py-1 text-sm font-bold rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-dark-900">VIP</span>
+          <span class="text-neutral-400">Conteudo exclusivo do grupo INEMA.Make</span>
+        </div>
+        <div class="grid md:grid-cols-4 gap-6 text-center">
+          <div>
+            <div class="text-3xl font-bold text-blue-400">174</div>
+            <div class="text-neutral-400 text-sm">Topicos</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-purple-400">100+</div>
+            <div class="text-neutral-400 text-sm">Blueprints</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-pink-400">6</div>
+            <div class="text-neutral-400 text-sm">Categorias</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-emerald-400">50+</div>
+            <div class="text-neutral-400 text-sm">Automacoes Avancadas</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back -->
+    <div class="flex justify-start mt-8">
+      <a href="index.html" class="px-4 py-2 bg-dark-700 hover:bg-dark-600 rounded-lg text-neutral-300 transition-colors">
+        ← Voltar para o Curso
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark-800 border-t border-dark-600 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="text-red-500 font-bold text-lg">INEMA.Make</span>
+        <a href="https://t.me/+dN1X5kYnfgFkNmQx" target="_blank"
+           class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-dark-900 text-sm font-bold hover:shadow-lg hover:shadow-amber-500/30 transition-all">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/>
+          </svg>
+          VIP Telegram
+        </a>
+      </div>
+      <p class="text-neutral-500 text-sm">174 topicos documentados do grupo exclusivo</p>
+    </div>
+  </footer>
+
+</body>
+</html>

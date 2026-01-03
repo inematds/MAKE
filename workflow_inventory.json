@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "total_workflows": 0,
+    "total_categories": 0,
+    "generated_at": "2026-01-02T22:11:52.436975",
+    "source": "INEMA.Make VIP - Telegram"
+  },
+  "categories": {},
+  "top_modules": [],
+  "sources": [
+    {
+      "id": "inema-vip",
+      "name": "INEMA VIP",
+      "color": "#f59e0b",
+      "badge": "VIP",
+      "link": "https://t.me/+dN1X5kYnfgFkNmQx"
+    }
+  ],
+  "workflows": []
+}
