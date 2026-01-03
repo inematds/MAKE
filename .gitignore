@@ -2,8 +2,8 @@
 *.mp4
 *.MP4
 
-# Documentação com secrets
-doc/
+# Dados do Telegram (privado)
+doc/2277358326/
 
 # Dependências
 node_modules/
