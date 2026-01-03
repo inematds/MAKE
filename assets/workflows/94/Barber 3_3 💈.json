@@ -1,0 +1,411 @@
+{
+    "name": "Barber 3/3 💈",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 746097,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": -713,
+                    "y": -70
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "label": "Email Review 📧",
+                            "data": {
+                                "editable": "true"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "rating",
+                        "type": "text"
+                    },
+                    {
+                        "name": "email",
+                        "type": "text"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": -403,
+                    "y": -77
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 3,
+                            "module": "gateway:WebhookRespond",
+                            "version": 1,
+                            "parameters": {},
+                            "filter": {
+                                "name": "5 star 🌟",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{1.rating}}",
+                                            "o": "text:equal",
+                                            "b": "5"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "status": "302",
+                                "body": "",
+                                "headers": [
+                                    {
+                                        "key": "Location",
+                                        "value": "https://www.google.com/search?q=barber+barber+google+reviews&sca_esv=fdfd3cadaaa7fb2f&sca_upv=1&source=hp&ei=vgqZZsqvDNyihbIP78-ByAw&iflsig=AL9hbdgAAAAAZpkYzu9Lo0gm9cEVLOztv9_qv7p1QKrz&ved=0ahUKEwjKhrPhy7CHAxVcUUEAHe9nAMkQ4dUDCBc&uact=5&oq=barber+barber+google+reviews&gs_lp=Egdnd3Mtd2l6IhxiYXJiZXIgYmFyYmVyIGdvb2dsZSByZXZpZXdzMgUQIRigATIFECEYnwVItgJQAFgAcAB4AJABAJgBa6ABa6oBAzAuMbgBA8gBAPgBAvgBAZgCAaACbpgDAJIHAzAuMaAHpAI&sclient=gws-wiz#lrd=0x48795c198fd05751:0x7c57e50c521ec95b,3,,,,"
+                                    }
+                                ]
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": -60,
+                                    "y": -242
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "headers": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        }
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "status",
+                                        "type": "uinteger",
+                                        "label": "Status",
+                                        "validate": {
+                                            "min": 100
+                                        },
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "body",
+                                        "type": "any",
+                                        "label": "Body"
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "type": "array",
+                                        "label": "Custom headers",
+                                        "validate": {
+                                            "maxItems": 16
+                                        },
+                                        "spec": [
+                                            {
+                                                "name": "key",
+                                                "label": "Key",
+                                                "type": "text",
+                                                "required": true,
+                                                "validate": {
+                                                    "max": 256
+                                                }
+                                            },
+                                            {
+                                                "name": "value",
+                                                "label": "Value",
+                                                "type": "text",
+                                                "required": true,
+                                                "validate": {
+                                                    "max": 4096
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 4,
+                            "module": "gateway:WebhookRespond",
+                            "version": 1,
+                            "parameters": {},
+                            "filter": {
+                                "name": "1-4 star 🥺",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{1.rating}}",
+                                            "o": "number:less",
+                                            "b": "5"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "status": "302",
+                                "body": "",
+                                "headers": [
+                                    {
+                                        "key": "Location",
+                                        "value": "https://barberbarberrrr.carrd.co"
+                                    }
+                                ]
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": -58,
+                                    "y": 80
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "headers": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        }
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "status",
+                                        "type": "uinteger",
+                                        "label": "Status",
+                                        "validate": {
+                                            "min": 100
+                                        },
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "body",
+                                        "type": "any",
+                                        "label": "Body"
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "type": "array",
+                                        "label": "Custom headers",
+                                        "validate": {
+                                            "maxItems": 16
+                                        },
+                                        "spec": [
+                                            {
+                                                "name": "key",
+                                                "label": "Key",
+                                                "type": "text",
+                                                "required": true,
+                                                "validate": {
+                                                    "max": 256
+                                                }
+                                            },
+                                            {
+                                                "name": "value",
+                                                "label": "Value",
+                                                "type": "text",
+                                                "required": true,
+                                                "validate": {
+                                                    "max": 4096
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        },
+                        {
+                            "id": 2,
+                            "module": "google-email:ActionSendEmail",
+                            "version": 2,
+                            "parameters": {
+                                "account": 2240722
+                            },
+                            "mapper": {
+                                "from": "",
+                                "to": [
+                                    "itsssssjack@outlook.com"
+                                ],
+                                "subject": "heyyy",
+                                "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Rate Our Service</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            line-height: 1.6;\n            color: #333;\n            max-width: 600px;\n            margin: 0 auto;\n            padding: 20px;\n        }\n        h1 {\n            color: #2c3e50;\n        }\n        .rating-buttons {\n            display: flex;\n            justify-content: space-between;\n            margin-top: 20px;\n        }\n        .rating-button {\n            background-color: #3498db;\n            color: white;\n            border: none;\n            padding: 10px 20px;\n            font-size: 16px;\n            text-decoration: none;\n            border-radius: 5px;\n            transition: background-color 0.3s;\n        }\n        .rating-button:hover {\n            background-color: #2980b9;\n        }\n    </style>\n</head>\n<body>\n    <h1>How did we do?</h1>\n    <p>Dear Valued Customer,</p>\n    <p>Thank you for choosing our service. We'd love to hear your feedback! Please rate your experience by clicking on one of the buttons below:</p>\n    \n    <div class=\"rating-buttons\">\n        <a href=\"https://hook.eu2.make.com/od7uooqlgu5yljtio53penbp5pnq9l31?rating=1&email={{1.email}}\" class=\"rating-button\">1 - Poor</a>\n        <a href=\"https://hook.eu2.make.com/od7uooqlgu5yljtio53penbp5pnq9l31?rating=2&email={{1.email}}\" class=\"rating-button\">2 - Fair</a>\n        <a href=\"https://hook.eu2.make.com/od7uooqlgu5yljtio53penbp5pnq9l31?rating=3&email={{1.email}}\" class=\"rating-button\">3 - Good</a>\n        <a href=\"https://hook.eu2.make.com/od7uooqlgu5yljtio53penbp5pnq9l31?rating=4&email={{1.email}}\" class=\"rating-button\">4 - Very Good</a>\n        <a href=\"https://hook.eu2.make.com/od7uooqlgu5yljtio53penbp5pnq9l31?rating=5&email={{1.email}}\" class=\"rating-button\">5 - Excellent</a>\n    </div>\n    \n    <p>Your feedback helps us improve our service. Thank you for your time!</p>\n    <p>Best regards,<br>Your Company Name</p>\n</body>\n</html>",
+                                "attachments": [],
+                                "cc": [],
+                                "bcc": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 340,
+                                    "y": 79,
+                                    "name": "Offer & Value 💎"
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "account": {
+                                            "label": "My Google Restricted connection (jack@aiautomationswithjack.com)",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            }
+                                        }
+                                    },
+                                    "expect": {
+                                        "to": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        },
+                                        "attachments": {
+                                            "mode": "chose"
+                                        },
+                                        "cc": {
+                                            "mode": "chose"
+                                        },
+                                        "bcc": {
+                                            "mode": "chose"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "from",
+                                        "type": "text",
+                                        "label": "From"
+                                    },
+                                    {
+                                        "name": "to",
+                                        "type": "array",
+                                        "label": "To",
+                                        "required": true,
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "email",
+                                            "label": "Email address",
+                                            "required": true
+                                        }
+                                    },
+                                    {
+                                        "name": "subject",
+                                        "type": "text",
+                                        "label": "Subject"
+                                    },
+                                    {
+                                        "name": "html",
+                                        "type": "text",
+                                        "label": "Content"
+                                    },
+                                    {
+                                        "name": "attachments",
+                                        "type": "array",
+                                        "label": "Attachments",
+                                        "spec": [
+                                            {
+                                                "name": "fileName",
+                                                "label": "File name",
+                                                "type": "filename",
+                                                "required": true,
+                                                "semantic": "file:name"
+                                            },
+                                            {
+                                                "name": "data",
+                                                "label": "Data",
+                                                "type": "buffer",
+                                                "required": true,
+                                                "semantic": "file:data"
+                                            },
+                                            {
+                                                "name": "cid",
+                                                "label": "Content-ID",
+                                                "type": "text"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "cc",
+                                        "type": "array",
+                                        "label": "Copy recipient",
+                                        "spec": {
+                                            "type": "email",
+                                            "label": "Email address",
+                                            "name": "value"
+                                        }
+                                    },
+                                    {
+                                        "name": "bcc",
+                                        "type": "array",
+                                        "label": "Blind copy recipient",
+                                        "spec": {
+                                            "type": "email",
+                                            "label": "Email address",
+                                            "name": "value"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

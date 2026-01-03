@@ -1,0 +1,886 @@
+{
+    "name": "Videos Luxury life style",
+    "flow": [
+        {
+            "id": 71,
+            "module": "util:FunctionIncrement",
+            "version": 1,
+            "parameters": {
+                "reset": "scenario"
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 450
+                },
+                "restore": {
+                    "parameters": {
+                        "reset": {
+                            "label": "Never"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "reset",
+                        "type": "select",
+                        "label": "Reset a value",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "run",
+                                "execution",
+                                "scenario"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 56,
+            "module": "dropbox:searchFilesFolders",
+            "version": 5,
+            "parameters": {
+                "__IMTCONN__": 3526401
+            },
+            "mapper": {
+                "path": "/Minimalist Luxury",
+                "limit": "1",
+                "search": "{{71.i}}",
+                "file_status": "active"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 450
+                },
+                "restore": {
+                    "expect": {
+                        "path": {
+                            "mode": "chose"
+                        },
+                        "file_status": {
+                            "mode": "chose",
+                            "label": "Active"
+                        },
+                        "file_categories": {
+                            "mode": "chose"
+                        },
+                        "file_extensions": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "dropbox"
+                            },
+                            "label": "My Dropbox connection (ssabellshop@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:dropbox",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "search",
+                        "type": "text",
+                        "label": "Search",
+                        "required": true
+                    },
+                    {
+                        "name": "path",
+                        "type": "folder",
+                        "label": "Folder"
+                    },
+                    {
+                        "name": "file_status",
+                        "type": "select",
+                        "label": "File Status",
+                        "validate": {
+                            "enum": [
+                                "active",
+                                "deleted"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "file_categories",
+                        "type": "select",
+                        "label": "File Categories",
+                        "multiple": true,
+                        "validate": {
+                            "enum": [
+                                "image",
+                                "document",
+                                "pdf",
+                                "spreadsheet",
+                                "presentation",
+                                "audio",
+                                "video",
+                                "folder",
+                                "paper",
+                                "others"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "file_extensions",
+                        "spec": {
+                            "name": "value",
+                            "type": "text"
+                        },
+                        "type": "array",
+                        "label": "File Extensions"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 39,
+            "module": "dropbox:createShareLink",
+            "version": 5,
+            "parameters": {
+                "__IMTCONN__": 3526401
+            },
+            "mapper": {
+                "path": "{{56.path_display}}",
+                "select": "map",
+                "settings": {}
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 450
+                },
+                "restore": {
+                    "expect": {
+                        "select": {
+                            "label": "Map a file/folder path"
+                        },
+                        "settings": {
+                            "nested": {
+                                "access": {
+                                    "mode": "chose",
+                                    "label": "Empty"
+                                },
+                                "allow_download": {
+                                    "mode": "chose"
+                                },
+                                "require_password": {
+                                    "mode": "chose"
+                                },
+                                "requested_visibility": {
+                                    "mode": "chose",
+                                    "label": "Empty"
+                                }
+                            }
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "dropbox"
+                            },
+                            "label": "My Dropbox connection (ssabellshop@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:dropbox",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Way of selecting files",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "map",
+                                "file"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "settings",
+                        "spec": [
+                            {
+                                "name": "access",
+                                "type": "select",
+                                "label": "Link's Access Level",
+                                "validate": {
+                                    "enum": [
+                                        "viewer",
+                                        "editor",
+                                        "max"
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "expires",
+                                "time": true,
+                                "type": "date",
+                                "label": "Link's Expiration Date"
+                            },
+                            {
+                                "name": "require_password",
+                                "type": "boolean",
+                                "label": "Require Password"
+                            },
+                            {
+                                "name": "link_password",
+                                "type": "text",
+                                "label": "Link's Password"
+                            },
+                            {
+                                "name": "allow_download",
+                                "type": "boolean",
+                                "label": "Allow Download"
+                            },
+                            {
+                                "name": "requested_visibility",
+                                "type": "select",
+                                "label": "Requested Visibility (Deprecated)",
+                                "validate": {
+                                    "enum": [
+                                        "public",
+                                        "team_only",
+                                        "password"
+                                    ]
+                                }
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Settings"
+                    },
+                    {
+                        "name": "path",
+                        "type": "text",
+                        "label": "File Path",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 57,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 450
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 58,
+                            "module": "facebook-pages:UploadVideo",
+                            "version": 6,
+                            "parameters": {
+                                "__IMTCONN__": 3766117
+                            },
+                            "mapper": {
+                                "url": "{{39.downloadUrl}}",
+                                "type": "url",
+                                "page_id": "632556896613749",
+                                "description": "🎥 Este vídeo foi criado e postado automaticamente, sem um único clique!\nTudo graças a um fluxo de automação inteligente. 🚀💡\n\nQuer aprender a fazer isso também ou adquirir o projeto completo?\n\n💼 Também ofereço serviços personalizados de automação para empresas e criadores.\n📩 comenta \"Eu quero\"!\n\n🔗 Acesse o site oficial e junte-se ao nosso grupo VIP agora mesmo:\n👉 https://automatizze-pro.lovable.app/\n\n#AutomaçãoDigital #InteligênciaArtificial #MakeIntegromat  #motivação #Inspiração"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 0
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "type": {
+                                            "mode": "chose",
+                                            "label": "download a video from URL"
+                                        },
+                                        "page_id": {
+                                            "mode": "chose",
+                                            "label": "Minimalist Luxury"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "facebook"
+                                            },
+                                            "label": "My Facebook connection"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:facebook",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "page_id",
+                                        "type": "select",
+                                        "label": "Page",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "type",
+                                        "type": "select",
+                                        "label": "Type",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "data",
+                                                "url"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "description",
+                                        "type": "text",
+                                        "label": "Description"
+                                    },
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "page_id",
+                                        "type": "select",
+                                        "label": "Page",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "type",
+                                        "type": "select",
+                                        "label": "Type",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "data",
+                                                "url"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "description",
+                                        "type": "text",
+                                        "label": "Description"
+                                    },
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 35,
+                            "module": "dropbox:getFile",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 3526401
+                            },
+                            "mapper": {
+                                "path": "{{56.path_lower}}",
+                                "select": "map"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1366,
+                                    "y": 343
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "select": {
+                                            "label": "Map a file path"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (ssabellshop@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Way of selecting files",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "file"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "path",
+                                        "type": "text",
+                                        "label": "File Path",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 59,
+                            "module": "linkedin:createVideoPost",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 3947426
+                            },
+                            "mapper": {
+                                "video": "{{35.data}}",
+                                "content": "🎥 Este vídeo foi criado e postado automaticamente, sem um único clique!\nTudo graças a um fluxo de automação inteligente. 🚀💡\n\nQuer aprender a fazer isso também ou adquirir o projeto completo?\n\n💼 Também ofereço serviços personalizados de automação para empresas e criadores.\n📩 comenta \"Eu quero\"!\n\n🔗 Acesse o site oficial e junte-se ao nosso grupo VIP agora mesmo:\n👉 https://automatizze-pro.lovable.app/\n\n#AutomaçãoDigital #InteligênciaArtificial #MakeIntegromat  #motivação #Inspiração",
+                                "videoName": "{{35.fileName}}",
+                                "visibility": "PUBLIC",
+                                "feedDistribution": "MAIN_FEED",
+                                "isReshareDisabledByAuthor": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1757,
+                                    "y": 307
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "visibility": {
+                                            "mode": "chose",
+                                            "label": "Public"
+                                        },
+                                        "feedDistribution": {
+                                            "mode": "chose",
+                                            "label": "Main Feed"
+                                        },
+                                        "isReshareDisabledByAuthor": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "linkedin2"
+                                            },
+                                            "label": "My LinkedIn connection"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:linkedin2,linkedin-openid",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "videoName",
+                                        "type": "text",
+                                        "label": "File Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "video",
+                                        "type": "buffer",
+                                        "label": "Video",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "title",
+                                        "type": "text",
+                                        "label": "Title"
+                                    },
+                                    {
+                                        "name": "content",
+                                        "type": "text",
+                                        "label": "Content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "visibility",
+                                        "type": "select",
+                                        "label": "Visibility",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "PUBLIC",
+                                                "CONNECTIONS",
+                                                "LOGGED_IN"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "feedDistribution",
+                                        "type": "select",
+                                        "label": "Feed Distribution",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "MAIN_FEED",
+                                                "NONE"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "isReshareDisabledByAuthor",
+                                        "type": "boolean",
+                                        "label": "Is Reshare Disabled",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "videoName",
+                                        "type": "text",
+                                        "label": "File Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "video",
+                                        "type": "buffer",
+                                        "label": "Video",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "title",
+                                        "type": "text",
+                                        "label": "Title"
+                                    },
+                                    {
+                                        "name": "content",
+                                        "type": "text",
+                                        "label": "Content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "visibility",
+                                        "type": "select",
+                                        "label": "Visibility",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "PUBLIC",
+                                                "CONNECTIONS",
+                                                "LOGGED_IN"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "feedDistribution",
+                                        "type": "select",
+                                        "label": "Feed Distribution",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "MAIN_FEED",
+                                                "NONE"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "isReshareDisabledByAuthor",
+                                        "type": "boolean",
+                                        "label": "Is Reshare Disabled",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 36,
+                            "module": "instagram-business:CreateAReelPost",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 3766122
+                            },
+                            "mapper": {
+                                "caption": "🎥 Este vídeo foi criado e postado automaticamente, sem um único clique!\nTudo graças a um fluxo de automação inteligente. 🚀💡\n\nQuer aprender a fazer isso também ou adquirir o projeto completo?\n\n💼 Também ofereço serviços personalizados de automação para empresas e criadores.\n📩 Comenta \"Eu quero\" que eu posso te ajudar!\n\n🔗 Acesse o site oficial e junte-se ao nosso grupo VIP agora mesmo:\n👉 https://automatizze-pro.lovable.app/\n\n#AutomaçãoDigital #InteligênciaArtificial #MakeIntegromat #motivação #Inspiração",
+                                "accountId": "17841447047743239",
+                                "video_url": "{{39.downloadUrl}}",
+                                "thumb_offset": "1",
+                                "share_to_feed": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1419,
+                                    "y": 664
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "accountId": {
+                                            "mode": "chose",
+                                            "label": "Minimalist Luxury (@minimalist_luxuria)"
+                                        },
+                                        "share_to_feed": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "facebook"
+                                            },
+                                            "label": "My Facebook connection"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:facebook",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "accountId",
+                                        "type": "select",
+                                        "label": "Page",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "video_url",
+                                        "type": "url",
+                                        "label": "Video URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "caption",
+                                        "type": "text",
+                                        "label": "Caption"
+                                    },
+                                    {
+                                        "name": "thumb_offset",
+                                        "type": "number",
+                                        "label": "Cover Frame"
+                                    },
+                                    {
+                                        "name": "location_id",
+                                        "type": "text",
+                                        "label": "Location ID"
+                                    },
+                                    {
+                                        "name": "share_to_feed",
+                                        "type": "boolean",
+                                        "label": "Share to Feed",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "accountId",
+                                        "type": "select",
+                                        "label": "Page",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "video_url",
+                                        "type": "url",
+                                        "label": "Video URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "caption",
+                                        "type": "text",
+                                        "label": "Caption"
+                                    },
+                                    {
+                                        "name": "thumb_offset",
+                                        "type": "number",
+                                        "label": "Cover Frame"
+                                    },
+                                    {
+                                        "name": "location_id",
+                                        "type": "text",
+                                        "label": "Location ID"
+                                    },
+                                    {
+                                        "name": "share_to_feed",
+                                        "type": "boolean",
+                                        "label": "Share to Feed",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 63,
+                            "module": "dropbox:moveFileFolder",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 3526401
+                            },
+                            "mapper": {
+                                "path": "{{56.path_display}}",
+                                "select": "map",
+                                "to_path": "/Minimalist Luxury/Minimalist Luxury Enviados",
+                                "autorename": false,
+                                "allow_ownership_transfer": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1104,
+                                    "y": 813
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "select": {
+                                            "label": "Map a file/folder path"
+                                        },
+                                        "to_path": {
+                                            "mode": "chose"
+                                        },
+                                        "autorename": {
+                                            "mode": "chose"
+                                        },
+                                        "allow_ownership_transfer": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (ssabellshop@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Way of selecting files",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "file"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "to_path",
+                                        "type": "folder",
+                                        "label": "To Folder"
+                                    },
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "New Name"
+                                    },
+                                    {
+                                        "name": "autorename",
+                                        "type": "boolean",
+                                        "label": "Auto rename",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "allow_ownership_transfer",
+                                        "type": "boolean",
+                                        "label": "Allow ownership transfer",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "path",
+                                        "type": "text",
+                                        "label": "File/Folder Path",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}

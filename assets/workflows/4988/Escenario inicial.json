@@ -1,0 +1,213 @@
+{
+    "name": "PV_Reunión Inicial",
+    "flow": [
+        {
+            "id": 6,
+            "module": "tidycal:watchBookingCreated",
+            "version": 1,
+            "parameters": {
+                "limit": 20,
+                "__IMTCONN__": 1569737
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "tidycal"
+                            },
+                            "label": "My Tidycal connection (angel.aparicio92@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:tidycal",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "google-email:ActionSendEmail",
+            "version": 2,
+            "parameters": {
+                "account": 1889630
+            },
+            "filter": {
+                "name": "Prueba",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{6.booking_type.title}}",
+                            "b": "Pruebas",
+                            "o": "text:equal"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "cc": "",
+                "to": "{{6.contact.email}}",
+                "bcc": "",
+                "from": "",
+                "html": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Consulta Agendada</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f9f9f9;\">\n    <div style=\"max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);\">\n        <h1 style=\"color: #4A90E2; text-align: center;\">¡Gracias por reservar tu primera consulta!</h1>\n        <p>Hola <strong>{{6.contact.name}}</strong>,</p>\n        <p>¡Qué emoción acompañarte en este primer paso! 🎉 Estoy deseando conocerte mejor y empezar a trabajar en lo que realmente importa para ti y tu negocio.</p>\n        <p>Para que nuestra sesión sea aún más productiva, me encantaría que completes un breve formulario. Esto me ayudará a entender tus necesidades y retos antes de nuestra reunión.</p>\n        <div style=\"text-align: center; margin: 20px 0;\">\n            <a href=\"https://tally.so/r/n0bXPP\" \n               style=\"display: inline-block; background-color: #4A90E2; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;\">\n                👉 Completar formulario\n            </a>\n        </div>\n        <h3>¿Por qué es importante?</h3>\n        <ul style=\"list-style: none; padding: 0;\">\n            <li style=\"margin-bottom: 10px;\">1️⃣ Entender tus retos y necesidades específicas.</li>\n            <li style=\"margin-bottom: 10px;\">2️⃣ Ofrecerte soluciones claras desde el primer minuto.</li>\n            <li style=\"margin-bottom: 10px;\">3️⃣ Ser honesto contigo si veo que no soy la persona adecuada para ayudarte (¡sin dramas!).</li>\n        </ul>\n        <p>Gracias por confiar en mí. Estoy aquí para ayudarte a lograr tus objetivos. Nos vemos muy pronto.</p>\n        <p style=\"margin-top: 30px; text-align: center; color: #666;\">💙 <strong>Angel Aparicio</strong></p>\n    </div>\n</body>\n</html>",
+                "subject": "👋 Hola! Preparémonos para tu sesión 🎯 (un formulario rápido para ti)",
+                "attachments": ""
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0,
+                    "name": "Enviar mail con link Formulario Tally"
+                },
+                "restore": {
+                    "expect": {
+                        "cc": {
+                            "mode": "edit",
+                            "collapsed": true
+                        },
+                        "to": {
+                            "mode": "edit"
+                        },
+                        "bcc": {
+                            "mode": "edit",
+                            "collapsed": true
+                        },
+                        "attachments": {
+                            "mode": "edit"
+                        }
+                    },
+                    "parameters": {
+                        "account": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            },
+                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "text",
+                        "label": "From"
+                    },
+                    {
+                        "name": "to",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "html",
+                        "type": "text",
+                        "label": "Content"
+                    },
+                    {
+                        "name": "attachments",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "type": "filename",
+                                "label": "File name",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "required": true,
+                                "semantic": "file:data"
+                            },
+                            {
+                                "name": "cid",
+                                "type": "text",
+                                "label": "Content-ID"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Attachments"
+                    },
+                    {
+                        "name": "cc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Copy recipient"
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Blind copy recipient"
+                    }
+                ],
+                "advanced": true
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

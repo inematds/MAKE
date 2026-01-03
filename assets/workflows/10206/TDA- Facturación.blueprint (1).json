@@ -1,0 +1,2396 @@
+{
+    "name": "TDA: Facturación",
+    "flow": [
+        {
+            "id": 1,
+            "module": "google-email:TriggerNewEmail",
+            "version": 2,
+            "parameters": {
+                "from": "angel.aparicio@solutechia.es",
+                "text": "",
+                "folder": "INBOX",
+                "account": 1889630,
+                "subject": "Factura",
+                "criteria": "ALL",
+                "markSeen": true,
+                "maxResults": 100,
+                "searchType": "simple"
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 450,
+                    "name": "Recibe Correos"
+                },
+                "restore": {
+                    "parameters": {
+                        "folder": {
+                            "path": [
+                                "INBOX"
+                            ]
+                        },
+                        "account": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            },
+                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                        },
+                        "criteria": {
+                            "label": "All emails"
+                        },
+                        "searchType": {
+                            "label": "Simple filter"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "searchType",
+                        "type": "select",
+                        "label": "Filter type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "simple",
+                                "gmail"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "markSeen",
+                        "type": "boolean",
+                        "label": "Mark email message(s) as read when fetched"
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "uinteger",
+                        "label": "Maximum number of results",
+                        "required": true
+                    },
+                    {
+                        "name": "folder",
+                        "type": "folder",
+                        "label": "Folder",
+                        "required": true
+                    },
+                    {
+                        "name": "criteria",
+                        "type": "select",
+                        "label": "Criteria",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "ALL",
+                                "SEEN",
+                                "UNSEEN"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "type": "email",
+                        "label": "Sender email address"
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "text",
+                        "type": "text",
+                        "label": "Search phrase"
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 2,
+            "module": "google-email:FeedAttachments",
+            "version": 2,
+            "parameters": {},
+            "mapper": {
+                "array": "{{1.attachments}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 450,
+                    "name": "Itera correos"
+                },
+                "expect": [
+                    {
+                        "name": "array",
+                        "spec": [],
+                        "type": "array"
+                    }
+                ],
+                "relative": 1
+            }
+        },
+        {
+            "id": 57,
+            "module": "pdf-co:PdfToImages",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 2941084
+            },
+            "mapper": {
+                "async": 15000,
+                "export": {
+                    "exportType": "downloadFile"
+                },
+                "import": {
+                    "data": "{{2.data}}",
+                    "name": "{{2.fileName}}",
+                    "importType": "upload"
+                },
+                "inline": false,
+                "convert": {
+                    "convertType": "toJpg"
+                },
+                "expiration": "60"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 450
+                },
+                "restore": {
+                    "expect": {
+                        "async": {
+                            "mode": "chose",
+                            "label": "Async"
+                        },
+                        "export": {
+                            "nested": {
+                                "exportType": {
+                                    "label": "Download a File"
+                                }
+                            }
+                        },
+                        "import": {
+                            "nested": {
+                                "importType": {
+                                    "label": "Upload a File"
+                                }
+                            }
+                        },
+                        "inline": {
+                            "mode": "chose"
+                        },
+                        "convert": {
+                            "nested": {
+                                "convertType": {
+                                    "label": "PDF to JPG"
+                                }
+                            }
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "pdf-co"
+                            },
+                            "label": "My PDF.co connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:pdf-co",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "import",
+                        "spec": [
+                            {
+                                "name": "importType",
+                                "type": "select",
+                                "label": "Input File",
+                                "required": true,
+                                "validate": {
+                                    "enum": [
+                                        "upload",
+                                        "url"
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "required": true
+                            },
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Output File Name"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Import Options",
+                        "required": true
+                    },
+                    {
+                        "name": "convert",
+                        "spec": [
+                            {
+                                "name": "convertType",
+                                "type": "select",
+                                "label": "Convert Type",
+                                "required": true,
+                                "validate": {
+                                    "enum": [
+                                        "toJpg",
+                                        "toPng"
+                                    ]
+                                }
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Convert Options",
+                        "required": true
+                    },
+                    {
+                        "name": "pages",
+                        "type": "text",
+                        "label": "Pages"
+                    },
+                    {
+                        "name": "password",
+                        "type": "text",
+                        "label": "Password"
+                    },
+                    {
+                        "name": "async",
+                        "type": "select",
+                        "label": "Execution Mode",
+                        "validate": {
+                            "enum": [
+                                false,
+                                15000,
+                                "asyncCheckLater"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "inline",
+                        "type": "boolean",
+                        "label": "Inline"
+                    },
+                    {
+                        "name": "profiles",
+                        "type": "text",
+                        "label": "Profiles"
+                    },
+                    {
+                        "name": "expiration",
+                        "type": "number",
+                        "label": "Output Links Expiration"
+                    },
+                    {
+                        "name": "export",
+                        "spec": [
+                            {
+                                "name": "exportType",
+                                "type": "select",
+                                "label": "Export Type",
+                                "required": true,
+                                "validate": {
+                                    "enum": [
+                                        "downloadFile",
+                                        "inline"
+                                    ]
+                                }
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Export Options",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 58,
+            "module": "builtin:BasicAggregator",
+            "version": 1,
+            "parameters": {
+                "feeder": 57
+            },
+            "mapper": {
+                "url": "{{57.url}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 450
+                },
+                "restore": {
+                    "extra": {
+                        "feeder": {
+                            "label": "PDF.co - Convert from PDF into Images [57]"
+                        },
+                        "target": {
+                            "label": "Custom"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 59,
+            "module": "openai-gpt-3:analyzeImages",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 1524414
+            },
+            "mapper": {
+                "model": "gpt-4o",
+                "top_p": "1",
+                "images": [
+                    {
+                        "imageUrl": "{{58.array[1].url}}",
+                        "imageUploadType": "url"
+                    },
+                    {
+                        "imageUrl": "{{58.array[2].url}}",
+                        "imageUploadType": "url"
+                    },
+                    {
+                        "imageUrl": "{{58.array[3].url}}",
+                        "imageUploadType": "url"
+                    }
+                ],
+                "prompt": "Esto es una factura. Extrae la siguiene información de la factura:\n- Nombre del cliente\n- Fecha / Data\n- Codigo del cliente\n- NIF / DNI\n- Total importe\n- IVA\n- Total factura\n- Fecha de vencimiento\n\nDevuelve la información en el siguiente formato JSON:\n{\n  \"Nombre_del_cliente\": \"Texto\",\n  \"Fecha\": \"Fecha\",\n  \"Codigo_del_cliente\": \"Numero\",\n  \"NIF/DNI\": \"Numero\",\n  \"Total_importe\": \"Importe\",\n  \"IVA\": \"Importe\",\n  \"Total factura\": \"Importe\",\n  \"Fecha_Vencimiento\": \"Fecha\"\n}\n​",
+                "max_tokens": "300",
+                "temperature": "1",
+                "n_completions": "1"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 450
+                },
+                "restore": {
+                    "expect": {
+                        "model": {
+                            "mode": "chose",
+                            "label": "gpt-4o"
+                        },
+                        "images": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "imageUploadType": {
+                                        "mode": "chose",
+                                        "label": "Image URL"
+                                    }
+                                },
+                                {
+                                    "imageUploadType": {
+                                        "mode": "chose",
+                                        "label": "Image URL"
+                                    }
+                                },
+                                {
+                                    "imageUploadType": {
+                                        "mode": "chose",
+                                        "label": "Image URL"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "My OpenAI connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:openai-gpt-3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "prompt",
+                        "type": "text",
+                        "label": "Prompt",
+                        "required": true
+                    },
+                    {
+                        "name": "images",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "imageUploadType",
+                                    "type": "select",
+                                    "label": "How would you like to specify an image?",
+                                    "options": [
+                                        {
+                                            "label": "Image URL",
+                                            "value": "url",
+                                            "nested": [
+                                                {
+                                                    "help": "Public URL of the image. For example, `https://getmyimage.com/myimage.png`.",
+                                                    "mode": "edit",
+                                                    "name": "imageUrl",
+                                                    "type": "url",
+                                                    "label": "Image URL",
+                                                    "mappable": {
+                                                        "help": "Public URL of the image. For example, `https://getmyimage.com/myimage.png`."
+                                                    },
+                                                    "required": true
+                                                }
+                                            ],
+                                            "default": true
+                                        },
+                                        {
+                                            "label": "Image File",
+                                            "value": "imageFile",
+                                            "nested": [
+                                                {
+                                                    "help": "Binary data of the image. For example, you can retrieve the binary data of your image using the __HTTP: Get a file__ module.",
+                                                    "name": "imageFileData",
+                                                    "type": "buffer",
+                                                    "label": "Image File",
+                                                    "required": true,
+                                                    "semantic": "file:data"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "required": true
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Image"
+                        },
+                        "type": "array",
+                        "label": "Images",
+                        "required": true
+                    },
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "number",
+                        "label": "Max Tokens"
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature",
+                        "validate": {
+                            "max": 2,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P",
+                        "validate": {
+                            "max": 1,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "n_completions",
+                        "type": "number",
+                        "label": "Number"
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 60,
+            "module": "openai-gpt-3:CreateCompletion",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 1524414
+            },
+            "mapper": {
+                "model": "gpt-4o-mini-2024-07-18",
+                "top_p": "1",
+                "select": "chat",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "Corrige el siguiente texto JSON: {{59.result}}\n\nResponde solo con el codigo JSON"
+                    }
+                ],
+                "max_tokens": "300",
+                "temperature": "1",
+                "n_completions": "1",
+                "response_format": "json_object",
+                "parseJSONResponse": true
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1500,
+                    "y": 450
+                },
+                "restore": {
+                    "expect": {
+                        "stop": {
+                            "mode": "chose"
+                        },
+                        "model": {
+                            "mode": "chose",
+                            "label": "gpt-4o-mini-2024-07-18 (system)"
+                        },
+                        "select": {
+                            "label": "Create a Chat Completion (GPT Models)"
+                        },
+                        "messages": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    }
+                                }
+                            ]
+                        },
+                        "logit_bias": {
+                            "mode": "chose"
+                        },
+                        "response_format": {
+                            "mode": "chose",
+                            "label": "JSON Object"
+                        },
+                        "parseJSONResponse": {
+                            "mode": "chose"
+                        },
+                        "additionalParameters": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "My OpenAI connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:openai-gpt-3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Select Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "chat",
+                                "prompt"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "number",
+                        "label": "Max Tokens",
+                        "required": true
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature",
+                        "validate": {
+                            "max": 2,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P",
+                        "validate": {
+                            "max": 1,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "n_completions",
+                        "type": "number",
+                        "label": "Number"
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "number",
+                        "label": "Frequency Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "presence_penalty",
+                        "type": "number",
+                        "label": "Presence Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "logit_bias",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "token",
+                                    "type": "text",
+                                    "label": "Token ID",
+                                    "required": true
+                                },
+                                {
+                                    "name": "probability",
+                                    "type": "number",
+                                    "label": "Probability",
+                                    "required": true,
+                                    "validate": {
+                                        "max": 100,
+                                        "min": -100
+                                    }
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Token Probability"
+                        },
+                        "type": "array",
+                        "label": "Token Probability"
+                    },
+                    {
+                        "name": "response_format",
+                        "type": "select",
+                        "label": "Response Format",
+                        "validate": {
+                            "enum": [
+                                "text",
+                                "json_object"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "seed",
+                        "type": "integer",
+                        "label": "Seed"
+                    },
+                    {
+                        "name": "stop",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Stop Sequence"
+                        },
+                        "type": "array",
+                        "label": "Stop Sequences",
+                        "validate": {
+                            "maxItems": 4
+                        }
+                    },
+                    {
+                        "name": "additionalParameters",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Parameter Name",
+                                    "required": true
+                                },
+                                {
+                                    "name": "type",
+                                    "type": "select",
+                                    "label": "Input Type",
+                                    "options": [
+                                        {
+                                            "label": "Text",
+                                            "value": "text",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "text",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ],
+                                            "default": true
+                                        },
+                                        {
+                                            "label": "Number",
+                                            "value": "number",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "number",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Boolean",
+                                            "value": "boolean",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "boolean",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Date",
+                                            "value": "date",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "date",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Any",
+                                            "value": "any",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "any",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Input Parameter"
+                        },
+                        "type": "array",
+                        "label": "Other Input Parameters"
+                    },
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "messages",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "role",
+                                    "type": "select",
+                                    "label": "Role",
+                                    "options": [
+                                        {
+                                            "label": "System",
+                                            "value": "system"
+                                        },
+                                        {
+                                            "label": "User",
+                                            "value": "user"
+                                        },
+                                        {
+                                            "label": "Assistant",
+                                            "value": "assistant"
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                {
+                                    "name": "content",
+                                    "type": "text",
+                                    "label": "Message Content"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Message"
+                        },
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    },
+                    {
+                        "name": "parseJSONResponse",
+                        "type": "boolean",
+                        "label": "Parse JSON Response",
+                        "required": true
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 61,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 1800,
+                    "y": 450
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 32,
+                            "module": "google-drive:searchForFilesFolders",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 1889630
+                            },
+                            "mapper": {
+                                "limit": "10",
+                                "query": "{{formatDate(now; \"YYYY\")}}",
+                                "select": "list",
+                                "folderId": "/1sJqM61k7jvXd7Y3_tdXhExH2EJWQdKZw/18T6BKBbDxI4P3S8B4mlLM6j2LqiVfoEP",
+                                "operator": "=",
+                                "retrieve": "folder",
+                                "searchType": "title",
+                                "destination": "drive"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2100,
+                                    "y": 300,
+                                    "name": "Buscar Carpeta"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "select": {
+                                            "label": "Select from the list"
+                                        },
+                                        "folderId": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "Pruebas",
+                                                "Facturas"
+                                            ]
+                                        },
+                                        "operator": {
+                                            "label": "Search for exact term"
+                                        },
+                                        "retrieve": {
+                                            "label": "Folders"
+                                        },
+                                        "searchType": {
+                                            "label": "Search within file/folder names"
+                                        },
+                                        "destination": {
+                                            "label": "My Drive"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Select the Method",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "list"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "retrieve",
+                                        "type": "select",
+                                        "label": "Retrieve",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "file",
+                                                "folder",
+                                                "file_folder"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "searchType",
+                                        "type": "select",
+                                        "label": "Search",
+                                        "validate": {
+                                            "enum": [
+                                                "title",
+                                                "fulltext",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "limit",
+                                        "type": "uinteger",
+                                        "label": "Limit"
+                                    },
+                                    {
+                                        "name": "destination",
+                                        "type": "select",
+                                        "label": "Choose a Drive",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "folderId",
+                                        "type": "folder",
+                                        "label": "Choose a Folder"
+                                    },
+                                    {
+                                        "name": "query",
+                                        "type": "text",
+                                        "label": "Query",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "operator",
+                                        "type": "select",
+                                        "label": "Search options",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "=",
+                                                "contains"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 34,
+                            "module": "builtin:BasicRouter",
+                            "version": 1,
+                            "mapper": null,
+                            "metadata": {
+                                "designer": {
+                                    "x": 2400,
+                                    "y": 300,
+                                    "name": "Router Carpeta"
+                                }
+                            },
+                            "routes": [
+                                {
+                                    "flow": [
+                                        {
+                                            "id": 11,
+                                            "module": "google-drive:createAFolder",
+                                            "version": 4,
+                                            "parameters": {
+                                                "__IMTCONN__": 1889630
+                                            },
+                                            "filter": {
+                                                "name": "Carpeta No Existe",
+                                                "conditions": [
+                                                    [
+                                                        {
+                                                            "a": "{{32.`__IMTLENGTH__`}}",
+                                                            "b": "0",
+                                                            "o": "text:equal"
+                                                        }
+                                                    ]
+                                                ]
+                                            },
+                                            "mapper": {
+                                                "name": "{{formatDate(now; \"YYYY\")}}",
+                                                "shared": false,
+                                                "folderId": "/1sJqM61k7jvXd7Y3_tdXhExH2EJWQdKZw/18T6BKBbDxI4P3S8B4mlLM6j2LqiVfoEP",
+                                                "destination": "drive"
+                                            },
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 2700,
+                                                    "y": 0,
+                                                    "name": "Crea Carpeta"
+                                                },
+                                                "restore": {
+                                                    "expect": {
+                                                        "folderId": {
+                                                            "mode": "chose",
+                                                            "path": [
+                                                                "Pruebas",
+                                                                "Facturas"
+                                                            ]
+                                                        },
+                                                        "destination": {
+                                                            "label": "My Drive"
+                                                        }
+                                                    },
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "google-restricted"
+                                                            },
+                                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                                        }
+                                                    }
+                                                },
+                                                "parameters": [
+                                                    {
+                                                        "name": "__IMTCONN__",
+                                                        "type": "account:google-restricted",
+                                                        "label": "Connection",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "expect": [
+                                                    {
+                                                        "name": "destination",
+                                                        "type": "select",
+                                                        "label": "New Drive Location",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "enum": [
+                                                                "drive",
+                                                                "share",
+                                                                "team"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "folderId",
+                                                        "type": "folder",
+                                                        "label": "New Folder Location",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "name",
+                                                        "type": "text",
+                                                        "label": "New Folder's Name"
+                                                    },
+                                                    {
+                                                        "name": "shared",
+                                                        "type": "boolean",
+                                                        "label": "Share Folder",
+                                                        "required": true
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "id": 63,
+                                            "module": "google-drive:createAFolder",
+                                            "version": 4,
+                                            "parameters": {
+                                                "__IMTCONN__": 1889630
+                                            },
+                                            "mapper": {
+                                                "name": "{{switch(formatDate(now; \"MMMM\"); \"January\"; \"Enero\"; \"February\"; \"Febrero\"; \"March\"; \"Marzo\"; \"April\"; \"Abril\"; \"May\"; \"Mayo\"; \"June\"; \"Junio\"; \"July\"; \"Julio\"; \"August\"; \"Agosto\"; \"September\"; \"Septiembre\"; \"October\"; \"Octubre\"; \"November\"; \"Noviembre\"; \"December\"; \"Diciembre\")}}",
+                                                "shared": false,
+                                                "folderId": "{{11.id}}",
+                                                "destination": "drive"
+                                            },
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 3000,
+                                                    "y": 0,
+                                                    "name": "Crea Subcarpeta"
+                                                },
+                                                "restore": {
+                                                    "expect": {
+                                                        "folderId": {
+                                                            "mode": "edit",
+                                                            "path": []
+                                                        },
+                                                        "destination": {
+                                                            "label": "My Drive"
+                                                        }
+                                                    },
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "google-restricted"
+                                                            },
+                                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                                        }
+                                                    }
+                                                },
+                                                "parameters": [
+                                                    {
+                                                        "name": "__IMTCONN__",
+                                                        "type": "account:google-restricted",
+                                                        "label": "Connection",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "expect": [
+                                                    {
+                                                        "name": "destination",
+                                                        "type": "select",
+                                                        "label": "New Drive Location",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "enum": [
+                                                                "drive",
+                                                                "share",
+                                                                "team"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "folderId",
+                                                        "type": "folder",
+                                                        "label": "New Folder Location",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "name",
+                                                        "type": "text",
+                                                        "label": "New Folder's Name"
+                                                    },
+                                                    {
+                                                        "name": "shared",
+                                                        "type": "boolean",
+                                                        "label": "Share Folder",
+                                                        "required": true
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "id": 64,
+                                            "module": "google-drive:uploadAFile",
+                                            "version": 4,
+                                            "parameters": {
+                                                "__IMTCONN__": 1889630
+                                            },
+                                            "mapper": {
+                                                "data": "{{2.data}}",
+                                                "title": "Factura - {{60.result.Nombre_del_cliente}} ({{60.result.Fecha}})",
+                                                "select": "map",
+                                                "convert": false,
+                                                "filename": "{{2.fileName}}",
+                                                "folderId": "{{63.id}}"
+                                            },
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 3300,
+                                                    "y": 0
+                                                },
+                                                "restore": {
+                                                    "expect": {
+                                                        "select": {
+                                                            "label": "Enter manually"
+                                                        }
+                                                    },
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "google-restricted"
+                                                            },
+                                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                                        }
+                                                    }
+                                                },
+                                                "parameters": [
+                                                    {
+                                                        "name": "__IMTCONN__",
+                                                        "type": "account:google-restricted",
+                                                        "label": "Connection",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "expect": [
+                                                    {
+                                                        "name": "select",
+                                                        "type": "select",
+                                                        "label": "Enter a Folder ID",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "enum": [
+                                                                "map",
+                                                                "value"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "title",
+                                                        "type": "text",
+                                                        "label": "New File Name"
+                                                    },
+                                                    {
+                                                        "name": "filename",
+                                                        "type": "text",
+                                                        "label": "File Name",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "data",
+                                                        "type": "buffer",
+                                                        "label": "Data",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "convert",
+                                                        "type": "boolean",
+                                                        "label": "Convert a File",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "folderId",
+                                                        "type": "text",
+                                                        "label": "Folder ID",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "advanced": true
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "flow": [
+                                        {
+                                            "id": 38,
+                                            "module": "google-drive:searchForFilesFolders",
+                                            "version": 4,
+                                            "parameters": {
+                                                "__IMTCONN__": 1889630
+                                            },
+                                            "filter": {
+                                                "name": "Carpeta Existe",
+                                                "conditions": [
+                                                    [
+                                                        {
+                                                            "a": "{{32.`__IMTLENGTH__`}}",
+                                                            "b": "1",
+                                                            "o": "text:equal"
+                                                        }
+                                                    ]
+                                                ]
+                                            },
+                                            "mapper": {
+                                                "limit": "10",
+                                                "query": "{{switch(formatDate(now; \"MMMM\"); \"January\"; \"Enero\"; \"February\"; \"Febrero\"; \"March\"; \"Marzo\"; \"April\"; \"Abril\"; \"May\"; \"Mayo\"; \"June\"; \"Junio\"; \"July\"; \"Julio\"; \"August\"; \"Agosto\"; \"September\"; \"Septiembre\"; \"October\"; \"Octubre\"; \"November\"; \"Noviembre\"; \"December\"; \"Diciembre\")}}",
+                                                "select": "list",
+                                                "folderId": "{{32.id}}",
+                                                "operator": "=",
+                                                "retrieve": "folder",
+                                                "searchType": "title",
+                                                "destination": "drive"
+                                            },
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 2700,
+                                                    "y": 450,
+                                                    "name": "Buscar Subcarpeta"
+                                                },
+                                                "restore": {
+                                                    "expect": {
+                                                        "select": {
+                                                            "label": "Select from the list"
+                                                        },
+                                                        "folderId": {
+                                                            "mode": "edit",
+                                                            "path": []
+                                                        },
+                                                        "operator": {
+                                                            "label": "Search for exact term"
+                                                        },
+                                                        "retrieve": {
+                                                            "label": "Folders"
+                                                        },
+                                                        "searchType": {
+                                                            "label": "Search within file/folder names"
+                                                        },
+                                                        "destination": {
+                                                            "label": "My Drive"
+                                                        }
+                                                    },
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "google-restricted"
+                                                            },
+                                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                                        }
+                                                    }
+                                                },
+                                                "parameters": [
+                                                    {
+                                                        "name": "__IMTCONN__",
+                                                        "type": "account:google-restricted",
+                                                        "label": "Connection",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "expect": [
+                                                    {
+                                                        "name": "select",
+                                                        "type": "select",
+                                                        "label": "Select the Method",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "enum": [
+                                                                "map",
+                                                                "list"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "retrieve",
+                                                        "type": "select",
+                                                        "label": "Retrieve",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "enum": [
+                                                                "file",
+                                                                "folder",
+                                                                "file_folder"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "searchType",
+                                                        "type": "select",
+                                                        "label": "Search",
+                                                        "validate": {
+                                                            "enum": [
+                                                                "title",
+                                                                "fulltext",
+                                                                "custom"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "limit",
+                                                        "type": "uinteger",
+                                                        "label": "Limit"
+                                                    },
+                                                    {
+                                                        "name": "destination",
+                                                        "type": "select",
+                                                        "label": "Choose a Drive",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "enum": [
+                                                                "drive",
+                                                                "share",
+                                                                "team"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "folderId",
+                                                        "type": "folder",
+                                                        "label": "Choose a Folder"
+                                                    },
+                                                    {
+                                                        "name": "query",
+                                                        "type": "text",
+                                                        "label": "Query",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "operator",
+                                                        "type": "select",
+                                                        "label": "Search options",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "enum": [
+                                                                "=",
+                                                                "contains"
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "id": 39,
+                                            "module": "builtin:BasicRouter",
+                                            "version": 1,
+                                            "mapper": null,
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 3000,
+                                                    "y": 450
+                                                }
+                                            },
+                                            "routes": [
+                                                {
+                                                    "flow": [
+                                                        {
+                                                            "id": 51,
+                                                            "module": "google-drive:createAFolder",
+                                                            "version": 4,
+                                                            "parameters": {
+                                                                "__IMTCONN__": 1889630
+                                                            },
+                                                            "filter": {
+                                                                "name": "No existe",
+                                                                "conditions": [
+                                                                    [
+                                                                        {
+                                                                            "a": "{{38.`__IMTLENGTH__`}}",
+                                                                            "b": "0",
+                                                                            "o": "text:equal"
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                            },
+                                                            "mapper": {
+                                                                "name": "{{switch(formatDate(now; \"MMMM\"); \"January\"; \"Enero\"; \"February\"; \"Febrero\"; \"March\"; \"Marzo\"; \"April\"; \"Abril\"; \"May\"; \"Mayo\"; \"June\"; \"Junio\"; \"July\"; \"Julio\"; \"August\"; \"Agosto\"; \"September\"; \"Septiembre\"; \"October\"; \"Octubre\"; \"November\"; \"Noviembre\"; \"December\"; \"Diciembre\")}}",
+                                                                "shared": false,
+                                                                "folderId": "{{38.id}}",
+                                                                "destination": "drive"
+                                                            },
+                                                            "metadata": {
+                                                                "designer": {
+                                                                    "x": 3300,
+                                                                    "y": 300,
+                                                                    "name": "Crea Subcarpeta"
+                                                                },
+                                                                "restore": {
+                                                                    "expect": {
+                                                                        "folderId": {
+                                                                            "mode": "edit",
+                                                                            "path": [
+                                                                                "Pruebas",
+                                                                                "Facturas"
+                                                                            ]
+                                                                        },
+                                                                        "destination": {
+                                                                            "label": "My Drive"
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "google-restricted"
+                                                                            },
+                                                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "parameters": [
+                                                                    {
+                                                                        "name": "__IMTCONN__",
+                                                                        "type": "account:google-restricted",
+                                                                        "label": "Connection",
+                                                                        "required": true
+                                                                    }
+                                                                ],
+                                                                "expect": [
+                                                                    {
+                                                                        "name": "destination",
+                                                                        "type": "select",
+                                                                        "label": "New Drive Location",
+                                                                        "required": true,
+                                                                        "validate": {
+                                                                            "enum": [
+                                                                                "drive",
+                                                                                "share",
+                                                                                "team"
+                                                                            ]
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "name": "folderId",
+                                                                        "type": "folder",
+                                                                        "label": "New Folder Location",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "name",
+                                                                        "type": "text",
+                                                                        "label": "New Folder's Name"
+                                                                    },
+                                                                    {
+                                                                        "name": "shared",
+                                                                        "type": "boolean",
+                                                                        "label": "Share Folder",
+                                                                        "required": true
+                                                                    }
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "id": 73,
+                                                            "module": "google-drive:uploadAFile",
+                                                            "version": 4,
+                                                            "parameters": {
+                                                                "__IMTCONN__": 1889630
+                                                            },
+                                                            "mapper": {
+                                                                "data": "{{2.data}}",
+                                                                "title": "Factura - {{60.result.Nombre_del_cliente}} ({{60.result.Fecha}})",
+                                                                "select": "map",
+                                                                "convert": false,
+                                                                "filename": "{{2.fileName}}",
+                                                                "folderId": "{{51.id}}"
+                                                            },
+                                                            "metadata": {
+                                                                "designer": {
+                                                                    "x": 3600,
+                                                                    "y": 300
+                                                                },
+                                                                "restore": {
+                                                                    "expect": {
+                                                                        "select": {
+                                                                            "label": "Enter manually"
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "google-restricted"
+                                                                            },
+                                                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "parameters": [
+                                                                    {
+                                                                        "name": "__IMTCONN__",
+                                                                        "type": "account:google-restricted",
+                                                                        "label": "Connection",
+                                                                        "required": true
+                                                                    }
+                                                                ],
+                                                                "expect": [
+                                                                    {
+                                                                        "name": "select",
+                                                                        "type": "select",
+                                                                        "label": "Enter a Folder ID",
+                                                                        "required": true,
+                                                                        "validate": {
+                                                                            "enum": [
+                                                                                "map",
+                                                                                "value"
+                                                                            ]
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "name": "title",
+                                                                        "type": "text",
+                                                                        "label": "New File Name"
+                                                                    },
+                                                                    {
+                                                                        "name": "filename",
+                                                                        "type": "text",
+                                                                        "label": "File Name",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "data",
+                                                                        "type": "buffer",
+                                                                        "label": "Data",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "convert",
+                                                                        "type": "boolean",
+                                                                        "label": "Convert a File",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "folderId",
+                                                                        "type": "text",
+                                                                        "label": "Folder ID",
+                                                                        "required": true
+                                                                    }
+                                                                ],
+                                                                "advanced": true
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "flow": [
+                                                        {
+                                                            "id": 74,
+                                                            "module": "google-drive:uploadAFile",
+                                                            "version": 4,
+                                                            "parameters": {
+                                                                "__IMTCONN__": 1889630
+                                                            },
+                                                            "filter": {
+                                                                "name": "Existe",
+                                                                "conditions": [
+                                                                    [
+                                                                        {
+                                                                            "a": "{{38.`__IMTLENGTH__`}}",
+                                                                            "b": "1",
+                                                                            "o": "text:equal"
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                            },
+                                                            "mapper": {
+                                                                "data": "{{2.data}}",
+                                                                "title": "Factura - {{60.result.Nombre_del_cliente}} ({{60.result.Fecha}})",
+                                                                "select": "map",
+                                                                "convert": false,
+                                                                "filename": "{{2.fileName}}",
+                                                                "folderId": "{{38.id}}"
+                                                            },
+                                                            "metadata": {
+                                                                "designer": {
+                                                                    "x": 3300,
+                                                                    "y": 600
+                                                                },
+                                                                "restore": {
+                                                                    "expect": {
+                                                                        "select": {
+                                                                            "label": "Enter manually"
+                                                                        }
+                                                                    },
+                                                                    "parameters": {
+                                                                        "__IMTCONN__": {
+                                                                            "data": {
+                                                                                "scoped": "true",
+                                                                                "connection": "google-restricted"
+                                                                            },
+                                                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "parameters": [
+                                                                    {
+                                                                        "name": "__IMTCONN__",
+                                                                        "type": "account:google-restricted",
+                                                                        "label": "Connection",
+                                                                        "required": true
+                                                                    }
+                                                                ],
+                                                                "expect": [
+                                                                    {
+                                                                        "name": "select",
+                                                                        "type": "select",
+                                                                        "label": "Enter a Folder ID",
+                                                                        "required": true,
+                                                                        "validate": {
+                                                                            "enum": [
+                                                                                "map",
+                                                                                "value"
+                                                                            ]
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "name": "title",
+                                                                        "type": "text",
+                                                                        "label": "New File Name"
+                                                                    },
+                                                                    {
+                                                                        "name": "filename",
+                                                                        "type": "text",
+                                                                        "label": "File Name",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "data",
+                                                                        "type": "buffer",
+                                                                        "label": "Data",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "convert",
+                                                                        "type": "boolean",
+                                                                        "label": "Convert a File",
+                                                                        "required": true
+                                                                    },
+                                                                    {
+                                                                        "name": "folderId",
+                                                                        "type": "text",
+                                                                        "label": "Folder ID",
+                                                                        "required": true
+                                                                    }
+                                                                ],
+                                                                "advanced": true
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 67,
+                            "module": "google-sheets:addRow",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 1523189
+                            },
+                            "mapper": {
+                                "from": "drive",
+                                "mode": "select",
+                                "values": {
+                                    "0": "{{60.result.Nombre_del_cliente}}",
+                                    "1": "{{60.result.Fecha}}",
+                                    "2": "{{60.result.Codigo_del_cliente}}",
+                                    "3": "{{60.result.NIF_DNI}}",
+                                    "4": "{{60.result.Total_importe}}",
+                                    "5": "{{60.result.IVA}}",
+                                    "6": "{{60.result.Total_factura}}",
+                                    "7": "{{60.result.Fecha_Vencimiento}}"
+                                },
+                                "sheetId": "Septiembre",
+                                "spreadsheetId": "/1s6PdgaHhUq6OqlG4bUHr5IEttAB5cmN_TdEkB5Q6H48",
+                                "includesHeaders": true,
+                                "insertDataOption": "INSERT_ROWS",
+                                "valueInputOption": "USER_ENTERED",
+                                "insertUnformatted": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2100,
+                                    "y": 900
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "from": {
+                                            "label": "My Drive"
+                                        },
+                                        "mode": {
+                                            "label": "Search by path"
+                                        },
+                                        "sheetId": {
+                                            "label": "Septiembre"
+                                        },
+                                        "spreadsheetId": {
+                                            "path": [
+                                                "Ejemplo base de datos factura"
+                                            ]
+                                        },
+                                        "includesHeaders": {
+                                            "label": "Yes",
+                                            "nested": [
+                                                {
+                                                    "name": "values",
+                                                    "spec": [
+                                                        {
+                                                            "name": "0",
+                                                            "type": "text",
+                                                            "label": "Nombe cliente (A)"
+                                                        },
+                                                        {
+                                                            "name": "1",
+                                                            "type": "text",
+                                                            "label": "Fecha (B)"
+                                                        },
+                                                        {
+                                                            "name": "2",
+                                                            "type": "text",
+                                                            "label": "Codigo cliente (C)"
+                                                        },
+                                                        {
+                                                            "name": "3",
+                                                            "type": "text",
+                                                            "label": "NIF (D)"
+                                                        },
+                                                        {
+                                                            "name": "4",
+                                                            "type": "text",
+                                                            "label": "Total importe (E)"
+                                                        },
+                                                        {
+                                                            "name": "5",
+                                                            "type": "text",
+                                                            "label": "IVA (F)"
+                                                        },
+                                                        {
+                                                            "name": "6",
+                                                            "type": "text",
+                                                            "label": "Total factura (G)"
+                                                        },
+                                                        {
+                                                            "name": "7",
+                                                            "type": "text",
+                                                            "label": "Vencimiento (H)"
+                                                        },
+                                                        {
+                                                            "name": "8",
+                                                            "type": "text",
+                                                            "label": "Pais (I)"
+                                                        },
+                                                        {
+                                                            "name": "9",
+                                                            "type": "text",
+                                                            "label": "(J)"
+                                                        },
+                                                        {
+                                                            "name": "10",
+                                                            "type": "text",
+                                                            "label": "(K)"
+                                                        },
+                                                        {
+                                                            "name": "11",
+                                                            "type": "text",
+                                                            "label": "(L)"
+                                                        },
+                                                        {
+                                                            "name": "12",
+                                                            "type": "text",
+                                                            "label": "(M)"
+                                                        },
+                                                        {
+                                                            "name": "13",
+                                                            "type": "text",
+                                                            "label": "(N)"
+                                                        },
+                                                        {
+                                                            "name": "14",
+                                                            "type": "text",
+                                                            "label": "(O)"
+                                                        },
+                                                        {
+                                                            "name": "15",
+                                                            "type": "text",
+                                                            "label": "(P)"
+                                                        },
+                                                        {
+                                                            "name": "16",
+                                                            "type": "text",
+                                                            "label": "(Q)"
+                                                        },
+                                                        {
+                                                            "name": "17",
+                                                            "type": "text",
+                                                            "label": "(R)"
+                                                        },
+                                                        {
+                                                            "name": "18",
+                                                            "type": "text",
+                                                            "label": "(S)"
+                                                        },
+                                                        {
+                                                            "name": "19",
+                                                            "type": "text",
+                                                            "label": "(T)"
+                                                        },
+                                                        {
+                                                            "name": "20",
+                                                            "type": "text",
+                                                            "label": "(U)"
+                                                        },
+                                                        {
+                                                            "name": "21",
+                                                            "type": "text",
+                                                            "label": "(V)"
+                                                        },
+                                                        {
+                                                            "name": "22",
+                                                            "type": "text",
+                                                            "label": "(W)"
+                                                        },
+                                                        {
+                                                            "name": "23",
+                                                            "type": "text",
+                                                            "label": "(X)"
+                                                        },
+                                                        {
+                                                            "name": "24",
+                                                            "type": "text",
+                                                            "label": "(Y)"
+                                                        },
+                                                        {
+                                                            "name": "25",
+                                                            "type": "text",
+                                                            "label": "(Z)"
+                                                        },
+                                                        {
+                                                            "name": "26",
+                                                            "type": "text",
+                                                            "label": "(AA)"
+                                                        }
+                                                    ],
+                                                    "type": "collection",
+                                                    "label": "Values"
+                                                }
+                                            ]
+                                        },
+                                        "insertDataOption": {
+                                            "mode": "chose",
+                                            "label": "Insert rows"
+                                        },
+                                        "valueInputOption": {
+                                            "mode": "chose",
+                                            "label": "User entered"
+                                        },
+                                        "insertUnformatted": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google"
+                                            },
+                                            "label": "My Google connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "mode",
+                                        "type": "select",
+                                        "label": "Search Method",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "select",
+                                                "fromAll",
+                                                "map"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "insertUnformatted",
+                                        "type": "boolean",
+                                        "label": "Unformatted",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "valueInputOption",
+                                        "type": "select",
+                                        "label": "Value input option",
+                                        "validate": {
+                                            "enum": [
+                                                "USER_ENTERED",
+                                                "RAW"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "insertDataOption",
+                                        "type": "select",
+                                        "label": "Insert data option",
+                                        "validate": {
+                                            "enum": [
+                                                "INSERT_ROWS",
+                                                "OVERWRITE"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "from",
+                                        "type": "select",
+                                        "label": "Drive",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "spreadsheetId",
+                                        "type": "file",
+                                        "label": "Spreadsheet ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "sheetId",
+                                        "type": "select",
+                                        "label": "Sheet Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "includesHeaders",
+                                        "type": "select",
+                                        "label": "Table contains headers",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                true,
+                                                false
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "values",
+                                        "spec": [
+                                            {
+                                                "name": "0",
+                                                "type": "text",
+                                                "label": "Nombe cliente (A)"
+                                            },
+                                            {
+                                                "name": "1",
+                                                "type": "text",
+                                                "label": "Fecha (B)"
+                                            },
+                                            {
+                                                "name": "2",
+                                                "type": "text",
+                                                "label": "Codigo cliente (C)"
+                                            },
+                                            {
+                                                "name": "3",
+                                                "type": "text",
+                                                "label": "NIF (D)"
+                                            },
+                                            {
+                                                "name": "4",
+                                                "type": "text",
+                                                "label": "Total importe (E)"
+                                            },
+                                            {
+                                                "name": "5",
+                                                "type": "text",
+                                                "label": "IVA (F)"
+                                            },
+                                            {
+                                                "name": "6",
+                                                "type": "text",
+                                                "label": "Total factura (G)"
+                                            },
+                                            {
+                                                "name": "7",
+                                                "type": "text",
+                                                "label": "Vencimiento (H)"
+                                            },
+                                            {
+                                                "name": "8",
+                                                "type": "text",
+                                                "label": "Pais (I)"
+                                            },
+                                            {
+                                                "name": "9",
+                                                "type": "text",
+                                                "label": "(J)"
+                                            },
+                                            {
+                                                "name": "10",
+                                                "type": "text",
+                                                "label": "(K)"
+                                            },
+                                            {
+                                                "name": "11",
+                                                "type": "text",
+                                                "label": "(L)"
+                                            },
+                                            {
+                                                "name": "12",
+                                                "type": "text",
+                                                "label": "(M)"
+                                            },
+                                            {
+                                                "name": "13",
+                                                "type": "text",
+                                                "label": "(N)"
+                                            },
+                                            {
+                                                "name": "14",
+                                                "type": "text",
+                                                "label": "(O)"
+                                            },
+                                            {
+                                                "name": "15",
+                                                "type": "text",
+                                                "label": "(P)"
+                                            },
+                                            {
+                                                "name": "16",
+                                                "type": "text",
+                                                "label": "(Q)"
+                                            },
+                                            {
+                                                "name": "17",
+                                                "type": "text",
+                                                "label": "(R)"
+                                            },
+                                            {
+                                                "name": "18",
+                                                "type": "text",
+                                                "label": "(S)"
+                                            },
+                                            {
+                                                "name": "19",
+                                                "type": "text",
+                                                "label": "(T)"
+                                            },
+                                            {
+                                                "name": "20",
+                                                "type": "text",
+                                                "label": "(U)"
+                                            },
+                                            {
+                                                "name": "21",
+                                                "type": "text",
+                                                "label": "(V)"
+                                            },
+                                            {
+                                                "name": "22",
+                                                "type": "text",
+                                                "label": "(W)"
+                                            },
+                                            {
+                                                "name": "23",
+                                                "type": "text",
+                                                "label": "(X)"
+                                            },
+                                            {
+                                                "name": "24",
+                                                "type": "text",
+                                                "label": "(Y)"
+                                            },
+                                            {
+                                                "name": "25",
+                                                "type": "text",
+                                                "label": "(Z)"
+                                            },
+                                            {
+                                                "name": "26",
+                                                "type": "text",
+                                                "label": "(AA)"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Values"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com",
+        "notes": [
+            {
+                "moduleIds": [
+                    1
+                ],
+                "content": "<h1>1. Recibir Correo Electrónico</h1><p><strong>Propósito:</strong> Este es el disparador (trigger) de la automatización. Se activa cuando llega un nuevo correo electrónico que cumple con criterios específicos.</p><h2>Configuración Clave</h2><ul><li><strong>Cuenta:</strong> Asegúrate de seleccionar la conexión correcta a tu cuenta de Google.</li><li><strong>Carpeta:</strong> Está configurado para monitorear la 'INBOX' (Bandeja de entrada).</li><li><strong>Filtros:</strong> Solo se activará para correos enviados desde 'angel.aparicio@solutechia.es' y que tengan 'Factura' en el asunto.</li><li><strong>Marcar como leído:</strong> La opción 'Mark email message(s) as read' está activada para no procesar el mismo correo dos veces.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#9138FE"
+                }
+            },
+            {
+                "moduleIds": [
+                    2
+                ],
+                "content": "<h1>2. Iterar Archivos Adjuntos</h1><p><strong>Propósito:</strong> Un correo puede tener varios archivos adjuntos. Este módulo (un iterador) procesa cada archivo adjunto del correo recibido por el trigger (módulo 1) de forma individual, ejecutando los módulos siguientes una vez por cada archivo.</p><h2>Configuración Clave</h2><ul><li><strong>Array:</strong> Se mapea la variable 'attachments' del módulo 1. No requiere configuración adicional.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#9138FE"
+                }
+            },
+            {
+                "moduleIds": [
+                    57
+                ],
+                "content": "<h1>3. Convertir PDF a Imágenes</h1><p><strong>Propósito:</strong> Convierte el archivo PDF de la factura (obtenido del iterador) en una serie de imágenes JPG, una por cada página del documento. Esto es necesario para que el modelo de IA pueda 'leer' visualmente el contenido.</p><h2>Configuración Clave</h2><ul><li><strong>Conexión:</strong> Debes tener una conexión válida a PDF.co.</li><li><strong>Archivo de entrada:</strong> Se mapea la variable 'data' del iterador (módulo 2), que contiene el archivo en sí.</li><li><strong>Tipo de conversión:</strong> Se ha seleccionado la conversión a JPG.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#9138FE"
+                }
+            },
+            {
+                "moduleIds": [
+                    58
+                ],
+                "content": "<h1>4. Agregar Imágenes</h1><p><strong>Propósito:</strong> Reúne todas las imágenes JPG generadas en el paso anterior (módulo 57) en un único paquete (un array). Esto es crucial para enviar todas las páginas de la factura a OpenAI en una sola solicitud.</p><h2>Configuración Clave</h2><ul><li><strong>Módulo de origen:</strong> Selecciona el módulo de PDF.co (ID 57).</li><li><strong>Estructura de destino:</strong> Agrega la 'url' de cada imagen generada.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#9138FE"
+                }
+            },
+            {
+                "moduleIds": [
+                    59
+                ],
+                "content": "<h1>5. Analizar Imágenes con IA</h1><p><strong>Propósito:</strong> Envía las imágenes de la factura al modelo GPT-4o de OpenAI para que extraiga la información clave. El 'prompt' le indica exactamente qué datos buscar y en qué formato JSON debe devolverlos.</p><h2>Configuración Clave</h2><ul><li><strong>Conexión:</strong> Conexión a OpenAI.</li><li><strong>Modelo:</strong> 'gpt-4o' para análisis de imágenes.</li><li><strong>Imágenes:</strong> Se mapean las URLs del agregador (módulo 58).</li><li><strong>Prompt:</strong> El texto del prompt es fundamental. Define los campos a extraer y la estructura JSON deseada.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#9138FE"
+                }
+            },
+            {
+                "moduleIds": [
+                    60
+                ],
+                "content": "<h1>6. Corregir y Validar JSON</h1><p><strong>Propósito:</strong> El resultado del análisis de imagen (módulo 59) a veces puede tener pequeños errores de formato. Este módulo utiliza un modelo de IA más rápido (GPT-4o-mini) para limpiar y asegurar que la salida sea un código JSON perfectamente válido antes de usarlo en los siguientes pasos.</p><h2>Configuración Clave</h2><ul><li><strong>Conexión:</strong> Conexión a OpenAI.</li><li><strong>Modelo:</strong> 'gpt-4o-mini' es suficiente para esta tarea.</li><li><strong>Contenido:</strong> Se le pasa el texto resultante del módulo 59.</li><li><strong>Formato de respuesta:</strong> Se fuerza a que la salida sea un 'JSON Object'.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#9138FE"
+                }
+            },
+            {
+                "moduleIds": [
+                    61
+                ],
+                "content": "<h1>7. Enrutador Principal</h1><p><strong>Propósito:</strong> Este enrutador (Router) divide el flujo en dos caminos que se ejecutan simultáneamente. Esto permite, por un lado, guardar el archivo en Google Drive y, por otro, registrar los datos en Google Sheets.</p><h2>Configuración Clave</h2><ul><li>No requiere configuración, solo conecta los módulos que inician cada ruta.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#9138FE"
+                }
+            },
+            {
+                "moduleIds": [
+                    32
+                ],
+                "content": "<h1>8. Buscar Carpeta del Año</h1><p><strong>Propósito:</strong> (Ruta superior) Comprueba si ya existe en Google Drive una carpeta para el año en curso (ej. '2025') dentro de la carpeta principal de 'Facturas'.</p><h2>Configuración Clave</h2><ul><li><strong>Conexión:</strong> Google Drive.</li><li><strong>Carpeta de búsqueda:</strong> La carpeta principal donde se almacenan todas las facturas.</li><li><strong>Consulta:</strong> Busca un nombre de carpeta que coincida con el año actual, obtenido con la fórmula `formatDate(now; \"YYYY\")`.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#239F73"
+                }
+            },
+            {
+                "moduleIds": [
+                    34
+                ],
+                "content": "<h1>9. Router - ¿Existe la Carpeta del Año?</h1><p><strong>Propósito:</strong> (Ruta superior) Basado en el resultado de la búsqueda anterior (módulo 32), este enrutador decide qué camino seguir: si la carpeta del año no existe, la crea; si ya existe, continúa el flujo por la otra ruta.</p><h2>Configuración Clave</h2><ul><li>Los filtros en las rutas siguientes son clave.</li><li><strong>Ruta superior:</strong> Se activa si el número de carpetas encontradas es 0.</li><li><strong>Ruta inferior:</strong> Se activa si el número de carpetas encontradas es 1.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#239F73"
+                }
+            },
+            {
+                "moduleIds": [
+                    11,
+                    63,
+                    64
+                ],
+                "content": "<h1>10. Crear Estructura de Carpetas y Subir Archivo (Si no existe)</h1><p><strong>Propósito:</strong> Esta secuencia se activa si la carpeta del año no existe. Primero crea la carpeta del año (ej. '2025'), luego una subcarpeta para el mes actual (ej. 'Septiembre'), y finalmente sube el archivo de la factura a esa subcarpeta.</p><h2>Configuración Clave</h2><ul><li><strong>Módulo 11:</strong> Crea la carpeta del año.</li><li><strong>Módulo 63:</strong> Crea la subcarpeta del mes usando el ID de la carpeta creada en el paso 11.</li><li><strong>Módulo 64:</strong> Sube el archivo original (del módulo 2) a la subcarpeta del mes (creada en el paso 63) y le cambia el nombre usando los datos extraídos por la IA.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#239F73"
+                }
+            },
+            {
+                "moduleIds": [
+                    38,
+                    39,
+                    51,
+                    73,
+                    74
+                ],
+                "content": "<h1>11. Gestionar Subcarpetas y Subir Archivo (Si el año ya existe)</h1><p><strong>Propósito:</strong> Esta secuencia se activa si la carpeta del año ya existe. Comprueba si existe la subcarpeta del mes actual. Si no existe, la crea y sube el archivo. Si ya existe, simplemente sube el archivo a la subcarpeta existente.</p><h2>Configuración Clave</h2><ul><li><strong>Módulo 38:</strong> Busca la subcarpeta del mes dentro de la carpeta del año encontrada.</li><li><strong>Módulo 39 (Router):</strong> Decide si crear o no la subcarpeta del mes.</li><li><strong>Módulos 51 y 73:</strong> Ruta para crear la subcarpeta y luego subir el archivo.</li><li><strong>Módulo 74:</strong> Ruta para subir el archivo directamente a la subcarpeta ya existente.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#239F73"
+                }
+            },
+            {
+                "moduleIds": [
+                    67
+                ],
+                "content": "<h1>12. Añadir Fila a Google Sheets</h1><p><strong>Propósito:</strong> (Ruta inferior) Registra toda la información extraída de la factura en una nueva fila de una hoja de cálculo de Google Sheets.</p><h2>Configuración Clave</h2><ul><li><strong>Conexión:</strong> Conexión a Google Sheets.</li><li><strong>Spreadsheet y Hoja:</strong> Selecciona el archivo y la hoja de cálculo correctos donde se almacenarán los datos.</li><li><strong>Valores:</strong> Mapea cada campo del JSON validado (del módulo 60) a la columna correspondiente en la hoja de cálculo.</li></ul>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#3369E8"
+                }
+            }
+        ]
+    }
+}

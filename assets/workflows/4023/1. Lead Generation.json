@@ -1,0 +1,1152 @@
+{
+    "name": "1. Lead Scraper",
+    "flow": [
+        {
+            "id": 1,
+            "module": "apify:runActor",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 2983978
+            },
+            "mapper": {
+                "actorId": "2Mdma1N6Fd0y3QEjR",
+                "runSync": true,
+                "inputBody": "{\n    \"deeperCityScrape\": false,\n    \"language\": \"en\",\n    \"locationQuery\": \"Barcelona\",\n    \"maxCrawledPlacesPerSearch\": 20,\n    \"searchStringsArray\": [\n        \"Gimnasio\"\n    ],\n    \"skipClosedPlaces\": false\n}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "memory": {
+                            "mode": "chose",
+                            "label": "Empty"
+                        },
+                        "actorId": {
+                            "mode": "chose",
+                            "label": "compass/google-maps-extractor"
+                        },
+                        "runSync": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "apify"
+                            },
+                            "label": "AngelApaIA"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:apify",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "actorId",
+                        "type": "select",
+                        "label": "Actor",
+                        "required": true
+                    },
+                    {
+                        "name": "runSync",
+                        "type": "boolean",
+                        "label": "Run synchronously",
+                        "required": true
+                    },
+                    {
+                        "name": "inputBody",
+                        "type": "text",
+                        "label": "Input JSON"
+                    },
+                    {
+                        "name": "build",
+                        "type": "text",
+                        "label": "Build"
+                    },
+                    {
+                        "name": "timeout",
+                        "type": "uinteger",
+                        "label": "Timeout"
+                    },
+                    {
+                        "name": "memory",
+                        "type": "select",
+                        "label": "Memory",
+                        "validate": {
+                            "enum": [
+                                128,
+                                256,
+                                512,
+                                1024,
+                                2048,
+                                4096,
+                                8192,
+                                16384,
+                                32768
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "apify:fetchDatasetItems",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 2983978
+            },
+            "mapper": {
+                "type": "clean",
+                "limit": "100",
+                "format": "json",
+                "datasetId": "{{1.defaultDatasetId}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "type": {
+                            "mode": "chose",
+                            "label": "Clean"
+                        },
+                        "format": {
+                            "mode": "chose",
+                            "label": "JSON"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "apify"
+                            },
+                            "label": "AngelApaIA"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:apify",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "datasetId",
+                        "type": "text",
+                        "label": "Dataset ID",
+                        "required": true
+                    },
+                    {
+                        "name": "type",
+                        "type": "select",
+                        "label": "Data transformation",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "clean",
+                                "simplified",
+                                "none"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "format",
+                        "type": "select",
+                        "label": "Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "json",
+                                "csv",
+                                "html",
+                                "xml",
+                                "rss",
+                                "xlsx"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit",
+                        "validate": {
+                            "max": 100000,
+                            "min": 1
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "type": "uinteger",
+                        "label": "Offset",
+                        "validate": {
+                            "min": 0
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "anymailfinder:emailSearchCompany",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 2984182
+            },
+            "filter": {
+                "name": "URL Disponible",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{2.website}}",
+                            "o": "exist"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "domain": "{{2.website}}",
+                "searchCriteria": "domain"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "searchCriteria": {
+                            "label": "Domain"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "anymailfinder"
+                            },
+                            "label": "My Anymail finder connection (angel.aparicio92@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:anymailfinder",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "searchCriteria",
+                        "type": "select",
+                        "label": "Search by",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "domain",
+                                "companyName"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "domain",
+                        "type": "text",
+                        "label": "Domain",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "module": "perplexity-ai:createAChatCompletion",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 1534825
+            },
+            "filter": {
+                "name": "Email Disponible",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{3.emailList[]}}",
+                            "o": "exist"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "model": "llama-3.1-sonar-large-128k-online",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "Extrae el máximo de información posible sobre la siguiente pagina web: {{2.website}} \nEste negocio esta situado en {{2.state}} y se llama {{2.title}}\n"
+                    }
+                ],
+                "max_tokens": "2000"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "model": {
+                            "mode": "chose",
+                            "label": "llama-3.1-sonar-large-128k-online"
+                        },
+                        "messages": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "perplexity-ai"
+                            },
+                            "label": "My Perplexity connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:perplexity-ai",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "messages",
+                        "spec": [
+                            {
+                                "name": "content",
+                                "type": "text",
+                                "label": "Content",
+                                "required": true
+                            },
+                            {
+                                "name": "role",
+                                "type": "select",
+                                "label": "Role",
+                                "options": [
+                                    {
+                                        "label": "User",
+                                        "value": "user"
+                                    },
+                                    {
+                                        "label": "Assistant",
+                                        "value": "assistant"
+                                    },
+                                    {
+                                        "label": "System",
+                                        "value": "system"
+                                    }
+                                ],
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "number",
+                        "label": "Max Tokens"
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature",
+                        "validate": {
+                            "max": 1.999,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P",
+                        "validate": {
+                            "max": 1,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_k",
+                        "type": "number",
+                        "label": "Top K",
+                        "validate": {
+                            "max": 2048,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "presence_penalty",
+                        "type": "number",
+                        "label": "Presence Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "number",
+                        "label": "Frequency Penalty",
+                        "validate": {
+                            "min": 0
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "module": "openai-gpt-3:CreateCompletion",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 1524414
+            },
+            "mapper": {
+                "model": "gpt-4o-mini-2024-07-18",
+                "top_p": "1",
+                "select": "chat",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "Actua como experto en ventas de equipamiento de gimnasio."
+                    },
+                    {
+                        "role": "user",
+                        "content": "Crea un cuerpo de email personalizado para ofrecer tus productos al gimnasio con el objetivo de agendar una llamada con el propietario de la empresa. Solo el cuerpo del email sin asunto. Puntos importantes:\n\n1. Obten información relevante de la empresa a partir de la siguiente información para personalizar el email: {{10.choices[].message.content}}\n2. Pueden agendar una llamada en sl siguiente enlace (https://tidycal.com/angelaparicio/primer-contacto-solutechia) o contestar al email con disponibilidad para agendar una llamada\n3. El cliente encontrará adjunto el catalogo de productos.\n4. Se extremadamente persuasivo utilizando los sesgos de la escasez, sesgo de prueba social y sesgo de autoridad\n5. Este gimnasio esta en {{2.state}} en la zona de {{2.neighborhood}}. Utilizalo para la prueba social.\n6. En remitente del correo es Angel Aparicio\n7. El nombre de mi empresa es GimnasIA y mi numero de contacto es 612345678\n8. El mensaje tiene que ser cercano y parecer muy humano. \n9. Siempre responde en español de españa (vosotros, tu)\n\nImportante:\n-Responde solo con el texto del cuerpo del correo electronico. No añadas asunto.\n-No añadas variables vacias, solo utiliza las variables sobre las que tengas información"
+                    }
+                ],
+                "max_tokens": "2000",
+                "temperature": "1",
+                "n_completions": "1",
+                "response_format": "text"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "stop": {
+                            "mode": "chose"
+                        },
+                        "model": {
+                            "mode": "chose",
+                            "label": "gpt-4o-mini-2024-07-18 (system)"
+                        },
+                        "select": {
+                            "label": "Create a Chat Completion (GPT Models)"
+                        },
+                        "messages": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "System"
+                                    }
+                                },
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    }
+                                }
+                            ]
+                        },
+                        "logit_bias": {
+                            "mode": "chose"
+                        },
+                        "response_format": {
+                            "mode": "chose",
+                            "label": "Text"
+                        },
+                        "additionalParameters": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "My OpenAI connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:openai-gpt-3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Select Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "chat",
+                                "prompt"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "number",
+                        "label": "Max Tokens",
+                        "required": true
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature",
+                        "validate": {
+                            "max": 2,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P",
+                        "validate": {
+                            "max": 1,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "n_completions",
+                        "type": "number",
+                        "label": "Number"
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "number",
+                        "label": "Frequency Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "presence_penalty",
+                        "type": "number",
+                        "label": "Presence Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "logit_bias",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "token",
+                                    "type": "text",
+                                    "label": "Token ID",
+                                    "required": true
+                                },
+                                {
+                                    "name": "probability",
+                                    "type": "number",
+                                    "label": "Probability",
+                                    "required": true,
+                                    "validate": {
+                                        "max": 100,
+                                        "min": -100
+                                    }
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Token Probability"
+                        },
+                        "type": "array",
+                        "label": "Token Probability"
+                    },
+                    {
+                        "name": "response_format",
+                        "type": "select",
+                        "label": "Response Format",
+                        "validate": {
+                            "enum": [
+                                "text",
+                                "json_object"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "seed",
+                        "type": "integer",
+                        "label": "Seed"
+                    },
+                    {
+                        "name": "stop",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Stop Sequence"
+                        },
+                        "type": "array",
+                        "label": "Stop Sequences",
+                        "validate": {
+                            "maxItems": 4
+                        }
+                    },
+                    {
+                        "name": "additionalParameters",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Parameter Name",
+                                    "required": true
+                                },
+                                {
+                                    "name": "type",
+                                    "type": "select",
+                                    "label": "Input Type",
+                                    "options": [
+                                        {
+                                            "label": "Text",
+                                            "value": "text",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "text",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ],
+                                            "default": true
+                                        },
+                                        {
+                                            "label": "Number",
+                                            "value": "number",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "number",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Boolean",
+                                            "value": "boolean",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "boolean",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Date",
+                                            "value": "date",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "date",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Any",
+                                            "value": "any",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "any",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Input Parameter"
+                        },
+                        "type": "array",
+                        "label": "Other Input Parameters"
+                    },
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "messages",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "role",
+                                    "type": "select",
+                                    "label": "Role",
+                                    "options": [
+                                        {
+                                            "label": "System",
+                                            "value": "system"
+                                        },
+                                        {
+                                            "label": "User",
+                                            "value": "user"
+                                        },
+                                        {
+                                            "label": "Assistant",
+                                            "value": "assistant"
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                {
+                                    "name": "content",
+                                    "type": "text",
+                                    "label": "Message Content"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Message"
+                        },
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "airtable:ActionCreateRecord",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 2923290
+            },
+            "mapper": {
+                "base": "apprHqUjygEoWOmX6",
+                "table": "tbl8d5Ic5AZizkmL6",
+                "record": {
+                    "fld37fUkFzM1XVPSj": "{{3.emailList[1]}}",
+                    "fld5wXVxCQtFEhnaQ": "{{2.totalScore}}",
+                    "fldAGBFeRaIK9voIY": "{{2.phone}}",
+                    "fldDMROj2rlBgx2lB": "{{2.city}}",
+                    "fldE9c50Lhe7vEksm": "{{2.title}}",
+                    "fldLJwdntVxu57MLL": "{{7.result}}",
+                    "fldLtpaYuNq7CLhWM": "{{3.emailList[4]}}",
+                    "fldQMC2TksPZn5TgM": "{{2.searchString}}",
+                    "fldXjOS73p7ebo2CA": "{{2.url}}",
+                    "fldjlY63dzcB1xTxB": "{{3.emailList[2]}}",
+                    "fldjvqRalCGtt4JW5": "{{2.website}}",
+                    "fldkwxCRxUvYvWAQA": "{{3.emailList[3]}}",
+                    "flduS6Kj2Eas6T3eB": "{{2.neighborhood}}",
+                    "fldyvfPCQFukyLufH": "{{2.address}}"
+                },
+                "typecast": false,
+                "useColumnId": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1500,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "base": {
+                            "label": "Leads Maps"
+                        },
+                        "table": {
+                            "label": "Table 1",
+                            "nested": [
+                                {
+                                    "name": "record",
+                                    "spec": [
+                                        {
+                                            "name": "fldE9c50Lhe7vEksm",
+                                            "type": "text",
+                                            "label": "Empresa"
+                                        },
+                                        {
+                                            "name": "fldQMC2TksPZn5TgM",
+                                            "type": "text",
+                                            "label": "Palabra Clave"
+                                        },
+                                        {
+                                            "name": "fldyvfPCQFukyLufH",
+                                            "type": "text",
+                                            "label": "Dirección"
+                                        },
+                                        {
+                                            "name": "flduS6Kj2Eas6T3eB",
+                                            "type": "text",
+                                            "label": "Barrio"
+                                        },
+                                        {
+                                            "name": "fldDMROj2rlBgx2lB",
+                                            "type": "text",
+                                            "label": "Ciudad"
+                                        },
+                                        {
+                                            "name": "fldjvqRalCGtt4JW5",
+                                            "type": "text",
+                                            "label": "Web"
+                                        },
+                                        {
+                                            "name": "fldAGBFeRaIK9voIY",
+                                            "type": "text",
+                                            "label": "Telefono"
+                                        },
+                                        {
+                                            "name": "fldXjOS73p7ebo2CA",
+                                            "type": "text",
+                                            "label": "URL Maps"
+                                        },
+                                        {
+                                            "name": "fld37fUkFzM1XVPSj",
+                                            "type": "text",
+                                            "label": "Email de contacto 1"
+                                        },
+                                        {
+                                            "name": "fldjlY63dzcB1xTxB",
+                                            "type": "text",
+                                            "label": "Email de contacto 2"
+                                        },
+                                        {
+                                            "name": "fldkwxCRxUvYvWAQA",
+                                            "type": "text",
+                                            "label": "Email de contacto 3"
+                                        },
+                                        {
+                                            "name": "fldLtpaYuNq7CLhWM",
+                                            "type": "text",
+                                            "label": "Email de contacto 4"
+                                        },
+                                        {
+                                            "name": "fld5wXVxCQtFEhnaQ",
+                                            "type": "number",
+                                            "label": "Nota Negocio"
+                                        },
+                                        {
+                                            "name": "fldLJwdntVxu57MLL",
+                                            "type": "text",
+                                            "label": "Texto email",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fld2KcVcEnmadZO0x",
+                                            "type": "boolean",
+                                            "label": "¿Enviar?"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Record"
+                                }
+                            ]
+                        },
+                        "record": {
+                            "nested": {
+                                "fld2KcVcEnmadZO0x": {
+                                    "mode": "chose"
+                                }
+                            }
+                        },
+                        "typecast": {
+                            "mode": "chose"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            },
+                            "label": "My Airtable OAuth connection buena (User ID: usr1voXsCs2mwE0pt)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "typecast",
+                        "type": "boolean",
+                        "label": "Smart links",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "record",
+                        "spec": [
+                            {
+                                "name": "fldE9c50Lhe7vEksm",
+                                "type": "text",
+                                "label": "Empresa"
+                            },
+                            {
+                                "name": "fldQMC2TksPZn5TgM",
+                                "type": "text",
+                                "label": "Palabra Clave"
+                            },
+                            {
+                                "name": "fldyvfPCQFukyLufH",
+                                "type": "text",
+                                "label": "Dirección"
+                            },
+                            {
+                                "name": "flduS6Kj2Eas6T3eB",
+                                "type": "text",
+                                "label": "Barrio"
+                            },
+                            {
+                                "name": "fldDMROj2rlBgx2lB",
+                                "type": "text",
+                                "label": "Ciudad"
+                            },
+                            {
+                                "name": "fldjvqRalCGtt4JW5",
+                                "type": "text",
+                                "label": "Web"
+                            },
+                            {
+                                "name": "fldAGBFeRaIK9voIY",
+                                "type": "text",
+                                "label": "Telefono"
+                            },
+                            {
+                                "name": "fldXjOS73p7ebo2CA",
+                                "type": "text",
+                                "label": "URL Maps"
+                            },
+                            {
+                                "name": "fld37fUkFzM1XVPSj",
+                                "type": "text",
+                                "label": "Email de contacto 1"
+                            },
+                            {
+                                "name": "fldjlY63dzcB1xTxB",
+                                "type": "text",
+                                "label": "Email de contacto 2"
+                            },
+                            {
+                                "name": "fldkwxCRxUvYvWAQA",
+                                "type": "text",
+                                "label": "Email de contacto 3"
+                            },
+                            {
+                                "name": "fldLtpaYuNq7CLhWM",
+                                "type": "text",
+                                "label": "Email de contacto 4"
+                            },
+                            {
+                                "name": "fld5wXVxCQtFEhnaQ",
+                                "type": "number",
+                                "label": "Nota Negocio"
+                            },
+                            {
+                                "name": "fldLJwdntVxu57MLL",
+                                "type": "text",
+                                "label": "Texto email"
+                            },
+                            {
+                                "name": "fld2KcVcEnmadZO0x",
+                                "type": "boolean",
+                                "label": "¿Enviar?"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Record"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "Empresa",
+                        "type": "text",
+                        "label": "Empresa"
+                    },
+                    {
+                        "name": "Palabra Clave",
+                        "type": "text",
+                        "label": "Palabra Clave"
+                    },
+                    {
+                        "name": "Dirección",
+                        "type": "text",
+                        "label": "Dirección"
+                    },
+                    {
+                        "name": "Barrio",
+                        "type": "text",
+                        "label": "Barrio"
+                    },
+                    {
+                        "name": "Ciudad",
+                        "type": "text",
+                        "label": "Ciudad"
+                    },
+                    {
+                        "name": "Web",
+                        "type": "text",
+                        "label": "Web"
+                    },
+                    {
+                        "name": "Telefono",
+                        "type": "text",
+                        "label": "Telefono"
+                    },
+                    {
+                        "name": "URL Maps",
+                        "type": "text",
+                        "label": "URL Maps"
+                    },
+                    {
+                        "name": "Email de contacto 1",
+                        "type": "text",
+                        "label": "Email de contacto 1"
+                    },
+                    {
+                        "name": "Email de contacto 2",
+                        "type": "text",
+                        "label": "Email de contacto 2"
+                    },
+                    {
+                        "name": "Email de contacto 3",
+                        "type": "text",
+                        "label": "Email de contacto 3"
+                    },
+                    {
+                        "name": "Email de contacto 4",
+                        "type": "text",
+                        "label": "Email de contacto 4"
+                    },
+                    {
+                        "name": "Nota Negocio",
+                        "type": "number",
+                        "label": "Nota Negocio"
+                    },
+                    {
+                        "name": "Texto email",
+                        "type": "text",
+                        "label": "Texto email",
+                        "multiline": true
+                    },
+                    {
+                        "name": "¿Enviar?",
+                        "type": "boolean",
+                        "label": "¿Enviar?"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

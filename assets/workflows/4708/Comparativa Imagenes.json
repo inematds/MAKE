@@ -1,0 +1,1499 @@
+{
+    "name": "11. Comparativa de imagenes",
+    "flow": [
+        {
+            "id": 54,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "Estilos",
+                "scope": "roundtrip",
+                "value": "{\n  \"prompts\": [\n    {\n      \"style\": \"Hyperrealism\",\n      \"prompt\": \"Create an extremely detailed hyperrealistic portrait of a young woman. Focus on showing every pore of her skin, individual strands of hair, and subtle reflections in her eyes. The background should be a blurred cityscape, with soft, natural lighting enhancing the depth and realism of the image.\"\n    },\n    {\n      \"style\": \"Steampunk\",\n      \"prompt\": \"Design a steampunk character, an inventor, wearing Victorian-era clothing with visible gears and steam-powered gadgets. The character should have goggles on their forehead and a mechanical arm. The setting is a workshop filled with intricate machines and steam engines, with a warm, sepia-toned color palette.\"\n    },\n    {\n      \"style\": \"Pop Art\",\n      \"prompt\": \"Create a pop art image of a retro telephone with a bright red rotary dial. Use bold, saturated colors and thick black outlines to mimic a comic book style. Incorporate halftone dots and speech bubbles with playful, exaggerated text to add a dynamic, lively feel to the artwork.\"\n    },\n    {\n      \"style\": \"Medieval Fantasy\",\n      \"prompt\": \"Illustrate a medieval fantasy character, a knight in shining armor, standing in an enchanted forest. The armor should be highly detailed, reflecting the dappled sunlight filtering through the trees. Add a mythical creature, like a small dragon perched on the knight's shoulder, to emphasize the magical theme.\"\n    },\n    {\n      \"style\": \"Cubism\",\n      \"prompt\": \"Create a cubist representation of a violin. Deconstruct the violin into geometric shapes, showing multiple angles and perspectives simultaneously. Use a palette of muted earth tones with occasional bright accents to create a sense of movement and complexity in the composition.\"\n    }\n  ]\n}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 450
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Estilos",
+                        "type": "any",
+                        "label": "Estilos"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 58,
+            "module": "json:ParseJSON",
+            "version": 1,
+            "parameters": {
+                "type": ""
+            },
+            "mapper": {
+                "json": "{{54.Estilos}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 450
+                },
+                "restore": {
+                    "parameters": {
+                        "type": {
+                            "label": "Choose a data structure"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "json",
+                        "type": "text",
+                        "label": "JSON string",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 60,
+            "module": "builtin:BasicFeeder",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "array": "{{58.prompts}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 450
+                },
+                "restore": {
+                    "expect": {
+                        "array": {
+                            "mode": "edit"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "mode": "edit",
+                        "name": "array",
+                        "spec": [],
+                        "type": "array",
+                        "label": "Array"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 45,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 450
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 47,
+                            "module": "stability-ai:generateImageFromText2",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 1664275
+                            },
+                            "mapper": {
+                                "steps": "30",
+                                "width": "1024",
+                                "height": "1024",
+                                "samples": "1",
+                                "cfg_scale": "7",
+                                "engine_id": "stable-diffusion-xl-1024-v1-0",
+                                "text_prompts": [
+                                    {
+                                        "text": "{{60.prompt}}",
+                                        "weight": "1"
+                                    }
+                                ]
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 0
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "sampler": {
+                                            "mode": "chose",
+                                            "label": "Empty"
+                                        },
+                                        "engine_id": {
+                                            "mode": "chose",
+                                            "label": "Stable Diffusion XL v1.0"
+                                        },
+                                        "style_preset": {
+                                            "mode": "chose",
+                                            "label": "Empty"
+                                        },
+                                        "text_prompts": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        },
+                                        "clip_guidance_preset": {
+                                            "mode": "chose",
+                                            "label": "Empty"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "stability-ai"
+                                            },
+                                            "label": "My Stability connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:stability-ai",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "engine_id",
+                                        "type": "select",
+                                        "label": "Engine",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "text_prompts",
+                                        "spec": [
+                                            {
+                                                "name": "text",
+                                                "type": "text",
+                                                "label": "Prompt Text",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "weight",
+                                                "type": "number",
+                                                "label": "Prompt Weight",
+                                                "required": true
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Text Prompts",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "height",
+                                        "type": "uinteger",
+                                        "label": "Image Height",
+                                        "validate": {
+                                            "min": 128
+                                        }
+                                    },
+                                    {
+                                        "name": "width",
+                                        "type": "uinteger",
+                                        "label": "Image Width",
+                                        "validate": {
+                                            "min": 128
+                                        }
+                                    },
+                                    {
+                                        "name": "samples",
+                                        "type": "integer",
+                                        "label": "Number of Samples",
+                                        "validate": {
+                                            "max": 10,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "cfg_scale",
+                                        "type": "number",
+                                        "label": "CFG Scale",
+                                        "validate": {
+                                            "max": 35,
+                                            "min": 0
+                                        }
+                                    },
+                                    {
+                                        "name": "clip_guidance_preset",
+                                        "type": "select",
+                                        "label": "CLIP Guidance Preset",
+                                        "validate": {
+                                            "enum": [
+                                                "FAST_BLUE",
+                                                "FAST_GREEN",
+                                                "NONE",
+                                                "SIMPLE",
+                                                "SLOW",
+                                                "SLOWER",
+                                                "SLOWEST"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "sampler",
+                                        "type": "select",
+                                        "label": "Sampler",
+                                        "validate": {
+                                            "enum": [
+                                                "DDIM",
+                                                "DDPM",
+                                                "K_DPMPP_2M",
+                                                "K_DPMPP_2S_ANCESTRAL",
+                                                "K_DPM_2",
+                                                "K_DPM_2_ANCESTRAL",
+                                                "K_EULER",
+                                                "K_EULER_ANCESTRAL",
+                                                "K_HEUN",
+                                                "K_LMS"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "seed",
+                                        "type": "integer",
+                                        "label": "Random Seed"
+                                    },
+                                    {
+                                        "name": "steps",
+                                        "type": "integer",
+                                        "label": "Diffusion Steps",
+                                        "validate": {
+                                            "max": 50,
+                                            "min": 10
+                                        }
+                                    },
+                                    {
+                                        "name": "style_preset",
+                                        "type": "select",
+                                        "label": "Style Preset",
+                                        "validate": {
+                                            "enum": [
+                                                "3d-model",
+                                                "analog-film",
+                                                "anime",
+                                                "cinematic",
+                                                "comic-book",
+                                                "digital-art",
+                                                "enhance",
+                                                "fantasy-art",
+                                                "isometric",
+                                                "line-art",
+                                                "low-poly",
+                                                "modeling-compound",
+                                                "neon-punk",
+                                                "origami",
+                                                "photographic",
+                                                "pixel-art",
+                                                "tile-texture"
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        },
+                        {
+                            "id": 49,
+                            "module": "dropbox:uploadLargeFile",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 1627932
+                            },
+                            "mapper": {
+                                "data": "{{47.data}}",
+                                "path": "/",
+                                "filename": "{{47.fileName}}",
+                                "overwrite": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 0
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "path": {
+                                            "mode": "chose"
+                                        },
+                                        "overwrite": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "path",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "filename",
+                                        "type": "filename",
+                                        "label": "File Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Data",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "overwrite",
+                                        "type": "boolean",
+                                        "label": "Overwrite an existing file",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 46,
+                            "module": "leonardo-ai:generateImage",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 1929874
+                            },
+                            "mapper": {
+                                "width": "1024",
+                                "height": "1024",
+                                "prompt": "{{60.prompt}}",
+                                "public": false,
+                                "alchemy": true,
+                                "modelId": "aa77f04e-3eec-4034-9c07-d0f619684628",
+                                "num_images": "1",
+                                "promptMagic": true,
+                                "highResolution": true,
+                                "promptMagicVersion": "v3"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "nsfw": {
+                                            "mode": "chose"
+                                        },
+                                        "public": {
+                                            "mode": "chose"
+                                        },
+                                        "source": {
+                                            "mode": "chose",
+                                            "label": "Empty"
+                                        },
+                                        "tiling": {
+                                            "mode": "chose"
+                                        },
+                                        "unzoom": {
+                                            "mode": "chose"
+                                        },
+                                        "alchemy": {
+                                            "mode": "chose"
+                                        },
+                                        "modelId": {
+                                            "mode": "chose",
+                                            "label": "Leonardo Kino XL"
+                                        },
+                                        "photoReal": {
+                                            "mode": "chose"
+                                        },
+                                        "scheduler": {
+                                            "mode": "chose",
+                                            "label": "Empty"
+                                        },
+                                        "controlNet": {
+                                            "mode": "chose"
+                                        },
+                                        "sd_version": {
+                                            "mode": "chose",
+                                            "label": "Empty"
+                                        },
+                                        "presetStyle": {
+                                            "mode": "chose",
+                                            "label": "Empty"
+                                        },
+                                        "promptMagic": {
+                                            "mode": "chose"
+                                        },
+                                        "highContrast": {
+                                            "mode": "chose"
+                                        },
+                                        "imagePrompts": {
+                                            "mode": "chose"
+                                        },
+                                        "expandedDomain": {
+                                            "mode": "chose"
+                                        },
+                                        "highResolution": {
+                                            "mode": "chose"
+                                        },
+                                        "promptMagicVersion": {
+                                            "mode": "chose",
+                                            "label": "v3"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "leonardo-ai"
+                                            },
+                                            "label": "MAke imagenes (angelapa11)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:leonardo-ai",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "prompt",
+                                        "type": "text",
+                                        "label": "Prompt",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "modelId",
+                                        "type": "select",
+                                        "label": "Model"
+                                    },
+                                    {
+                                        "name": "num_images",
+                                        "type": "uinteger",
+                                        "label": "Number of Images to Generate",
+                                        "validate": {
+                                            "max": 8,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "source",
+                                        "type": "select",
+                                        "label": "Source",
+                                        "validate": {
+                                            "enum": [
+                                                "im",
+                                                "gen"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "public",
+                                        "type": "boolean",
+                                        "label": "Public"
+                                    },
+                                    {
+                                        "name": "height",
+                                        "type": "uinteger",
+                                        "label": "Height"
+                                    },
+                                    {
+                                        "name": "width",
+                                        "type": "uinteger",
+                                        "label": "Width"
+                                    },
+                                    {
+                                        "name": "unzoom",
+                                        "type": "boolean",
+                                        "label": "Unzoom"
+                                    },
+                                    {
+                                        "name": "alchemy",
+                                        "type": "boolean",
+                                        "label": "Alchemy"
+                                    },
+                                    {
+                                        "name": "promptMagic",
+                                        "type": "boolean",
+                                        "label": "Prompt Magic"
+                                    },
+                                    {
+                                        "name": "controlNet",
+                                        "type": "boolean",
+                                        "label": "Control Net"
+                                    },
+                                    {
+                                        "name": "presetStyle",
+                                        "type": "select",
+                                        "label": "Preset Style",
+                                        "validate": {
+                                            "enum": [
+                                                "CINEMATIC",
+                                                "CREATIVE",
+                                                "VIBRANT",
+                                                "NONE",
+                                                "ANIME",
+                                                "CREATIVE",
+                                                "DYNAMIC",
+                                                "ENVIRONMENT",
+                                                "GENERAL",
+                                                "ILLUSTRATION",
+                                                "PHOTOGRAPHY",
+                                                "RAYTRACED",
+                                                "RENDER_3D",
+                                                "SKETCH_BW",
+                                                "SKETCH_COLOR",
+                                                "NONE",
+                                                "LEONARDO",
+                                                "NONE"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "guidance_scale",
+                                        "type": "uinteger",
+                                        "label": "Guidance Scale",
+                                        "validate": {
+                                            "max": 20,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "weighting",
+                                        "type": "number",
+                                        "label": "Weighting"
+                                    },
+                                    {
+                                        "name": "init_strength",
+                                        "type": "number",
+                                        "label": "Init Strength",
+                                        "validate": {
+                                            "max": 0.9,
+                                            "min": 0.1
+                                        }
+                                    },
+                                    {
+                                        "name": "nsfw",
+                                        "type": "boolean",
+                                        "label": "NSFW"
+                                    },
+                                    {
+                                        "name": "tiling",
+                                        "type": "boolean",
+                                        "label": "Tiling"
+                                    },
+                                    {
+                                        "name": "num_inference_steps",
+                                        "type": "uinteger",
+                                        "label": "Number of Inference Steps",
+                                        "validate": {
+                                            "max": 60,
+                                            "min": 30
+                                        }
+                                    },
+                                    {
+                                        "name": "sd_version",
+                                        "type": "select",
+                                        "label": "SD Version",
+                                        "validate": {
+                                            "enum": [
+                                                "v1_5",
+                                                "v2"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "imagePrompts",
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "text",
+                                            "label": "Image Prompt"
+                                        },
+                                        "type": "array",
+                                        "label": "Image Prompts"
+                                    },
+                                    {
+                                        "name": "imagePromptWeight",
+                                        "type": "number",
+                                        "label": "Image Prompt Weight"
+                                    },
+                                    {
+                                        "name": "scheduler",
+                                        "type": "select",
+                                        "label": "Scheduler",
+                                        "validate": {
+                                            "enum": [
+                                                "KLMS",
+                                                "EULER_ANCESTRAL_DISCRETE",
+                                                "EULER_DISCRETE",
+                                                "DDIM",
+                                                "DPM_SOLVER",
+                                                "PNDM",
+                                                "LEONARDO"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "seed",
+                                        "type": "uinteger",
+                                        "label": "Seed"
+                                    },
+                                    {
+                                        "name": "negative_prompt",
+                                        "type": "text",
+                                        "label": "Negative Prompt"
+                                    },
+                                    {
+                                        "name": "upscaleRatio",
+                                        "type": "number",
+                                        "label": "Upscale Ratio"
+                                    },
+                                    {
+                                        "name": "contrastRatio",
+                                        "type": "number",
+                                        "label": "Contrast Ratio",
+                                        "validate": {
+                                            "max": 1,
+                                            "min": 0
+                                        }
+                                    },
+                                    {
+                                        "name": "expandedDomain",
+                                        "type": "boolean",
+                                        "label": "Expanded Domain"
+                                    },
+                                    {
+                                        "name": "photoReal",
+                                        "type": "boolean",
+                                        "label": "PhotoReal"
+                                    },
+                                    {
+                                        "name": "promptMagicVersion",
+                                        "type": "select",
+                                        "label": "Prompt Magic Version",
+                                        "validate": {
+                                            "enum": [
+                                                "v2",
+                                                "v3"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "highContrast",
+                                        "type": "boolean",
+                                        "label": "High Contrast"
+                                    },
+                                    {
+                                        "name": "highResolution",
+                                        "type": "boolean",
+                                        "label": "High Resolution"
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 23,
+                            "module": "openai-gpt-3:GenerateImage",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 1524414
+                            },
+                            "mapper": {
+                                "size": "1024x1024",
+                                "model": "dall-e-3",
+                                "style": "natural",
+                                "prompt": "{{60.prompt}}",
+                                "quality": "hd",
+                                "response_format": "url"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 600,
+                                    "name": "DALL·E"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "size": {
+                                            "mode": "chose",
+                                            "label": "1024x1024"
+                                        },
+                                        "model": {
+                                            "mode": "chose",
+                                            "label": "Dall-E 3"
+                                        },
+                                        "style": {
+                                            "mode": "chose",
+                                            "label": "Natural"
+                                        },
+                                        "quality": {
+                                            "mode": "chose",
+                                            "label": "HD"
+                                        },
+                                        "response_format": {
+                                            "mode": "chose",
+                                            "label": "URL"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "openai-gpt-3"
+                                            },
+                                            "label": "My OpenAI connection"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:openai-gpt-3",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "model",
+                                        "type": "select",
+                                        "label": "Model",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "dall-e-3",
+                                                "dall-e-2"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "prompt",
+                                        "type": "text",
+                                        "label": "Prompt",
+                                        "required": true,
+                                        "validate": {
+                                            "max": 4000,
+                                            "min": 0
+                                        }
+                                    },
+                                    {
+                                        "name": "size",
+                                        "type": "select",
+                                        "label": "Size",
+                                        "validate": {
+                                            "enum": [
+                                                "1024x1024",
+                                                "1792x1024",
+                                                "1024x1792"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "quality",
+                                        "type": "select",
+                                        "label": "Quality",
+                                        "validate": {
+                                            "enum": [
+                                                "standard",
+                                                "hd"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "style",
+                                        "type": "select",
+                                        "label": "Style",
+                                        "validate": {
+                                            "enum": [
+                                                "vivid",
+                                                "natural"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "response_format",
+                                        "type": "select",
+                                        "label": "Response Format",
+                                        "validate": {
+                                            "enum": [
+                                                "url",
+                                                "imageFile"
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "created",
+                                        "type": "date",
+                                        "label": "Created"
+                                    },
+                                    {
+                                        "name": "data",
+                                        "spec": [
+                                            {
+                                                "name": "url",
+                                                "type": "url",
+                                                "label": "URL"
+                                            },
+                                            {
+                                                "name": "revised_prompt",
+                                                "type": "text",
+                                                "label": "Revised Prompt"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Data"
+                                    },
+                                    {
+                                        "name": "resImgName",
+                                        "type": "text",
+                                        "label": "Response Image Name",
+                                        "semantic": "file:name"
+                                    },
+                                    {
+                                        "name": "resImgData",
+                                        "type": "buffer",
+                                        "label": "Response Image Data",
+                                        "semantic": "file:data"
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 50,
+                            "module": "http:ActionSendData",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": true,
+                                "useNewZLibDeCompress": true
+                            },
+                            "mapper": {
+                                "ca": "",
+                                "qs": [],
+                                "url": "https://api.replicate.com/v1/models/black-forest-labs/flux-pro/predictions",
+                                "data": "{\n  \"input\": {\n    \"prompt\": \"{{60.prompt}}\",\n    \"seed\": 123456,\n    \"steps\": 25,\n    \"guidance\": 3,\n    \"interval\": 2,\n    \"aspect_ratio\": \"1:1\",\n    \"safety_tolerance\": 5\n   }\n}",
+                                "gzip": true,
+                                "method": "post",
+                                "headers": [
+                                    {
+                                        "name": "Authorization",
+                                        "value": "Bearer REMOVED_API_KEY"
+                                    }
+                                ],
+                                "timeout": "",
+                                "useMtls": false,
+                                "authPass": "",
+                                "authUser": "",
+                                "bodyType": "raw",
+                                "contentType": "application/json",
+                                "serializeUrl": false,
+                                "shareCookies": false,
+                                "parseResponse": true,
+                                "followRedirect": true,
+                                "useQuerystring": false,
+                                "followAllRedirects": false,
+                                "rejectUnauthorized": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 900
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "qs": {
+                                            "mode": "chose"
+                                        },
+                                        "method": {
+                                            "mode": "chose",
+                                            "label": "POST"
+                                        },
+                                        "headers": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        },
+                                        "bodyType": {
+                                            "label": "Raw"
+                                        },
+                                        "contentType": {
+                                            "label": "JSON (application/json)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useNewZLibDeCompress",
+                                        "type": "hidden"
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "serializeUrl",
+                                        "type": "boolean",
+                                        "label": "Serialize URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "select",
+                                        "label": "Method",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "get",
+                                                "head",
+                                                "post",
+                                                "put",
+                                                "patch",
+                                                "delete",
+                                                "options"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Headers"
+                                    },
+                                    {
+                                        "name": "qs",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Query String"
+                                    },
+                                    {
+                                        "name": "bodyType",
+                                        "type": "select",
+                                        "label": "Body type",
+                                        "validate": {
+                                            "enum": [
+                                                "raw",
+                                                "x_www_form_urlencoded",
+                                                "multipart_form_data"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "parseResponse",
+                                        "type": "boolean",
+                                        "label": "Parse response",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "authUser",
+                                        "type": "text",
+                                        "label": "User name"
+                                    },
+                                    {
+                                        "name": "authPass",
+                                        "type": "password",
+                                        "label": "Password"
+                                    },
+                                    {
+                                        "name": "timeout",
+                                        "type": "uinteger",
+                                        "label": "Timeout",
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "ca",
+                                        "type": "cert",
+                                        "label": "Self-signed certificate"
+                                    },
+                                    {
+                                        "name": "rejectUnauthorized",
+                                        "type": "boolean",
+                                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "followRedirect",
+                                        "type": "boolean",
+                                        "label": "Follow redirect",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useQuerystring",
+                                        "type": "boolean",
+                                        "label": "Disable serialization of multiple same query string keys as arrays",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "gzip",
+                                        "type": "boolean",
+                                        "label": "Request compressed content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useMtls",
+                                        "type": "boolean",
+                                        "label": "Use Mutual TLS",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content type",
+                                        "validate": {
+                                            "enum": [
+                                                "text/plain",
+                                                "application/json",
+                                                "application/xml",
+                                                "text/xml",
+                                                "text/html",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Request content"
+                                    },
+                                    {
+                                        "name": "followAllRedirects",
+                                        "type": "boolean",
+                                        "label": "Follow all redirect",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 51,
+                            "module": "util:FunctionSleep",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "duration": "30"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 900
+                                },
+                                "restore": {},
+                                "expect": [
+                                    {
+                                        "name": "duration",
+                                        "type": "uinteger",
+                                        "label": "Delay",
+                                        "required": true,
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 52,
+                            "module": "http:ActionSendData",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": true,
+                                "useNewZLibDeCompress": true
+                            },
+                            "mapper": {
+                                "ca": "",
+                                "qs": [],
+                                "url": "{{50.data.urls.get}}",
+                                "data": "",
+                                "gzip": true,
+                                "method": "get",
+                                "headers": [
+                                    {
+                                        "name": "Authorization",
+                                        "value": "Bearer REMOVED_API_KEY"
+                                    }
+                                ],
+                                "timeout": "",
+                                "useMtls": false,
+                                "authPass": "",
+                                "authUser": "",
+                                "bodyType": "raw",
+                                "contentType": "application/json",
+                                "serializeUrl": false,
+                                "shareCookies": false,
+                                "parseResponse": true,
+                                "followRedirect": true,
+                                "useQuerystring": false,
+                                "followAllRedirects": false,
+                                "rejectUnauthorized": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1800,
+                                    "y": 900
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "qs": {
+                                            "mode": "chose"
+                                        },
+                                        "method": {
+                                            "mode": "chose",
+                                            "label": "GET"
+                                        },
+                                        "headers": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        },
+                                        "bodyType": {
+                                            "label": "Raw"
+                                        },
+                                        "contentType": {
+                                            "label": "JSON (application/json)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useNewZLibDeCompress",
+                                        "type": "hidden"
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "serializeUrl",
+                                        "type": "boolean",
+                                        "label": "Serialize URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "select",
+                                        "label": "Method",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "get",
+                                                "head",
+                                                "post",
+                                                "put",
+                                                "patch",
+                                                "delete",
+                                                "options"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Headers"
+                                    },
+                                    {
+                                        "name": "qs",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Query String"
+                                    },
+                                    {
+                                        "name": "bodyType",
+                                        "type": "select",
+                                        "label": "Body type",
+                                        "validate": {
+                                            "enum": [
+                                                "raw",
+                                                "x_www_form_urlencoded",
+                                                "multipart_form_data"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "parseResponse",
+                                        "type": "boolean",
+                                        "label": "Parse response",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "authUser",
+                                        "type": "text",
+                                        "label": "User name"
+                                    },
+                                    {
+                                        "name": "authPass",
+                                        "type": "password",
+                                        "label": "Password"
+                                    },
+                                    {
+                                        "name": "timeout",
+                                        "type": "uinteger",
+                                        "label": "Timeout",
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "ca",
+                                        "type": "cert",
+                                        "label": "Self-signed certificate"
+                                    },
+                                    {
+                                        "name": "rejectUnauthorized",
+                                        "type": "boolean",
+                                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "followRedirect",
+                                        "type": "boolean",
+                                        "label": "Follow redirect",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useQuerystring",
+                                        "type": "boolean",
+                                        "label": "Disable serialization of multiple same query string keys as arrays",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "gzip",
+                                        "type": "boolean",
+                                        "label": "Request compressed content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useMtls",
+                                        "type": "boolean",
+                                        "label": "Use Mutual TLS",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content type",
+                                        "validate": {
+                                            "enum": [
+                                                "text/plain",
+                                                "application/json",
+                                                "application/xml",
+                                                "text/xml",
+                                                "text/html",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Request content"
+                                    },
+                                    {
+                                        "name": "followAllRedirects",
+                                        "type": "boolean",
+                                        "label": "Follow all redirect",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

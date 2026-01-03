@@ -1,0 +1,435 @@
+{
+    "name": "Nm11 - Integration Gmail, Groq",
+    "flow": [
+        {
+            "id": 4,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 721121,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": -1064,
+                    "y": -404
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "My gateway-webhook testes aula xxx"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "module": "groq:chatCompletion",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 3033350
+            },
+            "mapper": {
+                "model": "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "**Prompt para categorização de intenção:**\r\n\r\n> **Classifique a seguinte frase em uma destas quatro categorias, com base na intenção principal do usuário:**\r\n> - agendamento\r\n> - pagamento\r\n> - negociacao\r\n> - outros\r\n>\r\n> Regras:\r\n> - Responda **apenas** com uma das quatro palavras permitidas.\r\n> - Mesmo que o texto esteja com erros de digitação ou seja vago, escolha a categoria mais compatível.\r\n> - Se não for possível determinar com clareza, use “outros”.\r\n>\r\n> Frase do usuário:  \r\n>{{4.neka}}\r\n\r\n---\r\n\r\n**Exemplo com a sua frase:**\r\n\r\n> Frase do usuário:  \r\n> `quero fazer um forma de acerto vc pdoe ver para mim`  \r\n> **Resposta esperada:** `negociacao`\r\n\r\n"
+                    }
+                ],
+                "response_format": "text"
+            },
+            "metadata": {
+                "designer": {
+                    "x": -659,
+                    "y": -513
+                },
+                "restore": {
+                    "expect": {
+                        "model": {
+                            "mode": "chose",
+                            "label": "meta-llama/llama-4-maverick-17b-128e-instruct"
+                        },
+                        "messages": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    }
+                                }
+                            ]
+                        },
+                        "response_format": {
+                            "mode": "chose",
+                            "label": "Text"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "groq"
+                            },
+                            "label": "My Groq testes xxx"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:groq",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "messages",
+                        "spec": [
+                            {
+                                "name": "role",
+                                "type": "select",
+                                "label": "Role",
+                                "options": [
+                                    {
+                                        "label": "System",
+                                        "value": "system"
+                                    },
+                                    {
+                                        "label": "User",
+                                        "value": "user"
+                                    },
+                                    {
+                                        "label": "Assistant",
+                                        "value": "assistant"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "content",
+                                "type": "text",
+                                "label": "Content"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "number",
+                        "label": "Max tokens returned"
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature"
+                    },
+                    {
+                        "name": "response_format",
+                        "type": "select",
+                        "label": "Response Format",
+                        "validate": {
+                            "enum": [
+                                "text",
+                                "json_object"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P"
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "number",
+                        "label": "Frequency Penalty"
+                    },
+                    {
+                        "name": "seed",
+                        "type": "number",
+                        "label": "Seed"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "gateway:WebhookRespond",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "body": "{{2.result}}",
+                "status": "200",
+                "headers": []
+            },
+            "metadata": {
+                "designer": {
+                    "x": -62,
+                    "y": -340,
+                    "messages": [
+                        {
+                            "category": "reference",
+                            "severity": "warning",
+                            "message": "Referenced module 'Groq - Create a Chat Completion' [2] is not accessible."
+                        }
+                    ]
+                },
+                "restore": {
+                    "expect": {
+                        "headers": {
+                            "mode": "chose"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "status",
+                        "type": "uinteger",
+                        "label": "Status",
+                        "required": true,
+                        "validate": {
+                            "min": 100
+                        }
+                    },
+                    {
+                        "name": "body",
+                        "type": "any",
+                        "label": "Body"
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key",
+                                "required": true,
+                                "validate": {
+                                    "max": 256
+                                }
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value",
+                                "required": true,
+                                "validate": {
+                                    "max": 4096
+                                }
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Custom headers",
+                        "validate": {
+                            "maxItems": 16
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": [
+                [
+                    {
+                        "id": 2,
+                        "module": "groq:chatCompletion",
+                        "version": 1,
+                        "parameters": {
+                            "__IMTCONN__": 3033350
+                        },
+                        "mapper": {
+                            "model": "meta-llama/llama-4-maverick-17b-128e-instruct",
+                            "messages": [
+                                {
+                                    "role": "user",
+                                    "content": "responde sobre o assunton {{4.neka}}"
+                                }
+                            ],
+                            "response_format": "text"
+                        },
+                        "metadata": {
+                            "designer": {
+                                "x": -883,
+                                "y": -185,
+                                "messages": [
+                                    {
+                                        "category": "link",
+                                        "severity": "warning",
+                                        "message": "The module is not connected to the data flow."
+                                    },
+                                    {
+                                        "category": "reference",
+                                        "severity": "warning",
+                                        "message": "Referenced module 'Webhooks - Custom webhook' [4] is not accessible."
+                                    }
+                                ]
+                            },
+                            "restore": {
+                                "expect": {
+                                    "model": {
+                                        "mode": "chose",
+                                        "label": "meta-llama/llama-4-maverick-17b-128e-instruct"
+                                    },
+                                    "messages": {
+                                        "mode": "chose",
+                                        "items": [
+                                            {
+                                                "role": {
+                                                    "mode": "chose",
+                                                    "label": "User"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "response_format": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                "parameters": {
+                                    "__IMTCONN__": {
+                                        "data": {
+                                            "scoped": "true",
+                                            "connection": "groq"
+                                        },
+                                        "label": "My Groq testes xxx"
+                                    }
+                                }
+                            },
+                            "parameters": [
+                                {
+                                    "name": "__IMTCONN__",
+                                    "type": "account:groq",
+                                    "label": "Connection",
+                                    "required": true
+                                }
+                            ],
+                            "expect": [
+                                {
+                                    "name": "model",
+                                    "type": "select",
+                                    "label": "Model",
+                                    "required": true
+                                },
+                                {
+                                    "name": "messages",
+                                    "spec": [
+                                        {
+                                            "name": "role",
+                                            "type": "select",
+                                            "label": "Role",
+                                            "options": [
+                                                {
+                                                    "label": "System",
+                                                    "value": "system"
+                                                },
+                                                {
+                                                    "label": "User",
+                                                    "value": "user"
+                                                },
+                                                {
+                                                    "label": "Assistant",
+                                                    "value": "assistant"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "content",
+                                            "type": "text",
+                                            "label": "Content"
+                                        }
+                                    ],
+                                    "type": "array",
+                                    "label": "Messages",
+                                    "required": true
+                                },
+                                {
+                                    "name": "max_tokens",
+                                    "type": "number",
+                                    "label": "Max tokens returned"
+                                },
+                                {
+                                    "name": "temperature",
+                                    "type": "number",
+                                    "label": "Temperature"
+                                },
+                                {
+                                    "name": "response_format",
+                                    "type": "select",
+                                    "label": "Response Format",
+                                    "validate": {
+                                        "enum": [
+                                            "text",
+                                            "json_object"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "name": "top_p",
+                                    "type": "number",
+                                    "label": "Top P"
+                                },
+                                {
+                                    "name": "frequency_penalty",
+                                    "type": "number",
+                                    "label": "Frequency Penalty"
+                                },
+                                {
+                                    "name": "seed",
+                                    "type": "number",
+                                    "label": "Seed"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            ]
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}

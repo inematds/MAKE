@@ -1,0 +1,1794 @@
+{
+    "name": "Traducción Youtube 2",
+    "flow": [
+        {
+            "id": 55,
+            "module": "tally:watchNewResponse",
+            "version": 1,
+            "parameters": {
+                "__IMTHOOK__": 1071090
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 150
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTHOOK__": {
+                            "label": "Traducción Youtube 2",
+                            "data": {
+                                "editable": "false"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTHOOK__",
+                        "type": "hook:tally",
+                        "label": "Webhook",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "eventId",
+                        "type": "text",
+                        "label": "Event ID"
+                    },
+                    {
+                        "name": "responseId",
+                        "type": "text",
+                        "label": "Response ID"
+                    },
+                    {
+                        "name": "submissionId",
+                        "type": "text",
+                        "label": "Submission ID"
+                    },
+                    {
+                        "name": "respondentId",
+                        "type": "text",
+                        "label": "Respondent ID"
+                    },
+                    {
+                        "name": "formId",
+                        "type": "text",
+                        "label": "Form ID"
+                    },
+                    {
+                        "name": "formName",
+                        "type": "text",
+                        "label": "Form Name"
+                    },
+                    {
+                        "name": "createdAt",
+                        "type": "date",
+                        "label": "Created at"
+                    },
+                    {
+                        "name": "fields",
+                        "spec": [
+                            {
+                                "name": "Nombre Completo",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Título del proyecto",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Email",
+                                "type": "email"
+                            },
+                            {
+                                "name": "Enlace del video de Youtube",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿A que idioma quieres traducir el video?",
+                                "type": "array",
+                                "spec": {
+                                    "type": "text",
+                                    "name": "value",
+                                    "label": "Value"
+                                }
+                            },
+                            {
+                                "name": "¿A que idioma quieres traducir el video? (Inglés (Americano))",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "¿A que idioma quieres traducir el video? (Inglés)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "¿A que idioma quieres traducir el video? (Francés)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "¿A que idioma quieres traducir el video? (Italiano)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "¿A que idioma quieres traducir el video? (Alemán)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "¿A que idioma quieres traducir el video? (Portugués)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "¿A que idioma quieres traducir el video? (Chino)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "¿A que idioma quieres traducir el video? (Ruso)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "Price",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Precio total del servicio (price)",
+                                "type": "number"
+                            },
+                            {
+                                "name": "Precio total del servicio (currency)",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Precio total del servicio (name)",
+                                "type": "name"
+                            },
+                            {
+                                "name": "Precio total del servicio (email)",
+                                "type": "email"
+                            },
+                            {
+                                "name": "Precio total del servicio (link)",
+                                "type": "url"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Fields"
+                    },
+                    {
+                        "name": "fieldsById",
+                        "spec": [
+                            {
+                                "name": "question_XL9gKV",
+                                "label": "Nombre Completo",
+                                "type": "text"
+                            },
+                            {
+                                "name": "question_zjgBDg",
+                                "label": "Título del proyecto",
+                                "type": "text"
+                            },
+                            {
+                                "name": "question_8q2Wvo",
+                                "label": "Email",
+                                "type": "email"
+                            },
+                            {
+                                "name": "question_0dGl2Q",
+                                "label": "Enlace del video de Youtube",
+                                "type": "text"
+                            },
+                            {
+                                "name": "question_zjgOpE",
+                                "label": "¿A que idioma quieres traducir el video?",
+                                "type": "array",
+                                "spec": {
+                                    "type": "text"
+                                }
+                            },
+                            {
+                                "name": "question_zjgOpE_d1b9741f-92ae-4824-8153-2c6029754623",
+                                "label": "¿A que idioma quieres traducir el video? (Inglés (Americano))",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "question_zjgOpE_57b85e16-3a14-4d18-906a-3cce16e25310",
+                                "label": "¿A que idioma quieres traducir el video? (Inglés)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "question_zjgOpE_77a2a4da-0cb7-49b7-b9ba-5f1eac672f67",
+                                "label": "¿A que idioma quieres traducir el video? (Francés)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "question_zjgOpE_699f3b18-17bb-49f5-aca2-d4befdf62a39",
+                                "label": "¿A que idioma quieres traducir el video? (Italiano)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "question_zjgOpE_dd1d22f3-2bbb-4d65-9834-aff483689b84",
+                                "label": "¿A que idioma quieres traducir el video? (Alemán)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "question_zjgOpE_e690de09-7162-4af9-908b-f81c25607dc3",
+                                "label": "¿A que idioma quieres traducir el video? (Portugués)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "question_zjgOpE_91770725-fb70-4240-bf12-df7786046616",
+                                "label": "¿A que idioma quieres traducir el video? (Chino)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "question_zjgOpE_965cb002-5a19-4d2b-be55-cc46847b6bce",
+                                "label": "¿A que idioma quieres traducir el video? (Ruso)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "question_oEgQeb_10781039-5064-4518-a811-1549acf254dd",
+                                "label": "Price",
+                                "type": "text"
+                            },
+                            {
+                                "name": "question_9B5B7X_price",
+                                "label": "Precio total del servicio (price)",
+                                "type": "number"
+                            },
+                            {
+                                "name": "question_9B5B7X_currency",
+                                "label": "Precio total del servicio (currency)",
+                                "type": "text"
+                            },
+                            {
+                                "name": "question_9B5B7X_name",
+                                "label": "Precio total del servicio (name)",
+                                "type": "name"
+                            },
+                            {
+                                "name": "question_9B5B7X_email",
+                                "label": "Precio total del servicio (email)",
+                                "type": "email"
+                            },
+                            {
+                                "name": "question_9B5B7X_link",
+                                "label": "Precio total del servicio (link)",
+                                "type": "url"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Fields by ID"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 56,
+            "module": "builtin:BasicFeeder",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "array": "{{55.fields.`¿A que idioma quieres traducir el video?`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 150
+                },
+                "restore": {
+                    "expect": {
+                        "array": {
+                            "mode": "edit"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "array",
+                        "type": "array",
+                        "label": "Array",
+                        "mode": "edit",
+                        "spec": []
+                    }
+                ]
+            }
+        },
+        {
+            "id": 57,
+            "module": "util:Switcher",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "input": "{{56.value}}",
+                "useRegExpMatch": false,
+                "casesTable": [
+                    {
+                        "pattern": "Inglés",
+                        "output": "en"
+                    },
+                    {
+                        "pattern": "Chino",
+                        "output": "zh"
+                    },
+                    {
+                        "pattern": "Alemán",
+                        "output": "de"
+                    },
+                    {
+                        "pattern": "Francés",
+                        "output": "fr"
+                    },
+                    {
+                        "pattern": "Italiano",
+                        "output": "it"
+                    },
+                    {
+                        "pattern": "Ruso",
+                        "output": "ru"
+                    },
+                    {
+                        "pattern": "Portugués",
+                        "output": "pt"
+                    }
+                ],
+                "elseOutput": ""
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 150
+                },
+                "restore": {
+                    "expect": {
+                        "casesTable": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "input",
+                        "type": "text",
+                        "label": "Input"
+                    },
+                    {
+                        "name": "useRegExpMatch",
+                        "type": "boolean",
+                        "label": "Use regular expressions to match",
+                        "required": true
+                    },
+                    {
+                        "name": "casesTable",
+                        "type": "array",
+                        "label": "Cases",
+                        "required": true,
+                        "spec": [
+                            {
+                                "name": "pattern",
+                                "label": "Pattern",
+                                "type": "text"
+                            },
+                            {
+                                "name": "output",
+                                "label": "Output",
+                                "type": "any"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "elseOutput",
+                        "type": "any",
+                        "label": "Else"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 58,
+            "module": "http:ActionSendData",
+            "version": 3,
+            "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+            },
+            "mapper": {
+                "url": "https://api.elevenlabs.io/v1/dubbing",
+                "serializeUrl": false,
+                "method": "post",
+                "headers": [
+                    {
+                        "name": "Content-Type",
+                        "value": "multipart/form-data"
+                    },
+                    {
+                        "name": "xi-api-key",
+                        "value": "sk_f1e8fe657d04101c28a360d0c4262d6964fd96af443dce3c"
+                    }
+                ],
+                "qs": [],
+                "bodyType": "multipart_form_data",
+                "parseResponse": true,
+                "authUser": "",
+                "authPass": "",
+                "timeout": "",
+                "shareCookies": false,
+                "ca": "",
+                "rejectUnauthorized": true,
+                "followRedirect": true,
+                "useQuerystring": false,
+                "gzip": true,
+                "useMtls": false,
+                "formDataFields": [
+                    {
+                        "fieldType": "text",
+                        "key": "source_url",
+                        "value": "{{55.fields.`Enlace del video de Youtube`}}"
+                    },
+                    {
+                        "fieldType": "text",
+                        "key": "name",
+                        "value": "Video_Youtube"
+                    },
+                    {
+                        "fieldType": "text",
+                        "key": "source_lang",
+                        "value": "es"
+                    },
+                    {
+                        "fieldType": "text",
+                        "key": "target_lang",
+                        "value": "{{57.output}}"
+                    },
+                    {
+                        "fieldType": "text",
+                        "key": "num_speakers",
+                        "value": "0"
+                    },
+                    {
+                        "fieldType": "text",
+                        "key": "watermark",
+                        "value": "true"
+                    },
+                    {
+                        "fieldType": "text",
+                        "key": "start_time",
+                        "value": "0"
+                    },
+                    {
+                        "fieldType": "text",
+                        "key": "end_time",
+                        "value": "60"
+                    },
+                    {
+                        "fieldType": "text",
+                        "key": "highest_resolution",
+                        "value": "false"
+                    }
+                ],
+                "followAllRedirects": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 150
+                },
+                "restore": {
+                    "expect": {
+                        "method": {
+                            "mode": "chose",
+                            "label": "POST"
+                        },
+                        "headers": {
+                            "mode": "chose",
+                            "items": [
+                                null,
+                                null
+                            ]
+                        },
+                        "qs": {
+                            "mode": "chose"
+                        },
+                        "bodyType": {
+                            "label": "Multipart/form-data"
+                        },
+                        "formDataFields": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                },
+                                {
+                                    "fieldType": {
+                                        "mode": "chose",
+                                        "label": "Text"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "handleErrors",
+                        "type": "boolean",
+                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                        "required": true
+                    },
+                    {
+                        "name": "useNewZLibDeCompress",
+                        "type": "hidden"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "serializeUrl",
+                        "type": "boolean",
+                        "label": "Serialize URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "get",
+                                "head",
+                                "post",
+                                "put",
+                                "patch",
+                                "delete",
+                                "options"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "type": "array",
+                        "label": "Headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "label": "Name",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "label": "Value",
+                                "type": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "qs",
+                        "type": "array",
+                        "label": "Query String",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "label": "Name",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "label": "Value",
+                                "type": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bodyType",
+                        "type": "select",
+                        "label": "Body type",
+                        "validate": {
+                            "enum": [
+                                "raw",
+                                "x_www_form_urlencoded",
+                                "multipart_form_data"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "parseResponse",
+                        "type": "boolean",
+                        "label": "Parse response",
+                        "required": true
+                    },
+                    {
+                        "name": "authUser",
+                        "type": "text",
+                        "label": "User name"
+                    },
+                    {
+                        "name": "authPass",
+                        "type": "password",
+                        "label": "Password"
+                    },
+                    {
+                        "name": "timeout",
+                        "type": "uinteger",
+                        "label": "Timeout",
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    },
+                    {
+                        "name": "shareCookies",
+                        "type": "boolean",
+                        "label": "Share cookies with other HTTP modules",
+                        "required": true
+                    },
+                    {
+                        "name": "ca",
+                        "type": "cert",
+                        "label": "Self-signed certificate"
+                    },
+                    {
+                        "name": "rejectUnauthorized",
+                        "type": "boolean",
+                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                        "required": true
+                    },
+                    {
+                        "name": "followRedirect",
+                        "type": "boolean",
+                        "label": "Follow redirect",
+                        "required": true
+                    },
+                    {
+                        "name": "useQuerystring",
+                        "type": "boolean",
+                        "label": "Disable serialization of multiple same query string keys as arrays",
+                        "required": true
+                    },
+                    {
+                        "name": "gzip",
+                        "type": "boolean",
+                        "label": "Request compressed content",
+                        "required": true
+                    },
+                    {
+                        "name": "useMtls",
+                        "type": "boolean",
+                        "label": "Use Mutual TLS",
+                        "required": true
+                    },
+                    {
+                        "name": "formDataFields",
+                        "type": "array",
+                        "label": "Fields",
+                        "spec": [
+                            {
+                                "name": "fieldType",
+                                "label": "Field type",
+                                "type": "select",
+                                "required": true,
+                                "options": [
+                                    {
+                                        "value": "text",
+                                        "label": "Text",
+                                        "nested": [
+                                            {
+                                                "name": "key",
+                                                "label": "Key",
+                                                "type": "text",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "label": "Value",
+                                                "type": "text"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "value": "file",
+                                        "label": "File",
+                                        "nested": [
+                                            {
+                                                "name": "key",
+                                                "label": "Key",
+                                                "type": "text",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "data",
+                                                "label": "Data",
+                                                "type": "buffer",
+                                                "semantic": "file:data"
+                                            },
+                                            {
+                                                "name": "fileName",
+                                                "label": "File name",
+                                                "help": "File name, including the suffix, e.g. invoice, xml",
+                                                "type": "filename",
+                                                "semantic": "file:name"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "followAllRedirects",
+                        "type": "boolean",
+                        "label": "Follow all redirect",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 59,
+            "module": "util:FunctionSleep",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "duration": "120"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 150
+                },
+                "restore": {},
+                "expect": [
+                    {
+                        "name": "duration",
+                        "type": "uinteger",
+                        "label": "Delay",
+                        "validate": {
+                            "min": 1,
+                            "max": 300
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 60,
+            "module": "http:ActionSendData",
+            "version": 3,
+            "parameters": {
+                "handleErrors": true,
+                "useNewZLibDeCompress": true
+            },
+            "mapper": {
+                "url": "https://api.elevenlabs.io/v1/dubbing/{{58.data.dubbing_id}}/audio/{{57.output}}",
+                "serializeUrl": false,
+                "method": "get",
+                "headers": [
+                    {
+                        "name": "xi-api-key",
+                        "value": "sk_f1e8fe657d04101c28a360d0c4262d6964fd96af443dce3c"
+                    }
+                ],
+                "qs": [],
+                "bodyType": "",
+                "parseResponse": false,
+                "authUser": "",
+                "authPass": "",
+                "timeout": "",
+                "shareCookies": false,
+                "ca": "",
+                "rejectUnauthorized": true,
+                "followRedirect": true,
+                "useQuerystring": false,
+                "gzip": true,
+                "useMtls": false,
+                "followAllRedirects": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1500,
+                    "y": 150
+                },
+                "restore": {
+                    "expect": {
+                        "method": {
+                            "mode": "chose",
+                            "label": "GET"
+                        },
+                        "headers": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "qs": {
+                            "mode": "chose"
+                        },
+                        "bodyType": {
+                            "label": "Empty"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "handleErrors",
+                        "type": "boolean",
+                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                        "required": true
+                    },
+                    {
+                        "name": "useNewZLibDeCompress",
+                        "type": "hidden"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "serializeUrl",
+                        "type": "boolean",
+                        "label": "Serialize URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "get",
+                                "head",
+                                "post",
+                                "put",
+                                "patch",
+                                "delete",
+                                "options"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "type": "array",
+                        "label": "Headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "label": "Name",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "label": "Value",
+                                "type": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "qs",
+                        "type": "array",
+                        "label": "Query String",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "label": "Name",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "label": "Value",
+                                "type": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bodyType",
+                        "type": "select",
+                        "label": "Body type",
+                        "validate": {
+                            "enum": [
+                                "raw",
+                                "x_www_form_urlencoded",
+                                "multipart_form_data"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "parseResponse",
+                        "type": "boolean",
+                        "label": "Parse response",
+                        "required": true
+                    },
+                    {
+                        "name": "authUser",
+                        "type": "text",
+                        "label": "User name"
+                    },
+                    {
+                        "name": "authPass",
+                        "type": "password",
+                        "label": "Password"
+                    },
+                    {
+                        "name": "timeout",
+                        "type": "uinteger",
+                        "label": "Timeout",
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    },
+                    {
+                        "name": "shareCookies",
+                        "type": "boolean",
+                        "label": "Share cookies with other HTTP modules",
+                        "required": true
+                    },
+                    {
+                        "name": "ca",
+                        "type": "cert",
+                        "label": "Self-signed certificate"
+                    },
+                    {
+                        "name": "rejectUnauthorized",
+                        "type": "boolean",
+                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                        "required": true
+                    },
+                    {
+                        "name": "followRedirect",
+                        "type": "boolean",
+                        "label": "Follow redirect",
+                        "required": true
+                    },
+                    {
+                        "name": "useQuerystring",
+                        "type": "boolean",
+                        "label": "Disable serialization of multiple same query string keys as arrays",
+                        "required": true
+                    },
+                    {
+                        "name": "gzip",
+                        "type": "boolean",
+                        "label": "Request compressed content",
+                        "required": true
+                    },
+                    {
+                        "name": "useMtls",
+                        "type": "boolean",
+                        "label": "Use Mutual TLS",
+                        "required": true
+                    },
+                    {
+                        "name": "followAllRedirects",
+                        "type": "boolean",
+                        "label": "Follow all redirect",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 63,
+            "module": "google-drive:searchForFilesFolders",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 1889630
+            },
+            "mapper": {
+                "select": "list",
+                "retrieve": "folder",
+                "searchType": "title",
+                "limit": "10",
+                "destination": "drive",
+                "folderId": "/1sJqM61k7jvXd7Y3_tdXhExH2EJWQdKZw/16hQaIUHMOmdXxw-9nHuIIrSKD9mfr5we",
+                "query": "{{55.fields.`Título del proyecto`}}-{{55.fieldsById.question_XL9gKV}}-{{formatDate(now; \"DD-MM-YY\")}}",
+                "operator": "="
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1800,
+                    "y": 150
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "select": {
+                            "label": "Select from the list"
+                        },
+                        "retrieve": {
+                            "label": "Folders"
+                        },
+                        "searchType": {
+                            "label": "Search within file/folder names"
+                        },
+                        "destination": {
+                            "label": "My Drive"
+                        },
+                        "folderId": {
+                            "mode": "chose",
+                            "path": [
+                                "Pruebas",
+                                "Traducciones Videos"
+                            ]
+                        },
+                        "operator": {
+                            "label": "Search for exact term"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Select the Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "map",
+                                "list"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "retrieve",
+                        "type": "select",
+                        "label": "Retrieve",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "file",
+                                "folder",
+                                "file_folder"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "searchType",
+                        "type": "select",
+                        "label": "Search",
+                        "validate": {
+                            "enum": [
+                                "title",
+                                "fulltext",
+                                "custom"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "destination",
+                        "type": "select",
+                        "label": "Choose a Drive",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share",
+                                "team"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "folderId",
+                        "type": "folder",
+                        "label": "Choose a Folder"
+                    },
+                    {
+                        "name": "query",
+                        "type": "text",
+                        "label": "Query",
+                        "required": true
+                    },
+                    {
+                        "name": "operator",
+                        "type": "select",
+                        "label": "Search options",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "=",
+                                "contains"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 64,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 2100,
+                    "y": 150
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 61,
+                            "module": "google-drive:uploadAFile",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 1889630
+                            },
+                            "filter": {
+                                "name": "existe",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{63.`__IMTLENGTH__`}}",
+                                            "b": "1",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "select": "map",
+                                "filename": "Traducción - {{57.output}}.Mp4",
+                                "data": "{{60.data}}",
+                                "convert": false,
+                                "folderId": "{{63.id}}"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2400,
+                                    "y": 0
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            }
+                                        }
+                                    },
+                                    "expect": {
+                                        "select": {
+                                            "label": "Enter manually"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Enter a Folder ID",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "value"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "title",
+                                        "type": "text",
+                                        "label": "New File Name"
+                                    },
+                                    {
+                                        "name": "filename",
+                                        "type": "text",
+                                        "label": "File Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Data",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "convert",
+                                        "type": "boolean",
+                                        "label": "Convert a File",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "folderId",
+                                        "type": "text",
+                                        "label": "Folder ID",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 65,
+                            "module": "google-drive:createAFolder",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 1889630
+                            },
+                            "filter": {
+                                "name": "no existe",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{63.`__IMTLENGTH__`}}",
+                                            "o": "text:equal",
+                                            "b": "0"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "destination": "drive",
+                                "folderId": "/1sJqM61k7jvXd7Y3_tdXhExH2EJWQdKZw/16hQaIUHMOmdXxw-9nHuIIrSKD9mfr5we",
+                                "name": "{{55.fields.`Título del proyecto`}}-{{55.fieldsById.question_XL9gKV}}-{{formatDate(now; \"DD-MM-YY\")}}",
+                                "shared": true,
+                                "role": "commenter",
+                                "type": "user",
+                                "email": "{{55.fields.Email}}"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2400,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            }
+                                        }
+                                    },
+                                    "expect": {
+                                        "destination": {
+                                            "label": "My Drive"
+                                        },
+                                        "folderId": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "Pruebas",
+                                                "Traducciones Videos"
+                                            ]
+                                        },
+                                        "role": {
+                                            "mode": "chose",
+                                            "label": "Commenter"
+                                        },
+                                        "type": {
+                                            "mode": "chose",
+                                            "label": "User"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "destination",
+                                        "type": "select",
+                                        "label": "New Drive Location",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "folderId",
+                                        "type": "folder",
+                                        "label": "New Folder Location",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "New Folder's Name"
+                                    },
+                                    {
+                                        "name": "shared",
+                                        "type": "boolean",
+                                        "label": "Share Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "role",
+                                        "type": "select",
+                                        "label": "Role",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "owner",
+                                                "writer",
+                                                "commenter",
+                                                "reader"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "type",
+                                        "type": "select",
+                                        "label": "Type",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "user",
+                                                "group",
+                                                "domain",
+                                                "anyone"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "email",
+                                        "type": "email",
+                                        "label": "User's Email",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 66,
+                            "module": "google-drive:uploadAFile",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 1889630
+                            },
+                            "mapper": {
+                                "select": "map",
+                                "filename": "Traducción - {{57.output}}.Mp4",
+                                "data": "{{60.data}}",
+                                "convert": false,
+                                "folderId": "{{65.id}}"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2700,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            }
+                                        }
+                                    },
+                                    "expect": {
+                                        "select": {
+                                            "label": "Enter manually"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Enter a Folder ID",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "value"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "title",
+                                        "type": "text",
+                                        "label": "New File Name"
+                                    },
+                                    {
+                                        "name": "filename",
+                                        "type": "text",
+                                        "label": "File Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Data",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "convert",
+                                        "type": "boolean",
+                                        "label": "Convert a File",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "folderId",
+                                        "type": "text",
+                                        "label": "Folder ID",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 68,
+                            "module": "email:ActionSendEmail",
+                            "version": 7,
+                            "parameters": {
+                                "account": 1889630,
+                                "saveAfterSent": false
+                            },
+                            "mapper": {
+                                "to": [
+                                    "{{55.fields.Email}}"
+                                ],
+                                "subject": "Entrega de las traducciones",
+                                "contentType": "html",
+                                "attachments": [],
+                                "cc": [],
+                                "bcc": [],
+                                "from": "",
+                                "sender": "",
+                                "replyTo": "",
+                                "inReplyTo": "",
+                                "references": [],
+                                "priority": "normal",
+                                "headers": [],
+                                "html": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Entrega de las traducciones solicitadas</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333;\">\n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n        <tr>\n            <td>\n                <p>Hola <strong>{{55.fields.`Nombre Completo`}}</strong>,</p>\n                <p>Espero que te encuentres bien.</p>\n                <p>Te escribo para hacer llegar la carpeta de drive donde subiremos todas las traducciones de los videos que solicitaste. Las iremos subiendo en los próximos minutos. A continuación, te dejo el enlace desde donde podrás descargarlas:</p>\n                <p><a href=\"{{65.webViewLink}}\" style=\"background-color: #1E90FF; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px;\">Descargar videos</a></p>\n                <p>Si tienes alguna duda o necesitas alguna modificación, no dudes en decírmelo.</p>\n                <p>¡Gracias por tu confianza!</p>\n                <p>Un cordial saludo,</p>\n                <p><strong>Angel Aparicio</strong><br/>\n                IA Masters Academy</p>\n            </td>\n        </tr>\n    </table>\n</body>\n</html>"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 3000,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "account": {
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            }
+                                        },
+                                        "saveAfterSent": {
+                                            "label": "No"
+                                        }
+                                    },
+                                    "expect": {
+                                        "to": {
+                                            "mode": "chose",
+                                            "items": [
+                                                null
+                                            ]
+                                        },
+                                        "contentType": {
+                                            "label": "HTML"
+                                        },
+                                        "attachments": {
+                                            "mode": "chose"
+                                        },
+                                        "cc": {
+                                            "mode": "chose"
+                                        },
+                                        "bcc": {
+                                            "mode": "chose"
+                                        },
+                                        "references": {
+                                            "mode": "chose"
+                                        },
+                                        "priority": {
+                                            "label": "Normal"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:smtp,google-restricted,microsoft-smtp-imap",
+                                        "label": "Connection",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "saveAfterSent",
+                                        "type": "select",
+                                        "label": "Save message after sending",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                true,
+                                                false
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "to",
+                                        "type": "array",
+                                        "label": "To",
+                                        "required": true,
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "email",
+                                            "label": "Email address",
+                                            "required": true
+                                        }
+                                    },
+                                    {
+                                        "name": "subject",
+                                        "type": "text",
+                                        "label": "Subject"
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content Type",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "html",
+                                                "text"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "attachments",
+                                        "type": "array",
+                                        "label": "Attachments",
+                                        "spec": [
+                                            {
+                                                "name": "fileName",
+                                                "label": "File name",
+                                                "type": "filename",
+                                                "required": true,
+                                                "semantic": "file:name"
+                                            },
+                                            {
+                                                "name": "data",
+                                                "label": "Data",
+                                                "type": "buffer",
+                                                "required": true,
+                                                "semantic": "file:data"
+                                            },
+                                            {
+                                                "name": "cid",
+                                                "label": "Content-ID",
+                                                "type": "text"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "cc",
+                                        "type": "array",
+                                        "label": "Copy recipient",
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "email",
+                                            "label": "Email address"
+                                        }
+                                    },
+                                    {
+                                        "name": "bcc",
+                                        "type": "array",
+                                        "label": "Blind copy recipient",
+                                        "spec": {
+                                            "name": "value",
+                                            "type": "email",
+                                            "label": "Email address"
+                                        }
+                                    },
+                                    {
+                                        "name": "from",
+                                        "type": "text",
+                                        "label": "From"
+                                    },
+                                    {
+                                        "name": "sender",
+                                        "type": "text",
+                                        "label": "Sender"
+                                    },
+                                    {
+                                        "name": "replyTo",
+                                        "type": "text",
+                                        "label": "Reply-To"
+                                    },
+                                    {
+                                        "name": "inReplyTo",
+                                        "type": "text",
+                                        "label": "In-Reply-To"
+                                    },
+                                    {
+                                        "name": "references",
+                                        "type": "array",
+                                        "label": "References",
+                                        "spec": {
+                                            "type": "text",
+                                            "label": "Reference",
+                                            "required": true,
+                                            "name": "value"
+                                        }
+                                    },
+                                    {
+                                        "name": "priority",
+                                        "type": "select",
+                                        "label": "Priority",
+                                        "validate": {
+                                            "enum": [
+                                                "high",
+                                                "normal",
+                                                "low"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "type": "array",
+                                        "label": "Headers",
+                                        "spec": [
+                                            {
+                                                "name": "key",
+                                                "label": "Key",
+                                                "type": "text",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "label": "Value",
+                                                "type": "text",
+                                                "required": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "html",
+                                        "type": "text",
+                                        "label": "Content"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

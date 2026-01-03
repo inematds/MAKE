@@ -1,0 +1,689 @@
+{
+    "name": "GPT Asistente Notion",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 1197123,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": -82,
+                    "y": -144
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "GPT Asistente Notion"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "module": "notion:appendAPageContent",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 3763258
+            },
+            "mapper": {
+                "page": "13b2cd2e-5d15-8051-82d9-d7d71f9cb0b2",
+                "objects": [
+                    {
+                        "type": "heading_2",
+                        "heading_2": {
+                            "text": [
+                                {
+                                    "text": {
+                                        "link": "{{1.url_herramienta}}",
+                                        "content": "{{1.titulo_herramienta}}"
+                                    },
+                                    "type": "text",
+                                    "annotations": {
+                                        "color": "default"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "paragraph",
+                        "paragraph": {
+                            "text": [
+                                {
+                                    "text": {
+                                        "content": "{{1.descripcion_herramienta}}"
+                                    },
+                                    "type": "text",
+                                    "annotations": {
+                                        "color": "default"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "bulleted_list_item",
+                        "bulleted_list_item": {
+                            "text": [
+                                {
+                                    "text": {
+                                        "content": "{{1.bullet_points[1]}}"
+                                    },
+                                    "type": "text",
+                                    "annotations": {
+                                        "color": "default"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "bulleted_list_item",
+                        "bulleted_list_item": {
+                            "text": [
+                                {
+                                    "text": {
+                                        "content": "{{1.bullet_points[2]}}"
+                                    },
+                                    "type": "text",
+                                    "annotations": {
+                                        "color": "default"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "bulleted_list_item",
+                        "bulleted_list_item": {
+                            "text": [
+                                {
+                                    "text": {
+                                        "content": "{{1.bullet_points[3]}}"
+                                    },
+                                    "type": "text",
+                                    "annotations": {
+                                        "color": "default"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "bulleted_list_item",
+                        "bulleted_list_item": {
+                            "text": [
+                                {
+                                    "text": {
+                                        "content": "{{1.bullet_points[4]}}"
+                                    },
+                                    "type": "text",
+                                    "annotations": {
+                                        "color": "default"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "bulleted_list_item",
+                        "bulleted_list_item": {
+                            "text": [
+                                {
+                                    "text": {
+                                        "content": "{{1.bullet_points[5]}}"
+                                    },
+                                    "type": "text",
+                                    "annotations": {
+                                        "color": "default"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 218,
+                    "y": -144
+                },
+                "restore": {
+                    "expect": {
+                        "page": {
+                            "mode": "chose",
+                            "label": "Herramientas de IA"
+                        },
+                        "objects": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Heading 2"
+                                    },
+                                    "heading_2": {
+                                        "nested": {
+                                            "text": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    {
+                                                        "type": {
+                                                            "mode": "chose",
+                                                            "label": "Text"
+                                                        },
+                                                        "annotations": {
+                                                            "nested": {
+                                                                "bold": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "code": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "color": {
+                                                                    "mode": "chose",
+                                                                    "label": "default"
+                                                                },
+                                                                "italic": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "underline": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "strikethrough": {
+                                                                    "mode": "chose"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Paragraph"
+                                    },
+                                    "paragraph": {
+                                        "nested": {
+                                            "text": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    {
+                                                        "type": {
+                                                            "mode": "chose",
+                                                            "label": "Text"
+                                                        },
+                                                        "annotations": {
+                                                            "nested": {
+                                                                "bold": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "code": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "color": {
+                                                                    "mode": "chose",
+                                                                    "label": "default"
+                                                                },
+                                                                "italic": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "underline": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "strikethrough": {
+                                                                    "mode": "chose"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Bulleted list item"
+                                    },
+                                    "bulleted_list_item": {
+                                        "nested": {
+                                            "text": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    {
+                                                        "type": {
+                                                            "mode": "chose",
+                                                            "label": "Text"
+                                                        },
+                                                        "annotations": {
+                                                            "nested": {
+                                                                "bold": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "code": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "color": {
+                                                                    "mode": "chose",
+                                                                    "label": "default"
+                                                                },
+                                                                "italic": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "underline": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "strikethrough": {
+                                                                    "mode": "chose"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Bulleted list item"
+                                    },
+                                    "bulleted_list_item": {
+                                        "nested": {
+                                            "text": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    {
+                                                        "type": {
+                                                            "mode": "chose",
+                                                            "label": "Text"
+                                                        },
+                                                        "annotations": {
+                                                            "nested": {
+                                                                "bold": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "code": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "color": {
+                                                                    "mode": "chose",
+                                                                    "label": "default"
+                                                                },
+                                                                "italic": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "underline": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "strikethrough": {
+                                                                    "mode": "chose"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Bulleted list item"
+                                    },
+                                    "bulleted_list_item": {
+                                        "nested": {
+                                            "text": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    {
+                                                        "type": {
+                                                            "mode": "chose",
+                                                            "label": "Text"
+                                                        },
+                                                        "annotations": {
+                                                            "nested": {
+                                                                "bold": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "code": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "color": {
+                                                                    "mode": "chose",
+                                                                    "label": "default"
+                                                                },
+                                                                "italic": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "underline": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "strikethrough": {
+                                                                    "mode": "chose"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Bulleted list item"
+                                    },
+                                    "bulleted_list_item": {
+                                        "nested": {
+                                            "text": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    {
+                                                        "type": {
+                                                            "mode": "chose",
+                                                            "label": "Text"
+                                                        },
+                                                        "annotations": {
+                                                            "nested": {
+                                                                "bold": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "code": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "color": {
+                                                                    "mode": "chose",
+                                                                    "label": "default"
+                                                                },
+                                                                "italic": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "underline": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "strikethrough": {
+                                                                    "mode": "chose"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Bulleted list item"
+                                    },
+                                    "bulleted_list_item": {
+                                        "nested": {
+                                            "text": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    {
+                                                        "type": {
+                                                            "mode": "chose",
+                                                            "label": "Text"
+                                                        },
+                                                        "annotations": {
+                                                            "nested": {
+                                                                "bold": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "code": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "color": {
+                                                                    "mode": "chose",
+                                                                    "label": "default"
+                                                                },
+                                                                "italic": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "underline": {
+                                                                    "mode": "chose"
+                                                                },
+                                                                "strikethrough": {
+                                                                    "mode": "chose"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "notion3"
+                            },
+                            "label": "IA Masters"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:notion2,notion3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "mode": "edit",
+                        "name": "page",
+                        "type": "select",
+                        "label": "Page ID",
+                        "required": true
+                    },
+                    {
+                        "name": "objects",
+                        "spec": [
+                            {
+                                "name": "type",
+                                "type": "select",
+                                "label": "Type",
+                                "options": {
+                                    "store": [
+                                        {
+                                            "label": "Paragraph",
+                                            "value": "paragraph"
+                                        },
+                                        {
+                                            "label": "Heading 1",
+                                            "value": "heading_1"
+                                        },
+                                        {
+                                            "label": "Heading 2",
+                                            "value": "heading_2"
+                                        },
+                                        {
+                                            "label": "Heading 3",
+                                            "value": "heading_3"
+                                        },
+                                        {
+                                            "label": "Bulleted list item",
+                                            "value": "bulleted_list_item"
+                                        },
+                                        {
+                                            "label": "Numbered list item",
+                                            "value": "numbered_list_item"
+                                        },
+                                        {
+                                            "label": "Toggle",
+                                            "value": "toggle"
+                                        },
+                                        {
+                                            "label": "To do",
+                                            "value": "to_do"
+                                        },
+                                        {
+                                            "label": "Image",
+                                            "value": "image"
+                                        },
+                                        {
+                                            "label": "Embed",
+                                            "value": "embed"
+                                        },
+                                        {
+                                            "label": "File",
+                                            "value": "file"
+                                        },
+                                        {
+                                            "label": "PDF",
+                                            "value": "pdf"
+                                        },
+                                        {
+                                            "label": "Video",
+                                            "value": "video"
+                                        },
+                                        {
+                                            "label": "Breadcrumb",
+                                            "value": "breadcrumb"
+                                        },
+                                        {
+                                            "label": "Divider",
+                                            "value": "divider"
+                                        }
+                                    ]
+                                },
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Content Objects",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "module": "gateway:WebhookRespond",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "body": "Informa al usuario de que se ha añadido la nueva herramienta a la pagina de \"Herramientas de IA\" en Notion",
+                "status": "200",
+                "headers": []
+            },
+            "metadata": {
+                "designer": {
+                    "x": 518,
+                    "y": -144
+                },
+                "restore": {
+                    "expect": {
+                        "headers": {
+                            "mode": "chose"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "status",
+                        "type": "uinteger",
+                        "label": "Status",
+                        "required": true,
+                        "validate": {
+                            "min": 100
+                        }
+                    },
+                    {
+                        "name": "body",
+                        "type": "any",
+                        "label": "Body"
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key",
+                                "required": true,
+                                "validate": {
+                                    "max": 256
+                                }
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value",
+                                "required": true,
+                                "validate": {
+                                    "max": 4096
+                                }
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Custom headers",
+                        "validate": {
+                            "maxItems": 16
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

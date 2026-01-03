@@ -1,0 +1,440 @@
+{
+    "name": "1. Email satisfacción",
+    "flow": [
+        {
+            "id": 5,
+            "module": "airtable:TriggerWatchRecords",
+            "version": 3,
+            "parameters": {
+                "base": "appNDZF7ubXUqgEsA",
+                "view": "",
+                "table": "tblEhCoBWtYExxTqi",
+                "config": {
+                    "labelField": "Nombre",
+                    "triggerField": "Última modificación"
+                },
+                "formula": "",
+                "maxRecords": 20,
+                "__IMTCONN__": 2923290,
+                "useColumnId": false
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "base": {
+                            "label": "IA Barbershop"
+                        },
+                        "view": {
+                            "label": "Empty"
+                        },
+                        "table": {
+                            "label": "Citas"
+                        },
+                        "config": {
+                            "nested": {
+                                "labelField": {
+                                    "label": "Nombre"
+                                },
+                                "triggerField": {
+                                    "label": "Última modificación"
+                                }
+                            }
+                        },
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            },
+                            "label": "My Airtable OAuth connection buena (User ID: usr1voXsCs2mwE0pt)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "config",
+                        "spec": [
+                            {
+                                "name": "triggerField",
+                                "type": "select",
+                                "label": "Trigger field",
+                                "required": true
+                            },
+                            {
+                                "name": "triggerField",
+                                "type": "hidden"
+                            },
+                            {
+                                "name": "labelField",
+                                "type": "select",
+                                "label": "Label field",
+                                "required": true
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Trigger configuration"
+                    },
+                    {
+                        "name": "maxRecords",
+                        "type": "integer",
+                        "label": "Limit",
+                        "required": true
+                    },
+                    {
+                        "name": "view",
+                        "type": "select",
+                        "label": "View"
+                    },
+                    {
+                        "name": "formula",
+                        "type": "text",
+                        "label": "Formula"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "Nombre",
+                        "type": "text",
+                        "label": "Nombre"
+                    },
+                    {
+                        "name": "Numero de telefono",
+                        "type": "text",
+                        "label": "Numero de telefono"
+                    },
+                    {
+                        "name": "Email",
+                        "type": "text",
+                        "label": "Email"
+                    },
+                    {
+                        "name": "Dia y hora",
+                        "time": true,
+                        "type": "date",
+                        "label": "Dia y hora"
+                    },
+                    {
+                        "name": "Status",
+                        "type": "text",
+                        "label": "Status"
+                    },
+                    {
+                        "name": "Última modificación",
+                        "type": "date",
+                        "label": "Última modificación"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "module": "email:ActionSendEmail",
+            "version": 7,
+            "parameters": {
+                "account": 1676886,
+                "saveAfterSent": false
+            },
+            "filter": {
+                "name": "Completado",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{5.Status}}",
+                            "b": "Completado",
+                            "o": "text:equal"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "cc": [],
+                "to": [
+                    "{{5.Email}}"
+                ],
+                "bcc": [],
+                "from": "",
+                "html": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>¿Qué tal estuvo tu visita? - IA Barbershop</title>\n    <style>\n        body {\n            font-family: 'Montserrat', sans-serif;\n            line-height: 1.6;\n            color: #333;\n            max-width: 600px;\n            margin: 0 auto;\n            padding: 20px;\n            background-color: #f9f9f9;\n            text-align: center;\n        }\n        h1 {\n            color: #1f2f46;\n            font-size: 28px;\n            margin-bottom: 20px;\n        }\n        p {\n            font-size: 18px;\n            color: #4d4d4d;\n        }\n        .rating-buttons {\n            margin-top: 30px;\n        }\n        .rating-buttons-row {\n            display: inline-flex;\n            justify-content: center;\n            gap: 15px;\n            margin-bottom: 15px;\n        }\n        .rating-buttons-row a {\n            display: inline-block;\n            background: linear-gradient(90deg, #007bff 0%, #66a3ff 100%);\n            color: white;\n            padding: 15px 30px;\n            border-radius: 30px;\n            text-decoration: none;\n            font-size: 18px;\n            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);\n            transition: transform 0.3s, background 0.3s;\n        }\n        .rating-buttons-row a:hover {\n            transform: scale(1.1);\n            background: linear-gradient(90deg, #0056b3 0%, #3388ff 100%);\n        }\n        .social-icons {\n            margin-top: 20px;\n        }\n        .social-icons img {\n            margin: 0 10px;\n            transition: transform 0.3s;\n        }\n        .social-icons img:hover {\n            transform: scale(1.2);\n        }\n        .footer {\n            margin-top: 50px;\n        }\n        .footer a {\n            text-decoration: none;\n            color: #1f2f46;\n            font-size: 16px;\n        }\n        img.logo {\n            display: block;\n            margin: 0 auto 30px;\n            max-width: 200px;\n        }\n        .surprise {\n            font-weight: bold;\n        }\n    </style>\n</head>\n<body>\n    <a href=\"https://ibb.co/JF0vTf1\"><img src=\"https://i.ibb.co/0V8CLg7/UVs-Tyeg1-QW2-Fqr-CXdc-PBng.webp\" alt=\"IA Barbershop\" class=\"logo\"></a>\n    <h1>¡Tu opinión importa mucho!</h1>\n    <p>Hola {{5.Nombre}}👋🏼,</p>\n    <p>En IA Barbershop trabajamos cada día para ofrecerte el mejor servicio. Nos encantaría saber cómo fue tu experiencia hoy. 😊</p>\n\n    <p>Dedica solo unos segundos para valorar tu visita, y te prometemos que usaremos tu feedback para mejorar y sorprenderte aún más en tu próxima cita. ¡Queremos seguir siendo tu barbería de confianza!</p>\n\n    <div class=\"rating-buttons\">\n        <!-- Primera fila con 3 botones -->\n        <div class=\"rating-buttons-row\">\n            <a href=\"https://tally.so/r/np7WOE?Email={{5.Email}}&Satisfacción=Muy_mala&Nombre={{5.Nombre}}\">Muy Mala</a>\n            <a href=\"https://tally.so/r/np7WOE?Email={{5.Email}}&Satisfacción=Mala&Nombre={{5.Nombre}}\">Mala</a>\n            <a href=\"https://tally.so/r/np7WOE?Email={{5.Email}}&Satisfacción=Regular&Nombre={{5.Nombre}}\">Regular</a>\n        </div>\n        <!-- Segunda fila con 2 botones que solo redirigen a la página de Google -->\n        <div class=\"rating-buttons-row\">\n            <a href=\"https://www.google.com/search?rlz=1C5CHFA_enES1097ES1097&q=La%20Barber%C3%ADa%20de%20Madrid%20Rese%C3%B1as&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxK2sDAwtzQxsrA0NDU2MrCwNDI028DI-IpR3idRwSmxKCm16PDaRIWUVAXfxJSizBSFoNTi1MMbE4sXsRJSAQCgn0BSXgAAAA&rldimm=8807942891532089216&tbm=lcl&hl=es&sa=X&ved=0CB8Q9fQKKABqFwoTCMiv7sP--4gDFQAAAAAdAAAAABAH&biw=2560&bih=1318&dpr=1#lkt=LocalPoiReviews&lrd=0xd42257e46169b8f:0x7a3c1964b3b27780,3,,,,\">Buena</a>\n            <a href=\"https://www.google.com/search?rlz=1C5CHFA_enES1097ES1097&q=La%20Barber%C3%ADa%20de%20Madrid%20Rese%C3%B1as&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxK2sDAwtzQxsrA0NDU2MrCwNDI028DI-IpR3idRwSmxKCm16PDaRIWUVAXfxJSizBSFoNTi1MMbE4sXsRJSAQCgn0BSXgAAAA&rldimm=8807942891532089216&tbm=lcl&hl=es&sa=X&ved=0CB8Q9fQKKABqFwoTCMiv7sP--4gDFQAAAAAdAAAAABAH&biw=2560&bih=1318&dpr=1#lkt=LocalPoiReviews&lrd=0xd42257e46169b8f:0x7a3c1964b3b27780,3,,,,\">¡Excelente!</a>\n        </div>\n    </div>\n\n    <p class=\"surprise\">🎁 ¡Sorpresa especial! Si valoras tu experiencia, ¡te enviaremos un descuento exclusivo para tu próxima visita!</p>\n    \n    <p>¡Gracias por ser parte de nuestra familia en IA Barbershop! Nos vemos pronto. ✂️🛈</p>\n    <p>Angel Aparicio</p>\n\n    <div class=\"footer\">\n        <a href=\"tel:932 645 746\">📞 Llámanos: 932 645 746</a><br>\n        <a href=\"//iabasbershop.com\">🌐 Visítanos en: www.iabarbershop.com</a>\n        <div class=\"social-icons\">\n            <a href=\"#\"><img src=\"https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/facebook-icon-2x.png\" alt=\"Facebook\" width=\"30\"></a>\n            <a href=\"#\"><img src=\"https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/twitter-icon-2x.png\" alt=\"Twitter\" width=\"30\"></a>\n            <a href=\"#\"><img src=\"https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/linkedin-icon-2x.png\" alt=\"LinkedIn\" width=\"30\"></a>\n            <a href=\"#\"><img src=\"https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/instagram-icon-2x.png\" alt=\"Instagram\" width=\"30\"></a>\n        </div>\n    </div>\n</body>\n</html>",
+                "sender": "",
+                "headers": [],
+                "replyTo": "",
+                "subject": "🙏🏻 {{5.Nombre}}, necesitamos tu ayuda",
+                "priority": "normal",
+                "inReplyTo": "",
+                "references": [],
+                "attachments": [],
+                "contentType": "html"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 414,
+                    "y": -9
+                },
+                "restore": {
+                    "expect": {
+                        "cc": {
+                            "mode": "chose"
+                        },
+                        "to": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "bcc": {
+                            "mode": "chose"
+                        },
+                        "priority": {
+                            "label": "Normal"
+                        },
+                        "references": {
+                            "mode": "chose"
+                        },
+                        "attachments": {
+                            "mode": "chose"
+                        },
+                        "contentType": {
+                            "label": "HTML"
+                        }
+                    },
+                    "parameters": {
+                        "account": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "smtp"
+                            },
+                            "label": "infoIAMAsters (SMTP info@iamastersacademy.com)"
+                        },
+                        "saveAfterSent": {
+                            "label": "No"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account:smtp,google-restricted,microsoft-smtp-imap",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "saveAfterSent",
+                        "type": "select",
+                        "label": "Save message after sending",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "type": "hidden"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "to",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "contentType",
+                        "type": "select",
+                        "label": "Content Type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "html",
+                                "text"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "attachments",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "type": "filename",
+                                "label": "File name",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "required": true,
+                                "semantic": "file:data"
+                            },
+                            {
+                                "name": "cid",
+                                "type": "text",
+                                "label": "Content-ID"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Attachments"
+                    },
+                    {
+                        "name": "cc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Copy recipient"
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Blind copy recipient"
+                    },
+                    {
+                        "name": "from",
+                        "type": "text",
+                        "label": "From"
+                    },
+                    {
+                        "name": "sender",
+                        "type": "text",
+                        "label": "Sender"
+                    },
+                    {
+                        "name": "replyTo",
+                        "type": "text",
+                        "label": "Reply-To"
+                    },
+                    {
+                        "name": "inReplyTo",
+                        "type": "text",
+                        "label": "In-Reply-To"
+                    },
+                    {
+                        "name": "references",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Reference",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "References"
+                    },
+                    {
+                        "name": "priority",
+                        "type": "select",
+                        "label": "Priority",
+                        "validate": {
+                            "enum": [
+                                "high",
+                                "normal",
+                                "low"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value",
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "html",
+                        "type": "text",
+                        "label": "Content"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

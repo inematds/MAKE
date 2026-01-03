@@ -1,0 +1,756 @@
+{
+    "name": "FUNCIONES. MAKE",
+    "flow": [
+        {
+            "id": 4,
+            "module": "json:ParseJSON",
+            "version": 1,
+            "parameters": {
+                "type": ""
+            },
+            "mapper": {
+                "json": "[\n  {\n    \"clientes\": [\n      {\n        \"nombre\": \"Juan Pérez\",\n        \"correo\": \"juan.perez@ejemplo.com\",\n        \"edad\": 40,\n        \"etiquetas\": [\"etiqueta1\", \"etiqueta2\", \"etiqueta3\"],\n        \"direccion\": {\n          \"calle\": \"123 Calle Principal\",\n          \"ciudad\": \"Cualquierciudad\",\n          \"codigo_postal\": \"12345\"\n        },\n        \"aficiones\": [\n          {\n            \"nombre\": \"leer\",\n            \"frecuencia\": \"diario\"\n          },\n          {\n            \"nombre\": \"ciclismo\",\n            \"frecuencia\": \"semanal\"\n          },\n          {\n            \"nombre\": \"patinaje\",\n            \"frecuencia\": \"mensual\"\n          }\n        ]\n      },\n      {\n        \"nombre\": \"María Gómez\",\n        \"correo\": \"maria.gomez@ejemplo.com\",\n        \"edad\": 32,\n        \"direccion\": {\n          \"calle\": \"456 Calle Olmo\",\n          \"ciudad\": \"Otraciudad\",\n          \"codigo_postal\": \"67890\"\n        },\n        \"aficiones\": [\n          {\n            \"nombre\": \"pintar\",\n            \"frecuencia\": \"semanal\"\n          },\n          {\n            \"nombre\": \"yoga\",\n            \"frecuencia\": \"diario\"\n          },\n          {\n            \"nombre\": \"senderismo\",\n            \"frecuencia\": \"mensual\"\n          }\n        ]\n      },\n      {\n        \"nombre\": \"Roberto Fernández\",\n        \"correo\": \"roberto.fernandez@ejemplo.com\",\n        \"edad\": 29,\n        \"etiquetas\": [\"etiqueta1\", \"etiqueta2\", \"etiqueta3\"],\n        \"direccion\": {\n          \"calle\": \"789 Calle Roble\",\n          \"ciudad\": \"Otro Lugar\",\n          \"codigo_postal\": \"54321\"\n        },\n        \"aficiones\": [\n          {\n            \"nombre\": \"jugar videojuegos\",\n            \"frecuencia\": \"diario\"\n          },\n          {\n            \"nombre\": \"cocinar\",\n            \"frecuencia\": \"semanal\"\n          },\n          {\n            \"nombre\": \"viajar\",\n            \"frecuencia\": \"anual\"\n          }\n        ]\n      },\n      {\n        \"nombre\": \"Alicia Morales\",\n        \"correo\": \"alicia.morales@ejemplo.com\",\n        \"edad\": 35,\n        \"etiquetas\": [\"etiqueta1\", \"etiqueta2\", \"etiqueta3\"],\n        \"direccion\": {\n          \"calle\": \"101 Calle Arce\",\n          \"ciudad\": \"Algún Lugar\",\n          \"codigo_postal\": \"98765\"\n        },\n        \"aficiones\": [\n          {\n            \"nombre\": \"fotografía\",\n            \"frecuencia\": \"semanal\"\n          },\n          {\n            \"nombre\": \"baile\",\n            \"frecuencia\": \"mensual\"\n          },\n          {\n            \"nombre\": \"natación\",\n            \"frecuencia\": \"semanal\"\n          }\n        ]\n      },\n      {\n        \"nombre\": \"María Gómez\",\n        \"correo\": \"maria.gomez@ejemplo.com\",\n        \"edad\": 32,\n        \"etiquetas\": [\"etiqueta1\", \"etiqueta2\", \"etiqueta3\"],\n        \"direccion\": {\n          \"calle\": \"456 Calle Olmo\",\n          \"ciudad\": \"Otraciudad\",\n          \"codigo_postal\": \"67890\"\n        },\n        \"aficiones\": [\n          {\n            \"nombre\": \"pintar\",\n            \"frecuencia\": \"semanal\"\n          },\n          {\n            \"nombre\": \"yoga\",\n            \"frecuencia\": \"diario\"\n          },\n          {\n            \"nombre\": \"senderismo\",\n            \"frecuencia\": \"mensual\"\n          }\n        ]\n      }\n    ]\n  }\n]"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "type": {
+                            "label": "Choose a data structure"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "json",
+                        "type": "text",
+                        "label": "JSON string",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "module": "util:SetVariables",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "variables": [
+                    {
+                        "name": "GET",
+                        "value": "{{get(4.clientes[].direccion; \"calle\")}}"
+                    },
+                    {
+                        "name": "IF simple",
+                        "value": "{{if(0 >= 1; \"A\"; \"B\")}}"
+                    },
+                    {
+                        "name": "IF aplicado",
+                        "value": "{{if(4.clientes[].edad > 79; \"80's\"; if(4.clientes[].edad > 69; \"70's\"; if(4.clientes[].edad > 59; \"60's\"; if(4.clientes[].edad > 49; \"50's\"; if(4.clientes[].edad > 39; \"40's\"; if(4.clientes[].edad > 29; \"30's\"; if(4.clientes[].edad > 19; \"20's\"; )))))))}}"
+                    },
+                    {
+                        "name": "IFEMPTY Simple",
+                        "value": "{{ifempty(emptystring; \"Hola\")}}"
+                    },
+                    {
+                        "name": "IFEMPTY Aplicado",
+                        "value": "{{ifempty(4.clientes[].nombre; \"Anonimo\")}}"
+                    },
+                    {
+                        "name": "SWITCH",
+                        "value": "{{switch(4.clientes[].aficiones[].frecuencia; \"mensual\"; \"mes a mes\"; \"diario\"; \"dia a dia\"; \"anual\"; \"año a año\"; \"semanal\"; \"semana a semana\")}}"
+                    },
+                    {
+                        "name": "OMIT",
+                        "value": "{{omit(4.clientes[].direccion; \"ciudad\")}}"
+                    },
+                    {
+                        "name": "PICK",
+                        "value": "{{pick(4.clientes[].direccion; \"calle\"; \"ciudad\")}}"
+                    },
+                    {
+                        "name": "AVERAGE",
+                        "value": "{{average(7; 3; 6; 4)}}"
+                    },
+                    {
+                        "name": "CEIL (Redondeo a la alza)",
+                        "value": "{{ceil(4.2)}}"
+                    },
+                    {
+                        "name": "FLOOR (Redondeo a la baja)",
+                        "value": "{{floor(4.2)}}"
+                    },
+                    {
+                        "name": "TRUNC (Trucar)",
+                        "value": "{{trunc(4.2354)}}"
+                    },
+                    {
+                        "name": "MEDIAN",
+                        "value": "{{median(2; 5; 1; 4; 7; 8)}}"
+                    },
+                    {
+                        "name": "MAX",
+                        "value": "{{max(2; 4; 3; 7; 10; 5)}}"
+                    },
+                    {
+                        "name": "MIN",
+                        "value": "{{min(2; 4; 3; 7; 10; 5)}}"
+                    },
+                    {
+                        "name": "ABS",
+                        "value": "{{abs(-7.56)}}"
+                    },
+                    {
+                        "name": "ROUND",
+                        "value": "{{round(4.2)}}"
+                    },
+                    {
+                        "name": "SUM",
+                        "value": "{{sum(6; 4)}}"
+                    },
+                    {
+                        "name": "PARSENUMBER",
+                        "value": "{{parseNumber(\"1.000.000\"; \",\")}}"
+                    },
+                    {
+                        "name": "STDEVS",
+                        "value": "{{stdevS(1; 4; 6; 7; 9)}}"
+                    },
+                    {
+                        "name": "STDEVP",
+                        "value": "{{stdevP(1; 4; 6; 7; 9)}}"
+                    },
+                    {
+                        "name": "Format number",
+                        "value": "{{formatNumber(1000000; 2; \",\"; \".\")}}"
+                    },
+                    {
+                        "name": "LENGTH",
+                        "value": "{{length(4.clientes[].nombre)}}"
+                    },
+                    {
+                        "name": "LOWER",
+                        "value": "{{lower(4.clientes[].nombre)}}"
+                    },
+                    {
+                        "name": "CAPITALIZE",
+                        "value": "{{capitalize(4.clientes[].aficiones[].nombre)}}"
+                    },
+                    {
+                        "name": "STARTCASE",
+                        "value": "{{startcase(4.clientes[].aficiones[].nombre)}}"
+                    },
+                    {
+                        "name": "ASCII",
+                        "value": "{{ascii(\"ángel aparició\"; \"true\")}}"
+                    },
+                    {
+                        "name": "REPLACE",
+                        "value": "{{replace(4.clientes[].aficiones[].frecuencia; \"diario\"; \"dia a dia\")}}"
+                    },
+                    {
+                        "name": "REPLACEEMOJI",
+                        "value": "{{replaceEmojiCharacters(\"Hola camaleones🦎\"; emptystring)}}"
+                    },
+                    {
+                        "name": "TRIM",
+                        "value": "{{trim(\"Angel Aparicio Peraire\")}}"
+                    },
+                    {
+                        "name": "UPPER",
+                        "value": "{{upper(4.clientes[].nombre)}}"
+                    },
+                    {
+                        "name": "SUBSTRING",
+                        "value": "{{substring(\"calle mayor 247\"; 0; 5)}}"
+                    },
+                    {
+                        "name": "INDEXOF",
+                        "value": "{{indexOf(\"Angel_Aparicio\"; \"A\"; 1)}}"
+                    },
+                    {
+                        "name": "TOBINARY",
+                        "value": "{{toBinary(\"Angel\")}}"
+                    },
+                    {
+                        "name": "TOSTRING",
+                        "value": "{{toString(4.clientes[].edad)}}"
+                    },
+                    {
+                        "name": "ENCODEURL",
+                        "value": "{{encodeURL(\"https://www.skool.com/ia-masters-automations/classroom/c1117413?md=713e519aaf094db5ab4ad638e9896415\")}}"
+                    },
+                    {
+                        "name": "DECODEURL",
+                        "value": "{{decodeURL(\"https%3A%2F%2Fwww.skool.com%2Fia-masters-automations%2Fclassroom%2Fc1117413%3Fmd%3D713e519aaf094db5ab4ad638e9896415\")}}"
+                    },
+                    {
+                        "name": "ESCAPE HTML",
+                        "value": "{{escapeHTML(\"<p>Esta es una línea de texto en HTML.</p>\n\")}}"
+                    },
+                    {
+                        "name": "ESCAPE MARKDOWN",
+                        "value": "{{escapeMarkdown(\"# Esta es una línea de texto en Markdown como encabezado de nivel 1\n\")}}"
+                    },
+                    {
+                        "name": "STRIP HTML",
+                        "value": "{{stripHTML(\"<p>Esta es una línea de texto en HTML.</p>\")}}"
+                    },
+                    {
+                        "name": "contains",
+                        "value": "{{contains(4.clientes[].nombre; \"Juan\")}}"
+                    },
+                    {
+                        "name": "SPLIT",
+                        "value": "{{split(4.clientes[].nombre; space)}}"
+                    },
+                    {
+                        "name": "ADD",
+                        "value": "{{addDays(now; 2)}}"
+                    },
+                    {
+                        "name": "SET",
+                        "value": "{{setMonth(now; 8)}}"
+                    },
+                    {
+                        "name": "FORMAT DATE",
+                        "value": "{{formatDate(now; \"dd-mm-yy\")}}"
+                    },
+                    {
+                        "name": "PARSE DATE",
+                        "value": "{{parseDate(\"14/08/1992\"; \"DD/MM/YYYY\")}}"
+                    },
+                    {
+                        "name": "JOIN",
+                        "value": "{{join(4.clientes[].etiquetas; \",\")}}"
+                    },
+                    {
+                        "name": "LENGTH",
+                        "value": "{{length(4.clientes[].etiquetas)}}"
+                    },
+                    {
+                        "name": "KEYS",
+                        "value": "{{keys(4.clientes[].direccion)}}"
+                    },
+                    {
+                        "name": "SLICE",
+                        "value": "{{slice(4.clientes[].aficiones; 1)}}"
+                    },
+                    {
+                        "name": "MERGE",
+                        "value": "{{merge(4.clientes[].etiquetas; 4.clientes[].aficiones)}}"
+                    },
+                    {
+                        "name": "CONTAINS ARRAY",
+                        "value": "{{contains(4.clientes[].etiquetas; \"etiqueta2\")}}"
+                    },
+                    {
+                        "name": "REMOVE",
+                        "value": "{{remove(4.clientes[].etiquetas; \"etiqueta1\")}}"
+                    },
+                    {
+                        "name": "ADD",
+                        "value": "{{add(4.clientes[].etiquetas; \"etiqueta4\"; \"etiqueta5\")}}"
+                    },
+                    {
+                        "name": "MAP",
+                        "value": "{{map(4.clientes; \"correo\")}}"
+                    },
+                    {
+                        "name": "SHUFFLE",
+                        "value": "{{shuffle(4.clientes[].etiquetas)}}"
+                    },
+                    {
+                        "name": "SORT",
+                        "value": "{{sort(4.clientes[].aficiones; \"nombre\")}}"
+                    },
+                    {
+                        "name": "REVERSE",
+                        "value": "{{reverse(4.clientes[].etiquetas)}}"
+                    },
+                    {
+                        "name": "FIRST",
+                        "value": "{{first(4.clientes[].etiquetas)}}"
+                    },
+                    {
+                        "name": "LAST",
+                        "value": "{{last(4.clientes[].etiquetas)}}"
+                    },
+                    {
+                        "name": "flatten",
+                        "value": "{{flatten(4.clientes[].aficiones)}}"
+                    },
+                    {
+                        "name": "DISTINCT",
+                        "value": "{{distinct(4.clientes; \"nombre\")}}"
+                    },
+                    {
+                        "name": "TO ARRAY",
+                        "value": "{{toArray(4.clientes[].direccion)}}"
+                    },
+                    {
+                        "name": "Datos",
+                        "value": "Datos consumidos: {{var.scenario.dataConsumed}}\nID ejecución: {{var.scenario.executionId}}\nEjecución empieza a: {{var.scenario.executionStartedAt}}\nTipo de ejecución: {{var.scenario.executionType}}\nURL de ejecución: {{var.scenario.executionUrl}}\nID escenario: {{var.scenario.id}}\nEjecución completada: {{var.scenario.isDLQExecution}}\nNombre escenario: {{var.scenario.name}}\nOperaciones consumidas: {{var.scenario.operationsConsumed}}\nURL Escenario: {{var.scenario.url}}"
+                    }
+                ],
+                "scope": "roundtrip"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "variables": {
+                            "items": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            ]
+                        },
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "variables",
+                        "type": "array",
+                        "label": "Variables",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "label": "Variable name",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "label": "Variable value",
+                                "type": "any"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "GET",
+                        "label": "GET",
+                        "type": "any"
+                    },
+                    {
+                        "name": "IF simple",
+                        "label": "IF simple",
+                        "type": "any"
+                    },
+                    {
+                        "name": "IF aplicado",
+                        "label": "IF aplicado",
+                        "type": "any"
+                    },
+                    {
+                        "name": "IFEMPTY Simple",
+                        "label": "IFEMPTY Simple",
+                        "type": "any"
+                    },
+                    {
+                        "name": "IFEMPTY Aplicado",
+                        "label": "IFEMPTY Aplicado",
+                        "type": "any"
+                    },
+                    {
+                        "name": "SWITCH",
+                        "label": "SWITCH",
+                        "type": "any"
+                    },
+                    {
+                        "name": "OMIT",
+                        "label": "OMIT",
+                        "type": "any"
+                    },
+                    {
+                        "name": "PICK",
+                        "label": "PICK",
+                        "type": "any"
+                    },
+                    {
+                        "name": "AVERAGE",
+                        "label": "AVERAGE",
+                        "type": "any"
+                    },
+                    {
+                        "name": "CEIL (Redondeo a la alza)",
+                        "label": "CEIL (Redondeo a la alza)",
+                        "type": "any"
+                    },
+                    {
+                        "name": "FLOOR (Redondeo a la baja)",
+                        "label": "FLOOR (Redondeo a la baja)",
+                        "type": "any"
+                    },
+                    {
+                        "name": "TRUNC (Trucar)",
+                        "label": "TRUNC (Trucar)",
+                        "type": "any"
+                    },
+                    {
+                        "name": "MEDIAN",
+                        "label": "MEDIAN",
+                        "type": "any"
+                    },
+                    {
+                        "name": "MAX",
+                        "label": "MAX",
+                        "type": "any"
+                    },
+                    {
+                        "name": "MIN",
+                        "label": "MIN",
+                        "type": "any"
+                    },
+                    {
+                        "name": "ABS",
+                        "label": "ABS",
+                        "type": "any"
+                    },
+                    {
+                        "name": "ROUND",
+                        "label": "ROUND",
+                        "type": "any"
+                    },
+                    {
+                        "name": "SUM",
+                        "label": "SUM",
+                        "type": "any"
+                    },
+                    {
+                        "name": "PARSENUMBER",
+                        "label": "PARSENUMBER",
+                        "type": "any"
+                    },
+                    {
+                        "name": "STDEVS",
+                        "label": "STDEVS",
+                        "type": "any"
+                    },
+                    {
+                        "name": "STDEVP",
+                        "label": "STDEVP",
+                        "type": "any"
+                    },
+                    {
+                        "name": "Format number",
+                        "label": "Format number",
+                        "type": "any"
+                    },
+                    {
+                        "name": "LOWER",
+                        "label": "LOWER",
+                        "type": "any"
+                    },
+                    {
+                        "name": "CAPITALIZE",
+                        "label": "CAPITALIZE",
+                        "type": "any"
+                    },
+                    {
+                        "name": "STARTCASE",
+                        "label": "STARTCASE",
+                        "type": "any"
+                    },
+                    {
+                        "name": "ASCII",
+                        "label": "ASCII",
+                        "type": "any"
+                    },
+                    {
+                        "name": "REPLACE",
+                        "label": "REPLACE",
+                        "type": "any"
+                    },
+                    {
+                        "name": "REPLACEEMOJI",
+                        "label": "REPLACEEMOJI",
+                        "type": "any"
+                    },
+                    {
+                        "name": "TRIM",
+                        "label": "TRIM",
+                        "type": "any"
+                    },
+                    {
+                        "name": "UPPER",
+                        "label": "UPPER",
+                        "type": "any"
+                    },
+                    {
+                        "name": "SUBSTRING",
+                        "label": "SUBSTRING",
+                        "type": "any"
+                    },
+                    {
+                        "name": "INDEXOF",
+                        "label": "INDEXOF",
+                        "type": "any"
+                    },
+                    {
+                        "name": "TOBINARY",
+                        "label": "TOBINARY",
+                        "type": "any"
+                    },
+                    {
+                        "name": "TOSTRING",
+                        "label": "TOSTRING",
+                        "type": "any"
+                    },
+                    {
+                        "name": "ENCODEURL",
+                        "label": "ENCODEURL",
+                        "type": "any"
+                    },
+                    {
+                        "name": "DECODEURL",
+                        "label": "DECODEURL",
+                        "type": "any"
+                    },
+                    {
+                        "name": "ESCAPE HTML",
+                        "label": "ESCAPE HTML",
+                        "type": "any"
+                    },
+                    {
+                        "name": "ESCAPE MARKDOWN",
+                        "label": "ESCAPE MARKDOWN",
+                        "type": "any"
+                    },
+                    {
+                        "name": "STRIP HTML",
+                        "label": "STRIP HTML",
+                        "type": "any"
+                    },
+                    {
+                        "name": "contains",
+                        "label": "contains",
+                        "type": "any"
+                    },
+                    {
+                        "name": "SPLIT",
+                        "label": "SPLIT",
+                        "type": "any"
+                    },
+                    {
+                        "name": "SET",
+                        "label": "SET",
+                        "type": "any"
+                    },
+                    {
+                        "name": "FORMAT DATE",
+                        "label": "FORMAT DATE",
+                        "type": "any"
+                    },
+                    {
+                        "name": "PARSE DATE",
+                        "label": "PARSE DATE",
+                        "type": "any"
+                    },
+                    {
+                        "name": "JOIN",
+                        "label": "JOIN",
+                        "type": "any"
+                    },
+                    {
+                        "name": "LENGTH",
+                        "label": "LENGTH",
+                        "type": "any"
+                    },
+                    {
+                        "name": "KEYS",
+                        "label": "KEYS",
+                        "type": "any"
+                    },
+                    {
+                        "name": "SLICE",
+                        "label": "SLICE",
+                        "type": "any"
+                    },
+                    {
+                        "name": "MERGE",
+                        "label": "MERGE",
+                        "type": "any"
+                    },
+                    {
+                        "name": "CONTAINS ARRAY",
+                        "label": "CONTAINS ARRAY",
+                        "type": "any"
+                    },
+                    {
+                        "name": "REMOVE",
+                        "label": "REMOVE",
+                        "type": "any"
+                    },
+                    {
+                        "name": "ADD",
+                        "label": "ADD",
+                        "type": "any"
+                    },
+                    {
+                        "name": "MAP",
+                        "label": "MAP",
+                        "type": "any"
+                    },
+                    {
+                        "name": "SHUFFLE",
+                        "label": "SHUFFLE",
+                        "type": "any"
+                    },
+                    {
+                        "name": "SORT",
+                        "label": "SORT",
+                        "type": "any"
+                    },
+                    {
+                        "name": "REVERSE",
+                        "label": "REVERSE",
+                        "type": "any"
+                    },
+                    {
+                        "name": "FIRST",
+                        "label": "FIRST",
+                        "type": "any"
+                    },
+                    {
+                        "name": "LAST",
+                        "label": "LAST",
+                        "type": "any"
+                    },
+                    {
+                        "name": "flatten",
+                        "label": "flatten",
+                        "type": "any"
+                    },
+                    {
+                        "name": "DISTINCT",
+                        "label": "DISTINCT",
+                        "type": "any"
+                    },
+                    {
+                        "name": "TO ARRAY",
+                        "label": "TO ARRAY",
+                        "type": "any"
+                    },
+                    {
+                        "name": "Datos",
+                        "label": "Datos",
+                        "type": "any"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

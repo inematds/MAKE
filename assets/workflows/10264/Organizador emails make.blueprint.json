@@ -1,0 +1,2112 @@
+{
+    "name": "Organizador emails make",
+    "flow": [
+        {
+            "id": 29,
+            "module": "google-email:TriggerNewEmail",
+            "version": 2,
+            "parameters": {
+                "folder": "INBOX",
+                "xGmRaw": "newer_than:2d",
+                "account": 1889630,
+                "markSeen": false,
+                "maxResults": 100,
+                "searchType": "gmail"
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 1800
+                },
+                "restore": {
+                    "parameters": {
+                        "folder": {
+                            "path": [
+                                "INBOX"
+                            ]
+                        },
+                        "account": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            },
+                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                        },
+                        "searchType": {
+                            "label": "Gmail filter"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "searchType",
+                        "type": "select",
+                        "label": "Filter type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "simple",
+                                "gmail"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "markSeen",
+                        "type": "boolean",
+                        "label": "Mark email message(s) as read when fetched"
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "uinteger",
+                        "label": "Maximum number of results",
+                        "required": true
+                    },
+                    {
+                        "name": "folder",
+                        "type": "folder",
+                        "label": "Folder",
+                        "required": true
+                    },
+                    {
+                        "name": "xGmRaw",
+                        "type": "text",
+                        "label": "Query",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 30,
+            "module": "gemini-ai:createACompletionGeminiPro",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": "TAC_5986381"
+            },
+            "mapper": {
+                "model": "gemini-2.0-flash",
+                "contents": [
+                    {
+                        "role": "user",
+                        "parts": [
+                            {
+                                "text": "Eres un agente clasificador de correos electronicos. Vas a recibir el asunto del email y el cuerpo del email y tu objetivo es categorizarlos en una de las siguientes categorias:\n\n-Codigos_de_seguridad:\nEmails con códigos de verificación o seguridad (login, 2FA, confirmaciones de cuenta).\n\n-Notificaciones_sociales:\nComentarios y avisos de redes sociales (YouTube, LinkedIn, Instagram, Facebook, Meta etc.).\n\n-Promociones_y_ofertas:\nNewsletters comerciales, descuentos, cupones y promociones de tiendas o servicios.\n\n-Actualizaciones_de_servicio:\nAvisos de fallos, actualizaciones de automatizaciones (Make, Airtable, ChatGPT), releases de productos.\n\n-Reservas_y_viajes:\nConfirmaciones, modificaciones o recordatorios de vuelos, hoteles y reservas.\n\n-Facturas_y_finanzas:\nExtractos mensuales, facturas, informes de pagos o transacciones.\n\n-Calendarios_e_invitaciones:\nInvitaciones a reuniones, webinars o eventos con enlaces de Zoom/Google Meet.\n\n-Soporte_y_consultas:\nSolicitudes de ayuda técnica o preguntas de clientes y socios.\n\n-Newsletters_y_reportes:\nReportes de cumplimiento, newsletters de análisis y resúmenes semanales.\n\n-Contenido_Educativo:\nInvitaciones a clases en vivo, tutoriales y materiales formativos.\n\n-Personal:\nMensajes de contactos cercanos, compañeros de equipo o comunicaciones internas.\n\n-Spam_No_deseado:\nCorreos publicitarios no solicitados o masivos de remitentes desconocidos.\n\n-Colaboraciones:\nMensajes que buscan algún tipo de colaboración conmigo\n\nContesta SOLO con un JSON con la siguiente estructura:\n\n{\n\"categoria\": \"Colaboraciones\"\n}",
+                                "type": "text"
+                            },
+                            {
+                                "text": "Asunto: {{29.subject}}\nCuerpo email: {{29.text}}",
+                                "type": "text"
+                            }
+                        ]
+                    }
+                ],
+                "generationConfig": {
+                    "responseModalities": [
+                        "text"
+                    ]
+                }
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 1800
+                },
+                "restore": {
+                    "expect": {
+                        "model": {
+                            "mode": "chose",
+                            "label": "Gemini 2.0 Flash"
+                        },
+                        "contents": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    },
+                                    "parts": {
+                                        "mode": "chose",
+                                        "items": [
+                                            {
+                                                "type": {
+                                                    "mode": "chose",
+                                                    "label": "Text"
+                                                }
+                                            },
+                                            {
+                                                "type": {
+                                                    "mode": "chose",
+                                                    "label": "Text"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        "safetySettings": {
+                            "mode": "chose"
+                        },
+                        "generationConfig": {
+                            "nested": {
+                                "stopSequences": {
+                                    "mode": "chose"
+                                },
+                                "responseModalities": {
+                                    "mode": "chose"
+                                }
+                            }
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "gemini-ai-q9zyjp"
+                            },
+                            "label": "My Gemini AI connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:gemini-ai-q9zyjp",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "AI Model",
+                        "required": true
+                    },
+                    {
+                        "name": "contents",
+                        "spec": [
+                            {
+                                "name": "role",
+                                "type": "select",
+                                "label": "Role",
+                                "options": [
+                                    {
+                                        "label": "User",
+                                        "value": "user"
+                                    },
+                                    {
+                                        "label": "Model",
+                                        "value": "model"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "parts",
+                                "spec": [
+                                    {
+                                        "name": "type",
+                                        "type": "select",
+                                        "label": "Message Type",
+                                        "options": [
+                                            {
+                                                "label": "Text",
+                                                "value": "text",
+                                                "nested": [
+                                                    {
+                                                        "name": "text",
+                                                        "type": "text",
+                                                        "label": "Text",
+                                                        "required": false
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "label": "File",
+                                                "value": "file",
+                                                "nested": [
+                                                    {
+                                                        "name": "file_data",
+                                                        "spec": [
+                                                            {
+                                                                "name": "mime_type",
+                                                                "type": "text",
+                                                                "label": "Mime Type",
+                                                                "required": false
+                                                            },
+                                                            {
+                                                                "help": "You get this from the 'Upload a File' module.",
+                                                                "name": "file_uri",
+                                                                "type": "text",
+                                                                "label": "File URI",
+                                                                "required": false
+                                                            }
+                                                        ],
+                                                        "type": "collection",
+                                                        "label": "File Data",
+                                                        "required": false
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "type": "array",
+                                "label": "Parts"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    },
+                    {
+                        "name": "safetySettings",
+                        "spec": [
+                            {
+                                "name": "category",
+                                "type": "select",
+                                "label": "Category",
+                                "options": [
+                                    {
+                                        "label": "Harassment content",
+                                        "value": "HARM_CATEGORY_HARASSMENT"
+                                    },
+                                    {
+                                        "label": "Hate speech and content",
+                                        "value": "HARM_CATEGORY_HATE_SPEECH"
+                                    },
+                                    {
+                                        "label": "Sexually explicit content.",
+                                        "value": "HARM_CATEGORY_SEXUALLY_EXPLICIT"
+                                    },
+                                    {
+                                        "label": "Dangerous content:",
+                                        "value": "HARM_CATEGORY_DANGEROUS_CONTENT"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "threshold",
+                                "type": "select",
+                                "label": "Threshold",
+                                "options": [
+                                    {
+                                        "label": "Block low and above.",
+                                        "value": "BLOCK_LOW_AND_ABOVE"
+                                    },
+                                    {
+                                        "label": "Block medium and above.",
+                                        "value": "BLOCK_MEDIUM_AND_ABOVE"
+                                    },
+                                    {
+                                        "label": "Block only high.",
+                                        "value": "BLOCK_ONLY_HIGH"
+                                    },
+                                    {
+                                        "label": "Block none.",
+                                        "value": "BLOCK_NONE"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Safety Settings"
+                    },
+                    {
+                        "name": "generationConfig",
+                        "spec": [
+                            {
+                                "name": "stopSequences",
+                                "spec": {
+                                    "name": "value",
+                                    "type": "text",
+                                    "label": "Stop Sequence"
+                                },
+                                "type": "array",
+                                "label": "Stop Sequences"
+                            },
+                            {
+                                "name": "responseModalities",
+                                "type": "select",
+                                "label": "Response Modalities",
+                                "multiple": true,
+                                "validate": {
+                                    "enum": [
+                                        "text",
+                                        "image"
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "maxOutputTokens",
+                                "type": "number",
+                                "label": "Max Output Tokens"
+                            },
+                            {
+                                "name": "temperature",
+                                "type": "number",
+                                "label": "Temperature",
+                                "validate": {
+                                    "max": 1,
+                                    "min": 0
+                                }
+                            },
+                            {
+                                "name": "topP",
+                                "type": "number",
+                                "label": "Top P",
+                                "validate": {
+                                    "max": 1,
+                                    "min": 0
+                                }
+                            },
+                            {
+                                "name": "topK",
+                                "type": "number",
+                                "label": "Top K"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Generation configurations"
+                    },
+                    {
+                        "name": "tools",
+                        "type": "any",
+                        "label": "Tools"
+                    },
+                    {
+                        "name": "tool_config",
+                        "type": "any",
+                        "label": "Tool Config"
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 31,
+            "module": "json:ParseJSON",
+            "version": 1,
+            "parameters": {
+                "type": null
+            },
+            "mapper": {
+                "json": "{{replace(replace(30.candidates[].content.parts[].text; \"```json\n\"; emptystring); \"```\"; emptystring)}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 1800
+                },
+                "restore": {
+                    "parameters": {
+                        "type": {
+                            "label": "Choose a data structure"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "json",
+                        "type": "text",
+                        "label": "JSON string",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 32,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 1800
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 33,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "filter": {
+                                "name": "Actualizaciones_de_servicio",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{31.categoria}}",
+                                            "b": "Actualizaciones_de_servicio",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_5918798573086924537"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 0,
+                                    "name": "Actualizaciones de servicio"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Actualizaciones de servicio"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 34,
+                            "module": "google-email:ActionSetFlagSeen",
+                            "version": 2,
+                            "parameters": {
+                                "account": "TAC_1889630"
+                            },
+                            "mapper": {
+                                "id": "{{29.id}}",
+                                "folder": "Actualizaciones de servicio"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 0
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "folder": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "Actualizaciones de servicio"
+                                            ]
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "folder",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "number",
+                                        "label": "Email ID (UID)",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 35,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "filter": {
+                                "name": "Calendarios_e_invitaciones",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{31.categoria}}",
+                                            "b": "Calendarios_e_invitaciones",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_2921105062354393271"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 300,
+                                    "name": "Calendarios e invitaciones"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Calendarios e invitaciones"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 36,
+                            "module": "google-email:ActionSetFlagSeen",
+                            "version": 2,
+                            "parameters": {
+                                "account": "TAC_1889630"
+                            },
+                            "mapper": {
+                                "id": "{{29.id}}",
+                                "folder": "Calendarios e invitaciones"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "folder": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "Calendarios e invitaciones"
+                                            ]
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "folder",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "number",
+                                        "label": "Email ID (UID)",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 37,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "filter": {
+                                "name": "Codigos_de_seguridad",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{31.categoria}}",
+                                            "b": "Codigos_de_seguridad",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_108528877110941136"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 600,
+                                    "name": "Codigos de seguridad"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Códigos de seguridad"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 38,
+                            "module": "google-email:ActionSetFlagSeen",
+                            "version": 2,
+                            "parameters": {
+                                "account": "TAC_1889630"
+                            },
+                            "mapper": {
+                                "id": "{{29.id}}",
+                                "folder": "Códigos de seguridad"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 600
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "folder": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "Códigos de seguridad"
+                                            ]
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "folder",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "number",
+                                        "label": "Email ID (UID)",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 39,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_4755861574335896555"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 900,
+                                    "name": "Compras y pedidos"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Compras y pedidos"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 40,
+                            "module": "google-email:ActionSetFlagSeen",
+                            "version": 2,
+                            "parameters": {
+                                "account": "TAC_1889630"
+                            },
+                            "mapper": {
+                                "id": "{{29.id}}",
+                                "folder": "Compras y pedidos"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 900
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "folder": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "Compras y pedidos"
+                                            ]
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "folder",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "number",
+                                        "label": "Email ID (UID)",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 41,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "filter": {
+                                "name": "Contenido_Educativo",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{31.categoria}}",
+                                            "b": "Contenido_Educativo",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_8127329877605181140"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 1200,
+                                    "name": "Contenido educativo"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Contenido Educativo"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 42,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "filter": {
+                                "name": "Facturas_y_finanzas",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{31.categoria}}",
+                                            "b": "Facturas_y_finanzas",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_633207586246553958"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 1500,
+                                    "name": "Facturas y finanzas"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Facturas y finanzas"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 43,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "filter": {
+                                "name": "Newsletters_y_reportes",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{31.categoria}}",
+                                            "b": "Newsletters_y_reportes",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_238853632381700196"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 1800,
+                                    "name": "Newsletters"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Newsletters"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 44,
+                            "module": "google-email:ActionSetFlagSeen",
+                            "version": 2,
+                            "parameters": {
+                                "account": "TAC_1889630"
+                            },
+                            "mapper": {
+                                "id": "{{29.id}}",
+                                "folder": "Newsletters"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 1800
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "folder": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "Newsletters"
+                                            ]
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "folder",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "number",
+                                        "label": "Email ID (UID)",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 45,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_5748486376460056824"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 2100,
+                                    "name": "Notificaciones sociales"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Notificaciones Sociales"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 46,
+                            "module": "google-email:ActionSetFlagSeen",
+                            "version": 2,
+                            "parameters": {
+                                "account": "TAC_1889630"
+                            },
+                            "mapper": {
+                                "id": "{{29.id}}",
+                                "folder": "Notificaciones Sociales"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 2100
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "folder": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "Notificaciones Sociales"
+                                            ]
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "folder",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "number",
+                                        "label": "Email ID (UID)",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 47,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "filter": {
+                                "name": "Personal",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{31.categoria}}",
+                                            "b": "Personal",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_1423077879882880864"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 2400,
+                                    "name": "Personal"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Personal"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 48,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "filter": {
+                                "name": "Promociones_y_ofertas",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{31.categoria}}",
+                                            "b": "Promociones_y_ofertas",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_7577521476002524472"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 2700,
+                                    "name": "Promociones y ofertas"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Promociones y ofertas"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 49,
+                            "module": "google-email:ActionSetFlagSeen",
+                            "version": 2,
+                            "parameters": {
+                                "account": "TAC_1889630"
+                            },
+                            "mapper": {
+                                "id": "{{29.id}}",
+                                "folder": "Promociones y ofertas"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 2700
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "folder": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "Promociones y ofertas"
+                                            ]
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "folder",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "number",
+                                        "label": "Email ID (UID)",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 50,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "filter": {
+                                "name": "Reservas_y_viajes",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{31.categoria}}",
+                                            "b": "Reservas_y_viajes",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_3337185110032295070"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 3000,
+                                    "name": "Reservas y viajes"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Reservas y viajes"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 51,
+                            "module": "google-email:ActionSetFlagSeen",
+                            "version": 2,
+                            "parameters": {
+                                "account": "TAC_1889630"
+                            },
+                            "mapper": {
+                                "id": "{{29.id}}",
+                                "folder": "Reservas y viajes"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 3000
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "folder": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "Reservas y viajes"
+                                            ]
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "folder",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "id",
+                                        "type": "number",
+                                        "label": "Email ID (UID)",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 52,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "filter": {
+                                "name": "Soporte_y_consultas",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{31.categoria}}",
+                                            "b": "Soporte_y_consultas",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_3390694751349308377"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 3300,
+                                    "name": "Soporte y consultas"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Soporte y consultas"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 53,
+                            "module": "google-email:ActionModifyLabelsApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": 1889630
+                            },
+                            "filter": {
+                                "name": "Spam_No_deseado",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{31.categoria}}",
+                                            "b": "Spam_No_deseado",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "addLabelIds": [
+                                    "Label_8921278585692944566"
+                                ],
+                                "removeLabelIds": []
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 3600,
+                                    "name": "SPAM"
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "addLabelIds": {
+                                            "mode": "chose",
+                                            "label": [
+                                                "Spam / No deseado"
+                                            ]
+                                        },
+                                        "removeLabelIds": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "addLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to add",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "name": "removeLabelIds",
+                                        "type": "select",
+                                        "label": "Labels to remove",
+                                        "multiple": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 54,
+                            "module": "google-email:ActionDeleteEmailApi",
+                            "version": 2,
+                            "parameters": {
+                                "account": "TAC_1889630"
+                            },
+                            "mapper": {
+                                "messageId": "{{29.messageId}}",
+                                "permanent": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 3600
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "account": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "messageId",
+                                        "type": "text",
+                                        "label": "Gmail Message ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "permanent",
+                                        "type": "boolean",
+                                        "label": "Permanently",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com",
+        "notes": []
+    }
+}

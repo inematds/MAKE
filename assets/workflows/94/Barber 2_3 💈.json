@@ -1,0 +1,335 @@
+{
+    "name": "Barber 2/3 💈",
+    "flow": [
+        {
+            "id": 1,
+            "module": "airtable:TriggerWatchRecords",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 1532818,
+                "base": "appXSsKgxjFoIaAc5",
+                "useColumnId": false,
+                "table": "tbl4Kg80Fv7t2KrZT",
+                "config": {
+                    "triggerField": "Last Modified Time 👀",
+                    "labelField": "Status ⚫️"
+                },
+                "maxRecords": 10,
+                "view": "",
+                "formula": ""
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": -316,
+                    "y": -14
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "My Airtable OAuth connection (User ID: usrWHZndszJIS5AWQ)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            }
+                        },
+                        "base": {
+                            "label": "BarberBarber CRM 💈"
+                        },
+                        "table": {
+                            "label": "Table 1"
+                        },
+                        "config": {
+                            "nested": {
+                                "triggerField": {
+                                    "label": "Last Modified Time 👀"
+                                },
+                                "labelField": {
+                                    "label": "Status ⚫️"
+                                }
+                            }
+                        },
+                        "view": {
+                            "label": "Empty"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "config",
+                        "type": "collection",
+                        "label": "Trigger configuration",
+                        "spec": [
+                            {
+                                "name": "triggerField",
+                                "type": "select",
+                                "label": "Trigger field",
+                                "required": true
+                            },
+                            {
+                                "name": "triggerField",
+                                "type": "hidden"
+                            },
+                            {
+                                "name": "labelField",
+                                "type": "select",
+                                "label": "Label field",
+                                "required": true
+                            }
+                        ]
+                    },
+                    {
+                        "name": "maxRecords",
+                        "type": "integer",
+                        "label": "Limit",
+                        "required": true
+                    },
+                    {
+                        "name": "view",
+                        "type": "select",
+                        "label": "View"
+                    },
+                    {
+                        "name": "formula",
+                        "type": "text",
+                        "label": "Formula"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "Date 📅",
+                        "label": "Date 📅",
+                        "type": "date",
+                        "time": true
+                    },
+                    {
+                        "name": "Name 👋",
+                        "label": "Name 👋",
+                        "type": "text",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Client Email 📧",
+                        "label": "Client Email 📧",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Barber 💈",
+                        "label": "Barber 💈",
+                        "type": "text",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Status ⚫️",
+                        "label": "Status ⚫️",
+                        "type": "text"
+                    },
+                    {
+                        "name": "date created 📆",
+                        "label": "date created 📆",
+                        "type": "date",
+                        "time": false
+                    },
+                    {
+                        "name": "Last Modified Time 👀",
+                        "label": "Last Modified Time 👀",
+                        "type": "date"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "google-email:ActionCreateDraft",
+            "version": 2,
+            "parameters": {
+                "account": 1480479
+            },
+            "filter": {
+                "name": "Status ⚫️",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{1.`Status ⚫️`}}",
+                            "o": "text:contain:ci",
+                            "b": "complete"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "to": [
+                    "{{1.`Client Email 📧`}}"
+                ],
+                "subject": "{{1.`Name 👋`}}, How was your Cut? 💈",
+                "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Rate Our Service</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            line-height: 1.6;\n            color: #333;\n            max-width: 600px;\n            margin: 0 auto;\n            padding: 20px;\n        }\n        h1 {\n            color: #2c3e50;\n        }\n        .rating-buttons {\n            display: flex;\n            justify-content: space-between;\n            margin-top: 20px;\n        }\n        .rating-button {\n            background-color: #3498db;\n            color: white;\n            border: none;\n            padding: 10px 20px;\n            font-size: 16px;\n            text-decoration: none;\n            border-radius: 5px;\n            transition: background-color 0.3s;\n        }\n        .rating-button:hover {\n            background-color: #2980b9;\n        }\n    </style>\n</head>\n<body>\n    <h1>How did we do?</h1>\n    <p>Howdy {{1.`Name 👋`}},</p>\n    <p>Thank you for choosing us, we'd love your feedback. How was your experience today?</p>\n    \n    <div class=\"rating-buttons\">\n        <a href=\"https://hook.eu2.make.com/od7uooqlgu5yljtio53penbp5pnq9l31?rating=1&email={{1.`Client Email 📧`}}\" class=\"rating-button\">1 - Poor</a>\n        <a href=\"https://hook.eu2.make.com/od7uooqlgu5yljtio53penbp5pnq9l31?rating=2&email={{1.`Client Email 📧`}}\" class=\"rating-button\">2 - Fair</a>\n        <a href=\"https://hook.eu2.make.com/od7uooqlgu5yljtio53penbp5pnq9l31?rating=3&email={{1.`Client Email 📧`}}\" class=\"rating-button\">3 - Good</a>\n        <a href=\"https://hook.eu2.make.com/od7uooqlgu5yljtio53penbp5pnq9l31?rating=4&email={{1.`Client Email 📧`}}\" class=\"rating-button\">4 - Very Good</a>\n        <a href=\"https://hook.eu2.make.com/od7uooqlgu5yljtio53penbp5pnq9l31?rating=5&email={{1.`Client Email 📧`}}\" class=\"rating-button\">5 - Excellent</a>\n    </div>\n    \n    <p>Your feedback helps us to be better.</p>\n    <p>I appreciate you,</p>\n    <p>{{1.`Barber 💈`}}</p>\n\n    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"vertical-align: -webkit-baseline-middle; font-size: medium; font-family: Arial;\">\n        <tbody>\n            <tr>\n                <td>\n                    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"vertical-align: -webkit-baseline-middle; font-size: medium; font-family: Arial;\">\n                        <tbody>\n                            <tr>\n                                <td style=\"vertical-align: top;\">\n                                    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"vertical-align: -webkit-baseline-middle; font-size: medium; font-family: Arial;\">\n                                        <tbody>\n                                            <tr>\n                                                <td style=\"text-align: center;\">\n                                                    <img src=\"https://imgs.search.brave.com/p-3L5AbXp7Zf7Vowj8wv-UdSlKO3C-Nzb0ztDX6oeT4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAyLzEwLzk3LzE5/LzM2MF9GXzIxMDk3/MTk1OV93WGNCWWZp/ZjdqS2V5S2tIS2hW/eU9uelFXSGF3SWdL/NC5qcGc\" role=\"presentation\" width=\"130\" style=\"display: block; max-width: 128px;\">\n                                                </td>\n                                            </tr>\n                                            <tr>\n                                                <td height=\"30\"></td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"text-align: center;\">\n                                                    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"display: inline-block; vertical-align: -webkit-baseline-middle; font-size: medium; font-family: Arial;\">\n                                                        <tbody>\n                                                            <tr style=\"text-align: center;\">\n                                                                <td>\n                                                                    <a href=\"//qerger\" color=\"#7075db\" style=\"display: inline-block; padding: 0px; background-color: rgb(112, 117, 219);\">\n                                                                        <img src=\"https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/facebook-icon-2x.png\" alt=\"facebook\" color=\"#7075db\" width=\"24\" style=\"background-color: rgb(112, 117, 219); max-width: 135px; display: block;\">\n                                                                    </a>\n                                                                </td>\n                                                                <td width=\"5\">\n                                                                    <div></div>\n                                                                </td>\n                                                                <td>\n                                                                    <a href=\"//erg\" color=\"#7075db\" style=\"display: inline-block; padding: 0px; background-color: rgb(112, 117, 219);\">\n                                                                        <img src=\"https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/twitter-icon-2x.png\" alt=\"twitter\" color=\"#7075db\" width=\"24\" style=\"background-color: rgb(112, 117, 219); max-width: 135px; display: block;\">\n                                                                    </a>\n                                                                </td>\n                                                                <td width=\"5\">\n                                                                    <div></div>\n                                                                </td>\n                                                                <td>\n                                                                    <a href=\"//asdfref\" color=\"#7075db\" style=\"display: inline-block; padding: 0px; background-color: rgb(112, 117, 219);\">\n                                                                        <img src=\"https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/linkedin-icon-2x.png\" alt=\"linkedin\" color=\"#7075db\" width=\"24\" style=\"background-color: rgb(112, 117, 219); max-width: 135px; display: block;\">\n                                                                    </a>\n                                                                </td>\n                                                                <td width=\"5\">\n                                                                    <div></div>\n                                                                </td>\n                                                                <td>\n                                                                    <a href=\"//eqrger\" color=\"#7075db\" style=\"display: inline-block; padding: 0px; background-color: rgb(112, 117, 219);\">\n                                                                        <img src=\"https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/instagram-icon-2x.png\" alt=\"instagram\" color=\"#7075db\" width=\"24\" style=\"background-color: rgb(112, 117, 219); max-width: 135px; display: block;\">\n                                                                    </a>\n                                                                </td>\n                                                                <td width=\"5\">\n                                                                    <div></div>\n                                                                </td>\n                                                            </tr>\n                                                        </tbody>\n                                                    </table>\n                                                </td>\n                                            </tr>\n                                        </tbody>\n                                    </table>\n                                </td>\n                                <td width=\"46\">\n                                    <div></div>\n                                </td>\n                                <td style=\"padding: 0px; vertical-align: middle;\">\n                                    <h2 color=\"#000000\" style=\"margin: 0px; font-size: 18px; color: rgb(0, 0, 0); font-weight: 600;\">\n                                        <span>Barber Barberr</span>\n                                        <span>&nbsp;</span>\n                                        <span></span>\n                                    </h2>\n                                    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"width: 100%; vertical-align: -webkit-baseline-middle; font-size: medium; font-family: Arial;\">\n                                        <tbody>\n                                            <tr>\n                                                <td height=\"30\"></td>\n                                            </tr>\n                                            <tr>\n                                                <td color=\"#a40c3f\" direction=\"horizontal\" width=\"auto\" height=\"1\" style=\"width: 100%; border-bottom: 1px solid rgb(164, 12, 63); border-left: none; display: block;\"></td>\n                                            </tr>\n                                            <tr>\n                                                <td height=\"30\"></td>\n                                            </tr>\n                                        </tbody>\n                                    </table>\n                                    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"vertical-align: -webkit-baseline-middle; font-size: medium; font-family: Arial;\">\n                                        <tbody>\n                                            <tr height=\"25\" style=\"vertical-align: middle;\">\n                                                <td width=\"30\" style=\"vertical-align: middle;\">\n                                                    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"vertical-align: -webkit-baseline-middle; font-size: medium; font-family: Arial;\">\n                                                        <tbody>\n                                                            <tr>\n                                                                <td style=\"vertical-align: bottom;\">\n                                                                    <span color=\"#a40c3f\" width=\"11\" style=\"display: inline-block; background-color: rgb(164, 12, 63);\">\n                                                                        <img src=\"https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/phone-icon-2x.png\" color=\"#a40c3f\" alt=\"mobilePhone\" width=\"13\" style=\"display: block; background-color: rgb(164, 12, 63);\">\n                                                                    </span>\n                                                                </td>\n                                                            </tr>\n                                                        </tbody>\n                                                    </table>\n                                                </td>\n                                                <td style=\"padding: 0px; color: rgb(0, 0, 0);\">\n                                                    <a href=\"tel:0777 777 7777 \" color=\"#000000\" style=\"text-decoration: none; color: rgb(0, 0, 0); font-size: 12px;\">\n                                                        <span>0777 777 7777 </span>\n                                                    </a>\n                                                </td>\n                                            </tr>\n                                            <tr height=\"25\" style=\"vertical-align: middle;\">\n                                                <td width=\"30\" style=\"vertical-align: middle;\">\n                                                    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"vertical-align: -webkit-baseline-middle; font-size: medium; font-family: Arial;\">\n                                                        <tbody>\n                                                            <tr>\n                                                                <td style=\"vertical-align: bottom;\">\n                                                                    <span color=\"#a40c3f\" width=\"11\" style=\"display: inline-block; background-color: rgb(164, 12, 63);\">\n                                                                        <img src=\"https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/link-icon-2x.png\" color=\"#a40c3f\" alt=\"website\" width=\"13\" style=\"display: block; background-color: rgb(164, 12, 63);\">\n                                                                    </span>\n                                                                </td>\n                                                            </tr>\n                                                        </tbody>\n                                                    </table>\n                                                </td>\n                                                <td style=\"padding: 0px;\">\n                                                    <a href=\"//barberbarberrr.co\" color=\"#000000\" style=\"text-decoration: none; color: rgb(0, 0, 0); font-size: 12px;\">\n                                                        <span>barberbarberrr.co</span>\n                                                    </a>\n                                                </td>\n                                            </tr>\n                                        </tbody>\n                                    </table>\n                                    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"vertical-align: -webkit-baseline-middle; font-size: medium; font-family: Arial;\">\n                                        <tbody>\n                                            <tr>\n                                                <td height=\"30\"></td>\n                                            </tr>\n                                        </tbody>\n                                    </table>\n                                </td>\n                            </tr>\n                        </tbody>\n                    </table>\n                </td>\n            </tr>\n        </tbody>\n    </table>\n</body>\n</html>",
+                "attachments": [],
+                "cc": [],
+                "bcc": []
+            },
+            "metadata": {
+                "designer": {
+                    "x": 91,
+                    "y": -15,
+                    "name": "Email Feedback ⭐️⭐️⭐️⭐️⭐️"
+                },
+                "restore": {
+                    "parameters": {
+                        "account": {
+                            "label": "My Google Restricted connection (jack@aiautomationswithjack.com)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "to": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "attachments": {
+                            "mode": "chose"
+                        },
+                        "cc": {
+                            "mode": "chose"
+                        },
+                        "bcc": {
+                            "mode": "chose"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "to",
+                        "type": "array",
+                        "label": "To",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "html",
+                        "type": "text",
+                        "label": "Content"
+                    },
+                    {
+                        "name": "attachments",
+                        "type": "array",
+                        "label": "Attachments",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "label": "File name",
+                                "type": "filename",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "label": "Data",
+                                "type": "buffer",
+                                "required": true,
+                                "semantic": "file:data"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "cc",
+                        "type": "array",
+                        "label": "Copy recipient",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "bcc",
+                        "type": "array",
+                        "label": "Blind copy recipient",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

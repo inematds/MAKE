@@ -1,0 +1,840 @@
+{
+    "name": "Transcripción RÁPIDA audio",
+    "flow": [
+        {
+            "id": 1,
+            "module": "google-drive:watchFilesInAFolder",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 1889630,
+                "select": "create",
+                "destination": "drive",
+                "mimeType": "all",
+                "limit": 2,
+                "folderId": "/16ZynYo-HQ4ly5OLBgjutsHtAih5CjbsP"
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 150
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            }
+                        },
+                        "select": {
+                            "label": "By Created Time"
+                        },
+                        "destination": {
+                            "label": "My Drive"
+                        },
+                        "mimeType": {
+                            "label": "All"
+                        },
+                        "folderId": {
+                            "path": [
+                                "Audio transcripción"
+                            ]
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Watch Files",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "create",
+                                "modify"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "destination",
+                        "type": "select",
+                        "label": "Choose a Drive",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share",
+                                "team"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "mimeType",
+                        "type": "select",
+                        "label": "File Types to Watch",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "all",
+                                "document",
+                                "spreadsheet",
+                                "slide",
+                                "drawing"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit",
+                        "required": true
+                    },
+                    {
+                        "name": "folderId",
+                        "type": "folder",
+                        "label": "Select the Folder to be Watched",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "google-drive:getAFile",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 1889630
+            },
+            "mapper": {
+                "select": "map",
+                "formatDocuments": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "formatSpreadsheets": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "formatPresentations": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                "formatDrawings": "image/jpeg",
+                "file": "{{1.id}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 150
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "select": {
+                            "label": "Enter manually"
+                        },
+                        "formatDocuments": {
+                            "label": "MS Word Document"
+                        },
+                        "formatSpreadsheets": {
+                            "label": "MS Excel"
+                        },
+                        "formatPresentations": {
+                            "label": "MS PowerPoint"
+                        },
+                        "formatDrawings": {
+                            "label": "JPEG"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Enter a File ID",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "map",
+                                "value"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatDocuments",
+                        "type": "select",
+                        "label": "Convert Google Documents Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                "application/pdf",
+                                "application/vnd.oasis.opendocument.text",
+                                "text/html",
+                                "text/plain",
+                                "application/rtf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatSpreadsheets",
+                        "type": "select",
+                        "label": "Convert Google Spreadsheets Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                "application/x-vnd.oasis.opendocument.spreadsheet",
+                                "application/pdf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatPresentations",
+                        "type": "select",
+                        "label": "Convert Google Slides Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                                "application/pdf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatDrawings",
+                        "type": "select",
+                        "label": "Convert Google Drawings Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "image/jpeg",
+                                "image/png",
+                                "image/svg+xml",
+                                "application/pdf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "file",
+                        "type": "text",
+                        "label": "File ID",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 150
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 6,
+                            "module": "cloudconvert:ConvertFile",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 3393869
+                            },
+                            "filter": {
+                                "name": "+25mb",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{2.filesize}}",
+                                            "o": "number:greaterorequal",
+                                            "b": "25000000"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "import": {
+                                    "importType": "upload",
+                                    "data": "{{2.data}}",
+                                    "filename": "{{2.name}}"
+                                },
+                                "options": {
+                                    "useInputType": "no",
+                                    "filename": "{{2.name}}",
+                                    "opts": [
+                                        {
+                                            "name": "audio_qscale",
+                                            "value": "9"
+                                        },
+                                        {
+                                            "name": "channels",
+                                            "value": "1"
+                                        }
+                                    ],
+                                    "output_format": "mp3"
+                                },
+                                "export": {
+                                    "downloadFile": true
+                                }
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 0
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My CloudConvert OAuth connection (angelapa92)",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "cloudconvert2"
+                                            }
+                                        }
+                                    },
+                                    "expect": {
+                                        "import": {
+                                            "nested": {
+                                                "importType": {
+                                                    "label": "upload a file"
+                                                }
+                                            }
+                                        },
+                                        "options": {
+                                            "nested": {
+                                                "useInputType": {
+                                                    "mode": "chose",
+                                                    "label": "I don't know the input format"
+                                                },
+                                                "opts": {
+                                                    "mode": "chose",
+                                                    "items": [
+                                                        null,
+                                                        null
+                                                    ]
+                                                },
+                                                "output_format": {
+                                                    "mode": "chose",
+                                                    "label": "mp3"
+                                                }
+                                            }
+                                        },
+                                        "export": {
+                                            "nested": {
+                                                "downloadFile": {
+                                                    "mode": "chose"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:cloudconvert3,cloudconvert2",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "import",
+                                        "type": "collection",
+                                        "label": "Import options",
+                                        "required": true,
+                                        "spec": [
+                                            {
+                                                "name": "importType",
+                                                "type": "select",
+                                                "label": "Input file",
+                                                "required": true,
+                                                "validate": {
+                                                    "enum": [
+                                                        "upload",
+                                                        "url"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "data",
+                                                "type": "buffer",
+                                                "label": "Data",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "filename",
+                                                "type": "filename",
+                                                "label": "File name",
+                                                "required": true
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "options",
+                                        "type": "collection",
+                                        "label": "Convert options",
+                                        "required": true,
+                                        "spec": [
+                                            {
+                                                "name": "useInputType",
+                                                "type": "select",
+                                                "label": "Format",
+                                                "required": true,
+                                                "validate": {
+                                                    "enum": [
+                                                        "yes",
+                                                        "no"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "output_format",
+                                                "type": "select",
+                                                "label": "Output format",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "filename",
+                                                "type": "filename",
+                                                "label": "File name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "opts",
+                                                "type": "array",
+                                                "label": "Conversion and engine specific options",
+                                                "spec": [
+                                                    {
+                                                        "name": "name",
+                                                        "type": "text",
+                                                        "label": "Name",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "value",
+                                                        "type": "text",
+                                                        "label": "Value"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "export",
+                                        "type": "collection",
+                                        "label": "Export options",
+                                        "required": true,
+                                        "spec": [
+                                            {
+                                                "name": "downloadFile",
+                                                "type": "boolean",
+                                                "label": "Download a file",
+                                                "required": true
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 8,
+                            "module": "groq:speechToText",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 2431689,
+                                "response_format": "verbose_json"
+                            },
+                            "mapper": {
+                                "file_name": "{{6.filename}}",
+                                "file_data": "{{6.data}}",
+                                "model": "whisper-large-v3"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 0
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My Groq connection",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "groq"
+                                            }
+                                        }
+                                    },
+                                    "expect": {
+                                        "model": {
+                                            "mode": "chose",
+                                            "label": "whisper-large-v3"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:groq",
+                                        "label": "Connection",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "response_format",
+                                        "type": "text",
+                                        "label": "Response Format"
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "file_name",
+                                        "type": "filename",
+                                        "label": "Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "file_data",
+                                        "type": "buffer",
+                                        "label": "Data",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "prompt",
+                                        "type": "text",
+                                        "label": "System Prompt"
+                                    },
+                                    {
+                                        "name": "model",
+                                        "type": "select",
+                                        "label": "Model",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "whisper-large-v3",
+                                                "distil-whisper-large-v3-en"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "temperature",
+                                        "type": "number",
+                                        "label": "Temperature"
+                                    },
+                                    {
+                                        "name": "language",
+                                        "type": "text",
+                                        "label": "Language"
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        },
+                        {
+                            "id": 9,
+                            "module": "google-drive:deleteAFile",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 1889630
+                            },
+                            "mapper": {
+                                "select": "map",
+                                "select1": "file",
+                                "file": "{{1.id}}"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1500,
+                                    "y": 0
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            }
+                                        }
+                                    },
+                                    "expect": {
+                                        "select": {
+                                            "label": "Enter manually"
+                                        },
+                                        "select1": {
+                                            "label": "File"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Enter a File/Folder ID",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "value"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "select1",
+                                        "type": "select",
+                                        "label": "Select File/Folder",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "file",
+                                                "folder"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "file",
+                                        "type": "text",
+                                        "label": "File ID",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 3,
+                            "module": "groq:speechToText",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 2431689,
+                                "response_format": "verbose_json"
+                            },
+                            "filter": {
+                                "name": "<25 mb",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{2.filesize}}",
+                                            "o": "number:less",
+                                            "b": "25000000"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "file_name": "{{2.name}}",
+                                "file_data": "{{2.data}}",
+                                "model": "whisper-large-v3"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 900,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My Groq connection",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "groq"
+                                            }
+                                        }
+                                    },
+                                    "expect": {
+                                        "model": {
+                                            "mode": "chose",
+                                            "label": "whisper-large-v3"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:groq",
+                                        "label": "Connection",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "response_format",
+                                        "type": "text",
+                                        "label": "Response Format"
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "file_name",
+                                        "type": "filename",
+                                        "label": "Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "file_data",
+                                        "type": "buffer",
+                                        "label": "Data",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "prompt",
+                                        "type": "text",
+                                        "label": "System Prompt"
+                                    },
+                                    {
+                                        "name": "model",
+                                        "type": "select",
+                                        "label": "Model",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "whisper-large-v3",
+                                                "distil-whisper-large-v3-en"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "temperature",
+                                        "type": "number",
+                                        "label": "Temperature"
+                                    },
+                                    {
+                                        "name": "language",
+                                        "type": "text",
+                                        "label": "Language"
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        },
+                        {
+                            "id": 4,
+                            "module": "google-drive:deleteAFile",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 1889630
+                            },
+                            "mapper": {
+                                "select": "map",
+                                "select1": "file",
+                                "file": "{{1.id}}"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            }
+                                        }
+                                    },
+                                    "expect": {
+                                        "select": {
+                                            "label": "Enter manually"
+                                        },
+                                        "select1": {
+                                            "label": "File"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Enter a File/Folder ID",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "value"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "select1",
+                                        "type": "select",
+                                        "label": "Select File/Folder",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "file",
+                                                "folder"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "file",
+                                        "type": "text",
+                                        "label": "File ID",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

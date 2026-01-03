@@ -1,0 +1,2541 @@
+{
+    "name": "#4 Postagem de carrossel",
+    "flow": [
+        {
+            "id": 125,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 1395915,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 869,
+                    "y": 220
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "My gateway-webhook webhook"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 264,
+            "module": "util:FunctionIncrement",
+            "version": 1,
+            "parameters": {
+                "reset": "scenario"
+            },
+            "filter": {
+                "name": "Total de imagens",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{125.total_images}}",
+                            "b": "3",
+                            "o": "number:greater"
+                        },
+                        {
+                            "a": "{{125.file_urls[]}}",
+                            "o": "exist"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 1165,
+                    "y": 217
+                },
+                "restore": {
+                    "parameters": {
+                        "reset": {
+                            "label": "Never"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "reset",
+                        "type": "select",
+                        "label": "Reset a value",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "run",
+                                "execution",
+                                "scenario"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 247,
+            "module": "dropbox:createFolder",
+            "version": 5,
+            "parameters": {
+                "__IMTCONN__": 3526318
+            },
+            "mapper": {
+                "name": "Galeria_{{264.i}}",
+                "path": "/IMG TEMP",
+                "autorename": true
+            },
+            "metadata": {
+                "designer": {
+                    "x": 867,
+                    "y": -19
+                },
+                "restore": {
+                    "expect": {
+                        "path": {
+                            "mode": "chose"
+                        },
+                        "autorename": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "dropbox"
+                            },
+                            "label": "My Dropbox connection (jsgleisson@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:dropbox",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Folder Name",
+                        "required": true
+                    },
+                    {
+                        "name": "path",
+                        "type": "folder",
+                        "label": "Folder"
+                    },
+                    {
+                        "name": "autorename",
+                        "type": "boolean",
+                        "label": "Auto rename",
+                        "required": true
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 263,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "filter": {
+                "name": "ddsfddfdf",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{125.total_images}}",
+                            "b": "3",
+                            "o": "number:greater"
+                        },
+                        {
+                            "a": "{{125.file_urls[]}}",
+                            "o": "exist"
+                        }
+                    ]
+                ]
+            },
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 1162,
+                    "y": -18
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 226,
+                            "module": "http:ActionGetFile",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false
+                            },
+                            "mapper": {
+                                "url": "{{125.file_urls[1]}}",
+                                "method": "get",
+                                "serializeUrl": false,
+                                "shareCookies": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1449,
+                                    "y": -26
+                                },
+                                "restore": {},
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "serializeUrl",
+                                        "type": "boolean",
+                                        "label": "Serialize URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "hidden",
+                                        "label": "Method"
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 236,
+                            "module": "dropbox:uploadLargeFile",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 3526318
+                            },
+                            "mapper": {
+                                "data": "{{226.data}}",
+                                "path": "{{247.path_display}}",
+                                "filename": "foto1.jpg",
+                                "overwrite": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1800,
+                                    "y": -21
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "path": {
+                                            "mode": "edit"
+                                        },
+                                        "overwrite": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (jsgleisson@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "path",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "filename",
+                                        "type": "filename",
+                                        "label": "File Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Data",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "overwrite",
+                                        "type": "boolean",
+                                        "label": "Overwrite an existing file",
+                                        "required": true
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        },
+                        {
+                            "id": 237,
+                            "module": "dropbox:createShareLink",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 3526318
+                            },
+                            "mapper": {
+                                "path": "{{236.path_lower}}",
+                                "select": "map",
+                                "settings": {
+                                    "access": "max"
+                                }
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2144,
+                                    "y": -17
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "select": {
+                                            "label": "Map a file/folder path"
+                                        },
+                                        "settings": {
+                                            "nested": {
+                                                "access": {
+                                                    "mode": "chose",
+                                                    "label": "Max Access"
+                                                },
+                                                "allow_download": {
+                                                    "mode": "chose"
+                                                },
+                                                "require_password": {
+                                                    "mode": "chose"
+                                                },
+                                                "requested_visibility": {
+                                                    "mode": "chose",
+                                                    "label": "Empty"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (jsgleisson@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Way of selecting files",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "file"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "settings",
+                                        "spec": [
+                                            {
+                                                "name": "access",
+                                                "type": "select",
+                                                "label": "Link's Access Level",
+                                                "validate": {
+                                                    "enum": [
+                                                        "viewer",
+                                                        "editor",
+                                                        "max"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "expires",
+                                                "time": true,
+                                                "type": "date",
+                                                "label": "Link's Expiration Date"
+                                            },
+                                            {
+                                                "name": "require_password",
+                                                "type": "boolean",
+                                                "label": "Require Password"
+                                            },
+                                            {
+                                                "name": "link_password",
+                                                "type": "text",
+                                                "label": "Link's Password"
+                                            },
+                                            {
+                                                "name": "allow_download",
+                                                "type": "boolean",
+                                                "label": "Allow Download"
+                                            },
+                                            {
+                                                "name": "requested_visibility",
+                                                "type": "select",
+                                                "label": "Requested Visibility (Deprecated)",
+                                                "validate": {
+                                                    "enum": [
+                                                        "public",
+                                                        "team_only",
+                                                        "password"
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Settings"
+                                    },
+                                    {
+                                        "name": "path",
+                                        "type": "text",
+                                        "label": "File Path",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 228,
+                            "module": "http:ActionGetFile",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false
+                            },
+                            "mapper": {
+                                "url": "{{125.file_urls[2]}}",
+                                "method": "get",
+                                "serializeUrl": false,
+                                "shareCookies": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1464,
+                                    "y": 273
+                                },
+                                "restore": {},
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "serializeUrl",
+                                        "type": "boolean",
+                                        "label": "Serialize URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "hidden",
+                                        "label": "Method"
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 238,
+                            "module": "dropbox:uploadLargeFile",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 3526318
+                            },
+                            "mapper": {
+                                "data": "{{228.data}}",
+                                "path": "{{247.path_display}}",
+                                "filename": "foto2.jpg",
+                                "overwrite": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1796,
+                                    "y": 264
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "path": {
+                                            "mode": "edit"
+                                        },
+                                        "overwrite": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (jsgleisson@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "path",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "filename",
+                                        "type": "filename",
+                                        "label": "File Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Data",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "overwrite",
+                                        "type": "boolean",
+                                        "label": "Overwrite an existing file",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 239,
+                            "module": "dropbox:createShareLink",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 3526318
+                            },
+                            "mapper": {
+                                "path": "{{238.path_lower}}",
+                                "select": "map",
+                                "settings": {
+                                    "access": "max"
+                                }
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2096,
+                                    "y": 252
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "select": {
+                                            "label": "Map a file/folder path"
+                                        },
+                                        "settings": {
+                                            "nested": {
+                                                "access": {
+                                                    "mode": "chose",
+                                                    "label": "Max Access"
+                                                },
+                                                "allow_download": {
+                                                    "mode": "chose"
+                                                },
+                                                "require_password": {
+                                                    "mode": "chose"
+                                                },
+                                                "requested_visibility": {
+                                                    "mode": "chose",
+                                                    "label": "Empty"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (jsgleisson@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Way of selecting files",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "file"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "settings",
+                                        "spec": [
+                                            {
+                                                "name": "access",
+                                                "type": "select",
+                                                "label": "Link's Access Level",
+                                                "validate": {
+                                                    "enum": [
+                                                        "viewer",
+                                                        "editor",
+                                                        "max"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "expires",
+                                                "time": true,
+                                                "type": "date",
+                                                "label": "Link's Expiration Date"
+                                            },
+                                            {
+                                                "name": "require_password",
+                                                "type": "boolean",
+                                                "label": "Require Password"
+                                            },
+                                            {
+                                                "name": "link_password",
+                                                "type": "text",
+                                                "label": "Link's Password"
+                                            },
+                                            {
+                                                "name": "allow_download",
+                                                "type": "boolean",
+                                                "label": "Allow Download"
+                                            },
+                                            {
+                                                "name": "requested_visibility",
+                                                "type": "select",
+                                                "label": "Requested Visibility (Deprecated)",
+                                                "validate": {
+                                                    "enum": [
+                                                        "public",
+                                                        "team_only",
+                                                        "password"
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Settings"
+                                    },
+                                    {
+                                        "name": "path",
+                                        "type": "text",
+                                        "label": "File Path",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 230,
+                            "module": "http:ActionGetFile",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false
+                            },
+                            "mapper": {
+                                "url": "{{125.file_urls[3]}}",
+                                "method": "get",
+                                "serializeUrl": false,
+                                "shareCookies": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1475,
+                                    "y": 540
+                                },
+                                "restore": {},
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "serializeUrl",
+                                        "type": "boolean",
+                                        "label": "Serialize URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "hidden",
+                                        "label": "Method"
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 240,
+                            "module": "dropbox:uploadLargeFile",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 3526318
+                            },
+                            "mapper": {
+                                "data": "{{230.data}}",
+                                "path": "{{247.path_display}}",
+                                "filename": "foto3.jpg",
+                                "overwrite": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1792,
+                                    "y": 522
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "path": {
+                                            "mode": "edit"
+                                        },
+                                        "overwrite": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (jsgleisson@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "path",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "filename",
+                                        "type": "filename",
+                                        "label": "File Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Data",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "overwrite",
+                                        "type": "boolean",
+                                        "label": "Overwrite an existing file",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 241,
+                            "module": "dropbox:createShareLink",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 3526318
+                            },
+                            "mapper": {
+                                "path": "{{240.path_lower}}",
+                                "select": "map",
+                                "settings": {
+                                    "access": "max"
+                                }
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2104,
+                                    "y": 522
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "select": {
+                                            "label": "Map a file/folder path"
+                                        },
+                                        "settings": {
+                                            "nested": {
+                                                "access": {
+                                                    "mode": "chose",
+                                                    "label": "Max Access"
+                                                },
+                                                "allow_download": {
+                                                    "mode": "chose"
+                                                },
+                                                "require_password": {
+                                                    "mode": "chose"
+                                                },
+                                                "requested_visibility": {
+                                                    "mode": "chose",
+                                                    "label": "Empty"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (jsgleisson@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Way of selecting files",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "file"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "settings",
+                                        "spec": [
+                                            {
+                                                "name": "access",
+                                                "type": "select",
+                                                "label": "Link's Access Level",
+                                                "validate": {
+                                                    "enum": [
+                                                        "viewer",
+                                                        "editor",
+                                                        "max"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "expires",
+                                                "time": true,
+                                                "type": "date",
+                                                "label": "Link's Expiration Date"
+                                            },
+                                            {
+                                                "name": "require_password",
+                                                "type": "boolean",
+                                                "label": "Require Password"
+                                            },
+                                            {
+                                                "name": "link_password",
+                                                "type": "text",
+                                                "label": "Link's Password"
+                                            },
+                                            {
+                                                "name": "allow_download",
+                                                "type": "boolean",
+                                                "label": "Allow Download"
+                                            },
+                                            {
+                                                "name": "requested_visibility",
+                                                "type": "select",
+                                                "label": "Requested Visibility (Deprecated)",
+                                                "validate": {
+                                                    "enum": [
+                                                        "public",
+                                                        "team_only",
+                                                        "password"
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Settings"
+                                    },
+                                    {
+                                        "name": "path",
+                                        "type": "text",
+                                        "label": "File Path",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 232,
+                            "module": "http:ActionGetFile",
+                            "version": 3,
+                            "parameters": {
+                                "handleErrors": false
+                            },
+                            "mapper": {
+                                "url": "{{125.file_urls[4]}}",
+                                "method": "get",
+                                "serializeUrl": false,
+                                "shareCookies": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1465,
+                                    "y": 810
+                                },
+                                "restore": {},
+                                "parameters": [
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "serializeUrl",
+                                        "type": "boolean",
+                                        "label": "Serialize URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "hidden",
+                                        "label": "Method"
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 242,
+                            "module": "dropbox:uploadLargeFile",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 3526318
+                            },
+                            "mapper": {
+                                "data": "{{232.data}}",
+                                "path": "{{247.path_display}}",
+                                "filename": "foto4.jpg",
+                                "overwrite": false
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1773,
+                                    "y": 808
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "path": {
+                                            "mode": "edit"
+                                        },
+                                        "overwrite": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (jsgleisson@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "path",
+                                        "type": "folder",
+                                        "label": "Folder",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "filename",
+                                        "type": "filename",
+                                        "label": "File Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Data",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "overwrite",
+                                        "type": "boolean",
+                                        "label": "Overwrite an existing file",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 243,
+                            "module": "dropbox:createShareLink",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 3526318
+                            },
+                            "mapper": {
+                                "path": "{{242.path_lower}}",
+                                "select": "map",
+                                "settings": {
+                                    "access": "max"
+                                }
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2096,
+                                    "y": 808
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "select": {
+                                            "label": "Map a file/folder path"
+                                        },
+                                        "settings": {
+                                            "nested": {
+                                                "access": {
+                                                    "mode": "chose",
+                                                    "label": "Max Access"
+                                                },
+                                                "allow_download": {
+                                                    "mode": "chose"
+                                                },
+                                                "require_password": {
+                                                    "mode": "chose"
+                                                },
+                                                "requested_visibility": {
+                                                    "mode": "chose",
+                                                    "label": "Empty"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (jsgleisson@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Way of selecting files",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "file"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "settings",
+                                        "spec": [
+                                            {
+                                                "name": "access",
+                                                "type": "select",
+                                                "label": "Link's Access Level",
+                                                "validate": {
+                                                    "enum": [
+                                                        "viewer",
+                                                        "editor",
+                                                        "max"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "expires",
+                                                "time": true,
+                                                "type": "date",
+                                                "label": "Link's Expiration Date"
+                                            },
+                                            {
+                                                "name": "require_password",
+                                                "type": "boolean",
+                                                "label": "Require Password"
+                                            },
+                                            {
+                                                "name": "link_password",
+                                                "type": "text",
+                                                "label": "Link's Password"
+                                            },
+                                            {
+                                                "name": "allow_download",
+                                                "type": "boolean",
+                                                "label": "Allow Download"
+                                            },
+                                            {
+                                                "name": "requested_visibility",
+                                                "type": "select",
+                                                "label": "Requested Visibility (Deprecated)",
+                                                "validate": {
+                                                    "enum": [
+                                                        "public",
+                                                        "team_only",
+                                                        "password"
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Settings"
+                                    },
+                                    {
+                                        "name": "path",
+                                        "type": "text",
+                                        "label": "File Path",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 256,
+                            "module": "dropbox:createShareLink",
+                            "version": 5,
+                            "parameters": {
+                                "__IMTCONN__": 3526318
+                            },
+                            "mapper": {
+                                "path": "/Imagens/01.png",
+                                "select": "file",
+                                "select_1": "file",
+                                "settings": {
+                                    "access": "max"
+                                }
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2387,
+                                    "y": 815
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "path": {
+                                            "mode": "edit"
+                                        },
+                                        "select": {
+                                            "label": "Select a file/folder"
+                                        },
+                                        "select_1": {
+                                            "label": "File"
+                                        },
+                                        "settings": {
+                                            "nested": {
+                                                "access": {
+                                                    "mode": "chose",
+                                                    "label": "Max Access"
+                                                },
+                                                "allow_download": {
+                                                    "mode": "chose"
+                                                },
+                                                "require_password": {
+                                                    "mode": "chose"
+                                                },
+                                                "requested_visibility": {
+                                                    "mode": "chose",
+                                                    "label": "Empty"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dropbox"
+                                            },
+                                            "label": "My Dropbox connection (jsgleisson@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dropbox",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Way of selecting files",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "file"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "settings",
+                                        "spec": [
+                                            {
+                                                "name": "access",
+                                                "type": "select",
+                                                "label": "Link's Access Level",
+                                                "validate": {
+                                                    "enum": [
+                                                        "viewer",
+                                                        "editor",
+                                                        "max"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "expires",
+                                                "time": true,
+                                                "type": "date",
+                                                "label": "Link's Expiration Date"
+                                            },
+                                            {
+                                                "name": "require_password",
+                                                "type": "boolean",
+                                                "label": "Require Password"
+                                            },
+                                            {
+                                                "name": "link_password",
+                                                "type": "text",
+                                                "label": "Link's Password"
+                                            },
+                                            {
+                                                "name": "allow_download",
+                                                "type": "boolean",
+                                                "label": "Allow Download"
+                                            },
+                                            {
+                                                "name": "requested_visibility",
+                                                "type": "select",
+                                                "label": "Requested Visibility (Deprecated)",
+                                                "validate": {
+                                                    "enum": [
+                                                        "public",
+                                                        "team_only",
+                                                        "password"
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Settings"
+                                    },
+                                    {
+                                        "name": "select_1",
+                                        "type": "select",
+                                        "label": "Select",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "file",
+                                                "folder"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "path",
+                                        "type": "file",
+                                        "label": "File",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 244,
+                            "module": "util:SetVariables",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "scope": "roundtrip",
+                                "variables": [
+                                    {
+                                        "name": "Imagem 1",
+                                        "value": "{{replace(237.downloadUrl; \"www.dropbox.com\"; \"dl.dropboxusercontent.com\")}}"
+                                    },
+                                    {
+                                        "name": "Imagem 2",
+                                        "value": "{{replace(239.downloadUrl; \"www.dropbox.com\"; \"dl.dropboxusercontent.com\")}}"
+                                    },
+                                    {
+                                        "name": "Imagem 3",
+                                        "value": "{{replace(241.downloadUrl; \"www.dropbox.com\"; \"dl.dropboxusercontent.com\")}}"
+                                    },
+                                    {
+                                        "name": "Imagem 4",
+                                        "value": "{{replace(243.downloadUrl; \"www.dropbox.com\"; \"dl.dropboxusercontent.com\")}}"
+                                    },
+                                    {
+                                        "name": "Caption",
+                                        "value": "{{125.caption}}"
+                                    },
+                                    {
+                                        "name": "Imagem 5",
+                                        "value": "{{replace(256.downloadUrl; \"www.dropbox.com\"; \"dl.dropboxusercontent.com\")}}"
+                                    }
+                                ]
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2387,
+                                    "y": 311
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "scope": {
+                                            "label": "One cycle"
+                                        },
+                                        "variables": {
+                                            "items": [
+                                                null,
+                                                null,
+                                                null,
+                                                null,
+                                                null,
+                                                null
+                                            ]
+                                        }
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "name": "variables",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Variable name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "any",
+                                                "label": "Variable value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Variables"
+                                    },
+                                    {
+                                        "name": "scope",
+                                        "type": "select",
+                                        "label": "Variable lifetime",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "roundtrip",
+                                                "execution"
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "interface": [
+                                    {
+                                        "name": "Imagem 1",
+                                        "type": "any",
+                                        "label": "Imagem 1"
+                                    },
+                                    {
+                                        "name": "Imagem 2",
+                                        "type": "any",
+                                        "label": "Imagem 2"
+                                    },
+                                    {
+                                        "name": "Imagem 3",
+                                        "type": "any",
+                                        "label": "Imagem 3"
+                                    },
+                                    {
+                                        "name": "Imagem 4",
+                                        "type": "any",
+                                        "label": "Imagem 4"
+                                    },
+                                    {
+                                        "name": "Caption",
+                                        "type": "any",
+                                        "label": "Caption"
+                                    },
+                                    {
+                                        "name": "Imagem 5",
+                                        "type": "any",
+                                        "label": "Imagem 5"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 248,
+                            "module": "groq:chatCompletion",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 4894009
+                            },
+                            "mapper": {
+                                "model": "llama-3.1-8b-instant",
+                                "messages": [
+                                    {
+                                        "role": "system",
+                                        "content": "O texto que sera enviado se trata de um prompt que sera utilizado para gerar imagens no Midjorney, preciso que desconsio titulo, porém, nem sempre tem, mas quando tiver, desconsidere, e desconsidere links e mensoes em @ como  nome do canal, considera apenas o prompt, e apenas fornece o prompt original e que não passe de 800 caracteres.\n\nObservações a seguir:\nNão precisa explicar o que vai fazer, nem realizar comentarios, apenas envia o prompt e o mesmo precisa ser em inglês e mantém no prompt informações como: --sref -w --quality  --stylize --profile\n\nCaso não exista um promt pré definido no Caption indicado apenas informa hastags pertinentes. \n​"
+                                    },
+                                    {
+                                        "role": "user",
+                                        "content": "Texto: {{125.caption}}"
+                                    }
+                                ],
+                                "max_tokens": "2048",
+                                "response_format": "text"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 2675,
+                                    "y": 309
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "model": {
+                                            "mode": "chose",
+                                            "label": "llama-3.1-8b-instant"
+                                        },
+                                        "messages": {
+                                            "mode": "chose",
+                                            "items": [
+                                                {
+                                                    "role": {
+                                                        "mode": "chose",
+                                                        "label": "System"
+                                                    }
+                                                },
+                                                {
+                                                    "role": {
+                                                        "mode": "chose",
+                                                        "label": "User"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "response_format": {
+                                            "mode": "chose",
+                                            "label": "Text"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "groq"
+                                            },
+                                            "label": "Email"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:groq",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "model",
+                                        "type": "select",
+                                        "label": "Model",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "messages",
+                                        "spec": [
+                                            {
+                                                "name": "role",
+                                                "type": "select",
+                                                "label": "Role",
+                                                "options": [
+                                                    {
+                                                        "label": "System",
+                                                        "value": "system"
+                                                    },
+                                                    {
+                                                        "label": "User",
+                                                        "value": "user"
+                                                    },
+                                                    {
+                                                        "label": "Assistant",
+                                                        "value": "assistant"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "content",
+                                                "type": "text",
+                                                "label": "Content"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Messages",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "max_tokens",
+                                        "type": "number",
+                                        "label": "Max tokens returned"
+                                    },
+                                    {
+                                        "name": "temperature",
+                                        "type": "number",
+                                        "label": "Temperature"
+                                    },
+                                    {
+                                        "name": "response_format",
+                                        "type": "select",
+                                        "label": "Response Format",
+                                        "validate": {
+                                            "enum": [
+                                                "text",
+                                                "json_object"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "top_p",
+                                        "type": "number",
+                                        "label": "Top P"
+                                    },
+                                    {
+                                        "name": "frequency_penalty",
+                                        "type": "number",
+                                        "label": "Frequency Penalty"
+                                    },
+                                    {
+                                        "name": "seed",
+                                        "type": "number",
+                                        "label": "Seed"
+                                    },
+                                    {
+                                        "name": "model",
+                                        "type": "select",
+                                        "label": "Model",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "messages",
+                                        "spec": [
+                                            {
+                                                "name": "role",
+                                                "type": "select",
+                                                "label": "Role",
+                                                "options": [
+                                                    {
+                                                        "label": "System",
+                                                        "value": "system"
+                                                    },
+                                                    {
+                                                        "label": "User",
+                                                        "value": "user"
+                                                    },
+                                                    {
+                                                        "label": "Assistant",
+                                                        "value": "assistant"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "content",
+                                                "type": "text",
+                                                "label": "Content"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Messages",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "max_tokens",
+                                        "type": "number",
+                                        "label": "Max tokens returned"
+                                    },
+                                    {
+                                        "name": "temperature",
+                                        "type": "number",
+                                        "label": "Temperature"
+                                    },
+                                    {
+                                        "name": "response_format",
+                                        "type": "select",
+                                        "label": "Response Format",
+                                        "validate": {
+                                            "enum": [
+                                                "text",
+                                                "json_object"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "top_p",
+                                        "type": "number",
+                                        "label": "Top P"
+                                    },
+                                    {
+                                        "name": "frequency_penalty",
+                                        "type": "number",
+                                        "label": "Frequency Penalty"
+                                    },
+                                    {
+                                        "name": "seed",
+                                        "type": "number",
+                                        "label": "Seed"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 257,
+                            "module": "builtin:BasicRouter",
+                            "version": 1,
+                            "mapper": null,
+                            "metadata": {
+                                "designer": {
+                                    "x": 2971,
+                                    "y": 306
+                                }
+                            },
+                            "routes": [
+                                {
+                                    "flow": [
+                                        {
+                                            "id": 255,
+                                            "module": "telegram:SendMediaGroup",
+                                            "version": 1,
+                                            "parameters": {
+                                                "__IMTCONN__": 5599948
+                                            },
+                                            "mapper": {
+                                                "media": [
+                                                    {
+                                                        "type": "photo",
+                                                        "value": "{{226.data}}",
+                                                        "caption": "",
+                                                        "filename": "{{226.fileName}}",
+                                                        "sendType": "send_bydata",
+                                                        "parseMode": ""
+                                                    },
+                                                    {
+                                                        "type": "photo",
+                                                        "value": "{{228.data}}",
+                                                        "caption": "",
+                                                        "filename": "{{228.fileName}}",
+                                                        "sendType": "send_bydata",
+                                                        "parseMode": ""
+                                                    },
+                                                    {
+                                                        "type": "photo",
+                                                        "value": "{{230.data}}",
+                                                        "caption": "",
+                                                        "filename": "{{230.fileName}}",
+                                                        "sendType": "send_bydata",
+                                                        "parseMode": ""
+                                                    },
+                                                    {
+                                                        "type": "photo",
+                                                        "value": "{{232.data}}",
+                                                        "caption": "🧠 ⬇️:\n```\n{{248.result}}```\n\n\nQuer aprender a criar essa atumação? \r\n📩 comenta \"Eu quero\"! aqui embaixo. \n\r\n#n8n #midjorney #leonardoia #ia #make",
+                                                        "filename": "{{232.fileName}}",
+                                                        "sendType": "send_bydata",
+                                                        "parseMode": "Markdown"
+                                                    }
+                                                ],
+                                                "chatId": "@Automarizzepro",
+                                                "replyMarkup": "",
+                                                "messageThreadId": "13561",
+                                                "replyMarkupAssembleType": "reply_markup_enter"
+                                            },
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 3186,
+                                                    "y": 489
+                                                },
+                                                "restore": {
+                                                    "expect": {
+                                                        "media": {
+                                                            "mode": "chose",
+                                                            "items": [
+                                                                {
+                                                                    "type": {
+                                                                        "mode": "chose",
+                                                                        "label": "Photo"
+                                                                    },
+                                                                    "sendType": {
+                                                                        "mode": "edit"
+                                                                    },
+                                                                    "parseMode": {
+                                                                        "mode": "chose",
+                                                                        "label": "Empty"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": {
+                                                                        "mode": "chose",
+                                                                        "label": "Photo"
+                                                                    },
+                                                                    "sendType": {
+                                                                        "mode": "edit"
+                                                                    },
+                                                                    "parseMode": {
+                                                                        "mode": "chose",
+                                                                        "label": "Empty"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": {
+                                                                        "mode": "chose",
+                                                                        "label": "Photo"
+                                                                    },
+                                                                    "sendType": {
+                                                                        "mode": "edit"
+                                                                    },
+                                                                    "parseMode": {
+                                                                        "mode": "chose",
+                                                                        "label": "Empty"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": {
+                                                                        "mode": "chose",
+                                                                        "label": "Photo"
+                                                                    },
+                                                                    "sendType": {
+                                                                        "mode": "edit"
+                                                                    },
+                                                                    "parseMode": {
+                                                                        "mode": "chose",
+                                                                        "label": "Markdown"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "replyMarkupAssembleType": {
+                                                            "label": "Enter the Reply Markup"
+                                                        }
+                                                    },
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "telegram"
+                                                            },
+                                                            "label": "My Telegram Bot connection"
+                                                        }
+                                                    }
+                                                },
+                                                "parameters": [
+                                                    {
+                                                        "name": "__IMTCONN__",
+                                                        "type": "account:telegram",
+                                                        "label": "Connection",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "expect": [
+                                                    {
+                                                        "name": "chatId",
+                                                        "type": "text",
+                                                        "label": "Chat ID",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "media",
+                                                        "spec": [
+                                                            {
+                                                                "name": "type",
+                                                                "type": "select",
+                                                                "label": "Media Type",
+                                                                "options": [
+                                                                    {
+                                                                        "label": "Photo",
+                                                                        "value": "photo",
+                                                                        "nested": [
+                                                                            {
+                                                                                "help": "To add a caption to the album, specify this parameter only in the first item of the array. Leave it empty in all the next medias.",
+                                                                                "name": "caption",
+                                                                                "type": "text",
+                                                                                "label": "Caption",
+                                                                                "required": false
+                                                                            },
+                                                                            {
+                                                                                "help": "Select if to send using data, by HTTP URL or by file ID.",
+                                                                                "name": "sendType",
+                                                                                "type": "select",
+                                                                                "label": "Send by",
+                                                                                "default": "send_bydata",
+                                                                                "options": [
+                                                                                    {
+                                                                                        "label": "Data",
+                                                                                        "value": "send_bydata",
+                                                                                        "nested": [
+                                                                                            {
+                                                                                                "help": "Enter a filename.",
+                                                                                                "name": "filename",
+                                                                                                "type": "text",
+                                                                                                "label": "File Name",
+                                                                                                "required": true,
+                                                                                                "semantic": "file:name"
+                                                                                            },
+                                                                                            {
+                                                                                                "help": "Map the content data.",
+                                                                                                "name": "value",
+                                                                                                "type": "buffer",
+                                                                                                "label": "Data",
+                                                                                                "required": true,
+                                                                                                "semantic": "file:data"
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "HTTP URL",
+                                                                                        "value": "send_byurl",
+                                                                                        "nested": [
+                                                                                            {
+                                                                                                "help": "Pass a URL to get a photo from the Internet and send it.",
+                                                                                                "name": "httpUrl",
+                                                                                                "type": "url",
+                                                                                                "label": "URL",
+                                                                                                "required": true
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "File ID",
+                                                                                        "value": "send_byid",
+                                                                                        "nested": [
+                                                                                            {
+                                                                                                "help": "Pass a file ID to send a photo that exists on the Telegram servers.",
+                                                                                                "name": "fileId",
+                                                                                                "type": "text",
+                                                                                                "label": "File ID",
+                                                                                                "required": true
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ],
+                                                                                "editable": false,
+                                                                                "required": true
+                                                                            },
+                                                                            {
+                                                                                "help": "Select Markdown-style or HTML-style of the text, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message.",
+                                                                                "name": "parseMode",
+                                                                                "type": "select",
+                                                                                "label": "Parse Mode",
+                                                                                "options": [
+                                                                                    {
+                                                                                        "label": "Markdown",
+                                                                                        "value": "Markdown"
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "HTML",
+                                                                                        "value": "HTML"
+                                                                                    }
+                                                                                ],
+                                                                                "required": false
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "label": "Video",
+                                                                        "value": "video",
+                                                                        "nested": [
+                                                                            {
+                                                                                "help": "Enter the video caption.",
+                                                                                "name": "caption",
+                                                                                "type": "text",
+                                                                                "label": "Caption",
+                                                                                "required": false
+                                                                            },
+                                                                            {
+                                                                                "help": "Select if to send using data, by HTTP URL or by file ID.",
+                                                                                "name": "sendType",
+                                                                                "type": "select",
+                                                                                "label": "Send by",
+                                                                                "default": "send_bydata",
+                                                                                "options": [
+                                                                                    {
+                                                                                        "label": "Data",
+                                                                                        "value": "send_bydata",
+                                                                                        "nested": [
+                                                                                            {
+                                                                                                "help": "Enter a filename.",
+                                                                                                "name": "filename",
+                                                                                                "type": "text",
+                                                                                                "label": "File Name",
+                                                                                                "required": true,
+                                                                                                "semantic": "file:name"
+                                                                                            },
+                                                                                            {
+                                                                                                "help": "Map the content data.",
+                                                                                                "name": "value",
+                                                                                                "type": "buffer",
+                                                                                                "label": "Data",
+                                                                                                "required": true,
+                                                                                                "semantic": "file:data"
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "HTTP URL",
+                                                                                        "value": "send_byurl",
+                                                                                        "nested": [
+                                                                                            {
+                                                                                                "help": "Pass a URL to get a video from the Internet and send it.",
+                                                                                                "name": "httpUrl",
+                                                                                                "type": "url",
+                                                                                                "label": "URL",
+                                                                                                "required": true
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "File ID",
+                                                                                        "value": "send_byid",
+                                                                                        "nested": [
+                                                                                            {
+                                                                                                "help": "Pass a file ID to send a video that exists on the Telegram servers.",
+                                                                                                "name": "fileId",
+                                                                                                "type": "text",
+                                                                                                "label": "File ID",
+                                                                                                "required": true
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ],
+                                                                                "editable": false,
+                                                                                "required": true
+                                                                            },
+                                                                            {
+                                                                                "help": "Select Markdown-style or HTML-style of the text, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message.",
+                                                                                "name": "parseMode",
+                                                                                "type": "select",
+                                                                                "label": "Parse Mode",
+                                                                                "options": [
+                                                                                    {
+                                                                                        "label": "Markdown",
+                                                                                        "value": "Markdown"
+                                                                                    },
+                                                                                    {
+                                                                                        "label": "HTML",
+                                                                                        "value": "HTML"
+                                                                                    }
+                                                                                ],
+                                                                                "required": false
+                                                                            },
+                                                                            {
+                                                                                "help": "Enter the duration of sent video in seconds.",
+                                                                                "name": "duration",
+                                                                                "type": "number",
+                                                                                "label": "Duration",
+                                                                                "advanced": true,
+                                                                                "required": false
+                                                                            },
+                                                                            {
+                                                                                "help": "Enter the video width.",
+                                                                                "name": "width",
+                                                                                "type": "number",
+                                                                                "label": "Width",
+                                                                                "advanced": true,
+                                                                                "required": false
+                                                                            },
+                                                                            {
+                                                                                "help": "Enter the video height.",
+                                                                                "name": "height",
+                                                                                "type": "number",
+                                                                                "label": "Height",
+                                                                                "advanced": true,
+                                                                                "required": false
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ],
+                                                                "required": true
+                                                            }
+                                                        ],
+                                                        "type": "array",
+                                                        "label": "Media",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "minItems": 2
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "messageThreadId",
+                                                        "type": "number",
+                                                        "label": "Message Thread ID"
+                                                    },
+                                                    {
+                                                        "name": "disableNotification",
+                                                        "type": "boolean",
+                                                        "label": "Disable Notifications"
+                                                    },
+                                                    {
+                                                        "name": "replyMarkupAssembleType",
+                                                        "type": "select",
+                                                        "label": "Enter/Assemble the Reply Markup Field",
+                                                        "validate": {
+                                                            "enum": [
+                                                                "reply_markup_enter",
+                                                                "reply_markup_assemble"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "replyMarkup",
+                                                        "type": "text",
+                                                        "label": "Reply Markup"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "flow": [
+                                        {
+                                            "id": 213,
+                                            "module": "instagram-business:CreateCarouselPhoto",
+                                            "version": 1,
+                                            "parameters": {
+                                                "__IMTCONN__": 5599928
+                                            },
+                                            "mapper": {
+                                                "files": [
+                                                    {
+                                                        "image_url": "{{244.`Imagem 1`}}",
+                                                        "media_type": "IMAGE"
+                                                    },
+                                                    {
+                                                        "image_url": "{{244.`Imagem 2`}}",
+                                                        "media_type": "IMAGE"
+                                                    },
+                                                    {
+                                                        "image_url": "{{244.`Imagem 3`}}",
+                                                        "media_type": "IMAGE"
+                                                    },
+                                                    {
+                                                        "image_url": "{{244.`Imagem 4`}}",
+                                                        "media_type": "IMAGE"
+                                                    },
+                                                    {
+                                                        "image_url": "{{244.`Imagem 5`}}",
+                                                        "media_type": "IMAGE"
+                                                    }
+                                                ],
+                                                "caption": "🧠 Prompt utilizado ⬇️:\n {{248.result}}",
+                                                "accountId": "17841450047208466"
+                                            },
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 3189,
+                                                    "y": 141
+                                                },
+                                                "restore": {
+                                                    "expect": {
+                                                        "files": {
+                                                            "mode": "chose",
+                                                            "items": [
+                                                                {
+                                                                    "user_tags": {
+                                                                        "mode": "chose"
+                                                                    },
+                                                                    "media_type": {
+                                                                        "mode": "chose",
+                                                                        "label": "Image"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "user_tags": {
+                                                                        "mode": "chose"
+                                                                    },
+                                                                    "media_type": {
+                                                                        "mode": "chose",
+                                                                        "label": "Image"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "user_tags": {
+                                                                        "mode": "chose"
+                                                                    },
+                                                                    "media_type": {
+                                                                        "mode": "chose",
+                                                                        "label": "Image"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "user_tags": {
+                                                                        "mode": "chose"
+                                                                    },
+                                                                    "media_type": {
+                                                                        "mode": "chose",
+                                                                        "label": "Image"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "user_tags": {
+                                                                        "mode": "chose"
+                                                                    },
+                                                                    "media_type": {
+                                                                        "mode": "chose",
+                                                                        "label": "Image"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "accountId": {
+                                                            "mode": "chose",
+                                                            "label": "Automatizze Pro (@thiagoferrazzi)"
+                                                        }
+                                                    },
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "facebook"
+                                                            },
+                                                            "label": "My Facebook connection"
+                                                        }
+                                                    }
+                                                },
+                                                "parameters": [
+                                                    {
+                                                        "name": "__IMTCONN__",
+                                                        "type": "account:facebook",
+                                                        "label": "Connection",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "expect": [
+                                                    {
+                                                        "name": "accountId",
+                                                        "type": "select",
+                                                        "label": "Page",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "files",
+                                                        "spec": [
+                                                            {
+                                                                "name": "media_type",
+                                                                "type": "select",
+                                                                "label": "Media Type",
+                                                                "options": [
+                                                                    {
+                                                                        "label": "Image",
+                                                                        "value": "IMAGE",
+                                                                        "nested": [
+                                                                            {
+                                                                                "help": "**Photo Requirements**\n- Maximum file size: 8MiB\n- Aspect ratio: Must be within a 4:5 to 1.91:1 range\n- Minimum width: 320 (will be scaled up to the minimum if necessary)\n- Maximum width: 1440 (will be scaled down to the maximum if necessary)\n- Height: Varies, depending on width and aspect ratio\n- Format: JPEG only\n\nPlease note that your image must be hosted on a publicly accessible URL. You cannot use files from Google Drive even if they are shared publicly: the Instagram API is not able to download files from there.\nFor other similar services, you may need to adjust the URL with a `replace` function. You can search the web for `[service name] raw file link` to try to find workarounds.",
+                                                                                "name": "image_url",
+                                                                                "type": "url",
+                                                                                "label": "Photo URL",
+                                                                                "required": true
+                                                                            },
+                                                                            {
+                                                                                "name": "user_tags",
+                                                                                "spec": [
+                                                                                    {
+                                                                                        "help": "Must not start with `@`. User must have a public Instagram account.",
+                                                                                        "name": "username",
+                                                                                        "type": "text",
+                                                                                        "label": "Username",
+                                                                                        "required": true,
+                                                                                        "validate": {
+                                                                                            "pattern": "^(?!@)"
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        "help": "An optional float that indicates percentage distance from left edge of the published media image.",
+                                                                                        "name": "x",
+                                                                                        "type": "number",
+                                                                                        "label": "X position",
+                                                                                        "default": "0.0",
+                                                                                        "required": true,
+                                                                                        "validate": {
+                                                                                            "max": 1,
+                                                                                            "min": 0
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        "help": "An optional float that indicates percentage distance from top edge of the published media image.",
+                                                                                        "name": "y",
+                                                                                        "type": "number",
+                                                                                        "label": "Y position",
+                                                                                        "default": "0.0",
+                                                                                        "required": true,
+                                                                                        "validate": {
+                                                                                            "max": 1,
+                                                                                            "min": 0
+                                                                                        }
+                                                                                    }
+                                                                                ],
+                                                                                "type": "array",
+                                                                                "label": "User Tags"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "label": "Video",
+                                                                        "value": "VIDEO",
+                                                                        "nested": [
+                                                                            {
+                                                                                "help": "**Photo Requirements**\n- Maximum file size: 100MiB\n- Picture size:\n  ・ Maximum columns (horizontal pixels): 1920\n  ・ Minimum aspect ratio [cols / rows]: 4 / 5\n  ・ Maximum aspect ratio [cols / rows]: 16 / 9\n- Duration: 60 seconds max, 3 seconds min\n- Container: MOV or MP4 (MPEG-4 Part 14), no edit lists, moov atom at the front of the file\n- Frame rate: 23-60 FPS\n- Video codec: HEVC or H264, progressive scan, closed GOP, 4:2:0 chroma subsampling\n- Video bitrate: VBR, 5Mbps maximum\n- Audio codec: AAC, 48khz sample rate maximum, 1 or 2 channels (mono or stereo)\n- Audio bitrate: 128kbps\n\nPlease note that your video must be hosted on a publicly accessible URL. You cannot use files from Google Drive even if they are shared publicly: the Instagram API is not able to download files from there.\nFor other similar services, you may need to adjust the URL with a `replace` function. You can search the web for `[service name] raw file link` to try to find workarounds.",
+                                                                                "name": "video_url",
+                                                                                "type": "url",
+                                                                                "label": "Video URL",
+                                                                                "required": true
+                                                                            },
+                                                                            {
+                                                                                "help": "Location, in milliseconds, of the reel frame to be used as the cover thumbnail image. The default value is `0`, which is the first frame of the reel.",
+                                                                                "name": "thumb_offset",
+                                                                                "type": "number",
+                                                                                "label": "Cover Frame"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ],
+                                                                "required": true
+                                                            }
+                                                        ],
+                                                        "type": "array",
+                                                        "label": "Files",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "maxItems": 10,
+                                                            "minItems": 2
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "caption",
+                                                        "type": "text",
+                                                        "label": "Caption"
+                                                    },
+                                                    {
+                                                        "name": "location_id",
+                                                        "type": "text",
+                                                        "label": "Location ID"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "id": 246,
+                                            "module": "dropbox:deleteFile",
+                                            "version": 5,
+                                            "parameters": {
+                                                "__IMTCONN__": 3526318
+                                            },
+                                            "mapper": {
+                                                "path": "{{247.path_display}}",
+                                                "choose": "folder",
+                                                "select": "file"
+                                            },
+                                            "metadata": {
+                                                "designer": {
+                                                    "x": 3513,
+                                                    "y": 147
+                                                },
+                                                "restore": {
+                                                    "expect": {
+                                                        "path": {
+                                                            "mode": "edit"
+                                                        },
+                                                        "choose": {
+                                                            "label": "Folder"
+                                                        },
+                                                        "select": {
+                                                            "label": "Select a file/folder"
+                                                        }
+                                                    },
+                                                    "parameters": {
+                                                        "__IMTCONN__": {
+                                                            "data": {
+                                                                "scoped": "true",
+                                                                "connection": "dropbox"
+                                                            },
+                                                            "label": "My Dropbox connection (jsgleisson@gmail.com)"
+                                                        }
+                                                    }
+                                                },
+                                                "parameters": [
+                                                    {
+                                                        "name": "__IMTCONN__",
+                                                        "type": "account:dropbox",
+                                                        "label": "Connection",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "expect": [
+                                                    {
+                                                        "name": "select",
+                                                        "type": "select",
+                                                        "label": "Way of selecting files/folders",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "enum": [
+                                                                "map",
+                                                                "file"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "choose",
+                                                        "type": "select",
+                                                        "label": "Select a file/folder",
+                                                        "required": true,
+                                                        "validate": {
+                                                            "enum": [
+                                                                "file",
+                                                                "folder"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "path",
+                                                        "type": "folder",
+                                                        "label": "Folder",
+                                                        "required": true
+                                                    }
+                                                ]
+                                            },
+                                            "onerror": [
+                                                {
+                                                    "id": 265,
+                                                    "module": "builtin:Ignore",
+                                                    "version": 1,
+                                                    "metadata": {
+                                                        "designer": {
+                                                            "x": 3794,
+                                                            "y": 145
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": [
+            {
+                "moduleIds": [
+                    213
+                ],
+                "content": "<p>Lembrando que esse projeto utiliza um script em python, código ja pronto que vou disponibilizar e que está rodando de forma gratuita no Render..</p><p></p><p>Acessa ai o Meu canal no Telegram e procurar por \"Script Python\" ou solicita lá que sempre falamos por lá sobre automações com o Make e N8N:</p><p></p><p>https://t.me/Automarizzepro</p>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#9138FE"
+                }
+            },
+            {
+                "moduleIds": [
+                    125
+                ],
+                "content": "<p>Lembrando que esse projeto utiliza um script em python, código ja pronto que vou disponibilizar e que está rodando de forma gratuita no Render..</p><p></p><p>Acessa ai o Meu canal no Telegram e procurar por \"Script Python\" ou solicita lá que sempre falamos por lá sobre automações com o Make e N8N:</p><p></p><p>https://t.me/Automarizzepro</p>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#9138FE"
+                }
+            },
+            {
+                "moduleIds": [
+                    226
+                ],
+                "content": "<p>Lembrando que esse projeto utiliza um script em python, código ja pronto que vou disponibilizar e que está rodando de forma gratuita no Render..</p><p></p><p>Acessa ai o Meu canal no Telegram e procurar por \"Script Python\" ou solicita lá que sempre falamos por lá sobre automações com o Make e N8N:</p><p></p><p>https://t.me/Automarizzepro</p>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#9138FE"
+                }
+            },
+            {
+                "moduleIds": [
+                    247
+                ],
+                "content": "<p>Lembrando que esse projeto utiliza um script em python, código ja pronto que vou disponibilizar e que está rodando de forma gratuita no Render..</p><p></p><p>Acessa ai o Meu canal no Telegram e procurar por \"Script Python\" ou solicita lá que sempre falamos por lá sobre automações com o Make e N8N:</p><p></p><p>https://t.me/Automarizzepro</p>",
+                "isFilterNote": false,
+                "metadata": {
+                    "color": "#9138FE"
+                }
+            }
+        ]
+    }
+}

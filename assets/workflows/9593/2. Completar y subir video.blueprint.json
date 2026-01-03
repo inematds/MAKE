@@ -1,0 +1,1469 @@
+{
+    "name": "2. Completar y subir video",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 2673155,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "Generacion video kling"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 80,
+            "module": "datastore:SearchRecord",
+            "version": 1,
+            "parameters": {
+                "limit": null,
+                "datastore": 90790,
+                "continueWhenNoRes": false
+            },
+            "filter": {
+                "name": "Completado",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{1.status}}",
+                            "b": "COMPLETED",
+                            "o": "text:equal"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "sort": [],
+                "filter": [
+                    [
+                        {
+                            "a": "ID tarea",
+                            "b": "{{1.task_id}}",
+                            "o": "text:equal"
+                        }
+                    ]
+                ],
+                "mappAbleLimit": ""
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "datastore": {
+                            "label": "Video Comercial Klig"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "datastore",
+                        "type": "datastore",
+                        "label": "Data store",
+                        "required": true
+                    },
+                    {
+                        "name": "continueWhenNoRes",
+                        "type": "boolean",
+                        "label": "Continue the execution of the route even if the module returns no results"
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://datastore/1.12.0/RpcGetUDTKeys",
+                        "required": true
+                    },
+                    {
+                        "name": "sort",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "select",
+                                "label": "Key",
+                                "dynamic": true,
+                                "options": [],
+                                "required": true
+                            },
+                            {
+                                "name": "order",
+                                "type": "select",
+                                "label": "Order",
+                                "options": [
+                                    {
+                                        "label": "Ascending",
+                                        "value": 1
+                                    },
+                                    {
+                                        "label": "Descending",
+                                        "value": -1
+                                    }
+                                ],
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Sort"
+                    },
+                    {
+                        "name": "mappAbleLimit",
+                        "type": "uinteger",
+                        "label": "Mappable Limit"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "key",
+                        "type": "text",
+                        "label": "Key"
+                    },
+                    {
+                        "name": "data",
+                        "spec": [
+                            {
+                                "help": "",
+                                "name": "ID tarea",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            },
+                            {
+                                "help": "",
+                                "name": "Nombre_producto",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            },
+                            {
+                                "help": "",
+                                "name": "Descripción_producto",
+                                "type": "text",
+                                "label": null,
+                                "default": null,
+                                "required": false,
+                                "multiline": false
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Record"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 82,
+            "module": "http:ActionGetFile",
+            "version": 3,
+            "parameters": {
+                "handleErrors": false
+            },
+            "mapper": {
+                "url": "{{1.generated[]}}",
+                "method": "get",
+                "serializeUrl": false,
+                "shareCookies": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 577,
+                    "y": -3
+                },
+                "restore": {},
+                "parameters": [
+                    {
+                        "name": "handleErrors",
+                        "type": "boolean",
+                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "serializeUrl",
+                        "type": "boolean",
+                        "label": "Serialize URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "hidden",
+                        "label": "Method"
+                    },
+                    {
+                        "name": "shareCookies",
+                        "type": "boolean",
+                        "label": "Share cookies with other HTTP modules",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 81,
+            "module": "google-drive:uploadAFile",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 1889630
+            },
+            "mapper": {
+                "data": "{{82.data}}",
+                "select": "value",
+                "convert": false,
+                "filename": "{{80.data.Nombre_producto}}",
+                "folderId": "/1sJqM61k7jvXd7Y3_tdXhExH2EJWQdKZw",
+                "destination": "drive"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "select": {
+                            "label": "Select from the list"
+                        },
+                        "folderId": {
+                            "mode": "chose",
+                            "path": [
+                                "Pruebas"
+                            ]
+                        },
+                        "destination": {
+                            "label": "My Drive"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            },
+                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Enter a Folder ID",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "map",
+                                "value"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "type": "text",
+                        "label": "New File Name"
+                    },
+                    {
+                        "name": "filename",
+                        "type": "text",
+                        "label": "File Name",
+                        "required": true
+                    },
+                    {
+                        "name": "data",
+                        "type": "buffer",
+                        "label": "Data",
+                        "required": true
+                    },
+                    {
+                        "name": "convert",
+                        "type": "boolean",
+                        "label": "Convert a File",
+                        "required": true
+                    },
+                    {
+                        "name": "destination",
+                        "type": "select",
+                        "label": "New Drive Location",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share",
+                                "team"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "folderId",
+                        "type": "folder",
+                        "label": "New Folder Location",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "File ID"
+                    },
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                    },
+                    {
+                        "name": "mimeType",
+                        "type": "text",
+                        "label": "Mime Type"
+                    },
+                    {
+                        "name": "kind",
+                        "type": "text",
+                        "label": "Kind"
+                    },
+                    {
+                        "name": "starred",
+                        "type": "boolean",
+                        "label": "Starred"
+                    },
+                    {
+                        "name": "trashed",
+                        "type": "boolean",
+                        "label": "Trashed"
+                    },
+                    {
+                        "name": "explicitlyTrashed",
+                        "type": "boolean",
+                        "label": "Explicitly Trashed"
+                    },
+                    {
+                        "name": "parents",
+                        "type": "array",
+                        "label": "Parents"
+                    },
+                    {
+                        "name": "spaces",
+                        "type": "array",
+                        "label": "Spaces"
+                    },
+                    {
+                        "name": "version",
+                        "type": "number",
+                        "label": "Version"
+                    },
+                    {
+                        "name": "webContentLink",
+                        "type": "url",
+                        "label": "Web Content Link"
+                    },
+                    {
+                        "name": "webViewLink",
+                        "type": "url",
+                        "label": "Web View Link"
+                    },
+                    {
+                        "name": "iconLink",
+                        "type": "url",
+                        "label": "Icon Link"
+                    },
+                    {
+                        "name": "hasThumbnail",
+                        "type": "boolean",
+                        "label": "Thumbnail"
+                    },
+                    {
+                        "name": "thumbnailLink",
+                        "type": "url",
+                        "label": "Thumbnail Link"
+                    },
+                    {
+                        "name": "thumbnailVersion",
+                        "type": "number",
+                        "label": "Thumbnail Version"
+                    },
+                    {
+                        "name": "viewedByMe",
+                        "type": "boolean",
+                        "label": "Viewed By Me"
+                    },
+                    {
+                        "name": "viewedByMeTime",
+                        "type": "date",
+                        "label": "Viewed By Me Time"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "modifiedTime",
+                        "time": true,
+                        "type": "date",
+                        "label": "Modified Time"
+                    },
+                    {
+                        "name": "modifiedByMeTime",
+                        "time": true,
+                        "type": "date",
+                        "label": "Modified By Me Time"
+                    },
+                    {
+                        "name": "modifiedByMe",
+                        "type": "boolean",
+                        "label": "Modified By Me"
+                    },
+                    {
+                        "name": "teamDriveId",
+                        "type": "text",
+                        "label": "Team Drive ID"
+                    },
+                    {
+                        "name": "driveId",
+                        "type": "text",
+                        "label": "Drive ID"
+                    },
+                    {
+                        "name": "owners",
+                        "spec": [
+                            {
+                                "name": "kind",
+                                "type": "text",
+                                "label": "Kind"
+                            },
+                            {
+                                "name": "displayName",
+                                "type": "text",
+                                "label": "Display Name"
+                            },
+                            {
+                                "name": "photoLink",
+                                "type": "url",
+                                "label": "Photo Link"
+                            },
+                            {
+                                "name": "me",
+                                "type": "boolean",
+                                "label": "Me"
+                            },
+                            {
+                                "name": "permissionId",
+                                "type": "text",
+                                "label": "Permission ID"
+                            },
+                            {
+                                "name": "emailAddress",
+                                "type": "email",
+                                "label": "Email Address"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Owners"
+                    },
+                    {
+                        "name": "lastModifyingUser",
+                        "spec": [
+                            {
+                                "name": "kind",
+                                "type": "text",
+                                "label": "Kind"
+                            },
+                            {
+                                "name": "displayName",
+                                "type": "text",
+                                "label": "Display Name"
+                            },
+                            {
+                                "name": "photoLink",
+                                "type": "url",
+                                "label": "Photo Link"
+                            },
+                            {
+                                "name": "me",
+                                "type": "boolean",
+                                "label": "Me"
+                            },
+                            {
+                                "name": "permissionId",
+                                "type": "text",
+                                "label": "Permission ID"
+                            },
+                            {
+                                "name": "emailAddress",
+                                "type": "email",
+                                "label": "Email Address"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Last Modifying User"
+                    },
+                    {
+                        "name": "shared",
+                        "type": "boolean",
+                        "label": "Shared"
+                    },
+                    {
+                        "name": "ownedByMe",
+                        "type": "boolean",
+                        "label": "Owned By Me"
+                    },
+                    {
+                        "name": "capabilities",
+                        "spec": [
+                            {
+                                "name": "canAddChildren",
+                                "type": "boolean",
+                                "label": "Can Add Children"
+                            },
+                            {
+                                "name": "canChangeCopyRequiresWriterPermission",
+                                "type": "boolean",
+                                "label": "Can Change Copy Requires Writer Permission"
+                            },
+                            {
+                                "name": "canChangeViewersCanCopyContent",
+                                "type": "boolean",
+                                "label": "Can Change Viewers Can Copy Content"
+                            },
+                            {
+                                "name": "canComment",
+                                "type": "boolean",
+                                "label": "Can Comment"
+                            },
+                            {
+                                "name": "canCopy",
+                                "type": "boolean",
+                                "label": "Can Copy"
+                            },
+                            {
+                                "name": "canDelete",
+                                "type": "boolean",
+                                "label": "Can Delete"
+                            },
+                            {
+                                "name": "canDownload",
+                                "type": "boolean",
+                                "label": "Can Download"
+                            },
+                            {
+                                "name": "canEdit",
+                                "type": "boolean",
+                                "label": "Can Edit"
+                            },
+                            {
+                                "name": "canListChildren",
+                                "type": "boolean",
+                                "label": "Can List Children"
+                            },
+                            {
+                                "name": "canModifyContent",
+                                "type": "boolean",
+                                "label": "Can Modify Content"
+                            },
+                            {
+                                "name": "canMoveChildrenOutOfTeamDrive",
+                                "type": "boolean",
+                                "label": "Can Move Children Out Of Team Drive"
+                            },
+                            {
+                                "name": "canMoveChildrenOutOfDrive",
+                                "type": "boolean",
+                                "label": "Can Move Children Out Of Drive"
+                            },
+                            {
+                                "name": "canMoveChildrenWithinTeamDrive",
+                                "type": "boolean",
+                                "label": "Can Move Children Within Team Drive"
+                            },
+                            {
+                                "name": "canMoveChildrenWithinDrive",
+                                "type": "boolean",
+                                "label": "Can Move Children Within Drive"
+                            },
+                            {
+                                "name": "canMoveItemIntoTeamDrive",
+                                "type": "boolean",
+                                "label": "Can Move Item Into Team Drive"
+                            },
+                            {
+                                "name": "canMoveItemOutOfTeamDrive",
+                                "type": "boolean",
+                                "label": "Can Move Item Out Of Team Drive"
+                            },
+                            {
+                                "name": "canMoveItemOutOfDrive",
+                                "type": "boolean",
+                                "label": "Can Move Item Out Of Drive"
+                            },
+                            {
+                                "name": "canMoveItemWithinTeamDrive",
+                                "type": "boolean",
+                                "label": "Can Move Item Within Team Drive"
+                            },
+                            {
+                                "name": "canMoveItemWithinDrive",
+                                "type": "boolean",
+                                "label": "Can Move Item Within Drive"
+                            },
+                            {
+                                "name": "canMoveTeamDriveItem",
+                                "type": "boolean",
+                                "label": "Can Move Team Drive Item"
+                            },
+                            {
+                                "name": "canReadRevisions",
+                                "type": "boolean",
+                                "label": "Can Read Revisions"
+                            },
+                            {
+                                "name": "canReadTeamDrive",
+                                "type": "boolean",
+                                "label": "Can Read Team Drive"
+                            },
+                            {
+                                "name": "canReadDrive",
+                                "type": "boolean",
+                                "label": "Can Read Drive"
+                            },
+                            {
+                                "name": "canRemoveChildren",
+                                "type": "boolean",
+                                "label": "Can Remove Children"
+                            },
+                            {
+                                "name": "canRename",
+                                "type": "boolean",
+                                "label": "Can Rename"
+                            },
+                            {
+                                "name": "canShare",
+                                "type": "boolean",
+                                "label": "Can Share"
+                            },
+                            {
+                                "name": "canTrash",
+                                "type": "boolean",
+                                "label": "Can Trash"
+                            },
+                            {
+                                "name": "canTrashChildren",
+                                "type": "boolean",
+                                "label": "Can Trash Children"
+                            },
+                            {
+                                "name": "canUntrash",
+                                "type": "boolean",
+                                "label": "Can Untrash"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Capabilities"
+                    },
+                    {
+                        "name": "viewersCanCopyContent",
+                        "type": "boolean",
+                        "label": "Viewers Can Copy Content"
+                    },
+                    {
+                        "name": "copyRequiresWriterPermission",
+                        "type": "boolean",
+                        "label": "Copy Requires Writer Permission"
+                    },
+                    {
+                        "name": "writersCanShare",
+                        "type": "boolean",
+                        "label": "Writers Can Share"
+                    },
+                    {
+                        "name": "permissions",
+                        "spec": [
+                            {
+                                "name": "kind",
+                                "type": "text",
+                                "label": "Kind"
+                            },
+                            {
+                                "name": "id",
+                                "type": "text",
+                                "label": "Permission ID"
+                            },
+                            {
+                                "name": "type",
+                                "type": "text",
+                                "label": "Type"
+                            },
+                            {
+                                "name": "role",
+                                "type": "text",
+                                "label": "Role"
+                            },
+                            {
+                                "name": "allowFileDiscovery",
+                                "type": "boolean",
+                                "label": "Allow File Discovery"
+                            },
+                            {
+                                "name": "emailAddress",
+                                "type": "email",
+                                "label": "Email Address"
+                            },
+                            {
+                                "name": "displayName",
+                                "type": "text",
+                                "label": "Display Name"
+                            },
+                            {
+                                "name": "photoLink",
+                                "type": "url",
+                                "label": "Photo Link"
+                            },
+                            {
+                                "name": "deleted",
+                                "type": "boolean",
+                                "label": "Deleted"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Permissions"
+                    },
+                    {
+                        "name": "permissionIds",
+                        "type": "array",
+                        "label": "Permission IDs"
+                    },
+                    {
+                        "name": "hasAugmentedPermissions",
+                        "type": "boolean",
+                        "label": "Has Augmented Permissions"
+                    },
+                    {
+                        "name": "originalFilename",
+                        "type": "text",
+                        "label": "Original Filename"
+                    },
+                    {
+                        "name": "fullFileExtension",
+                        "type": "text",
+                        "label": "Full File Extension"
+                    },
+                    {
+                        "name": "fileExtension",
+                        "type": "text",
+                        "label": "File Extension"
+                    },
+                    {
+                        "name": "size",
+                        "type": "uinteger",
+                        "label": "Size"
+                    },
+                    {
+                        "name": "quotaBytesUsed",
+                        "type": "uinteger",
+                        "label": "Quota Bytes Used"
+                    },
+                    {
+                        "name": "headRevisionId",
+                        "type": "text",
+                        "label": "Head Revision ID"
+                    },
+                    {
+                        "name": "isAppAuthorized",
+                        "type": "boolean",
+                        "label": "App Authorized"
+                    },
+                    {
+                        "name": "exportLinks",
+                        "spec": [
+                            {
+                                "name": "application/vnd.oasis.opendocument.text",
+                                "type": "url",
+                                "label": "application/vnd.oasis.opendocument.text"
+                            },
+                            {
+                                "name": "application/pdf",
+                                "type": "url",
+                                "label": "application/pdf"
+                            },
+                            {
+                                "name": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                "type": "url",
+                                "label": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                            },
+                            {
+                                "name": "text/plain",
+                                "type": "url",
+                                "label": "text/plain"
+                            },
+                            {
+                                "name": "application/rtf",
+                                "type": "url",
+                                "label": "application/rtf"
+                            },
+                            {
+                                "name": "text/html",
+                                "type": "url",
+                                "label": "text/html"
+                            },
+                            {
+                                "name": "application/epub+zip",
+                                "type": "url",
+                                "label": "application/epub+zip"
+                            },
+                            {
+                                "name": "application/zip",
+                                "type": "url",
+                                "label": "application/zip"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Export Links"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 76,
+            "module": "google-drive:shareAFileFolder",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 1889630
+            },
+            "mapper": {
+                "file": "{{81.id}}",
+                "role": "reader",
+                "type": "user",
+                "select": "file",
+                "destination": "drive",
+                "emailAddress": "{{80.data.Email}}",
+                "sendNotificationEmail": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "file": {
+                            "mode": "edit",
+                            "path": []
+                        },
+                        "role": {
+                            "mode": "chose",
+                            "label": "Reader"
+                        },
+                        "type": {
+                            "mode": "chose",
+                            "label": "User"
+                        },
+                        "select": {
+                            "label": "File"
+                        },
+                        "destination": {
+                            "label": "My Drive"
+                        },
+                        "sendNotificationEmail": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            },
+                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "destination",
+                        "type": "select",
+                        "label": "Choose a Drive",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share",
+                                "team"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Select",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "file",
+                                "folder"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "role",
+                        "type": "select",
+                        "label": "Role",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "owner",
+                                "writer",
+                                "commenter",
+                                "reader"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "type": "select",
+                        "label": "Type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "user",
+                                "group",
+                                "domain",
+                                "anyone"
+                            ]
+                        }
+                    },
+                    {
+                        "mode": "edit",
+                        "name": "file",
+                        "type": "file",
+                        "label": "File ID",
+                        "required": true
+                    },
+                    {
+                        "name": "emailAddress",
+                        "type": "email",
+                        "label": "Email Address",
+                        "required": true
+                    },
+                    {
+                        "name": "sendNotificationEmail",
+                        "type": "boolean",
+                        "label": "Send Notification Email",
+                        "required": true
+                    },
+                    {
+                        "name": "expirationTime",
+                        "time": true,
+                        "type": "date",
+                        "label": "Expiration Time"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "fileId",
+                        "type": "text",
+                        "label": "File ID"
+                    },
+                    {
+                        "name": "kind",
+                        "type": "text",
+                        "label": "Kind"
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "Permission ID"
+                    },
+                    {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                    },
+                    {
+                        "name": "shareLink",
+                        "type": "url",
+                        "label": "Share Link"
+                    },
+                    {
+                        "name": "emailAddress",
+                        "type": "text",
+                        "label": "Email Address"
+                    },
+                    {
+                        "name": "domain",
+                        "type": "text",
+                        "label": "Domain"
+                    },
+                    {
+                        "name": "role",
+                        "type": "text",
+                        "label": "Role"
+                    },
+                    {
+                        "name": "allowFileDiscovery",
+                        "type": "boolean",
+                        "label": "Allow File Discovery"
+                    },
+                    {
+                        "name": "displayName",
+                        "type": "text",
+                        "label": "Display Name"
+                    },
+                    {
+                        "name": "photoLink",
+                        "type": "text",
+                        "label": "Photo Link"
+                    },
+                    {
+                        "name": "expirationTime",
+                        "type": "date",
+                        "label": "Expiration Time"
+                    },
+                    {
+                        "name": "teamDrivePermissionDetails",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "teamDrivePermissionType",
+                                    "type": "text",
+                                    "label": "Team Drive Permission Type"
+                                },
+                                {
+                                    "name": "role",
+                                    "type": "text",
+                                    "label": "Role"
+                                },
+                                {
+                                    "name": "inheritedFrom",
+                                    "type": "text",
+                                    "label": "Inherited From"
+                                },
+                                {
+                                    "name": "inherited",
+                                    "type": "boolean",
+                                    "label": "Inherited"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "Team Drive Permission Details"
+                    },
+                    {
+                        "name": "permissionDetails",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "permissionType",
+                                    "type": "text",
+                                    "label": "Permission Type"
+                                },
+                                {
+                                    "name": "role",
+                                    "type": "text",
+                                    "label": "Role"
+                                },
+                                {
+                                    "name": "inheritedFrom",
+                                    "type": "text",
+                                    "label": "Inherited From"
+                                },
+                                {
+                                    "name": "inherited",
+                                    "type": "boolean",
+                                    "label": "Inherited"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "Permission Details"
+                    },
+                    {
+                        "name": "deleted",
+                        "type": "boolean",
+                        "label": "Deleted"
+                    },
+                    {
+                        "name": "pendingOwner",
+                        "type": "boolean",
+                        "label": "Pending Owner"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 77,
+            "module": "google-email:sendAnEmail",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 9566705
+            },
+            "mapper": {
+                "to": [
+                    {
+                        "email": "{{80.data.Email}}"
+                    }
+                ],
+                "subject": "Video generado",
+                "contents": [
+                    {
+                        "text": "Hola, por aquí debajo tiene el enlace al video:\n\n{{76.shareLink}}",
+                        "image": {}
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1500,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "cc": {
+                            "mode": "chose"
+                        },
+                        "to": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "bcc": {
+                            "mode": "chose"
+                        },
+                        "from": {
+                            "mode": "chose"
+                        },
+                        "contents": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "signature": {
+                            "mode": "chose"
+                        },
+                        "attachments": {
+                            "mode": "chose"
+                        },
+                        "emailHeaders": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-email"
+                            },
+                            "label": "My Gmail connection (angel.aparicio92@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google-email",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "From"
+                    },
+                    {
+                        "name": "to",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "email",
+                                    "type": "email",
+                                    "label": "Recipient email address",
+                                    "required": true
+                                },
+                                {
+                                    "name": "name",
+                                    "type": "text",
+                                    "label": "Recipient name"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Recipient"
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "emailHeaders",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Key",
+                                    "required": true
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "text",
+                                    "label": "Value"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Email header"
+                        },
+                        "type": "array",
+                        "label": "Additional email headers"
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "contents",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "text",
+                                    "type": "text",
+                                    "label": "Text"
+                                },
+                                {
+                                    "name": "image",
+                                    "spec": [
+                                        {
+                                            "name": "filename",
+                                            "type": "filename",
+                                            "label": "File name",
+                                            "semantic": "file:name"
+                                        },
+                                        {
+                                            "name": "data",
+                                            "type": "buffer",
+                                            "label": "Data",
+                                            "semantic": "file:data"
+                                        },
+                                        {
+                                            "name": "width",
+                                            "type": "uinteger",
+                                            "label": "Width"
+                                        },
+                                        {
+                                            "name": "height",
+                                            "type": "uinteger",
+                                            "label": "Height"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Image"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Content"
+                        },
+                        "type": "array",
+                        "label": "Body contents"
+                    },
+                    {
+                        "name": "attachments",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "filename",
+                                    "type": "filename",
+                                    "label": "File name",
+                                    "required": true,
+                                    "semantic": "file:name"
+                                },
+                                {
+                                    "name": "data",
+                                    "type": "buffer",
+                                    "label": "Data",
+                                    "required": true,
+                                    "semantic": "file:data"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Attachment"
+                        },
+                        "type": "array",
+                        "label": "Attachments"
+                    },
+                    {
+                        "name": "cc",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "email",
+                                    "type": "email",
+                                    "label": "Recipient email address",
+                                    "required": true
+                                },
+                                {
+                                    "name": "name",
+                                    "type": "text",
+                                    "label": "Recipient name"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Cc recipient"
+                        },
+                        "type": "array",
+                        "label": "Cc recipients"
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "email",
+                                    "type": "email",
+                                    "label": "Recipient email address",
+                                    "required": true
+                                },
+                                {
+                                    "name": "name",
+                                    "type": "text",
+                                    "label": "Recipient name"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Bcc recipient"
+                        },
+                        "type": "array",
+                        "label": "Bcc recipients"
+                    },
+                    {
+                        "name": "signature",
+                        "type": "select",
+                        "label": "Signature content"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "Message ID"
+                    },
+                    {
+                        "name": "threadId",
+                        "type": "text",
+                        "label": "Thread ID"
+                    },
+                    {
+                        "name": "labelIds",
+                        "spec": {
+                            "type": "text"
+                        },
+                        "type": "array",
+                        "label": "Label IDs"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com",
+        "notes": []
+    }
+}

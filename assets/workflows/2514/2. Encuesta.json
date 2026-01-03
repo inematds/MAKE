@@ -1,0 +1,617 @@
+{
+    "name": "2. Instatec",
+    "flow": [
+        {
+            "id": 11,
+            "module": "jotform:watchForSubmissions",
+            "version": 1,
+            "parameters": {
+                "__IMTHOOK__": 427333
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTHOOK__": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "My Submission watcher webhook"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTHOOK__",
+                        "type": "hook:jotform",
+                        "label": "Webhook",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "formID",
+                        "type": "number",
+                        "label": "Form ID"
+                    },
+                    {
+                        "name": "submissionID",
+                        "type": "number",
+                        "label": "Submission ID"
+                    },
+                    {
+                        "name": "webhookURL",
+                        "type": "text",
+                        "label": "Webhook URL"
+                    },
+                    {
+                        "name": "ip",
+                        "type": "text",
+                        "label": "IP"
+                    },
+                    {
+                        "name": "fromTitle",
+                        "type": "text",
+                        "label": "Form title"
+                    },
+                    {
+                        "name": "pretty",
+                        "type": "text",
+                        "label": "Pretty"
+                    },
+                    {
+                        "name": "username",
+                        "type": "text",
+                        "label": "Username"
+                    },
+                    {
+                        "name": "rawRequest",
+                        "type": "text",
+                        "label": "RAW request"
+                    },
+                    {
+                        "name": "type",
+                        "type": "text",
+                        "label": "Type"
+                    },
+                    {
+                        "name": "request",
+                        "spec": [
+                            {
+                                "name": "slug",
+                                "type": "text",
+                                "label": "Slug"
+                            },
+                            {
+                                "name": "event_id",
+                                "type": "text",
+                                "label": "Event ID"
+                            },
+                            {
+                                "name": "path",
+                                "type": "text",
+                                "label": "Path"
+                            },
+                            {
+                                "name": "q2_empresa",
+                                "type": "text",
+                                "label": "Empresa"
+                            },
+                            {
+                                "name": "q3_estaSatisfecho",
+                                "type": "text",
+                                "label": "¿Está satisfecho con el trato recibido por parte del operario?"
+                            },
+                            {
+                                "name": "q4_hanFinalizado",
+                                "type": "text",
+                                "label": "¿Han finalizado los trabajos, incluida la limpieza y el orden?"
+                            },
+                            {
+                                "name": "q5_recomendariaNuestros",
+                                "type": "text",
+                                "label": "¿Recomendaría nuestros servicios a sus familiares y amigos?"
+                            },
+                            {
+                                "name": "q6_expliqueDetalladamente",
+                                "type": "text",
+                                "label": "Explique detalladamente el motivo de su respuesta anterior por favor"
+                            },
+                            {
+                                "name": "q7_queEs",
+                                "type": "text",
+                                "label": "¿Qué es lo que más le ha gustado?"
+                            },
+                            {
+                                "name": "q8_queAspectos",
+                                "type": "text",
+                                "label": "¿Qué aspectos cree que podríamos mejorar?"
+                            },
+                            {
+                                "name": "q9_numerocliente",
+                                "type": "text",
+                                "label": "NumeroCliente"
+                            },
+                            {
+                                "name": "q11_nombreCompleto",
+                                "type": "text",
+                                "label": "Nombre Completo"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Request"
+                    },
+                    {
+                        "name": "formTitle",
+                        "type": "text",
+                        "label": "Form Title"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 12,
+            "module": "google-sheets:addRow",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 1256904
+            },
+            "mapper": {
+                "from": "drive",
+                "mode": "select",
+                "values": {
+                    "0": "{{11.request.q9_numerocliente}}",
+                    "1": "{{11.request.q11_nombreCompleto}}",
+                    "2": "{{11.request.q2_empresa}}",
+                    "3": "{{11.request.q3_estaSatisfecho}}",
+                    "4": "{{11.request.q4_hanFinalizado}}",
+                    "5": "{{11.request.q5_recomendariaNuestros}}",
+                    "6": "{{11.request.q6_expliqueDetalladamente}}",
+                    "7": "{{11.request.q7_queEs}}",
+                    "8": "{{11.request.q8_queAspectos}}"
+                },
+                "sheetId": "Encuentas",
+                "spreadsheetId": "/1cEOPwPAKP_6Ty8Ak8EuTXM7JWsdJArwzch-qwn-ngog",
+                "includesHeaders": true,
+                "insertDataOption": "INSERT_ROWS",
+                "valueInputOption": "USER_ENTERED",
+                "insertUnformatted": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "My Drive"
+                        },
+                        "mode": {
+                            "label": "Select by path"
+                        },
+                        "sheetId": {
+                            "label": "Encuentas"
+                        },
+                        "spreadsheetId": {
+                            "path": [
+                                "Instatec datos encuestas"
+                            ]
+                        },
+                        "includesHeaders": {
+                            "label": "Yes",
+                            "nested": [
+                                {
+                                    "name": "values",
+                                    "spec": [
+                                        {
+                                            "name": "0",
+                                            "type": "text",
+                                            "label": "Numero de cliente (A)"
+                                        },
+                                        {
+                                            "name": "1",
+                                            "type": "text",
+                                            "label": "Nombre completo (B)"
+                                        },
+                                        {
+                                            "name": "2",
+                                            "type": "text",
+                                            "label": "Empresa (C)"
+                                        },
+                                        {
+                                            "name": "3",
+                                            "type": "text",
+                                            "label": "¿Esta satisfecha con el trato recibido por parte del operario? (D)"
+                                        },
+                                        {
+                                            "name": "4",
+                                            "type": "text",
+                                            "label": "Han finalizado los trabajos, incluida la limpieza y el orden? (E)"
+                                        },
+                                        {
+                                            "name": "5",
+                                            "type": "text",
+                                            "label": "Recomendaría nuestros servicios a sus familiares y amigos? (F)"
+                                        },
+                                        {
+                                            "name": "6",
+                                            "type": "text",
+                                            "label": "Explique brevemente el motivo de su respuesta anterior por favor (G)"
+                                        },
+                                        {
+                                            "name": "7",
+                                            "type": "text",
+                                            "label": "¿Qué es lo que más le ha gustado? (H)"
+                                        },
+                                        {
+                                            "name": "8",
+                                            "type": "text",
+                                            "label": "¿Qué aspectos cree que podríamos mejorar? (I)"
+                                        },
+                                        {
+                                            "name": "9",
+                                            "type": "text",
+                                            "label": "Fecha encuesta realizada (J)"
+                                        },
+                                        {
+                                            "name": "10",
+                                            "type": "text",
+                                            "label": "(K)"
+                                        },
+                                        {
+                                            "name": "11",
+                                            "type": "text",
+                                            "label": "(L)"
+                                        },
+                                        {
+                                            "name": "12",
+                                            "type": "text",
+                                            "label": "(M)"
+                                        },
+                                        {
+                                            "name": "13",
+                                            "type": "text",
+                                            "label": "(N)"
+                                        },
+                                        {
+                                            "name": "14",
+                                            "type": "text",
+                                            "label": "(O)"
+                                        },
+                                        {
+                                            "name": "15",
+                                            "type": "text",
+                                            "label": "(P)"
+                                        },
+                                        {
+                                            "name": "16",
+                                            "type": "text",
+                                            "label": "(Q)"
+                                        },
+                                        {
+                                            "name": "17",
+                                            "type": "text",
+                                            "label": "(R)"
+                                        },
+                                        {
+                                            "name": "18",
+                                            "type": "text",
+                                            "label": "(S)"
+                                        },
+                                        {
+                                            "name": "19",
+                                            "type": "text",
+                                            "label": "(T)"
+                                        },
+                                        {
+                                            "name": "20",
+                                            "type": "text",
+                                            "label": "(U)"
+                                        },
+                                        {
+                                            "name": "21",
+                                            "type": "text",
+                                            "label": "(V)"
+                                        },
+                                        {
+                                            "name": "22",
+                                            "type": "text",
+                                            "label": "(W)"
+                                        },
+                                        {
+                                            "name": "23",
+                                            "type": "text",
+                                            "label": "(X)"
+                                        },
+                                        {
+                                            "name": "24",
+                                            "type": "text",
+                                            "label": "(Y)"
+                                        },
+                                        {
+                                            "name": "25",
+                                            "type": "text",
+                                            "label": "(Z)"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Values"
+                                }
+                            ]
+                        },
+                        "insertDataOption": {
+                            "mode": "chose",
+                            "label": "Insert rows"
+                        },
+                        "valueInputOption": {
+                            "mode": "chose",
+                            "label": "User entered"
+                        },
+                        "insertUnformatted": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection (angel.aparicio92@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "mode",
+                        "type": "select",
+                        "label": "Choose a Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "select",
+                                "fromAll",
+                                "map"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "insertUnformatted",
+                        "type": "boolean",
+                        "label": "Unformatted",
+                        "required": true
+                    },
+                    {
+                        "name": "valueInputOption",
+                        "type": "select",
+                        "label": "Value input option",
+                        "validate": {
+                            "enum": [
+                                "USER_ENTERED",
+                                "RAW"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "insertDataOption",
+                        "type": "select",
+                        "label": "Insert data option",
+                        "validate": {
+                            "enum": [
+                                "INSERT_ROWS",
+                                "OVERWRITE"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Choose a Drive",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share",
+                                "team"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "file",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "values",
+                        "spec": [
+                            {
+                                "name": "0",
+                                "type": "text",
+                                "label": "Numero de cliente (A)"
+                            },
+                            {
+                                "name": "1",
+                                "type": "text",
+                                "label": "Nombre completo (B)"
+                            },
+                            {
+                                "name": "2",
+                                "type": "text",
+                                "label": "Empresa (C)"
+                            },
+                            {
+                                "name": "3",
+                                "type": "text",
+                                "label": "¿Esta satisfecha con el trato recibido por parte del operario? (D)"
+                            },
+                            {
+                                "name": "4",
+                                "type": "text",
+                                "label": "Han finalizado los trabajos, incluida la limpieza y el orden? (E)"
+                            },
+                            {
+                                "name": "5",
+                                "type": "text",
+                                "label": "Recomendaría nuestros servicios a sus familiares y amigos? (F)"
+                            },
+                            {
+                                "name": "6",
+                                "type": "text",
+                                "label": "Explique brevemente el motivo de su respuesta anterior por favor (G)"
+                            },
+                            {
+                                "name": "7",
+                                "type": "text",
+                                "label": "¿Qué es lo que más le ha gustado? (H)"
+                            },
+                            {
+                                "name": "8",
+                                "type": "text",
+                                "label": "¿Qué aspectos cree que podríamos mejorar? (I)"
+                            },
+                            {
+                                "name": "9",
+                                "type": "text",
+                                "label": "Fecha encuesta realizada (J)"
+                            },
+                            {
+                                "name": "10",
+                                "type": "text",
+                                "label": "(K)"
+                            },
+                            {
+                                "name": "11",
+                                "type": "text",
+                                "label": "(L)"
+                            },
+                            {
+                                "name": "12",
+                                "type": "text",
+                                "label": "(M)"
+                            },
+                            {
+                                "name": "13",
+                                "type": "text",
+                                "label": "(N)"
+                            },
+                            {
+                                "name": "14",
+                                "type": "text",
+                                "label": "(O)"
+                            },
+                            {
+                                "name": "15",
+                                "type": "text",
+                                "label": "(P)"
+                            },
+                            {
+                                "name": "16",
+                                "type": "text",
+                                "label": "(Q)"
+                            },
+                            {
+                                "name": "17",
+                                "type": "text",
+                                "label": "(R)"
+                            },
+                            {
+                                "name": "18",
+                                "type": "text",
+                                "label": "(S)"
+                            },
+                            {
+                                "name": "19",
+                                "type": "text",
+                                "label": "(T)"
+                            },
+                            {
+                                "name": "20",
+                                "type": "text",
+                                "label": "(U)"
+                            },
+                            {
+                                "name": "21",
+                                "type": "text",
+                                "label": "(V)"
+                            },
+                            {
+                                "name": "22",
+                                "type": "text",
+                                "label": "(W)"
+                            },
+                            {
+                                "name": "23",
+                                "type": "text",
+                                "label": "(X)"
+                            },
+                            {
+                                "name": "24",
+                                "type": "text",
+                                "label": "(Y)"
+                            },
+                            {
+                                "name": "25",
+                                "type": "text",
+                                "label": "(Z)"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Values"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

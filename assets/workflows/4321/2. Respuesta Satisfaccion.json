@@ -1,0 +1,1164 @@
+{
+    "name": "2. Respuesta satisfacción",
+    "flow": [
+        {
+            "id": 11,
+            "module": "tally:watchNewResponse",
+            "version": 1,
+            "parameters": {
+                "__IMTHOOK__": 1036773
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 150
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTHOOK__": {
+                            "data": {
+                                "editable": "false"
+                            },
+                            "label": "Feedback IA Barbershop"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTHOOK__",
+                        "type": "hook:tally",
+                        "label": "Webhook",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "eventId",
+                        "type": "text",
+                        "label": "Event ID"
+                    },
+                    {
+                        "name": "responseId",
+                        "type": "text",
+                        "label": "Response ID"
+                    },
+                    {
+                        "name": "submissionId",
+                        "type": "text",
+                        "label": "Submission ID"
+                    },
+                    {
+                        "name": "respondentId",
+                        "type": "text",
+                        "label": "Respondent ID"
+                    },
+                    {
+                        "name": "formId",
+                        "type": "text",
+                        "label": "Form ID"
+                    },
+                    {
+                        "name": "formName",
+                        "type": "text",
+                        "label": "Form Name"
+                    },
+                    {
+                        "name": "createdAt",
+                        "type": "date",
+                        "label": "Created at"
+                    },
+                    {
+                        "name": "fields",
+                        "spec": [
+                            {
+                                "name": "¿Qué aspectos del servicio no cumplieron con tus expectativas?",
+                                "spec": {
+                                    "type": "text"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "name": "¿Cómo crees que podemos mejorar para ofrecerte una mejor experiencia en el futuro?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Hay algún comentario adicional que te gustaría compartir con nosotros?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Email",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Satisfacción",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Nombre",
+                                "type": "text"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Fields"
+                    },
+                    {
+                        "name": "fieldsById",
+                        "spec": [
+                            {
+                                "name": "question_yM19Rp",
+                                "spec": {
+                                    "type": "text"
+                                },
+                                "type": "array",
+                                "label": "¿Qué aspectos del servicio no cumplieron con tus expectativas?"
+                            },
+                            {
+                                "name": "question_XLQWkd",
+                                "type": "text",
+                                "label": "¿Cómo crees que podemos mejorar para ofrecerte una mejor experiencia en el futuro?"
+                            },
+                            {
+                                "name": "question_8qrQyY",
+                                "type": "text",
+                                "label": "¿Hay algún comentario adicional que te gustaría compartir con nosotros?"
+                            },
+                            {
+                                "name": "question_oEzy6P_11fbe659-5f22-40b5-a875-0e0ddd60c1f5",
+                                "type": "text",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "question_Jqo6AJ_9087f149-c816-4a06-b212-d126b5f6721d",
+                                "type": "text",
+                                "label": "Satisfacción"
+                            },
+                            {
+                                "name": "question_dEz6kd_69ad5fe5-ebba-4842-b397-41b40b07432d",
+                                "type": "text",
+                                "label": "Nombre"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Fields by ID"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 13,
+            "module": "airtable:ActionCreateRecord",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 2923290
+            },
+            "mapper": {
+                "base": "appNDZF7ubXUqgEsA",
+                "table": "tbldVj67xNp99DvsI",
+                "record": {
+                    "fldEaXmv09atCkZmR": "{{11.fields.`¿Hay algún comentario adicional que te gustaría compartir con nosotros?`}}",
+                    "fldHlXvlesQ7FtKM1": "{{11.fields.Email}}",
+                    "fldT1NnhE6EdpvW1K": "{{11.fields.`¿Qué aspectos del servicio no cumplieron con tus expectativas?`[]}}",
+                    "fldYvrzTyAFXHTxuz": "{{11.fields.`¿Cómo crees que podemos mejorar para ofrecerte una mejor experiencia en el futuro?`}}",
+                    "fldiF25OAxfC0dJMu": "{{11.fields.Nombre}}",
+                    "fldkWWzuc5VRaf8lz": "{{11.fields.`Satisfacción`}}"
+                },
+                "typecast": false,
+                "useColumnId": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 150
+                },
+                "restore": {
+                    "expect": {
+                        "base": {
+                            "label": "IA Barbershop"
+                        },
+                        "table": {
+                            "label": "Satisfacción",
+                            "nested": [
+                                {
+                                    "name": "record",
+                                    "spec": [
+                                        {
+                                            "name": "fldiF25OAxfC0dJMu",
+                                            "type": "text",
+                                            "label": "Nombre"
+                                        },
+                                        {
+                                            "name": "fldHlXvlesQ7FtKM1",
+                                            "type": "text",
+                                            "label": "Email"
+                                        },
+                                        {
+                                            "mode": "edit",
+                                            "name": "fldkWWzuc5VRaf8lz",
+                                            "type": "select",
+                                            "label": "Satisfacción",
+                                            "dynamic": true,
+                                            "options": [
+                                                {
+                                                    "label": "Muy_mala",
+                                                    "value": "Muy_mala"
+                                                },
+                                                {
+                                                    "label": "Mala",
+                                                    "value": "Mala"
+                                                },
+                                                {
+                                                    "label": "Regular",
+                                                    "value": "Regular"
+                                                },
+                                                {
+                                                    "label": "Buena",
+                                                    "value": "Buena"
+                                                },
+                                                {
+                                                    "label": "Excelente",
+                                                    "value": "Excelente"
+                                                }
+                                            ],
+                                            "validate": false
+                                        },
+                                        {
+                                            "name": "fldT1NnhE6EdpvW1K",
+                                            "type": "text",
+                                            "label": "Aspectos"
+                                        },
+                                        {
+                                            "name": "fldYvrzTyAFXHTxuz",
+                                            "type": "text",
+                                            "label": "Feedback mejora",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldEaXmv09atCkZmR",
+                                            "type": "text",
+                                            "label": "Comentario adicional",
+                                            "multiline": true
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Record"
+                                }
+                            ]
+                        },
+                        "record": {
+                            "nested": {
+                                "fldkWWzuc5VRaf8lz": {
+                                    "mode": "edit"
+                                }
+                            }
+                        },
+                        "typecast": {
+                            "mode": "chose"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            },
+                            "label": "My Airtable OAuth connection buena (User ID: usr1voXsCs2mwE0pt)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "typecast",
+                        "type": "boolean",
+                        "label": "Smart links",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "record",
+                        "spec": [
+                            {
+                                "name": "fldiF25OAxfC0dJMu",
+                                "type": "text",
+                                "label": "Nombre"
+                            },
+                            {
+                                "name": "fldHlXvlesQ7FtKM1",
+                                "type": "text",
+                                "label": "Email"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fldkWWzuc5VRaf8lz",
+                                "type": "select",
+                                "label": "Satisfacción"
+                            },
+                            {
+                                "name": "fldT1NnhE6EdpvW1K",
+                                "type": "text",
+                                "label": "Aspectos"
+                            },
+                            {
+                                "name": "fldYvrzTyAFXHTxuz",
+                                "type": "text",
+                                "label": "Feedback mejora"
+                            },
+                            {
+                                "name": "fldEaXmv09atCkZmR",
+                                "type": "text",
+                                "label": "Comentario adicional"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Record"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "Nombre",
+                        "type": "text",
+                        "label": "Nombre"
+                    },
+                    {
+                        "name": "Email",
+                        "type": "text",
+                        "label": "Email"
+                    },
+                    {
+                        "name": "Satisfacción",
+                        "type": "text",
+                        "label": "Satisfacción"
+                    },
+                    {
+                        "name": "Aspectos",
+                        "type": "text",
+                        "label": "Aspectos"
+                    },
+                    {
+                        "name": "Feedback mejora",
+                        "type": "text",
+                        "label": "Feedback mejora",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Comentario adicional",
+                        "type": "text",
+                        "label": "Comentario adicional",
+                        "multiline": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 19,
+            "module": "util:SetVariables",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "scope": "roundtrip",
+                "variables": [
+                    {
+                        "name": "Start",
+                        "value": "{{var.scenario.executionStartedAt}}"
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 150
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        },
+                        "variables": {
+                            "items": [
+                                null
+                            ]
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "variables",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Variable name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "any",
+                                "label": "Variable value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Variables"
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Start",
+                        "type": "any",
+                        "label": "Start"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 20,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "go!",
+                "scope": "roundtrip",
+                "value": "{{if(formatDate(addMinutes(19.Start; 59); \"x\") > formatDate(now; \"x\"); formatNumber(\"X\"); formatNumber(1; 0))}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 150
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "go!",
+                        "type": "any",
+                        "label": "go!"
+                    }
+                ]
+            },
+            "onerror": [
+                {
+                    "id": 25,
+                    "module": "builtin:Break",
+                    "version": 1,
+                    "parameters": {},
+                    "mapper": {
+                        "count": "1",
+                        "retry": true,
+                        "interval": "60"
+                    },
+                    "metadata": {
+                        "designer": {
+                            "x": 1200,
+                            "y": 300
+                        },
+                        "restore": {
+                            "expect": {
+                                "retry": {
+                                    "mode": "chose"
+                                }
+                            }
+                        },
+                        "expect": [
+                            {
+                                "name": "retry",
+                                "type": "boolean",
+                                "label": "Automatically complete execution",
+                                "required": true
+                            },
+                            {
+                                "name": "count",
+                                "type": "uinteger",
+                                "label": "Number of attempts",
+                                "required": true,
+                                "validate": {
+                                    "max": 10000,
+                                    "min": 1
+                                }
+                            },
+                            {
+                                "name": "interval",
+                                "type": "uinteger",
+                                "label": "Interval between attempts",
+                                "required": true,
+                                "validate": {
+                                    "max": 44640,
+                                    "min": 1
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "module": "openai-gpt-3:CreateCompletion",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 1524414
+            },
+            "mapper": {
+                "model": "gpt-4o-2024-08-06",
+                "top_p": "1",
+                "select": "chat",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "Actua como el propietario de una barberia llamada \"IA Barbershop\", tu nombre es Angel Aparicio"
+                    },
+                    {
+                        "role": "user",
+                        "content": "Te voy a proporcionar los resultados de una encuesta de satisfacción que hemos recibido de un cliente después de su visita a nuestra barbería. Tu tarea consiste en generar un correo de respuesta en formato HTML que sea muy personalizado y cercano, con el objetivo de que el cliente regrese y se fidelice. El correo debe expresar empatía y ser muy cercano.\n\nInstrucciones para el email:\n\n-Comienza agradeciendo al cliente por su tiempo y comentarios.\n-Reconoce los aspectos del servicio que no cumplieron con sus expectativas, basándote en sus respuestas.\n-Explica cómo tomaremos medidas para mejorar en base a su feedback.\n-Ofrece un 20% de descuento para su próximo servicio y menciona que debe preguntar por Ángel Aparicio cuando vuelva.\n-Cierra el email con una invitación amigable para que regrese a la barbería.\n\nPreguntas y respuestas de la encuesta:\n1. ¿Qué aspectos del servicio no cumplieron con tus expectativas?{{11.fields.`¿Qué aspectos del servicio no cumplieron con tus expectativas?`[]}}\n\n2. ¿Qué podemos mejorar para ofrecerte una mejor experiencia en el próximo servicio?{{11.fields.`¿Cómo crees que podemos mejorar para ofrecerte una mejor experiencia en el futuro?`}}\n\n3. ¿Hay algún comentario adicional que te gustaría compartir con nosotros?{{11.fields.`¿Hay algún comentario adicional que te gustaría compartir con nosotros?`}}\n\nNombre del cliente: {{11.fields.Nombre}}\n\nObjetivo: Hacer que el cliente regrese y ofrecerle un descuento del 20% para su próxima visita.\n\nImportante:\n-Responde solo con el cuerpo del email\n-No añadas asunto\n-El texto tiene que ser sencillo sin negritas ni titulos\n-No empieces con '''html"
+                    }
+                ],
+                "max_tokens": "600",
+                "temperature": "1",
+                "n_completions": "1",
+                "response_format": "text"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "stop": {
+                            "mode": "chose"
+                        },
+                        "model": {
+                            "mode": "chose",
+                            "label": "gpt-4o-2024-08-06 (system)"
+                        },
+                        "select": {
+                            "label": "Create a Chat Completion (GPT Models)"
+                        },
+                        "messages": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "System"
+                                    }
+                                },
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    }
+                                }
+                            ]
+                        },
+                        "logit_bias": {
+                            "mode": "chose"
+                        },
+                        "response_format": {
+                            "mode": "chose",
+                            "label": "Text"
+                        },
+                        "additionalParameters": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "My OpenAI connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:openai-gpt-3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Select Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "chat",
+                                "prompt"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "number",
+                        "label": "Max Tokens",
+                        "required": true
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature",
+                        "validate": {
+                            "max": 2,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P",
+                        "validate": {
+                            "max": 1,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "n_completions",
+                        "type": "number",
+                        "label": "Number"
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "number",
+                        "label": "Frequency Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "presence_penalty",
+                        "type": "number",
+                        "label": "Presence Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "logit_bias",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "token",
+                                    "type": "text",
+                                    "label": "Token ID",
+                                    "required": true
+                                },
+                                {
+                                    "name": "probability",
+                                    "type": "number",
+                                    "label": "Probability",
+                                    "required": true,
+                                    "validate": {
+                                        "max": 100,
+                                        "min": -100
+                                    }
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Token Probability"
+                        },
+                        "type": "array",
+                        "label": "Token Probability"
+                    },
+                    {
+                        "name": "response_format",
+                        "type": "select",
+                        "label": "Response Format",
+                        "validate": {
+                            "enum": [
+                                "text",
+                                "json_object"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "seed",
+                        "type": "integer",
+                        "label": "Seed"
+                    },
+                    {
+                        "name": "stop",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Stop Sequence"
+                        },
+                        "type": "array",
+                        "label": "Stop Sequences",
+                        "validate": {
+                            "maxItems": 4
+                        }
+                    },
+                    {
+                        "name": "additionalParameters",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Parameter Name",
+                                    "required": true
+                                },
+                                {
+                                    "name": "type",
+                                    "type": "select",
+                                    "label": "Input Type",
+                                    "options": [
+                                        {
+                                            "label": "Text",
+                                            "value": "text",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "text",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ],
+                                            "default": true
+                                        },
+                                        {
+                                            "label": "Number",
+                                            "value": "number",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "number",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Boolean",
+                                            "value": "boolean",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "boolean",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Date",
+                                            "value": "date",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "date",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Any",
+                                            "value": "any",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "any",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Input Parameter"
+                        },
+                        "type": "array",
+                        "label": "Other Input Parameters"
+                    },
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "messages",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "role",
+                                    "type": "select",
+                                    "label": "Role",
+                                    "options": [
+                                        {
+                                            "label": "System",
+                                            "value": "system"
+                                        },
+                                        {
+                                            "label": "User",
+                                            "value": "user"
+                                        },
+                                        {
+                                            "label": "Assistant",
+                                            "value": "assistant"
+                                        }
+                                    ],
+                                    "required": true
+                                },
+                                {
+                                    "name": "content",
+                                    "type": "text",
+                                    "label": "Message Content"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Message"
+                        },
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 16,
+            "module": "email:ActionCreateDraft",
+            "version": 7,
+            "parameters": {
+                "account": 2283964
+            },
+            "mapper": {
+                "cc": [],
+                "to": [
+                    "{{11.fields.Email}}"
+                ],
+                "bcc": [],
+                "from": "",
+                "html": "{{replace(15.result; \"```html\"; emptystring)}}",
+                "folder": "INBOX.Drafts",
+                "sender": "",
+                "headers": [],
+                "replyTo": "",
+                "subject": "😢 Te lo compensamos",
+                "priority": "normal",
+                "inReplyTo": "",
+                "references": [],
+                "attachments": [],
+                "contentType": "html"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1500,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "cc": {
+                            "mode": "chose"
+                        },
+                        "to": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "bcc": {
+                            "mode": "chose"
+                        },
+                        "folder": {
+                            "mode": "chose",
+                            "path": [
+                                "Drafts"
+                            ]
+                        },
+                        "priority": {
+                            "label": "Normal"
+                        },
+                        "references": {
+                            "mode": "chose"
+                        },
+                        "attachments": {
+                            "mode": "chose"
+                        },
+                        "contentType": {
+                            "label": "HTML"
+                        }
+                    },
+                    "parameters": {
+                        "account": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "imap"
+                            },
+                            "label": "Info IA Masters Academy (IMAP info@iamastersacademy.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account:imap,google-restricted,microsoft-smtp-imap",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "type": "hidden"
+                    },
+                    {
+                        "name": "folder",
+                        "type": "folder",
+                        "label": "Folder",
+                        "required": true
+                    },
+                    {
+                        "name": "to",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "contentType",
+                        "type": "select",
+                        "label": "Content Type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "html",
+                                "text"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "attachments",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "type": "filename",
+                                "label": "File name",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "required": true,
+                                "semantic": "file:data"
+                            },
+                            {
+                                "name": "cid",
+                                "type": "text",
+                                "label": "Content-ID"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Attachments"
+                    },
+                    {
+                        "name": "cc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Copy recipient"
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Blind copy recipient"
+                    },
+                    {
+                        "name": "from",
+                        "type": "text",
+                        "label": "From"
+                    },
+                    {
+                        "name": "sender",
+                        "type": "text",
+                        "label": "Sender"
+                    },
+                    {
+                        "name": "replyTo",
+                        "type": "text",
+                        "label": "Reply-To"
+                    },
+                    {
+                        "name": "inReplyTo",
+                        "type": "text",
+                        "label": "In-Reply-To"
+                    },
+                    {
+                        "name": "references",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Reference",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "References"
+                    },
+                    {
+                        "name": "priority",
+                        "type": "select",
+                        "label": "Priority",
+                        "validate": {
+                            "enum": [
+                                "high",
+                                "normal",
+                                "low"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value",
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "html",
+                        "type": "text",
+                        "label": "Content"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": true,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

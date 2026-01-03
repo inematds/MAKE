@@ -1,0 +1,764 @@
+{
+    "name": "BackUp_Make",
+    "flow": [
+        {
+            "id": 1,
+            "module": "make:listScenarios",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 10561929
+            },
+            "mapper": {
+                "team": 443999,
+                "limit": "10",
+                "organization": 1489928
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 150
+                },
+                "restore": {
+                    "expect": {
+                        "cols": {
+                            "mode": "chose"
+                        },
+                        "team": {
+                            "mode": "chose",
+                            "label": "IA Masters Automations"
+                        },
+                        "folder": {
+                            "mode": "chose"
+                        },
+                        "islinked": {
+                            "mode": "chose"
+                        },
+                        "organization": {
+                            "mode": "chose",
+                            "label": "Angel Aparicio"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "make2"
+                            },
+                            "label": "My Make (OAuth2) connection (aaparicio@iamastersacademy.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:make2,make",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "organization",
+                        "type": "select",
+                        "label": "Organization"
+                    },
+                    {
+                        "name": "islinked",
+                        "type": "boolean",
+                        "label": "Only active scenarios"
+                    },
+                    {
+                        "name": "cols",
+                        "type": "select",
+                        "label": "Fields",
+                        "multiple": true,
+                        "validate": {
+                            "enum": [
+                                "created",
+                                "createdByUser",
+                                "description",
+                                "deviceId",
+                                "deviceScope",
+                                "dlqCount",
+                                "folderId",
+                                "hookId",
+                                "isinvalid",
+                                "islinked",
+                                "islocked",
+                                "isPaused",
+                                "iswaiting",
+                                "lastEdit",
+                                "name",
+                                "nextExec",
+                                "id",
+                                "scheduling",
+                                "teamId",
+                                "updatedByUser",
+                                "usedPackages",
+                                "customProperties"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "team",
+                        "type": "select",
+                        "label": "Team"
+                    },
+                    {
+                        "name": "folder",
+                        "type": "select",
+                        "label": "Folder"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "make:getAScenarioBlueprint",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 10561929
+            },
+            "mapper": {
+                "select": "file",
+                "scenario": "{{1.id}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 150
+                },
+                "restore": {
+                    "expect": {
+                        "draft": {
+                            "mode": "chose"
+                        },
+                        "select": {
+                            "mode": "chose",
+                            "label": "In a JSON file"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "make2"
+                            },
+                            "label": "My Make (OAuth2) connection (aaparicio@iamastersacademy.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:make2,make",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "scenario",
+                        "type": "text",
+                        "label": "Scenario ID",
+                        "required": true
+                    },
+                    {
+                        "name": "draft",
+                        "type": "boolean",
+                        "label": "Draft"
+                    },
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Return a blueprint",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "json",
+                                "string",
+                                "file"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "blueprint",
+                        "type": "buffer",
+                        "label": "Blueprint data",
+                        "semantic": "file:data"
+                    },
+                    {
+                        "name": "filename",
+                        "type": "filename",
+                        "label": "File name",
+                        "semantic": "file:name"
+                    },
+                    {
+                        "name": "gitSHA",
+                        "type": "text",
+                        "label": "GitHub SHA"
+                    },
+                    {
+                        "name": "scheduling",
+                        "spec": [
+                            {
+                                "name": "type",
+                                "type": "text",
+                                "label": "Type"
+                            },
+                            {
+                                "name": "between",
+                                "spec": {
+                                    "type": "date"
+                                },
+                                "type": "array",
+                                "label": "Between"
+                            },
+                            {
+                                "name": "interval",
+                                "type": "number",
+                                "label": "Interval"
+                            },
+                            {
+                                "name": "restrict",
+                                "spec": {
+                                    "spec": [
+                                        {
+                                            "name": "days",
+                                            "spec": {
+                                                "type": "number"
+                                            },
+                                            "type": "array",
+                                            "label": "Days"
+                                        },
+                                        {
+                                            "name": "time",
+                                            "spec": {
+                                                "type": "text"
+                                            },
+                                            "type": "array",
+                                            "label": "Time"
+                                        },
+                                        {
+                                            "name": "months",
+                                            "spec": {
+                                                "type": "number"
+                                            },
+                                            "type": "array",
+                                            "label": "Months"
+                                        }
+                                    ],
+                                    "type": "collection"
+                                },
+                                "type": "array",
+                                "label": "Restrict"
+                            },
+                            {
+                                "name": "date",
+                                "time": true,
+                                "type": "date",
+                                "label": "Date"
+                            },
+                            {
+                                "name": "time",
+                                "type": "text",
+                                "label": "Time"
+                            },
+                            {
+                                "name": "days",
+                                "type": "array",
+                                "label": "Days"
+                            },
+                            {
+                                "name": "months",
+                                "type": "array",
+                                "label": "Months"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Scheduling"
+                    },
+                    {
+                        "name": "concept",
+                        "type": "boolean",
+                        "label": "Concept"
+                    },
+                    {
+                        "name": "idSequence",
+                        "type": "uinteger",
+                        "label": "ID Sequence"
+                    },
+                    {
+                        "name": "created",
+                        "time": true,
+                        "type": "date",
+                        "label": "Created"
+                    },
+                    {
+                        "name": "last_edit",
+                        "time": true,
+                        "type": "date",
+                        "label": "Last edit"
+                    },
+                    {
+                        "name": "metadata",
+                        "spec": [
+                            {
+                                "name": "input_spec",
+                                "type": "any",
+                                "label": "Input spec"
+                            },
+                            {
+                                "name": "output_spec",
+                                "type": "any",
+                                "label": "Output spec"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Metadata"
+                    },
+                    {
+                        "name": "length",
+                        "type": "number",
+                        "label": "Length"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "module": "google-drive:searchForFilesFolders",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 1889630
+            },
+            "mapper": {
+                "limit": "200",
+                "query": "{{1.name}}.json",
+                "select": "list",
+                "folderId": "/1qhEZqaoLmJ_x74MPJwpiRDyW0KQNUdGe",
+                "operator": "=",
+                "retrieve": "file",
+                "searchType": "title",
+                "destination": "drive"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 150
+                },
+                "restore": {
+                    "expect": {
+                        "select": {
+                            "label": "Select from the list"
+                        },
+                        "folderId": {
+                            "mode": "chose",
+                            "path": [
+                                "Make_BackUp"
+                            ]
+                        },
+                        "operator": {
+                            "label": "Search for exact term"
+                        },
+                        "retrieve": {
+                            "label": "Files"
+                        },
+                        "searchType": {
+                            "label": "Search within file/folder names"
+                        },
+                        "destination": {
+                            "label": "My Drive"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            },
+                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Select the Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "map",
+                                "list"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "retrieve",
+                        "type": "select",
+                        "label": "Retrieve",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "file",
+                                "folder",
+                                "file_folder"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "searchType",
+                        "type": "select",
+                        "label": "Search",
+                        "validate": {
+                            "enum": [
+                                "title",
+                                "fulltext",
+                                "custom"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "destination",
+                        "type": "select",
+                        "label": "Choose a Drive",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share",
+                                "team"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "folderId",
+                        "type": "folder",
+                        "label": "Choose a Folder"
+                    },
+                    {
+                        "name": "query",
+                        "type": "text",
+                        "label": "Query",
+                        "required": true
+                    },
+                    {
+                        "name": "operator",
+                        "type": "select",
+                        "label": "Search options",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "=",
+                                "contains"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 150
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 4,
+                            "module": "google-drive:uploadAFile",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 1889630
+                            },
+                            "filter": {
+                                "name": "Nuevo",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{6.`__IMTLENGTH__`}}",
+                                            "b": "0",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "data": "{{2.blueprint}}",
+                                "title": "{{1.name}}",
+                                "select": "value",
+                                "convert": false,
+                                "filename": "{{2.filename}}",
+                                "folderId": "/1qhEZqaoLmJ_x74MPJwpiRDyW0KQNUdGe",
+                                "destination": "drive"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 0
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "select": {
+                                            "label": "Select from the list"
+                                        },
+                                        "folderId": {
+                                            "mode": "chose",
+                                            "path": [
+                                                "Make_BackUp"
+                                            ]
+                                        },
+                                        "destination": {
+                                            "label": "My Drive"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Enter a Folder ID",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "value"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "title",
+                                        "type": "text",
+                                        "label": "New File Name"
+                                    },
+                                    {
+                                        "name": "filename",
+                                        "type": "text",
+                                        "label": "File Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Data",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "convert",
+                                        "type": "boolean",
+                                        "label": "Convert a File",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "destination",
+                                        "type": "select",
+                                        "label": "New Drive Location",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "drive",
+                                                "share",
+                                                "team"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "folderId",
+                                        "type": "folder",
+                                        "label": "New Folder Location",
+                                        "required": true
+                                    }
+                                ],
+                                "advanced": true
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 7,
+                            "module": "google-drive:updateAFile",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 1889630
+                            },
+                            "filter": {
+                                "name": "Actualizar",
+                                "conditions": [
+                                    [
+                                        {
+                                            "a": "{{6.`__IMTLENGTH__`}}",
+                                            "b": "1",
+                                            "o": "text:equal"
+                                        }
+                                    ]
+                                ]
+                            },
+                            "mapper": {
+                                "data": "{{2.blueprint}}",
+                                "file": "{{6.id}}",
+                                "title": "{{1.name}}",
+                                "select": "map",
+                                "filename": "{{2.filename}}",
+                                "changeContent": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 1200,
+                                    "y": 300
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "select": {
+                                            "label": "Enter manually"
+                                        },
+                                        "keepRevisionForever": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "google-restricted"
+                                            },
+                                            "label": "My Google Restricted connection (angel.aparicio92@gmail.com)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:google-restricted",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "select",
+                                        "type": "select",
+                                        "label": "Enter a File ID",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "map",
+                                                "value"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "title",
+                                        "type": "text",
+                                        "label": "New Updated File Name"
+                                    },
+                                    {
+                                        "name": "description",
+                                        "type": "text",
+                                        "label": "File Description"
+                                    },
+                                    {
+                                        "name": "changeContent",
+                                        "type": "boolean",
+                                        "label": "Change File Content\n(To change the file content, the new file must have`same mimeType`as the original file.)",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "keepRevisionForever",
+                                        "type": "boolean",
+                                        "label": "Keep Revision Forever"
+                                    },
+                                    {
+                                        "name": "file",
+                                        "type": "text",
+                                        "label": "File ID",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "filename",
+                                        "type": "filename",
+                                        "label": "File Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Data",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com",
+        "notes": []
+    }
+}

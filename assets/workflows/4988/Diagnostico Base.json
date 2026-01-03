@@ -1,0 +1,1968 @@
+{
+    "name": "PV_Diagnóstico Base_V2",
+    "flow": [
+        {
+            "id": 16,
+            "module": "tally:watchNewResponse",
+            "version": 1,
+            "parameters": {
+                "__IMTHOOK__": 1294963
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTHOOK__": {
+                            "data": {
+                                "editable": "false"
+                            },
+                            "label": "Diagnostico Negocio"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTHOOK__",
+                        "type": "hook:tally",
+                        "label": "Webhook",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "eventId",
+                        "type": "text",
+                        "label": "Event ID"
+                    },
+                    {
+                        "name": "responseId",
+                        "type": "text",
+                        "label": "Response ID"
+                    },
+                    {
+                        "name": "submissionId",
+                        "type": "text",
+                        "label": "Submission ID"
+                    },
+                    {
+                        "name": "respondentId",
+                        "type": "text",
+                        "label": "Respondent ID"
+                    },
+                    {
+                        "name": "formId",
+                        "type": "text",
+                        "label": "Form ID"
+                    },
+                    {
+                        "name": "formName",
+                        "type": "text",
+                        "label": "Form Name"
+                    },
+                    {
+                        "name": "createdAt",
+                        "type": "date",
+                        "label": "Created at"
+                    },
+                    {
+                        "name": "fields",
+                        "spec": [
+                            {
+                                "name": "Nombre",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Apellidos",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Email",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Cómo se llama tu negocio o proyecto?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "RRSS",
+                                "type": "text"
+                            },
+                            {
+                                "name": "LinkedIn",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Otro",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿En qué etapa se encuentra tu negocio?",
+                                "spec": {
+                                    "type": "text"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "name": "¿En qué etapa se encuentra tu negocio? (Iniciando: Validando ideas o recién comenzando.)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "¿En qué etapa se encuentra tu negocio? (Monetizando: Generando ingresos, pero con áreas para optimizar.)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "¿En qué etapa se encuentra tu negocio? (Escalando: Ampliando operaciones, equipo o alcance.)",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "Descríbeme tu negocio",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Con que retos principales te estas enfrentando?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Cuales son tus TOP 3 prioridades para mejorar actualmente?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Que edad tiene?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Qué cosas le encantan? ",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Qué problemas quiere resolver contigo?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Qué hace que diga “me quedo contigo”?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Dime sinceramente: ¿crees que tu página web refleja lo increíble que eres?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Si pudieras cambiar algo, ¿qué sería?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Qué herramientas usas para analizar tu web?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Visitantes mensuales:",
+                                "type": "number"
+                            },
+                            {
+                                "name": "Tasa de conversión:",
+                                "type": "number"
+                            },
+                            {
+                                "name": "¿Quiénes crees que son tus principales competidores?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Qué te hace único frente a ellos?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Qué te gusta de lo que hacen y te gustaría mejorar?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Qué áreas de tu negocio te gustaría automatizar?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Describe un proceso que ahora haces manualmente y que te encantaría simplificar:",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Qué quieres lograr en los próximos 6 meses?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "¿Qué valores y principios son clave para tu negocio?",
+                                "type": "text"
+                            },
+                            {
+                                "name": "Cuéntame, ¿algo te ronda la cabeza?",
+                                "type": "text"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Fields"
+                    },
+                    {
+                        "name": "fieldsById",
+                        "spec": [
+                            {
+                                "name": "question_DK2K6X",
+                                "type": "text",
+                                "label": "Nombre"
+                            },
+                            {
+                                "name": "question_lqDqkV",
+                                "type": "text",
+                                "label": "Apellidos"
+                            },
+                            {
+                                "name": "question_RdKdyv",
+                                "type": "text",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "question_oD6DL5",
+                                "type": "text",
+                                "label": "¿Cómo se llama tu negocio o proyecto?"
+                            },
+                            {
+                                "name": "question_GKvKAQ",
+                                "type": "text",
+                                "label": "RRSS"
+                            },
+                            {
+                                "name": "question_Ol1lMk",
+                                "type": "text",
+                                "label": "LinkedIn"
+                            },
+                            {
+                                "name": "question_VjEjON",
+                                "type": "text",
+                                "label": "Otro"
+                            },
+                            {
+                                "name": "question_PDjDJP",
+                                "spec": {
+                                    "type": "text"
+                                },
+                                "type": "array",
+                                "label": "¿En qué etapa se encuentra tu negocio?"
+                            },
+                            {
+                                "name": "question_PDjDJP_586ee2b0-9d8e-4d8c-86f8-454124f61dda",
+                                "type": "boolean",
+                                "label": "¿En qué etapa se encuentra tu negocio? (Iniciando: Validando ideas o recién comenzando.)"
+                            },
+                            {
+                                "name": "question_PDjDJP_bd6a34ee-4e0a-4d47-bcf0-067244f6d588",
+                                "type": "boolean",
+                                "label": "¿En qué etapa se encuentra tu negocio? (Monetizando: Generando ingresos, pero con áreas para optimizar.)"
+                            },
+                            {
+                                "name": "question_PDjDJP_51fc3575-04a6-4fd6-a2e5-4564eb8a4706",
+                                "type": "boolean",
+                                "label": "¿En qué etapa se encuentra tu negocio? (Escalando: Ampliando operaciones, equipo o alcance.)"
+                            },
+                            {
+                                "name": "question_E5z57A",
+                                "type": "text",
+                                "label": "Descríbeme tu negocio"
+                            },
+                            {
+                                "name": "question_BK4d6Q",
+                                "type": "text",
+                                "label": "¿Con que retos principales te estas enfrentando?"
+                            },
+                            {
+                                "name": "question_k9aegR",
+                                "type": "text",
+                                "label": "¿Cuales son tus TOP 3 prioridades para mejorar actualmente?"
+                            },
+                            {
+                                "name": "question_vrjeg0",
+                                "type": "text",
+                                "label": "¿Que edad tiene?"
+                            },
+                            {
+                                "name": "question_2B8BGg",
+                                "type": "text",
+                                "label": "¿Qué cosas le encantan? "
+                            },
+                            {
+                                "name": "question_xjxj5E",
+                                "type": "text",
+                                "label": "¿Qué problemas quiere resolver contigo?"
+                            },
+                            {
+                                "name": "question_RdKdyQ",
+                                "type": "text",
+                                "label": "¿Qué hace que diga “me quedo contigo”?"
+                            },
+                            {
+                                "name": "question_KeQ5O8",
+                                "type": "text",
+                                "label": "Dime sinceramente: ¿crees que tu página web refleja lo increíble que eres?"
+                            },
+                            {
+                                "name": "question_GKvKAO",
+                                "type": "text",
+                                "label": "Si pudieras cambiar algo, ¿qué sería?"
+                            },
+                            {
+                                "name": "question_Ol1lMM",
+                                "type": "text",
+                                "label": "¿Qué herramientas usas para analizar tu web?"
+                            },
+                            {
+                                "name": "question_VjEjO6",
+                                "type": "number",
+                                "label": "Visitantes mensuales:"
+                            },
+                            {
+                                "name": "question_PDjDJx",
+                                "type": "number",
+                                "label": "Tasa de conversión:"
+                            },
+                            {
+                                "name": "question_E5z572",
+                                "type": "text",
+                                "label": "¿Quiénes crees que son tus principales competidores?"
+                            },
+                            {
+                                "name": "question_rByBMX",
+                                "type": "text",
+                                "label": "¿Qué te hace único frente a ellos?"
+                            },
+                            {
+                                "name": "question_4BXBV5",
+                                "type": "text",
+                                "label": "¿Qué te gusta de lo que hacen y te gustaría mejorar?"
+                            },
+                            {
+                                "name": "question_Lz17Vv",
+                                "type": "text",
+                                "label": "¿Qué áreas de tu negocio te gustaría automatizar?"
+                            },
+                            {
+                                "name": "question_2B8BGM",
+                                "type": "text",
+                                "label": "Describe un proceso que ahora haces manualmente y que te encantaría simplificar:"
+                            },
+                            {
+                                "name": "question_xjxj5k",
+                                "type": "text",
+                                "label": "¿Qué quieres lograr en los próximos 6 meses?"
+                            },
+                            {
+                                "name": "question_Zo5oB5",
+                                "type": "text",
+                                "label": "¿Qué valores y principios son clave para tu negocio?"
+                            },
+                            {
+                                "name": "question_ND5DZp",
+                                "type": "text",
+                                "label": "Cuéntame, ¿algo te ronda la cabeza?"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Fields by ID"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 17,
+            "module": "openai-gpt-3:CreateCompletion",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 1524414
+            },
+            "mapper": {
+                "model": "gpt-4o-mini-2024-07-18",
+                "top_p": "1",
+                "select": "chat",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": "Actua como un consultor experto en mejorar y optimizar negocios"
+                    },
+                    {
+                        "role": "user",
+                        "content": "Analizar Información del Negocio: \n-Revisar los datos recopilados para entender el contexto del negocio del cliente.\n\nProponer una Estrategia Personalizada: \n-Crear un plan de marketing alineado con:\n- La etapa del negocio (inicio, monetización, escalado).\n- Definir Público Objetivo\n- Definir exhaustivamente 3 Buyer Persona \n- Análisis FODA/DAFO\n- Las necesidades específicas identificadas (generación de leads, conversión, diferenciación).\n- Los recursos disponibles (canales, herramientas, presupuesto).\n\nEstructurar la Estrategia: Divídala claramente en objetivos, tácticas y recomendaciones para la implementación.\n\n### **Procesamiento de Información**\nEl asistente debe:\n- **Clasificar según la Etapa del Negocio**: \n  - **Inicio**: Centrarse en la validación del mercado y la tracción inicial.\n  - **Monetización**: Optimizar la conversión y expandir los canales.\n  - **Escalado**: Automatización, retención y diferenciación.\n  \n- **Identificar Prioridades**:\n  - Retos como baja cantidad de tráfico o bajas tasas de conversión.\n  - Oportunidades como la expansión de nuevos productos.\n\n- **Seleccionar Tácticas de Marketing**:\n  - Estrategias específicas basadas en las necesidades de crecimiento (p. ej., generación de leads, conversión, diferenciación).\n\n# **Salida: Estrategia Personalizada**\n\n1. **Objetivo Estratégico Principal** \n   Definir el enfoque general basado en la etapa del negocio.\n   - *Ejemplo*: “Incrementar el tráfico web en un 30% y mejorar las tasas de conversión para consolidar ventas recurrentes”.\n\n2. **Estrategias Claves** \n   Proponer estrategias alineadas con los objetivos del cliente.\n   - **Generación de Leads**: Estrategias para atraer tráfico y generar leads.\n     - *Ejemplo*: Lanzar campañas publicitarias en Instagram dirigidas a profesionales interesados en la automatización de negocios.\n   - **Conversión**: Optimizar procesos de conversión.\n     - *Ejemplo*: Rediseñar la landing page para incluir storytelling emocional y prueba social.\n   - **Diferenciación**: Fortalecer el posicionamiento de la marca.\n     - *Ejemplo*: Actualizar el contenido web para resaltar los diferenciadores únicos usando marcos de storytelling.\n\n3. **Pasos Tácticos** \n   Acciones concretas para implementar los objetivos estratégicos.\n   - *Ejemplo*: Construir un funnel de ventas automatizado con campañas de email marketing; producir contenido en video educativo para alcance orgánico.\n\n4. **Recomendaciones Iniciales**\n   Acciones inmediatas que se pueden implementar directamente.\n   - *Ejemplo*: Configurar pruebas A/B en Google Ads para identificar los mensajes más efectivos.\n​",
+                        "imageDetail": "auto"
+                    },
+                    {
+                        "role": "user",
+                        "content": "Datos del cliente:\nNombre:{{16.fields.Nombre}}\nNombre del negocio / proyecto:{{16.fields.`¿Cómo se llama tu negocio o proyecto?`}}\n\nSituación Actual:{{16.fields.`¿En qué etapa se encuentra tu negocio?`[1]}}\n\nDescripción del Negocio: {{16.fields.`Descríbeme tu negocio`}}\n\nPreocupaciones y retos actuales: {{16.fields.`¿Con que retos principales te estas enfrentando?`}}\n\nPrioridades del negocio: {{16.fields.`¿Cuales son tus TOP 3 prioridades para mejorar actualmente?`}}\n\nEdad del cliente portencia:{{16.fields.`¿Que edad tiene?`}}\n\nGustos del cliente potencial:{{16.fields.`¿Qué cosas le encantan? `}}\n\nProblema que resuelve el cliente potencial con el servicio:{{16.fields.`¿Qué problemas quiere resolver contigo?`}}\n\nComo se fideliza al cliente potencial:{{16.fields.`¿Qué hace que diga “me quedo contigo”?`}}\n\nEvalución del cliente de su web: {{16.fields.`Dime sinceramente: ¿crees que tu página web refleja lo increíble que eres?`[]}}\n\nCambio que le gustarian en la web:{{16.fields.`Si pudieras cambiar algo, ¿qué sería?`}}\n\nHerramientas utilizadas para analizar la web:{{16.fields.`¿Qué herramientas usas para analizar tu web?`}}\n\nVisitantes mensuales en la web:{{16.fields.`Visitantes mensuales:`}}\n\nTasa de conversión de la web:{{16.fields.`Tasa de conversión:`}}\n\nPrincipales competidores:{{16.fields.`¿Quiénes crees que son tus principales competidores?`}}\n\nDiferenciacion frente a los competidores:{{16.fields.`¿Qué te hace único frente a ellos?`}}\n\nQue le gusta de la competencia y le gustaria incorporar:{{16.fields.`¿Qué te gusta de lo que hacen y te gustaría mejorar?`}}\n\nQue areas del negocio le gustaria automatizar: {{16.fields.`¿Qué áreas de tu negocio te gustaría automatizar?`[]}}\n\nProceso a simplificar: {{16.fields.`Describe un proceso que ahora haces manualmente y que te encantaría simplificar:`}}\n\nMetas para los proximos 6 meses:{{16.fields.`¿Qué quieres lograr en los próximos 6 meses?`}}\n\nValores claves y principios del negocio:{{16.fields.`¿Qué valores y principios son clave para tu negocio?`}}\n\nInformación extra importante:{{16.fields.`Cuéntame, ¿algo te ronda la cabeza?`}}",
+                        "imageDetail": "auto"
+                    }
+                ],
+                "max_tokens": "4000",
+                "temperature": "1",
+                "n_completions": "1",
+                "response_format": "text"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0,
+                    "name": "Diagnostico base"
+                },
+                "restore": {
+                    "expect": {
+                        "stop": {
+                            "mode": "chose"
+                        },
+                        "model": {
+                            "mode": "chose",
+                            "label": "gpt-4o-mini-2024-07-18 (system)"
+                        },
+                        "select": {
+                            "label": "Create a Chat Completion (GPT and o1 models)"
+                        },
+                        "messages": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "System"
+                                    }
+                                },
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    },
+                                    "imageDetail": {
+                                        "mode": "chose",
+                                        "label": "Auto"
+                                    },
+                                    "imageInputType": {
+                                        "mode": "chose",
+                                        "label": "Empty"
+                                    }
+                                },
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    },
+                                    "imageDetail": {
+                                        "mode": "chose",
+                                        "label": "Auto"
+                                    },
+                                    "imageInputType": {
+                                        "mode": "chose",
+                                        "label": "Empty"
+                                    }
+                                }
+                            ]
+                        },
+                        "logit_bias": {
+                            "mode": "chose"
+                        },
+                        "response_format": {
+                            "mode": "chose",
+                            "label": "Text"
+                        },
+                        "additionalParameters": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "My OpenAI connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:openai-gpt-3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Select Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "chat",
+                                "prompt"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature",
+                        "validate": {
+                            "max": 2,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P",
+                        "validate": {
+                            "max": 1,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "n_completions",
+                        "type": "number",
+                        "label": "Number"
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "number",
+                        "label": "Frequency Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "presence_penalty",
+                        "type": "number",
+                        "label": "Presence Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "logit_bias",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "token",
+                                    "type": "text",
+                                    "label": "Token ID",
+                                    "required": true
+                                },
+                                {
+                                    "name": "probability",
+                                    "type": "number",
+                                    "label": "Probability",
+                                    "required": true,
+                                    "validate": {
+                                        "max": 100,
+                                        "min": -100
+                                    }
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Token Probability"
+                        },
+                        "type": "array",
+                        "label": "Token Probability"
+                    },
+                    {
+                        "name": "seed",
+                        "type": "integer",
+                        "label": "Seed"
+                    },
+                    {
+                        "name": "stop",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Stop Sequence"
+                        },
+                        "type": "array",
+                        "label": "Stop Sequences",
+                        "validate": {
+                            "maxItems": 4
+                        }
+                    },
+                    {
+                        "name": "additionalParameters",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Parameter Name",
+                                    "required": true
+                                },
+                                {
+                                    "name": "type",
+                                    "type": "select",
+                                    "label": "Input Type",
+                                    "options": [
+                                        {
+                                            "label": "Text",
+                                            "value": "text",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "text",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ],
+                                            "default": true
+                                        },
+                                        {
+                                            "label": "Number",
+                                            "value": "number",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "number",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Boolean",
+                                            "value": "boolean",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "boolean",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Date",
+                                            "value": "date",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "date",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Any",
+                                            "value": "any",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "any",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Input Parameter"
+                        },
+                        "type": "array",
+                        "label": "Other Input Parameters"
+                    },
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "uinteger",
+                        "label": "Max Completion Tokens"
+                    },
+                    {
+                        "name": "messages",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "role",
+                                    "type": "select",
+                                    "label": "Role",
+                                    "options": {
+                                        "store": [
+                                            {
+                                                "label": "System",
+                                                "value": "system",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "label": "User",
+                                                "value": "user",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    },
+                                                    {
+                                                        "name": "imageInputType",
+                                                        "type": "select",
+                                                        "label": "Image Input Type",
+                                                        "options": [
+                                                            {
+                                                                "label": "URL",
+                                                                "value": "url",
+                                                                "nested": [
+                                                                    {
+                                                                        "help": "Make sure to use a publically accessible URL.\nYou can test if your image is publically accessible by opening the link in an incognito tab.",
+                                                                        "name": "imageUrl",
+                                                                        "type": "url",
+                                                                        "label": "Image URL"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "label": "Image File",
+                                                                "value": "file",
+                                                                "nested": [
+                                                                    {
+                                                                        "name": "imageFile",
+                                                                        "spec": [
+                                                                            {
+                                                                                "help": "Accepted extensions: `.jpg`, `.jpeg`, `.png`, `.webp` and `.gif`.",
+                                                                                "name": "imageFilename",
+                                                                                "type": "filename",
+                                                                                "label": "Image Filename",
+                                                                                "semantic": "file:name",
+                                                                                "extension": [
+                                                                                    "jpg",
+                                                                                    "jpeg",
+                                                                                    "png",
+                                                                                    "webp",
+                                                                                    "gif"
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "name": "imageData",
+                                                                                "type": "buffer",
+                                                                                "label": "Image Data",
+                                                                                "semantic": "file:data"
+                                                                            }
+                                                                        ],
+                                                                        "type": "collection",
+                                                                        "label": "Image"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "mappable": false
+                                                    },
+                                                    {
+                                                        "name": "imageDetail",
+                                                        "type": "select",
+                                                        "label": "Image Detail",
+                                                        "options": [
+                                                            {
+                                                                "label": "Auto",
+                                                                "value": "auto",
+                                                                "default": true
+                                                            },
+                                                            {
+                                                                "label": "High",
+                                                                "value": "high"
+                                                            },
+                                                            {
+                                                                "label": "Low",
+                                                                "value": "low"
+                                                            }
+                                                        ],
+                                                        "advanced": true
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "label": "Assistant",
+                                                "value": "assistant",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "required": true
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Message"
+                        },
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    },
+                    {
+                        "name": "response_format",
+                        "type": "select",
+                        "label": "Response Format",
+                        "validate": {
+                            "enum": [
+                                "text",
+                                "json_object"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "result",
+                        "type": "any",
+                        "label": "Result"
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "object",
+                        "type": "text",
+                        "label": "Object"
+                    },
+                    {
+                        "name": "created",
+                        "type": "date",
+                        "label": "Created"
+                    },
+                    {
+                        "name": "model",
+                        "type": "text",
+                        "label": "Model"
+                    },
+                    {
+                        "name": "choices",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "text",
+                                    "type": "text",
+                                    "label": "Text"
+                                },
+                                {
+                                    "name": "index",
+                                    "type": "number",
+                                    "label": "Index"
+                                },
+                                {
+                                    "name": "logprobs",
+                                    "type": "text",
+                                    "label": "Log Probs"
+                                },
+                                {
+                                    "name": "finish_reason",
+                                    "type": "text",
+                                    "label": "Finish Reason"
+                                },
+                                {
+                                    "name": "message",
+                                    "spec": [
+                                        {
+                                            "name": "role",
+                                            "type": "text",
+                                            "label": "Role"
+                                        },
+                                        {
+                                            "name": "content",
+                                            "type": "text",
+                                            "label": "Content"
+                                        },
+                                        {
+                                            "name": "refusal",
+                                            "type": "text",
+                                            "label": "Refusal"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Message"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "Choices"
+                    },
+                    {
+                        "name": "usage",
+                        "spec": [
+                            {
+                                "name": "prompt_tokens",
+                                "type": "number",
+                                "label": "Prompt Tokens"
+                            },
+                            {
+                                "name": "completion_tokens",
+                                "type": "text",
+                                "label": "Completion Tokens"
+                            },
+                            {
+                                "name": "total_tokens",
+                                "type": "number",
+                                "label": "Total Tokens"
+                            },
+                            {
+                                "name": "prompt_tokens_details",
+                                "spec": [
+                                    {
+                                        "name": "cached_tokens",
+                                        "type": "uinteger",
+                                        "label": "Cached Tokens"
+                                    },
+                                    {
+                                        "name": "text_tokens",
+                                        "type": "uinteger",
+                                        "label": "Text Tokens"
+                                    },
+                                    {
+                                        "name": "image_tokens",
+                                        "type": "uinteger",
+                                        "label": "Image Tokens"
+                                    },
+                                    {
+                                        "name": "audio_tokens",
+                                        "type": "uinteger",
+                                        "label": "Audio Tokens"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Prompt Tokens Details"
+                            },
+                            {
+                                "name": "completion_tokens_details",
+                                "spec": [
+                                    {
+                                        "name": "reasoning_tokens",
+                                        "type": "uinteger",
+                                        "label": "Reasoning Tokens"
+                                    },
+                                    {
+                                        "name": "text_tokens",
+                                        "type": "uinteger",
+                                        "label": "Text Tokens"
+                                    },
+                                    {
+                                        "name": "audio_tokens",
+                                        "type": "uinteger",
+                                        "label": "Audio Tokens"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Completion Tokens Details"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Usage"
+                    },
+                    {
+                        "name": "system_fingerprint",
+                        "type": "text",
+                        "label": "System Fingerprint"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 21,
+            "module": "airtable:ActionCreateRecord",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 2923290
+            },
+            "mapper": {
+                "base": "appwMSW8eqarqIv3S",
+                "table": "tblicWRs8PjgUJ95V",
+                "record": {
+                    "fld0jdTKqw1aNtIPN": [
+                        "{{16.fields.`¿En qué etapa se encuentra tu negocio?`[]}}"
+                    ],
+                    "fld3JRNShgFbyo8dR": "{{16.fields.Otro}}",
+                    "fld50DAplqkPeJaQs": "{{16.fieldsById.question_2B8BGM}}",
+                    "fld7AF75FLrYKjqlj": "{{16.fields.`¿Que edad tiene?`}}",
+                    "fld8ETDD1JgCjhPRH": "{{16.fields.`¿Qué quieres lograr en los próximos 6 meses?`}}",
+                    "fldGY2Cib69UGOxHg": "{{16.fields.`¿Qué te gusta de lo que hacen y te gustaría mejorar?`}}",
+                    "fldIDEyphdvVbDJ71": "{{16.fields.`¿Qué herramientas usas para analizar tu web?`}}",
+                    "fldMfle8h0t7qZqHR": "{{16.fields.Email}}",
+                    "fldQ4LFvh0yJynbrw": "{{16.fields.Apellidos}}",
+                    "fldQSRT2VrEG7sO08": "{{16.fields.`¿Qué cosas le encantan? `}}",
+                    "fldQlSdFuTk2ATiXP": "{{16.fields.`Dime sinceramente: ¿crees que tu página web refleja lo increíble que eres?`[]}}",
+                    "fldQmiPTc4qjVrg0a": "{{16.fields.`¿Qué problemas quiere resolver contigo?`}}",
+                    "fldTZob8XjudEs64v": "{{16.fields.Nombre}}",
+                    "fldUpJIeEJ9BfZxm9": "{{16.fields.`Si pudieras cambiar algo, ¿qué sería?`}}",
+                    "fldVNcWRrJbi4M8KR": "{{16.fields.`¿Qué te hace único frente a ellos?`}}",
+                    "flde3W9SOaItk4phA": "{{16.fields.`¿Cuales son tus TOP 3 prioridades para mejorar actualmente?`}}",
+                    "fldgmrOVM7Ykzjh1Q": "{{16.fields.`Cuéntame, ¿algo te ronda la cabeza?`}}",
+                    "fldjjGa2XYxWiT2if": "{{16.fields.`¿Cómo se llama tu negocio o proyecto?`}}",
+                    "fldjjgxauMkwmyXCD": "{{16.fields.`¿Qué valores y principios son clave para tu negocio?`}}",
+                    "fldm8OppmDLbFBJjt": "{{16.fields.`¿Qué hace que diga “me quedo contigo”?`}}",
+                    "fldms5Xzump5uMtwJ": "{{16.fields.LinkedIn}}",
+                    "fldoQG76txAHTQYhh": "{{17.result}}",
+                    "fldpm3NoZrYhMLwKR": "{{16.fields.`¿Quiénes crees que son tus principales competidores?`}}",
+                    "fldsuE5bn50Eyso6z": "{{16.fields.`Descríbeme tu negocio`}}",
+                    "fldv70QqDWLoXIXBu": "{{16.fields.RRSS}}",
+                    "fldvsoGisPSbetidN": "{{16.fields.`¿Con que retos principales te estas enfrentando?`}}",
+                    "fldyz1ii2nYvzcdm4": "{{16.fields.`¿Qué áreas de tu negocio te gustaría automatizar?`[]}}"
+                },
+                "typecast": false,
+                "useColumnId": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "base": {
+                            "label": "Venta Servicios_Leads OK"
+                        },
+                        "table": {
+                            "label": "Proceso_Automatz_IA",
+                            "nested": [
+                                {
+                                    "name": "record",
+                                    "spec": [
+                                        {
+                                            "name": "fldTZob8XjudEs64v",
+                                            "type": "text",
+                                            "label": "Nombre"
+                                        },
+                                        {
+                                            "name": "fldQ4LFvh0yJynbrw",
+                                            "type": "text",
+                                            "label": "Apellidos"
+                                        },
+                                        {
+                                            "name": "fldMfle8h0t7qZqHR",
+                                            "type": "text",
+                                            "label": "Email"
+                                        },
+                                        {
+                                            "name": "fldjjGa2XYxWiT2if",
+                                            "type": "text",
+                                            "label": "¿Cómo se llama tu negocio o proyecto?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldv70QqDWLoXIXBu",
+                                            "type": "text",
+                                            "label": "RRSS"
+                                        },
+                                        {
+                                            "name": "fldms5Xzump5uMtwJ",
+                                            "type": "text",
+                                            "label": "Linkedin"
+                                        },
+                                        {
+                                            "name": "fld3JRNShgFbyo8dR",
+                                            "type": "text",
+                                            "label": "Otro"
+                                        },
+                                        {
+                                            "name": "fld0jdTKqw1aNtIPN",
+                                            "spec": {
+                                                "mode": "edit",
+                                                "type": "select",
+                                                "label": "Value",
+                                                "dynamic": true,
+                                                "options": [
+                                                    {
+                                                        "label": "Iniciando: Validando ideas o recién comenzando.",
+                                                        "value": "Iniciando: Validando ideas o recién comenzando."
+                                                    },
+                                                    {
+                                                        "label": "Monetizando: Generando ingresos, pero con áreas para optimizar.",
+                                                        "value": "Monetizando: Generando ingresos, pero con áreas para optimizar."
+                                                    },
+                                                    {
+                                                        "label": "Escalando: Ampliando operaciones, equipo o alcance.",
+                                                        "value": "Escalando: Ampliando operaciones, equipo o alcance."
+                                                    }
+                                                ],
+                                                "validate": false
+                                            },
+                                            "type": "array",
+                                            "label": "Situación Actual ¿En qué etapa se encuentra tu negocio?"
+                                        },
+                                        {
+                                            "name": "fldsuE5bn50Eyso6z",
+                                            "type": "text",
+                                            "label": "Cuéntame sobre ti: Descríbeme tu negocio",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldvsoGisPSbetidN",
+                                            "type": "text",
+                                            "label": "¿Con que retos principales te estas enfrentando?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "flde3W9SOaItk4phA",
+                                            "type": "text",
+                                            "label": "¿Cuales son tus TOP 3 prioridades para mejorar actualmente?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fld7AF75FLrYKjqlj",
+                                            "type": "text",
+                                            "label": "Buyer Persona: ¿Qué edad tiene?"
+                                        },
+                                        {
+                                            "name": "fldQSRT2VrEG7sO08",
+                                            "type": "text",
+                                            "label": "Buyer Persona: ¿Qué cosas le encantan? ",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldQmiPTc4qjVrg0a",
+                                            "type": "text",
+                                            "label": "Buyer Persona: ¿Qué problemas quiere resolver contigo?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldm8OppmDLbFBJjt",
+                                            "type": "text",
+                                            "label": "Buyer Persona: ¿Qué hace que diga “me quedo contigo”?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldQlSdFuTk2ATiXP",
+                                            "type": "text",
+                                            "label": "Tu Web: Dime sinceramente: ¿crees que tu página web refleja lo increíble que eres?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldUpJIeEJ9BfZxm9",
+                                            "type": "text",
+                                            "label": "Tu Web: Si pudieras cambiar algo, ¿qué sería?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldIDEyphdvVbDJ71",
+                                            "type": "text",
+                                            "label": "Tu web: ¿Qué herramientas usas para analizar tu web?"
+                                        },
+                                        {
+                                            "name": "fldpm3NoZrYhMLwKR",
+                                            "type": "text",
+                                            "label": "Competencia 🕵️‍♀️: ¿Quiénes crees que son tus principales competidores?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldVNcWRrJbi4M8KR",
+                                            "type": "text",
+                                            "label": "Competencia 🕵️‍♀️: ¿Qué te hace único frente a ellos?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldGY2Cib69UGOxHg",
+                                            "type": "text",
+                                            "label": "Competencia 🕵️‍♀️: ¿Qué te gusta de lo que hacen y te gustaría mejorar?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldyz1ii2nYvzcdm4",
+                                            "type": "text",
+                                            "label": "Automatización: ¿Qué áreas de tu negocio te gustaría automatizar?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fld50DAplqkPeJaQs",
+                                            "type": "text",
+                                            "label": "Automatización: Describe un proceso te encantaría simplificar:",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fld8ETDD1JgCjhPRH",
+                                            "type": "text",
+                                            "label": "Tus metas: ¿Qué quieres lograr en los próximos 6 meses?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldjjgxauMkwmyXCD",
+                                            "type": "text",
+                                            "label": "Tus metas: ¿Qué valores y principios son clave para tu negocio?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldgmrOVM7Ykzjh1Q",
+                                            "type": "text",
+                                            "label": "Tus metas: Cuéntame, ¿algo te ronda la cabeza?",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fld5w8oaervT7K8tr",
+                                            "type": "text",
+                                            "label": "Archivo transripcion",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldoQG76txAHTQYhh",
+                                            "type": "text",
+                                            "label": "Diagnóstico Base",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldouRJ3WKCsqHA8E",
+                                            "type": "text",
+                                            "label": "Diagnóstico Gral.",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fld1s381TVRxFJ44t",
+                                            "type": "text",
+                                            "label": "PO + Buyer Persona",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldIkzsJ1hkPwQOUI",
+                                            "type": "text",
+                                            "label": "Análisis de marketing",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldwtYxDX7PV75g1Q",
+                                            "type": "text",
+                                            "label": "Evaluación de procesos",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldjcc33cS6an8FFY",
+                                            "type": "text",
+                                            "label": "Diagnótico Operativo",
+                                            "multiline": true
+                                        },
+                                        {
+                                            "name": "fldpMfjifGFCqHLi5",
+                                            "spec": [
+                                                {
+                                                    "help": "Airtable will download the file at the given url and keep its own copy of it.",
+                                                    "name": "url",
+                                                    "type": "text",
+                                                    "label": "File URL"
+                                                },
+                                                {
+                                                    "help": "If empty, Airtable will generate the name automatically.",
+                                                    "name": "filename",
+                                                    "type": "filename",
+                                                    "label": "File name"
+                                                }
+                                            ],
+                                            "type": "array",
+                                            "label": "Propuesta de Servicios",
+                                            "editable": true
+                                        },
+                                        {
+                                            "name": "fldLIez5VhkLPdTqU",
+                                            "spec": [
+                                                {
+                                                    "help": "Airtable will download the file at the given url and keep its own copy of it.",
+                                                    "name": "url",
+                                                    "type": "text",
+                                                    "label": "File URL"
+                                                },
+                                                {
+                                                    "help": "If empty, Airtable will generate the name automatically.",
+                                                    "name": "filename",
+                                                    "type": "filename",
+                                                    "label": "File name"
+                                                }
+                                            ],
+                                            "type": "array",
+                                            "label": "Prespuesto",
+                                            "editable": true
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Record"
+                                }
+                            ]
+                        },
+                        "record": {
+                            "nested": {
+                                "fld0jdTKqw1aNtIPN": {
+                                    "mode": "chose",
+                                    "items": [
+                                        {
+                                            "value": {
+                                                "mode": "edit"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "fldLIez5VhkLPdTqU": {
+                                    "mode": "chose"
+                                },
+                                "fldpMfjifGFCqHLi5": {
+                                    "mode": "chose"
+                                }
+                            }
+                        },
+                        "typecast": {
+                            "mode": "chose"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            },
+                            "label": "My Airtable OAuth connection buena (User ID: usr1voXsCs2mwE0pt)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "typecast",
+                        "type": "boolean",
+                        "label": "Smart links",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "record",
+                        "spec": [
+                            {
+                                "name": "fldTZob8XjudEs64v",
+                                "type": "text",
+                                "label": "Nombre"
+                            },
+                            {
+                                "name": "fldQ4LFvh0yJynbrw",
+                                "type": "text",
+                                "label": "Apellidos"
+                            },
+                            {
+                                "name": "fldMfle8h0t7qZqHR",
+                                "type": "text",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "fldjjGa2XYxWiT2if",
+                                "type": "text",
+                                "label": "¿Cómo se llama tu negocio o proyecto?"
+                            },
+                            {
+                                "name": "fldv70QqDWLoXIXBu",
+                                "type": "text",
+                                "label": "RRSS"
+                            },
+                            {
+                                "name": "fldms5Xzump5uMtwJ",
+                                "type": "text",
+                                "label": "Linkedin"
+                            },
+                            {
+                                "name": "fld3JRNShgFbyo8dR",
+                                "type": "text",
+                                "label": "Otro"
+                            },
+                            {
+                                "name": "fld0jdTKqw1aNtIPN",
+                                "spec": {
+                                    "mode": "edit",
+                                    "name": "value",
+                                    "type": "select",
+                                    "label": "Value",
+                                    "dynamic": true,
+                                    "options": [
+                                        {
+                                            "label": "Iniciando: Validando ideas o recién comenzando.",
+                                            "value": "Iniciando: Validando ideas o recién comenzando."
+                                        },
+                                        {
+                                            "label": "Monetizando: Generando ingresos, pero con áreas para optimizar.",
+                                            "value": "Monetizando: Generando ingresos, pero con áreas para optimizar."
+                                        },
+                                        {
+                                            "label": "Escalando: Ampliando operaciones, equipo o alcance.",
+                                            "value": "Escalando: Ampliando operaciones, equipo o alcance."
+                                        }
+                                    ],
+                                    "validate": false
+                                },
+                                "type": "array",
+                                "label": "Situación Actual ¿En qué etapa se encuentra tu negocio?"
+                            },
+                            {
+                                "name": "fldsuE5bn50Eyso6z",
+                                "type": "text",
+                                "label": "Cuéntame sobre ti: Descríbeme tu negocio"
+                            },
+                            {
+                                "name": "fldvsoGisPSbetidN",
+                                "type": "text",
+                                "label": "¿Con que retos principales te estas enfrentando?"
+                            },
+                            {
+                                "name": "flde3W9SOaItk4phA",
+                                "type": "text",
+                                "label": "¿Cuales son tus TOP 3 prioridades para mejorar actualmente?"
+                            },
+                            {
+                                "name": "fld7AF75FLrYKjqlj",
+                                "type": "text",
+                                "label": "Buyer Persona: ¿Qué edad tiene?"
+                            },
+                            {
+                                "name": "fldQSRT2VrEG7sO08",
+                                "type": "text",
+                                "label": "Buyer Persona: ¿Qué cosas le encantan? "
+                            },
+                            {
+                                "name": "fldQmiPTc4qjVrg0a",
+                                "type": "text",
+                                "label": "Buyer Persona: ¿Qué problemas quiere resolver contigo?"
+                            },
+                            {
+                                "name": "fldm8OppmDLbFBJjt",
+                                "type": "text",
+                                "label": "Buyer Persona: ¿Qué hace que diga “me quedo contigo”?"
+                            },
+                            {
+                                "name": "fldQlSdFuTk2ATiXP",
+                                "type": "text",
+                                "label": "Tu Web: Dime sinceramente: ¿crees que tu página web refleja lo increíble que eres?"
+                            },
+                            {
+                                "name": "fldUpJIeEJ9BfZxm9",
+                                "type": "text",
+                                "label": "Tu Web: Si pudieras cambiar algo, ¿qué sería?"
+                            },
+                            {
+                                "name": "fldIDEyphdvVbDJ71",
+                                "type": "text",
+                                "label": "Tu web: ¿Qué herramientas usas para analizar tu web?"
+                            },
+                            {
+                                "name": "fldpm3NoZrYhMLwKR",
+                                "type": "text",
+                                "label": "Competencia 🕵️‍♀️: ¿Quiénes crees que son tus principales competidores?"
+                            },
+                            {
+                                "name": "fldVNcWRrJbi4M8KR",
+                                "type": "text",
+                                "label": "Competencia 🕵️‍♀️: ¿Qué te hace único frente a ellos?"
+                            },
+                            {
+                                "name": "fldGY2Cib69UGOxHg",
+                                "type": "text",
+                                "label": "Competencia 🕵️‍♀️: ¿Qué te gusta de lo que hacen y te gustaría mejorar?"
+                            },
+                            {
+                                "name": "fldyz1ii2nYvzcdm4",
+                                "type": "text",
+                                "label": "Automatización: ¿Qué áreas de tu negocio te gustaría automatizar?"
+                            },
+                            {
+                                "name": "fld50DAplqkPeJaQs",
+                                "type": "text",
+                                "label": "Automatización: Describe un proceso te encantaría simplificar:"
+                            },
+                            {
+                                "name": "fld8ETDD1JgCjhPRH",
+                                "type": "text",
+                                "label": "Tus metas: ¿Qué quieres lograr en los próximos 6 meses?"
+                            },
+                            {
+                                "name": "fldjjgxauMkwmyXCD",
+                                "type": "text",
+                                "label": "Tus metas: ¿Qué valores y principios son clave para tu negocio?"
+                            },
+                            {
+                                "name": "fldgmrOVM7Ykzjh1Q",
+                                "type": "text",
+                                "label": "Tus metas: Cuéntame, ¿algo te ronda la cabeza?"
+                            },
+                            {
+                                "name": "fld5w8oaervT7K8tr",
+                                "type": "text",
+                                "label": "Archivo transripcion"
+                            },
+                            {
+                                "name": "fldoQG76txAHTQYhh",
+                                "type": "text",
+                                "label": "Diagnóstico Base"
+                            },
+                            {
+                                "name": "fldouRJ3WKCsqHA8E",
+                                "type": "text",
+                                "label": "Diagnóstico Gral."
+                            },
+                            {
+                                "name": "fld1s381TVRxFJ44t",
+                                "type": "text",
+                                "label": "PO + Buyer Persona"
+                            },
+                            {
+                                "name": "fldIkzsJ1hkPwQOUI",
+                                "type": "text",
+                                "label": "Análisis de marketing"
+                            },
+                            {
+                                "name": "fldwtYxDX7PV75g1Q",
+                                "type": "text",
+                                "label": "Evaluación de procesos"
+                            },
+                            {
+                                "name": "fldjcc33cS6an8FFY",
+                                "type": "text",
+                                "label": "Diagnótico Operativo"
+                            },
+                            {
+                                "name": "fldpMfjifGFCqHLi5",
+                                "spec": [
+                                    {
+                                        "name": "url",
+                                        "type": "text",
+                                        "label": "File URL"
+                                    },
+                                    {
+                                        "name": "filename",
+                                        "type": "filename",
+                                        "label": "File name"
+                                    }
+                                ],
+                                "type": "array",
+                                "label": "Propuesta de Servicios"
+                            },
+                            {
+                                "name": "fldLIez5VhkLPdTqU",
+                                "spec": [
+                                    {
+                                        "name": "url",
+                                        "type": "text",
+                                        "label": "File URL"
+                                    },
+                                    {
+                                        "name": "filename",
+                                        "type": "filename",
+                                        "label": "File name"
+                                    }
+                                ],
+                                "type": "array",
+                                "label": "Prespuesto"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Record"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "Nombre",
+                        "type": "text",
+                        "label": "Nombre"
+                    },
+                    {
+                        "name": "Creada",
+                        "type": "date",
+                        "label": "Creada"
+                    },
+                    {
+                        "name": "Apellidos",
+                        "type": "text",
+                        "label": "Apellidos"
+                    },
+                    {
+                        "name": "Email",
+                        "type": "text",
+                        "label": "Email"
+                    },
+                    {
+                        "name": "¿Cómo se llama tu negocio o proyecto?",
+                        "type": "text",
+                        "label": "¿Cómo se llama tu negocio o proyecto?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "RRSS",
+                        "type": "text",
+                        "label": "RRSS"
+                    },
+                    {
+                        "name": "Linkedin",
+                        "type": "text",
+                        "label": "Linkedin"
+                    },
+                    {
+                        "name": "Otro",
+                        "type": "text",
+                        "label": "Otro"
+                    },
+                    {
+                        "name": "Situación Actual ¿En qué etapa se encuentra tu negocio?",
+                        "type": "array",
+                        "label": "Situación Actual ¿En qué etapa se encuentra tu negocio?",
+                        "dynamic": true,
+                        "editable": true
+                    },
+                    {
+                        "name": "Cuéntame sobre ti: Descríbeme tu negocio",
+                        "type": "text",
+                        "label": "Cuéntame sobre ti: Descríbeme tu negocio",
+                        "multiline": true
+                    },
+                    {
+                        "name": "¿Con que retos principales te estas enfrentando?",
+                        "type": "text",
+                        "label": "¿Con que retos principales te estas enfrentando?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "¿Cuales son tus TOP 3 prioridades para mejorar actualmente?",
+                        "type": "text",
+                        "label": "¿Cuales son tus TOP 3 prioridades para mejorar actualmente?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Buyer Persona: ¿Qué edad tiene?",
+                        "type": "text",
+                        "label": "Buyer Persona: ¿Qué edad tiene?"
+                    },
+                    {
+                        "name": "Buyer Persona: ¿Qué cosas le encantan? ",
+                        "type": "text",
+                        "label": "Buyer Persona: ¿Qué cosas le encantan? ",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Buyer Persona: ¿Qué problemas quiere resolver contigo?",
+                        "type": "text",
+                        "label": "Buyer Persona: ¿Qué problemas quiere resolver contigo?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Buyer Persona: ¿Qué hace que diga “me quedo contigo”?",
+                        "type": "text",
+                        "label": "Buyer Persona: ¿Qué hace que diga “me quedo contigo”?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Tu Web: Dime sinceramente: ¿crees que tu página web refleja lo increíble que eres?",
+                        "type": "text",
+                        "label": "Tu Web: Dime sinceramente: ¿crees que tu página web refleja lo increíble que eres?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Tu Web: Si pudieras cambiar algo, ¿qué sería?",
+                        "type": "text",
+                        "label": "Tu Web: Si pudieras cambiar algo, ¿qué sería?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Tu web: ¿Qué herramientas usas para analizar tu web?",
+                        "type": "text",
+                        "label": "Tu web: ¿Qué herramientas usas para analizar tu web?"
+                    },
+                    {
+                        "name": "Competencia 🕵️‍♀️: ¿Quiénes crees que son tus principales competidores?",
+                        "type": "text",
+                        "label": "Competencia 🕵️‍♀️: ¿Quiénes crees que son tus principales competidores?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Competencia 🕵️‍♀️: ¿Qué te hace único frente a ellos?",
+                        "type": "text",
+                        "label": "Competencia 🕵️‍♀️: ¿Qué te hace único frente a ellos?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Competencia 🕵️‍♀️: ¿Qué te gusta de lo que hacen y te gustaría mejorar?",
+                        "type": "text",
+                        "label": "Competencia 🕵️‍♀️: ¿Qué te gusta de lo que hacen y te gustaría mejorar?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Automatización: ¿Qué áreas de tu negocio te gustaría automatizar?",
+                        "type": "text",
+                        "label": "Automatización: ¿Qué áreas de tu negocio te gustaría automatizar?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Automatización: Describe un proceso te encantaría simplificar:",
+                        "type": "text",
+                        "label": "Automatización: Describe un proceso te encantaría simplificar:",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Tus metas: ¿Qué quieres lograr en los próximos 6 meses?",
+                        "type": "text",
+                        "label": "Tus metas: ¿Qué quieres lograr en los próximos 6 meses?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Tus metas: ¿Qué valores y principios son clave para tu negocio?",
+                        "type": "text",
+                        "label": "Tus metas: ¿Qué valores y principios son clave para tu negocio?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Tus metas: Cuéntame, ¿algo te ronda la cabeza?",
+                        "type": "text",
+                        "label": "Tus metas: Cuéntame, ¿algo te ronda la cabeza?",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Diagnóstico Base",
+                        "type": "text",
+                        "label": "Diagnóstico Base",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Archivo transripcion",
+                        "type": "text",
+                        "label": "Archivo transripcion",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Abrir transcripcion",
+                        "spec": [
+                            {
+                                "name": "label",
+                                "type": "text",
+                                "label": "Label"
+                            },
+                            {
+                                "name": "url",
+                                "type": "url",
+                                "label": "URL"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Abrir transcripcion"
+                    },
+                    {
+                        "name": "Diagnóstico Gral.",
+                        "type": "text",
+                        "label": "Diagnóstico Gral.",
+                        "multiline": true
+                    },
+                    {
+                        "name": "PO + Buyer Persona",
+                        "type": "text",
+                        "label": "PO + Buyer Persona",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Análisis de marketing",
+                        "type": "text",
+                        "label": "Análisis de marketing",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Evaluación de procesos",
+                        "type": "text",
+                        "label": "Evaluación de procesos",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Diagnótico Operativo",
+                        "type": "text",
+                        "label": "Diagnótico Operativo",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Propuesta de Servicios",
+                        "type": "text",
+                        "label": "Propuesta de Servicios"
+                    },
+                    {
+                        "name": "Prespuesto",
+                        "spec": [
+                            {
+                                "name": "id",
+                                "type": "text",
+                                "label": "ID"
+                            },
+                            {
+                                "name": "width",
+                                "type": "uinteger",
+                                "label": "Width"
+                            },
+                            {
+                                "name": "height",
+                                "type": "uinteger",
+                                "label": "Height"
+                            },
+                            {
+                                "name": "url",
+                                "type": "url",
+                                "label": "URL"
+                            },
+                            {
+                                "name": "filename",
+                                "type": "filename",
+                                "label": "File name"
+                            },
+                            {
+                                "name": "size",
+                                "type": "uinteger",
+                                "label": "Size"
+                            },
+                            {
+                                "name": "type",
+                                "type": "text",
+                                "label": "MIME type"
+                            },
+                            {
+                                "name": "thumbnails",
+                                "spec": [
+                                    {
+                                        "name": "small",
+                                        "spec": [
+                                            {
+                                                "name": "url",
+                                                "type": "url",
+                                                "label": "URL"
+                                            },
+                                            {
+                                                "name": "width",
+                                                "type": "uinteger",
+                                                "label": "Width"
+                                            },
+                                            {
+                                                "name": "height",
+                                                "type": "uinteger",
+                                                "label": "Height"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Small"
+                                    },
+                                    {
+                                        "name": "large",
+                                        "spec": [
+                                            {
+                                                "name": "url",
+                                                "type": "url",
+                                                "label": "URL"
+                                            },
+                                            {
+                                                "name": "width",
+                                                "type": "uinteger",
+                                                "label": "Width"
+                                            },
+                                            {
+                                                "name": "height",
+                                                "type": "uinteger",
+                                                "label": "Height"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Large"
+                                    },
+                                    {
+                                        "name": "full",
+                                        "spec": [
+                                            {
+                                                "name": "url",
+                                                "type": "url",
+                                                "label": "URL"
+                                            },
+                                            {
+                                                "name": "width",
+                                                "type": "uinteger",
+                                                "label": "Width"
+                                            },
+                                            {
+                                                "name": "height",
+                                                "type": "uinteger",
+                                                "label": "Height"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Full"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Thumbnails"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Prespuesto"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": true,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com"
+    }
+}

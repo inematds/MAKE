@@ -1,0 +1,2936 @@
+{
+    "name": "Self-Serve AI Audit",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 2099810,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "Self-Serve Audit Tool"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "email",
+                        "type": "text"
+                    },
+                    {
+                        "name": "timestamp",
+                        "type": "text"
+                    },
+                    {
+                        "name": "business_overview",
+                        "spec": [
+                            {
+                                "name": "company_name",
+                                "type": "text"
+                            },
+                            {
+                                "name": "industry",
+                                "type": "text"
+                            },
+                            {
+                                "name": "employees",
+                                "type": "text"
+                            },
+                            {
+                                "name": "goals",
+                                "spec": {
+                                    "type": "text"
+                                },
+                                "type": "array"
+                            }
+                        ],
+                        "type": "collection"
+                    },
+                    {
+                        "name": "workflow_analysis",
+                        "spec": [
+                            {
+                                "name": "tasks",
+                                "spec": {
+                                    "spec": [
+                                        {
+                                            "name": "description",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "name": "frequency",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "name": "timeSpent",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "name": "responsible",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "name": "department",
+                                            "type": "text"
+                                        }
+                                    ],
+                                    "type": "collection"
+                                },
+                                "type": "array"
+                            }
+                        ],
+                        "type": "collection"
+                    },
+                    {
+                        "name": "data_infrastructure",
+                        "spec": [
+                            {
+                                "name": "data_sources",
+                                "spec": {
+                                    "type": "text"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "name": "source_details",
+                                "spec": [
+                                    {
+                                        "name": "CRM System",
+                                        "type": "text"
+                                    }
+                                ],
+                                "type": "collection"
+                            },
+                            {
+                                "name": "data_quality",
+                                "type": "text"
+                            },
+                            {
+                                "name": "willing_to_improve",
+                                "type": "boolean"
+                            }
+                        ],
+                        "type": "collection"
+                    },
+                    {
+                        "name": "ai_implementation",
+                        "spec": [
+                            {
+                                "name": "interested_tools",
+                                "spec": {
+                                    "type": "text"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "name": "budget",
+                                "type": "number"
+                            },
+                            {
+                                "name": "implementation_preference",
+                                "type": "text"
+                            },
+                            {
+                                "name": "compliance_needs",
+                                "type": "text"
+                            }
+                        ],
+                        "type": "collection"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "perplexity-ai:createAChatCompletion",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 4000796
+            },
+            "mapper": {
+                "model": "sonar-pro",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "Company Name: {{1.business_overview.company_name}} \nIndustry: {{1.business_overview.industry}}\nNumber of Employees: {{1.business_overview.employees}}  \nPrimary Business Goals: {{1.business_overview.goals}}\n\nSearch for the following:\n1. A brief description of the company's services or products.\n2. Any recent news, press releases, or key milestones.\n3. Competitor landscape and positioning within its industry.\n4. Common challenges businesses in this industry face.\n5. Potential AI and automation opportunities based on industry trends.\n\nIf little to no information is found on the specific company, summarize general insights about businesses in the {{1.business_overview.industry}} industry that match the size and goals of{{1.business_overview.company_name}}. \n\nStructure the response in a clear and concise format, avoiding unnecessary filler language"
+                    }
+                ],
+                "max_tokens": "2000"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "model": {
+                            "mode": "chose",
+                            "label": "sonar-pro"
+                        },
+                        "messages": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    }
+                                }
+                            ]
+                        },
+                        "return_images": {
+                            "mode": "chose"
+                        },
+                        "search_domain_filter": {
+                            "mode": "chose"
+                        },
+                        "search_recency_filter": {
+                            "mode": "chose",
+                            "label": "Empty"
+                        },
+                        "return_related_questions": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "perplexity-ai"
+                            },
+                            "label": "PA API Key"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:perplexity-ai",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "messages",
+                        "spec": [
+                            {
+                                "name": "content",
+                                "type": "text",
+                                "label": "Content",
+                                "required": true
+                            },
+                            {
+                                "name": "role",
+                                "type": "select",
+                                "label": "Role",
+                                "options": [
+                                    {
+                                        "label": "User",
+                                        "value": "user"
+                                    },
+                                    {
+                                        "label": "Assistant",
+                                        "value": "assistant"
+                                    },
+                                    {
+                                        "label": "System",
+                                        "value": "system"
+                                    }
+                                ],
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "number",
+                        "label": "Max Tokens"
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature",
+                        "validate": {
+                            "max": 1.999,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P",
+                        "validate": {
+                            "max": 1,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_k",
+                        "type": "number",
+                        "label": "Top K",
+                        "validate": {
+                            "max": 2048,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "presence_penalty",
+                        "type": "number",
+                        "label": "Presence Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "number",
+                        "label": "Frequency Penalty",
+                        "validate": {
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "search_domain_filter",
+                        "spec": {
+                            "name": "value",
+                            "type": "text"
+                        },
+                        "type": "array",
+                        "label": "Search Domain Filter"
+                    },
+                    {
+                        "name": "search_recency_filter",
+                        "type": "select",
+                        "label": "Search Recency Filter",
+                        "validate": {
+                            "enum": [
+                                "month",
+                                "week",
+                                "day",
+                                "hour"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "return_images",
+                        "type": "boolean",
+                        "label": "Return Images"
+                    },
+                    {
+                        "name": "return_related_questions",
+                        "type": "boolean",
+                        "label": "Return Related Questions"
+                    },
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "messages",
+                        "spec": [
+                            {
+                                "name": "content",
+                                "type": "text",
+                                "label": "Content",
+                                "required": true
+                            },
+                            {
+                                "name": "role",
+                                "type": "select",
+                                "label": "Role",
+                                "options": [
+                                    {
+                                        "label": "User",
+                                        "value": "user"
+                                    },
+                                    {
+                                        "label": "Assistant",
+                                        "value": "assistant"
+                                    },
+                                    {
+                                        "label": "System",
+                                        "value": "system"
+                                    }
+                                ],
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "number",
+                        "label": "Max Tokens"
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature",
+                        "validate": {
+                            "max": 1.999,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P",
+                        "validate": {
+                            "max": 1,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_k",
+                        "type": "number",
+                        "label": "Top K",
+                        "validate": {
+                            "max": 2048,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "presence_penalty",
+                        "type": "number",
+                        "label": "Presence Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "number",
+                        "label": "Frequency Penalty",
+                        "validate": {
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "search_domain_filter",
+                        "spec": {
+                            "name": "value",
+                            "type": "text"
+                        },
+                        "type": "array",
+                        "label": "Search Domain Filter"
+                    },
+                    {
+                        "name": "search_recency_filter",
+                        "type": "select",
+                        "label": "Search Recency Filter",
+                        "validate": {
+                            "enum": [
+                                "month",
+                                "week",
+                                "day",
+                                "hour"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "return_images",
+                        "type": "boolean",
+                        "label": "Return Images"
+                    },
+                    {
+                        "name": "return_related_questions",
+                        "type": "boolean",
+                        "label": "Return Related Questions"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "openai-gpt-3:CreateCompletion",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 2974974
+            },
+            "mapper": {
+                "model": "o3-mini",
+                "top_p": "1",
+                "select": "chat",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "You are an AI consultant generating a **comprehensive AI & automation audit report** based on collected business inputs and enriched research.\n\n### **Inputs:**\n- **Company Name:**\n{{1.business_overview.company_name}} \n- **Industry:** \n{{1.business_overview.industry}}\n- **Employees Count** \n{{1.business_overview.employees}}\n- **Business Goals:** \n{{1.business_overview.goals}}\n- **Workflow Analysis:** \n{{1.workflow_analysis.tasks}}\n- **Data Infrastructure:** \n  - Data Sources: \n{{1.data_infrastructure.data_sources}}\n\nDetails on Data Sources:\n{{1.data_infrastructure.source_details}}\n  - Data Quality: \n{{1.data_infrastructure.data_quality}}\n  - Willing to Improve Data: \n{{1.data_infrastructure.willing_to_improve}}\n- **AI Implementation Preferences:**\n  - Interested Tools: \n{{1.ai_implementation.interested_tools}}\n  - Budget: \n{{1.ai_implementation.budget}}\n  - Implementation Preference: \n{{1.ai_implementation.implementation_preference}}\n  - Compliance Needs: \n{{1.ai_implementation.compliance_needs}}\n- Interested in following solutions:\n{{1.ai_implementation.interested_tools}}\n- With following budget:\n{{1.ai_implementation.budget}}\n-With following implementation preference:\n{{1.ai_implementation.implementation_preference}}\n- With compliance restrictio\n{{1.ai_implementation.compliance_needs}}\n- **Perplexity Research Findings:**  \n  {{2.choices[].message.content}}\n\n---\n\n### **Report Output Structure**\n**1. Executive Summary**  \nProvide a **concise** introduction summarizing the company, its goals, and the scope of this audit. Mention key challenges identified from **workflow analysis and Perplexity research**. \n\n**2. Current Business Processes & Pain Points**  \nBreak down the company’s current processes based on their workflow analysis. Identify which **tasks are the biggest bottlenecks** and whether they are **manual, inefficient, or data-limited**. Highlight where **data quality issues** might impact automation.\n\n**3. AI & Automation Opportunities**  \nFor each **high-impact area**, recommend a solution based on Mark’s structured decision-making process. Ensure recommendations are **strategic, practical, and justified**.  \n\n- **Customer-Facing AI (If applicable)**\n  - If handling **high-volume repetitive inquiries**, suggest **Voiceflow or Botpress** for chatbot implementation.  \n  - If lead response time is an issue, suggest **Make.com or n8n** for automated follow-ups.  \n\n- **Sales & Lead Handling Optimization (If applicable)**\n  - If speed-to-lead is a problem, recommend an automation flow with **Make.com/n8n + CRM integration**.  \n  - For reactivation of cold leads, suggest **custom GPTs or AI-driven outreach sequences**.  \n\n- **Workflow Automation (If applicable)**\n  - Identify high-friction, repetitive tasks that can be automated using **Make.com (simpler) or n8n (more complex, custom logic)**.  \n  - If tasks require dynamic logic or integration across multiple platforms, recommend **n8n or Python-based scripts**.  \n\n- **Data Structuring & Readiness**\n  - If data is unstructured or fragmented, recommend **centralizing in Google Sheets, CRM, or using APIs** before AI is applied.  \n  - If a company is willing to improve data but lacks expertise, suggest hiring a **data engineer** or using **custom ETL pipelines**.  \n\n- **AI-Assisted Development (For Tech Teams)**\n  - If developers are using AI-assisted coding, ensure they are **reviewing AI-generated code** and not blindly deploying.  \n  - If security concerns exist, suggest **GitHub Copilot or Clusher AI** for managed AI-enhanced development. \n\n---\n\n# **Solution Matrix to Draw Inspiration From** \n\n# AI & Automation Solutions and Tools\n\n## 1. Customer-Facing AI Solutions\n### **Voiceflow**\n- **When to Use:** If the business receives a high volume of repetitive inquiries (e.g., FAQs, appointment scheduling).\n- **Example Implementation:** Deploy a Voiceflow chatbot on the website and integrate it with the CRM to log inquiries.\n- **Roadmap:**\n  - **Phase 1:** Define top 20 customer questions.\n  - **Phase 2:** Build a chatbot flow that answers these automatically.\n  - **Phase 3:** Integrate with CRM to capture leads and automate follow-ups.\n  - **Phase 4:** Train AI to escalate complex inquiries to human agents.\n\n### **Botpress**\n- **When to Use:** When the business needs a chatbot with complex logic or internal integrations (e.g., internal helpdesk automation).\n- **Example Implementation:** Use Botpress to build an internal HR chatbot that answers employee questions and integrates with payroll.\n- **Roadmap:**\n  - **Phase 1:** Identify repetitive HR and IT support questions.\n  - **Phase 2:** Build chatbot logic in Botpress.\n  - **Phase 3:** Connect to company database for real-time employee info.\n  - **Phase 4:** Expand to handle leave requests and approvals.\n\n### **Make.com + AI**\n- **When to Use:** When automating chatbot-human handoffs or triggering workflows from chatbot interactions.\n- **Example Implementation:** Connect Voiceflow to Make.com so that when a lead requests a demo, Make.com books a calendar invite.\n- **Roadmap:**\n  - **Phase 1:** Set up chatbot with demo request intent.\n  - **Phase 2:** Create Make.com workflow that triggers when a request is made.\n  - **Phase 3:** Automatically schedule meetings and send reminders.\n  - **Phase 4:** Integrate with CRM to track interactions.\n\n---\n\n## 2. Sales & Lead Handling Optimization\n### **Make.com / n8n**\n- **When to Use:** If leads are going cold due to slow responses, or if sales follow-ups are inconsistent.\n- **Example Implementation:** Automate follow-ups so that every lead receives a personalized email or SMS 5 minutes after filling out a form.\n- **Roadmap:**\n  - **Phase 1:** Connect form submissions to Make.com/n8n.\n  - **Phase 2:** Trigger an email sequence based on lead source.\n  - **Phase 3:** Integrate with CRM to track lead responses.\n  - **Phase 4:** Use AI to segment leads and prioritize high-intent ones.\n\n### **AI-Powered Outreach**\n- **When to Use:** For lead nurturing or reactivation of old contacts.\n- **Example Implementation:** Use a custom GPT to craft personalized cold emails for leads that have not been contacted in 30 days.\n- **Roadmap:**\n  - **Phase 1:** Extract stale leads from CRM.\n  - **Phase 2:** Generate personalized emails using GPT.\n  - **Phase 3:** Automate sending and tracking open rates.\n  - **Phase 4:** Schedule follow-ups based on response behavior.\n\n### **Automated Lead Scoring**\n- **When to Use:** If sales teams spend too much time on low-quality leads.\n- **Example Implementation:** Use AI to rank leads based on behavior, like email opens, website visits, and demo requests.\n- **Roadmap:**\n  - **Phase 1:** Define lead scoring criteria.\n  - **Phase 2:** Set up AI model to score new leads.\n  - **Phase 3:** Route high-priority leads to sales team.\n  - **Phase 4:** Optimize based on conversion performance.\n\n---\n\n## 3. Workflow & Process Automation\n### **Make.com**\n- **When to Use:** If the business has **simple, repetitive tasks** that can be automated without code.\n- **Example Implementation:** Automatically send invoices when a contract is signed.\n- **Roadmap:**\n  - **Phase 1:** Identify processes that require manual input.\n  - **Phase 2:** Automate a single process using Make.com.\n  - **Phase 3:** Expand automations across departments.\n  - **Phase 4:** Introduce AI-based decision-making.\n\n### **n8n**\n- **When to Use:** When the workflow involves **multiple systems** or requires **custom logic**.\n- **Example Implementation:** Sync customer support tickets between a helpdesk and Slack in real time.\n- **Roadmap:**\n  - **Phase 1:** Map out data flows between tools.\n  - **Phase 2:** Build n8n workflows for ticket updates.\n  - **Phase 3:** Introduce AI-based ticket categorization.\n  - **Phase 4:** Optimize for efficiency and automation reliability.\n\n---\n\n## 4. Data Structuring & Integration\n### **Google Sheets / CRM**\n- **When to Use:** If the company needs a **centralized location** to store structured data before AI automation.\n- **Example Implementation:** Consolidate sales data from different platforms into a Google Sheet.\n- **Roadmap:**\n  - **Phase 1:** Identify key data sources.\n  - **Phase 2:** Set up automated data extraction.\n  - **Phase 3:** Normalize and clean data.\n  - **Phase 4:** Use AI to generate insights.\n\n### **Custom ETL Pipelines**\n- **When to Use:** If a business has **disparate data sources** and needs structured pipelines.\n- **Example Implementation:** Aggregate sales data from Shopify, Stripe, and HubSpot into a centralized warehouse.\n- **Roadmap:**\n  - **Phase 1:** Map existing data sources.\n  - **Phase 2:** Build ETL pipelines.\n  - **Phase 3:** Ensure data consistency.\n  - **Phase 4:** Make AI-ready by structuring into clean datasets.\n\n---\n\n## 5. AI-Assisted Development (For Tech Teams)\n### **Clusher AI (iLibrary)**\n- **When to Use:** If developers need structured AI assistance in writing code.\n- **Example Implementation:** Use Clusher AI to generate scalable backend functions.\n- **Roadmap:**\n  - **Phase 1:** Train devs to use AI-assisted coding.\n  - **Phase 2:** Implement AI-generated components.\n  - **Phase 3:** Ensure code review & scalability checks.\n  - **Phase 4:** Automate repetitive coding patterns.\n\n### **GitHub Copilot**\n- **When to Use:** If developers need AI help for **speeding up coding** but still require human review.\n- **Example Implementation:** Use Copilot to draft API integrations, with devs reviewing the final code.\n- **Roadmap:**\n  - **Phase 1:** Enable Copilot for all engineers.\n  - **Phase 2:** Define best practices for AI review.\n  - **Phase 3:** Track efficiency improvements.\n  - **Phase 4:** Scale AI adoption across engineering teams.\n\n---\n\n## 6. AI Agents & Advanced AI Workflows\n### **Custom GPTs**\n- **When to Use:** When businesses need AI **tailored to their unique workflows**.\n- **Example Implementation:** Create a GPT-powered assistant that analyzes contracts for legal teams.\n- **Roadmap:**\n  - **Phase 1:** Define the use case.\n  - **Phase 2:** Train GPT on company data.\n  - **Phase 3:** Deploy internally for testing.\n  - **Phase 4:** Expand functionality based on feedback.\n\n### **Vector Databases (Pinecone, Quadrant)**\n- **When to Use:** If AI needs memory to retrieve **contextual knowledge over time**.\n- **Example Implementation:** Store customer chat histories for personalized responses.\n- **Roadmap:**\n  - **Phase 1:** Define what data to store.\n  - **Phase 2:** Build vector embeddings.\n  - **Phase 3:** Optimize retrieval performance.\n  - **Phase 4:** Scale and integrate with AI workflows.\n\n"
+                    }
+                ],
+                "max_tokens": "10000",
+                "temperature": "1",
+                "n_completions": "1",
+                "response_format": "text"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "stop": {
+                            "mode": "chose"
+                        },
+                        "model": {
+                            "mode": "chose",
+                            "label": "o3-mini (system)"
+                        },
+                        "select": {
+                            "label": "Create a Chat Completion (GPT and o1 models)"
+                        },
+                        "messages": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    }
+                                }
+                            ]
+                        },
+                        "logit_bias": {
+                            "mode": "chose"
+                        },
+                        "response_format": {
+                            "mode": "chose",
+                            "label": "Text"
+                        },
+                        "reasoning_effort": {
+                            "mode": "chose",
+                            "label": "Empty"
+                        },
+                        "additionalParameters": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "PromptAdvisers OpenAI API key"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:openai-gpt-3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Select Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "chat",
+                                "prompt"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature",
+                        "validate": {
+                            "max": 2,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P",
+                        "validate": {
+                            "max": 1,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "n_completions",
+                        "type": "number",
+                        "label": "Number"
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "number",
+                        "label": "Frequency Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "presence_penalty",
+                        "type": "number",
+                        "label": "Presence Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "logit_bias",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "token",
+                                    "type": "text",
+                                    "label": "Token ID",
+                                    "required": true
+                                },
+                                {
+                                    "name": "probability",
+                                    "type": "number",
+                                    "label": "Probability",
+                                    "required": true,
+                                    "validate": {
+                                        "max": 100,
+                                        "min": -100
+                                    }
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Token Probability"
+                        },
+                        "type": "array",
+                        "label": "Token Probability"
+                    },
+                    {
+                        "name": "seed",
+                        "type": "integer",
+                        "label": "Seed"
+                    },
+                    {
+                        "name": "stop",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Stop Sequence"
+                        },
+                        "type": "array",
+                        "label": "Stop Sequences",
+                        "validate": {
+                            "maxItems": 4
+                        }
+                    },
+                    {
+                        "name": "additionalParameters",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Parameter Name",
+                                    "required": true
+                                },
+                                {
+                                    "name": "type",
+                                    "type": "select",
+                                    "label": "Input Type",
+                                    "options": [
+                                        {
+                                            "label": "Text",
+                                            "value": "text",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "text",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ],
+                                            "default": true
+                                        },
+                                        {
+                                            "label": "Number",
+                                            "value": "number",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "number",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Boolean",
+                                            "value": "boolean",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "boolean",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Date",
+                                            "value": "date",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "date",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Any",
+                                            "value": "any",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "any",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Input Parameter"
+                        },
+                        "type": "array",
+                        "label": "Other Input Parameters"
+                    },
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "uinteger",
+                        "label": "Max Completion Tokens"
+                    },
+                    {
+                        "name": "messages",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "role",
+                                    "type": "select",
+                                    "label": "Role",
+                                    "options": {
+                                        "store": [
+                                            {
+                                                "label": "User",
+                                                "value": "user",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "label": "Assistant",
+                                                "value": "assistant",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "label": "Developer / System",
+                                                "value": "system",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "required": true
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Message"
+                        },
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    },
+                    {
+                        "name": "response_format",
+                        "type": "select",
+                        "label": "Response Format",
+                        "validate": {
+                            "enum": [
+                                "text",
+                                "json_object"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "reasoning_effort",
+                        "type": "select",
+                        "label": "Reasoning Effort",
+                        "validate": {
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "result",
+                        "type": "any",
+                        "label": "Result"
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "object",
+                        "type": "text",
+                        "label": "Object"
+                    },
+                    {
+                        "name": "created",
+                        "type": "date",
+                        "label": "Created"
+                    },
+                    {
+                        "name": "model",
+                        "type": "text",
+                        "label": "Model"
+                    },
+                    {
+                        "name": "choices",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "text",
+                                    "type": "text",
+                                    "label": "Text"
+                                },
+                                {
+                                    "name": "index",
+                                    "type": "number",
+                                    "label": "Index"
+                                },
+                                {
+                                    "name": "logprobs",
+                                    "type": "text",
+                                    "label": "Log Probs"
+                                },
+                                {
+                                    "name": "finish_reason",
+                                    "type": "text",
+                                    "label": "Finish Reason"
+                                },
+                                {
+                                    "name": "message",
+                                    "spec": [
+                                        {
+                                            "name": "role",
+                                            "type": "text",
+                                            "label": "Role"
+                                        },
+                                        {
+                                            "name": "content",
+                                            "type": "text",
+                                            "label": "Content"
+                                        },
+                                        {
+                                            "name": "refusal",
+                                            "type": "text",
+                                            "label": "Refusal"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Message"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "Choices"
+                    },
+                    {
+                        "name": "usage",
+                        "spec": [
+                            {
+                                "name": "prompt_tokens",
+                                "type": "number",
+                                "label": "Prompt Tokens"
+                            },
+                            {
+                                "name": "completion_tokens",
+                                "type": "text",
+                                "label": "Completion Tokens"
+                            },
+                            {
+                                "name": "total_tokens",
+                                "type": "number",
+                                "label": "Total Tokens"
+                            },
+                            {
+                                "name": "prompt_tokens_details",
+                                "spec": [
+                                    {
+                                        "name": "cached_tokens",
+                                        "type": "uinteger",
+                                        "label": "Cached Tokens"
+                                    },
+                                    {
+                                        "name": "text_tokens",
+                                        "type": "uinteger",
+                                        "label": "Text Tokens"
+                                    },
+                                    {
+                                        "name": "image_tokens",
+                                        "type": "uinteger",
+                                        "label": "Image Tokens"
+                                    },
+                                    {
+                                        "name": "audio_tokens",
+                                        "type": "uinteger",
+                                        "label": "Audio Tokens"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Prompt Tokens Details"
+                            },
+                            {
+                                "name": "completion_tokens_details",
+                                "spec": [
+                                    {
+                                        "name": "reasoning_tokens",
+                                        "type": "uinteger",
+                                        "label": "Reasoning Tokens"
+                                    },
+                                    {
+                                        "name": "text_tokens",
+                                        "type": "uinteger",
+                                        "label": "Text Tokens"
+                                    },
+                                    {
+                                        "name": "audio_tokens",
+                                        "type": "uinteger",
+                                        "label": "Audio Tokens"
+                                    },
+                                    {
+                                        "name": "accepted_prediction_tokens",
+                                        "type": "uinteger",
+                                        "label": "Accepted Prediction Tokens"
+                                    },
+                                    {
+                                        "name": "rejected_prediction_tokens",
+                                        "type": "uinteger",
+                                        "label": "Rejected Prediction Tokens"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Completion Tokens Details"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Usage"
+                    },
+                    {
+                        "name": "service_tier",
+                        "type": "text",
+                        "label": "Service Tier"
+                    },
+                    {
+                        "name": "system_fingerprint",
+                        "type": "text",
+                        "label": "System Fingerprint"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "module": "openai-gpt-3:CreateCompletion",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 2974974
+            },
+            "mapper": {
+                "model": "o3-mini",
+                "top_p": "1",
+                "select": "chat",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "You are part of an AI and automation company called Early AI-dopters.\n\nYour goal is to refine the AI-generated draft of an automation audit report, making it more engaging, structured, and action-oriented.\n\nDouble it's length not just by filler content, but by going as deep in as many areas as possible. \n\nTry and write in a conversational manner, similar to how a consultant would speak to a client (minus the buzzwords).\n\nOutput in markdown.\n\n### **Refinement Goals:**\n1. **Rewrite the report as if a consultant is speaking directly to the business owner.**  \n   - Use a clear, engaging, and professional tone.  \n   - Make the insights actionable and easy to understand.  \n   - Avoid AI jargon, keeping explanations business-friendly.  \n\n2. **Improve readability and structure.**  \n   - Make sections flow naturally like a conversation.  \n   - Provide reasoning behind recommendations in a simple way.  \n   - Use short, clear paragraphs with bullet points where necessary.  \n\n3. **Ensure the recommendations feel tailored.**  \n   - Reference the business's name: \n{{1.business_overview.company_name}}\n   - Align recommendations with their **goals and industry**: **{{1.business_overview.goals}}**, **{{1.business_overview.industry}}**  \n   - Use insights from Perplexity research to add real-world context.  \n\n4. **Add a structured, step-by-step roadmap at the end.**  \n   - Provide a clear breakdown of how the business can implement AI & automation.  \n   - Ensure each phase includes **actionable sub-bullets** that **guide execution at a tactical level**.  \n   - Keep it **structured but manageable**, focusing on execution clarity.  \n\n---\n\n### **Inputs for Refinement:**\n- **Initial AI Draft Report:**  \n {{3.result}}\n- **Business Details:**  \n  - Name: **{{1.business_overview.company_name}}**  \n  - Industry: **{{1.business_overview.industry}}**  \n  - Goals: **{{1.business_overview.goals}}**  \n  - Current Challenges: **{{1.workflow_analysis}}**  \n  - Data Structure: **{{1.data_infrastructure}}**  \n  - AI Interest Areas: **{{1.ai_implementation.interested_tools}}**  \n  - Budget Considerations: **{{1.ai_implementation.budget}}**  \n\n---\n\n### **Final Output: Structured Consultant-Led Report**\n1. **Introduction**  \n   - Start with a warm and professional introduction.  \n   - Acknowledge the business's current state and goals.  \n   - Briefly explain what the report covers and why it matters.  \n\n2. **Current State Analysis**  \n   - Summarize the key challenges identified in the audit.  \n   - Provide relatable examples to make pain points clear.  \n   - Frame the discussion in a way that aligns with business priorities.  \n\n3. **High-Impact Opportunities**  \n   - Explain where AI & automation can provide the **biggest wins first**.  \n   - Use **easy-to-follow, human-friendly language** (avoid AI/tech jargon).  \n   - Ensure each recommendation includes:  \n     - **What it solves** (pain point it addresses).  \n     - **How it works** (simple explanation).  \n     - **Why it makes sense** (impact and ROI).  \n\n4. **Recommended Solutions & Tools**  \n   - Organize recommendations into **Customer AI, Sales Automation, Workflow Automation, Data Structuring, AI Agents, and Compliance Needs**.  \n   - For each tool or method, explain:  \n     - **When to use it.**  \n     - **How it fits into their workflow.**  \n     - **What they can expect in terms of results.**  \n\n---\n\n### **Step-by-Step Action Roadmap**  \nEach phase contains **actionable, tactical steps** to help businesses execute without ambiguity.  \n\n#### **Phase 1: Automate Low-Effort, High-Impact Workflows (Weeks 1-4)**  \n- Identify **3-5 repetitive tasks** that consume time but do not require human judgment.  \n- Choose an automation tool (**Make.com for simple workflows, n8n for advanced logic**).  \n- Set up a **test automation** (e.g., automate lead data entry into CRM).  \n- Validate the results by tracking time saved and errors reduced.  \n- Expand automation **only after confirming accuracy and effectiveness**.  \n\n#### **Phase 2: Optimize & Expand Workflow Efficiency (Weeks 5-8)**  \n- Review data sources and ensure **customer and operational data is structured** in a central location (Google Sheets, CRM, API database).  \n- Implement automated follow-ups for sales and customer support **with predefined response rules**.  \n- If lead management is an issue, **integrate CRM automation** to score and prioritize inbound leads.  \n- If customer support is a bottleneck, **deploy a chatbot (Voiceflow or Botpress) for common inquiries**.  \n- Train internal teams to monitor and refine automation based on early results.  \n\n#### **Phase 3: Introduce AI-Enhanced Workflows (Weeks 9-12)**  \n- Use **AI to assist decision-making** in workflows (e.g., AI-powered lead scoring, customer segmentation).  \n- Implement **AI-powered outreach** (custom GPTs or AI email follow-ups).  \n- If development teams are involved, **introduce AI-assisted coding tools like GitHub Copilot** while ensuring human review.  \n- Define **clear escalation paths** for cases where AI requires human intervention.  \n- Begin measuring KPIs for AI success, such as conversion lift or efficiency gains.  \n\n#### **Phase 4: Scale AI & Automation for Long-Term Growth (Ongoing)**  \n- Introduce **AI agents** where appropriate, ensuring they do not operate autonomously in customer-facing interactions.  \n- Optimize AI workflows based on business data and operational feedback.  \n- Continue **training employees to oversee AI-driven processes** rather than relying on AI to make uncontrolled decisions.  \n- If applicable, **establish AI compliance measures** (GDPR, SOC 2) to manage risks and security concerns.  \n- Expand AI into more **strategic decision-making roles**, where it **supports** human expertise rather than replacing it.  \n\n---\n\n### **Final Checks Before Generating the Report**\n- Ensure the **language is engaging and consultant-like**.  \n- Confirm that **recommendations align with the business’s actual needs**.  \n- Validate that the **roadmap is clear, actionable, and not overwhelming**.  \n- Remove any AI-related filler language (e.g., \"seamless AI integration\").  \n\nNow, refine the **initial AI draft report** into this **consultant-led, structured, and highly actionable format**."
+                    }
+                ],
+                "max_tokens": "10000",
+                "temperature": "1",
+                "n_completions": "1",
+                "response_format": "text"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "stop": {
+                            "mode": "chose"
+                        },
+                        "model": {
+                            "mode": "chose",
+                            "label": "o3-mini (system)"
+                        },
+                        "select": {
+                            "label": "Create a Chat Completion (GPT and o1 models)"
+                        },
+                        "messages": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    }
+                                }
+                            ]
+                        },
+                        "logit_bias": {
+                            "mode": "chose"
+                        },
+                        "response_format": {
+                            "mode": "chose",
+                            "label": "Text"
+                        },
+                        "reasoning_effort": {
+                            "mode": "chose",
+                            "label": "Empty"
+                        },
+                        "additionalParameters": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "PromptAdvisers OpenAI API key"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:openai-gpt-3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Select Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "chat",
+                                "prompt"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature",
+                        "validate": {
+                            "max": 2,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P",
+                        "validate": {
+                            "max": 1,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "n_completions",
+                        "type": "number",
+                        "label": "Number"
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "number",
+                        "label": "Frequency Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "presence_penalty",
+                        "type": "number",
+                        "label": "Presence Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "logit_bias",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "token",
+                                    "type": "text",
+                                    "label": "Token ID",
+                                    "required": true
+                                },
+                                {
+                                    "name": "probability",
+                                    "type": "number",
+                                    "label": "Probability",
+                                    "required": true,
+                                    "validate": {
+                                        "max": 100,
+                                        "min": -100
+                                    }
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Token Probability"
+                        },
+                        "type": "array",
+                        "label": "Token Probability"
+                    },
+                    {
+                        "name": "seed",
+                        "type": "integer",
+                        "label": "Seed"
+                    },
+                    {
+                        "name": "stop",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Stop Sequence"
+                        },
+                        "type": "array",
+                        "label": "Stop Sequences",
+                        "validate": {
+                            "maxItems": 4
+                        }
+                    },
+                    {
+                        "name": "additionalParameters",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Parameter Name",
+                                    "required": true
+                                },
+                                {
+                                    "name": "type",
+                                    "type": "select",
+                                    "label": "Input Type",
+                                    "options": [
+                                        {
+                                            "label": "Text",
+                                            "value": "text",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "text",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ],
+                                            "default": true
+                                        },
+                                        {
+                                            "label": "Number",
+                                            "value": "number",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "number",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Boolean",
+                                            "value": "boolean",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "boolean",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Date",
+                                            "value": "date",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "date",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Any",
+                                            "value": "any",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "any",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Input Parameter"
+                        },
+                        "type": "array",
+                        "label": "Other Input Parameters"
+                    },
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "uinteger",
+                        "label": "Max Completion Tokens"
+                    },
+                    {
+                        "name": "messages",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "role",
+                                    "type": "select",
+                                    "label": "Role",
+                                    "options": {
+                                        "store": [
+                                            {
+                                                "label": "User",
+                                                "value": "user",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "label": "Assistant",
+                                                "value": "assistant",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "label": "Developer / System",
+                                                "value": "system",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "required": true
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Message"
+                        },
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    },
+                    {
+                        "name": "response_format",
+                        "type": "select",
+                        "label": "Response Format",
+                        "validate": {
+                            "enum": [
+                                "text",
+                                "json_object"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "reasoning_effort",
+                        "type": "select",
+                        "label": "Reasoning Effort",
+                        "validate": {
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "result",
+                        "type": "any",
+                        "label": "Result"
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "object",
+                        "type": "text",
+                        "label": "Object"
+                    },
+                    {
+                        "name": "created",
+                        "type": "date",
+                        "label": "Created"
+                    },
+                    {
+                        "name": "model",
+                        "type": "text",
+                        "label": "Model"
+                    },
+                    {
+                        "name": "choices",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "text",
+                                    "type": "text",
+                                    "label": "Text"
+                                },
+                                {
+                                    "name": "index",
+                                    "type": "number",
+                                    "label": "Index"
+                                },
+                                {
+                                    "name": "logprobs",
+                                    "type": "text",
+                                    "label": "Log Probs"
+                                },
+                                {
+                                    "name": "finish_reason",
+                                    "type": "text",
+                                    "label": "Finish Reason"
+                                },
+                                {
+                                    "name": "message",
+                                    "spec": [
+                                        {
+                                            "name": "role",
+                                            "type": "text",
+                                            "label": "Role"
+                                        },
+                                        {
+                                            "name": "content",
+                                            "type": "text",
+                                            "label": "Content"
+                                        },
+                                        {
+                                            "name": "refusal",
+                                            "type": "text",
+                                            "label": "Refusal"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Message"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "Choices"
+                    },
+                    {
+                        "name": "usage",
+                        "spec": [
+                            {
+                                "name": "prompt_tokens",
+                                "type": "number",
+                                "label": "Prompt Tokens"
+                            },
+                            {
+                                "name": "completion_tokens",
+                                "type": "text",
+                                "label": "Completion Tokens"
+                            },
+                            {
+                                "name": "total_tokens",
+                                "type": "number",
+                                "label": "Total Tokens"
+                            },
+                            {
+                                "name": "prompt_tokens_details",
+                                "spec": [
+                                    {
+                                        "name": "cached_tokens",
+                                        "type": "uinteger",
+                                        "label": "Cached Tokens"
+                                    },
+                                    {
+                                        "name": "text_tokens",
+                                        "type": "uinteger",
+                                        "label": "Text Tokens"
+                                    },
+                                    {
+                                        "name": "image_tokens",
+                                        "type": "uinteger",
+                                        "label": "Image Tokens"
+                                    },
+                                    {
+                                        "name": "audio_tokens",
+                                        "type": "uinteger",
+                                        "label": "Audio Tokens"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Prompt Tokens Details"
+                            },
+                            {
+                                "name": "completion_tokens_details",
+                                "spec": [
+                                    {
+                                        "name": "reasoning_tokens",
+                                        "type": "uinteger",
+                                        "label": "Reasoning Tokens"
+                                    },
+                                    {
+                                        "name": "text_tokens",
+                                        "type": "uinteger",
+                                        "label": "Text Tokens"
+                                    },
+                                    {
+                                        "name": "audio_tokens",
+                                        "type": "uinteger",
+                                        "label": "Audio Tokens"
+                                    },
+                                    {
+                                        "name": "accepted_prediction_tokens",
+                                        "type": "uinteger",
+                                        "label": "Accepted Prediction Tokens"
+                                    },
+                                    {
+                                        "name": "rejected_prediction_tokens",
+                                        "type": "uinteger",
+                                        "label": "Rejected Prediction Tokens"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Completion Tokens Details"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Usage"
+                    },
+                    {
+                        "name": "service_tier",
+                        "type": "text",
+                        "label": "Service Tier"
+                    },
+                    {
+                        "name": "system_fingerprint",
+                        "type": "text",
+                        "label": "System Fingerprint"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 20,
+            "module": "openai-gpt-3:CreateCompletion",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 2974974
+            },
+            "mapper": {
+                "model": "o3-mini",
+                "top_p": "1",
+                "select": "chat",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": "Output this output without any extra metadata like this:\n\n\"```markdown\" and/or trailing quotes after.\n\nJust the core markdown itself.\n\n{{7.result}}"
+                    }
+                ],
+                "max_tokens": "10000",
+                "temperature": "1",
+                "n_completions": "1",
+                "response_format": "text"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "stop": {
+                            "mode": "chose"
+                        },
+                        "model": {
+                            "mode": "chose",
+                            "label": "o3-mini (system)"
+                        },
+                        "select": {
+                            "label": "Create a Chat Completion (GPT and o1 models)"
+                        },
+                        "messages": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "role": {
+                                        "mode": "chose",
+                                        "label": "User"
+                                    }
+                                }
+                            ]
+                        },
+                        "logit_bias": {
+                            "mode": "chose"
+                        },
+                        "response_format": {
+                            "mode": "chose",
+                            "label": "Text"
+                        },
+                        "reasoning_effort": {
+                            "mode": "chose",
+                            "label": "Empty"
+                        },
+                        "additionalParameters": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            },
+                            "label": "PromptAdvisers OpenAI API key"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:openai-gpt-3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Select Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "chat",
+                                "prompt"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "temperature",
+                        "type": "number",
+                        "label": "Temperature",
+                        "validate": {
+                            "max": 2,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "top_p",
+                        "type": "number",
+                        "label": "Top P",
+                        "validate": {
+                            "max": 1,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "n_completions",
+                        "type": "number",
+                        "label": "Number"
+                    },
+                    {
+                        "name": "frequency_penalty",
+                        "type": "number",
+                        "label": "Frequency Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "presence_penalty",
+                        "type": "number",
+                        "label": "Presence Penalty",
+                        "validate": {
+                            "max": 2,
+                            "min": -2
+                        }
+                    },
+                    {
+                        "name": "logit_bias",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "token",
+                                    "type": "text",
+                                    "label": "Token ID",
+                                    "required": true
+                                },
+                                {
+                                    "name": "probability",
+                                    "type": "number",
+                                    "label": "Probability",
+                                    "required": true,
+                                    "validate": {
+                                        "max": 100,
+                                        "min": -100
+                                    }
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Token Probability"
+                        },
+                        "type": "array",
+                        "label": "Token Probability"
+                    },
+                    {
+                        "name": "seed",
+                        "type": "integer",
+                        "label": "Seed"
+                    },
+                    {
+                        "name": "stop",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Stop Sequence"
+                        },
+                        "type": "array",
+                        "label": "Stop Sequences",
+                        "validate": {
+                            "maxItems": 4
+                        }
+                    },
+                    {
+                        "name": "additionalParameters",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Parameter Name",
+                                    "required": true
+                                },
+                                {
+                                    "name": "type",
+                                    "type": "select",
+                                    "label": "Input Type",
+                                    "options": [
+                                        {
+                                            "label": "Text",
+                                            "value": "text",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "text",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ],
+                                            "default": true
+                                        },
+                                        {
+                                            "label": "Number",
+                                            "value": "number",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "number",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Boolean",
+                                            "value": "boolean",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "boolean",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Date",
+                                            "value": "date",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "date",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "label": "Any",
+                                            "value": "any",
+                                            "nested": [
+                                                {
+                                                    "name": "value",
+                                                    "type": "any",
+                                                    "label": "Parameter Value"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Input Parameter"
+                        },
+                        "type": "array",
+                        "label": "Other Input Parameters"
+                    },
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "max_tokens",
+                        "type": "uinteger",
+                        "label": "Max Completion Tokens"
+                    },
+                    {
+                        "name": "messages",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "role",
+                                    "type": "select",
+                                    "label": "Role",
+                                    "options": {
+                                        "store": [
+                                            {
+                                                "label": "User",
+                                                "value": "user",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "label": "Assistant",
+                                                "value": "assistant",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "label": "Developer / System",
+                                                "value": "system",
+                                                "nested": [
+                                                    {
+                                                        "help": "Text content of the message on behalf of the selected __Role__.",
+                                                        "name": "content",
+                                                        "type": "text",
+                                                        "label": "Text Content"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "required": true
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Message"
+                        },
+                        "type": "array",
+                        "label": "Messages",
+                        "required": true
+                    },
+                    {
+                        "name": "response_format",
+                        "type": "select",
+                        "label": "Response Format",
+                        "validate": {
+                            "enum": [
+                                "text",
+                                "json_object"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "reasoning_effort",
+                        "type": "select",
+                        "label": "Reasoning Effort",
+                        "validate": {
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "result",
+                        "type": "any",
+                        "label": "Result"
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "object",
+                        "type": "text",
+                        "label": "Object"
+                    },
+                    {
+                        "name": "created",
+                        "type": "date",
+                        "label": "Created"
+                    },
+                    {
+                        "name": "model",
+                        "type": "text",
+                        "label": "Model"
+                    },
+                    {
+                        "name": "choices",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "text",
+                                    "type": "text",
+                                    "label": "Text"
+                                },
+                                {
+                                    "name": "index",
+                                    "type": "number",
+                                    "label": "Index"
+                                },
+                                {
+                                    "name": "logprobs",
+                                    "type": "text",
+                                    "label": "Log Probs"
+                                },
+                                {
+                                    "name": "finish_reason",
+                                    "type": "text",
+                                    "label": "Finish Reason"
+                                },
+                                {
+                                    "name": "message",
+                                    "spec": [
+                                        {
+                                            "name": "role",
+                                            "type": "text",
+                                            "label": "Role"
+                                        },
+                                        {
+                                            "name": "content",
+                                            "type": "text",
+                                            "label": "Content"
+                                        },
+                                        {
+                                            "name": "refusal",
+                                            "type": "text",
+                                            "label": "Refusal"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Message"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "Choices"
+                    },
+                    {
+                        "name": "usage",
+                        "spec": [
+                            {
+                                "name": "prompt_tokens",
+                                "type": "number",
+                                "label": "Prompt Tokens"
+                            },
+                            {
+                                "name": "completion_tokens",
+                                "type": "text",
+                                "label": "Completion Tokens"
+                            },
+                            {
+                                "name": "total_tokens",
+                                "type": "number",
+                                "label": "Total Tokens"
+                            },
+                            {
+                                "name": "prompt_tokens_details",
+                                "spec": [
+                                    {
+                                        "name": "cached_tokens",
+                                        "type": "uinteger",
+                                        "label": "Cached Tokens"
+                                    },
+                                    {
+                                        "name": "text_tokens",
+                                        "type": "uinteger",
+                                        "label": "Text Tokens"
+                                    },
+                                    {
+                                        "name": "image_tokens",
+                                        "type": "uinteger",
+                                        "label": "Image Tokens"
+                                    },
+                                    {
+                                        "name": "audio_tokens",
+                                        "type": "uinteger",
+                                        "label": "Audio Tokens"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Prompt Tokens Details"
+                            },
+                            {
+                                "name": "completion_tokens_details",
+                                "spec": [
+                                    {
+                                        "name": "reasoning_tokens",
+                                        "type": "uinteger",
+                                        "label": "Reasoning Tokens"
+                                    },
+                                    {
+                                        "name": "text_tokens",
+                                        "type": "uinteger",
+                                        "label": "Text Tokens"
+                                    },
+                                    {
+                                        "name": "audio_tokens",
+                                        "type": "uinteger",
+                                        "label": "Audio Tokens"
+                                    },
+                                    {
+                                        "name": "accepted_prediction_tokens",
+                                        "type": "uinteger",
+                                        "label": "Accepted Prediction Tokens"
+                                    },
+                                    {
+                                        "name": "rejected_prediction_tokens",
+                                        "type": "uinteger",
+                                        "label": "Rejected Prediction Tokens"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Completion Tokens Details"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Usage"
+                    },
+                    {
+                        "name": "service_tier",
+                        "type": "text",
+                        "label": "Service Tier"
+                    },
+                    {
+                        "name": "system_fingerprint",
+                        "type": "text",
+                        "label": "System Fingerprint"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "module": "markdown:Compile",
+            "version": 2,
+            "parameters": {},
+            "mapper": {
+                "gfm": true,
+                "svg": false,
+                "data": "{{20.result}}",
+                "html": true,
+                "mathM1": false,
+                "sanitize": true,
+                "wholeDocument": false,
+                "sanitizeOutputType": "PROFILED_HTML"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1500,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "gfm": {
+                            "mode": "chose"
+                        },
+                        "svg": {
+                            "mode": "chose"
+                        },
+                        "html": {
+                            "mode": "chose"
+                        },
+                        "mathM1": {
+                            "mode": "chose"
+                        },
+                        "sanitize": {
+                            "mode": "chose"
+                        },
+                        "addedAttr": {
+                            "mode": "chose"
+                        },
+                        "addedTags": {
+                            "mode": "chose"
+                        },
+                        "forbiddenAttr": {
+                            "mode": "chose"
+                        },
+                        "forbiddenTags": {
+                            "mode": "chose"
+                        },
+                        "wholeDocument": {
+                            "mode": "chose"
+                        },
+                        "sanitizeOutputType": {
+                            "mode": "chose",
+                            "label": "Predefined Profiles"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "data",
+                        "type": "text",
+                        "label": "Markdown"
+                    },
+                    {
+                        "name": "gfm",
+                        "type": "boolean",
+                        "label": "GitHub Flavored Markdown",
+                        "required": true
+                    },
+                    {
+                        "name": "sanitize",
+                        "type": "boolean",
+                        "label": "Sanitize",
+                        "required": true
+                    },
+                    {
+                        "name": "sanitizeOutputType",
+                        "type": "select",
+                        "label": "Output Type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "PROFILED_HTML",
+                                "PREDEFINED_TAGS_ATTR"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "forbiddenTags",
+                        "spec": {
+                            "name": "value",
+                            "type": "text"
+                        },
+                        "type": "array",
+                        "label": "Forbidden Tags"
+                    },
+                    {
+                        "name": "forbiddenAttr",
+                        "spec": {
+                            "name": "value",
+                            "type": "text"
+                        },
+                        "type": "array",
+                        "label": "Forbidden Attributes"
+                    },
+                    {
+                        "name": "addedTags",
+                        "spec": {
+                            "name": "value",
+                            "type": "text"
+                        },
+                        "type": "array",
+                        "label": "Extended List of Allowed Tags"
+                    },
+                    {
+                        "name": "addedAttr",
+                        "spec": {
+                            "name": "value",
+                            "type": "text"
+                        },
+                        "type": "array",
+                        "label": "Extended List of Allowed Attributes"
+                    },
+                    {
+                        "name": "wholeDocument",
+                        "type": "boolean",
+                        "label": "Return Entire Document Including html <tags>",
+                        "required": true
+                    },
+                    {
+                        "name": "html",
+                        "type": "boolean",
+                        "label": "HTML",
+                        "required": true
+                    },
+                    {
+                        "name": "svg",
+                        "type": "boolean",
+                        "label": "SVG",
+                        "required": true
+                    },
+                    {
+                        "name": "mathM1",
+                        "type": "boolean",
+                        "label": "Math ML",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 13,
+            "module": "google-docs:createADocument",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 2732873
+            },
+            "mapper": {
+                "name": "report_{{1.business_overview.company_name}}_{{1.timestamp}}_draft",
+                "footer": false,
+                "header": false,
+                "content": "{{8.data}}",
+                "folderId": "/1-O9blav9Is8fgUUC2a5es_5ozTtsZpKS",
+                "destination": "drive"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1800,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "folderId": {
+                            "mode": "chose",
+                            "path": [
+                                "Self-Serve AI Audit"
+                            ]
+                        },
+                        "destination": {
+                            "label": "My Drive"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "DataDump (mark@promptadvisers.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name",
+                        "required": true
+                    },
+                    {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content",
+                        "required": true
+                    },
+                    {
+                        "name": "destination",
+                        "type": "select",
+                        "label": "Choose a Drive",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share",
+                                "team"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "header",
+                        "type": "boolean",
+                        "label": "Insert a Header",
+                        "required": true
+                    },
+                    {
+                        "name": "footer",
+                        "type": "boolean",
+                        "label": "Insert a Footer",
+                        "required": true
+                    },
+                    {
+                        "name": "folderId",
+                        "type": "folder",
+                        "label": "New Document's Location",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 14,
+            "module": "google-drive:getAFile",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 2304940
+            },
+            "mapper": {
+                "file": "{{13.id}}",
+                "select": "map",
+                "formatDrawings": "image/jpeg",
+                "formatDocuments": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "formatSpreadsheets": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "formatPresentations": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 2100,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "select": {
+                            "label": "Enter manually"
+                        },
+                        "formatDrawings": {
+                            "label": "JPEG"
+                        },
+                        "formatDocuments": {
+                            "label": "MS Word Document"
+                        },
+                        "formatSpreadsheets": {
+                            "label": "MS Excel"
+                        },
+                        "formatPresentations": {
+                            "label": "MS PowerPoint"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            },
+                            "label": "My Gmail (mark@promptadvisers.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "type": "hidden"
+                    },
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Enter a File ID",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "map",
+                                "value"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatDocuments",
+                        "type": "select",
+                        "label": "Convert Google Documents Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                "application/pdf",
+                                "application/vnd.oasis.opendocument.text",
+                                "text/html",
+                                "text/plain",
+                                "application/rtf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatSpreadsheets",
+                        "type": "select",
+                        "label": "Convert Google Spreadsheets Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                "application/x-vnd.oasis.opendocument.spreadsheet",
+                                "application/pdf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatPresentations",
+                        "type": "select",
+                        "label": "Convert Google Slides Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                                "application/pdf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatDrawings",
+                        "type": "select",
+                        "label": "Convert Google Drawings Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "image/jpeg",
+                                "image/png",
+                                "image/svg+xml",
+                                "application/pdf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "file",
+                        "type": "text",
+                        "label": "File ID",
+                        "required": true
+                    },
+                    {
+                        "type": "hidden"
+                    },
+                    {
+                        "name": "select",
+                        "type": "select",
+                        "label": "Enter a File ID",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "map",
+                                "value"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatDocuments",
+                        "type": "select",
+                        "label": "Convert Google Documents Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                "application/pdf",
+                                "application/vnd.oasis.opendocument.text",
+                                "text/html",
+                                "text/plain",
+                                "application/rtf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatSpreadsheets",
+                        "type": "select",
+                        "label": "Convert Google Spreadsheets Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                "application/x-vnd.oasis.opendocument.spreadsheet",
+                                "application/pdf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatPresentations",
+                        "type": "select",
+                        "label": "Convert Google Slides Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                                "application/pdf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "formatDrawings",
+                        "type": "select",
+                        "label": "Convert Google Drawings Files to Format",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "image/jpeg",
+                                "image/png",
+                                "image/svg+xml",
+                                "application/pdf"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "file",
+                        "type": "text",
+                        "label": "File ID",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 12,
+            "module": "cloudconvert:ConvertFile",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 4000874
+            },
+            "mapper": {
+                "export": {
+                    "downloadFile": true
+                },
+                "import": {
+                    "data": "{{14.data}}",
+                    "filename": "{{14.name}}",
+                    "importType": "upload"
+                },
+                "options": {
+                    "filename": "report_{{1.business_overview.company_name}}_{{1.timestamp}}.pdf",
+                    "useInputType": "no",
+                    "output_format": "pdf"
+                }
+            },
+            "metadata": {
+                "designer": {
+                    "x": 2400,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "export": {
+                            "nested": {
+                                "downloadFile": {
+                                    "mode": "chose"
+                                }
+                            }
+                        },
+                        "import": {
+                            "nested": {
+                                "importType": {
+                                    "label": "upload a file"
+                                }
+                            }
+                        },
+                        "options": {
+                            "nested": {
+                                "opts": {
+                                    "mode": "chose"
+                                },
+                                "useInputType": {
+                                    "mode": "chose",
+                                    "label": "I don't know the input format"
+                                },
+                                "output_format": {
+                                    "mode": "chose",
+                                    "label": "pdf"
+                                }
+                            }
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "cloudconvert3"
+                            },
+                            "label": "My CloudConvert API KEY connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:cloudconvert3,cloudconvert2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "import",
+                        "spec": [
+                            {
+                                "name": "importType",
+                                "type": "select",
+                                "label": "Input file",
+                                "required": true,
+                                "validate": {
+                                    "enum": [
+                                        "upload",
+                                        "url"
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "required": true
+                            },
+                            {
+                                "name": "filename",
+                                "type": "filename",
+                                "label": "File name",
+                                "required": true
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Import options",
+                        "required": true
+                    },
+                    {
+                        "name": "options",
+                        "spec": [
+                            {
+                                "name": "useInputType",
+                                "type": "select",
+                                "label": "Format",
+                                "required": true,
+                                "validate": {
+                                    "enum": [
+                                        "yes",
+                                        "no"
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "output_format",
+                                "type": "select",
+                                "label": "Output format",
+                                "required": true
+                            },
+                            {
+                                "name": "filename",
+                                "type": "filename",
+                                "label": "File name",
+                                "required": true
+                            },
+                            {
+                                "name": "opts",
+                                "spec": [
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Name",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "value",
+                                        "type": "text",
+                                        "label": "Value"
+                                    }
+                                ],
+                                "type": "array",
+                                "label": "Conversion and engine specific options"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Convert options",
+                        "required": true
+                    },
+                    {
+                        "name": "export",
+                        "spec": [
+                            {
+                                "name": "downloadFile",
+                                "type": "boolean",
+                                "label": "Download a file",
+                                "required": true
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Export options",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 19,
+            "module": "util:SetVariable2",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "Convert",
+                "scope": "roundtrip",
+                "value": "{{base64(12.data)}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 2700,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "scope": {
+                            "label": "One cycle"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "Convert",
+                        "type": "any",
+                        "label": "Convert"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 16,
+            "module": "google-email:ActionSendEmail",
+            "version": 2,
+            "parameters": {
+                "account": 2304940
+            },
+            "mapper": {
+                "cc": [],
+                "to": [
+                    "{{1.email}}"
+                ],
+                "bcc": [],
+                "from": "",
+                "html": "<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Your AI Audit Is Ready</title>\n  </head>\n  <body style=\"margin:0; padding:0; font-family: Arial, sans-serif;\">\n    \n    <!-- Hidden Preheader (for Gmail snippet) -->\n    <span style=\"display:none; font-size:0; line-height:0; max-height:0; overflow:hidden; color:#ffffff;\">\n      Thanks for requesting your AI Audit! We’re excited to share the results.\n    </span>\n    \n    <table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n      <tr>\n        <td align=\"center\" style=\"background-color:#000000; padding:30px 0;\">\n          <h1 style=\"color:#ffffff; margin:0; font-size:28px;\">\n            Your AI Audit Is Ready\n          </h1>\n        </td>\n      </tr>\n      <tr>\n        <td align=\"center\" style=\"padding:20px;\">\n          <table width=\"600\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"max-width:600px;\">\n            <tr>\n              <td style=\"padding:20px; text-align:left;\">\n                <p style=\"margin-top:0; font-size:16px; line-height:1.6;\">\n                  Hi there!\n                </p>\n                <p style=\"font-size:16px; line-height:1.6;\">\n                  We’re excited to share your completed AI Audit file. Please find the attachment below. If you have any questions, just reply to this email.\n                </p>\n                <hr style=\"border:none; border-top:1px solid #000000; margin:20px 0;\">\n                <p style=\"font-size:16px; line-height:1.6; margin-bottom:0;\">\n                  Best,<br>\n                  <strong>Early AI-Dopters Team</strong>\n                </p>\n              </td>\n            </tr>\n          </table>\n        </td>\n      </tr>\n    </table>\n    \n  </body>\n</html>",
+                "subject": "✅ Your AI Audit Is Ready",
+                "attachments": [
+                    {
+                        "cid": "{{12.filename}}",
+                        "data": "{{12.data}}",
+                        "fileName": "{{12.filename}}"
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 3000,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "cc": {
+                            "mode": "chose"
+                        },
+                        "to": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "bcc": {
+                            "mode": "chose"
+                        },
+                        "attachments": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        }
+                    },
+                    "parameters": {
+                        "account": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            },
+                            "label": "My Gmail (mark@promptadvisers.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "text",
+                        "label": "From"
+                    },
+                    {
+                        "name": "to",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "html",
+                        "type": "text",
+                        "label": "Content"
+                    },
+                    {
+                        "name": "attachments",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "type": "filename",
+                                "label": "File name",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "required": true,
+                                "semantic": "file:data"
+                            },
+                            {
+                                "name": "cid",
+                                "type": "text",
+                                "label": "Content-ID"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Attachments"
+                    },
+                    {
+                        "name": "cc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Copy recipient"
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Blind copy recipient"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us1.make.com",
+        "notes": []
+    }
+}

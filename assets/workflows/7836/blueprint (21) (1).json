@@ -1,0 +1,227 @@
+{
+    "name": "Crear_imagen_tool",
+    "flow": [
+        {
+            "id": 8,
+            "module": "ideogram:generateAnImage",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 7401242
+            },
+            "mapper": {
+                "model": "V_2_TURBO",
+                "prompt": "{{var.input.Prompt}}",
+                "resolution": "RESOLUTION_736_1312",
+                "style_type": "REALISTIC",
+                "color_palette": {},
+                "magic_prompt_option": "AUTO"
+            },
+            "metadata": {
+                "designer": {
+                    "x": -54,
+                    "y": -11
+                },
+                "restore": {
+                    "expect": {
+                        "model": {
+                            "mode": "chose",
+                            "label": "V_2_TURBO"
+                        },
+                        "resolution": {
+                            "mode": "chose",
+                            "label": "736x1312"
+                        },
+                        "style_type": {
+                            "mode": "chose",
+                            "label": "Realistic"
+                        },
+                        "color_palette": {
+                            "nested": {
+                                "preSetOrCustom": {
+                                    "mode": "chose",
+                                    "label": "Empty"
+                                }
+                            }
+                        },
+                        "magic_prompt_option": {
+                            "mode": "chose",
+                            "label": "Auto"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "ideogram"
+                            },
+                            "label": "Buena"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:ideogram",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "prompt",
+                        "type": "text",
+                        "label": "Prompt",
+                        "required": true
+                    },
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "V_1",
+                                "V_1_TURBO",
+                                "V_2",
+                                "V_2_TURBO"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "magic_prompt_option",
+                        "type": "select",
+                        "label": "Magic Prompt Option",
+                        "validate": {
+                            "enum": [
+                                "AUTO",
+                                "ON",
+                                "OFF"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "negative_prompt",
+                        "type": "text",
+                        "label": "Negative Prompt"
+                    },
+                    {
+                        "name": "seed",
+                        "type": "integer",
+                        "label": "Seed",
+                        "validate": {
+                            "max": 2147483647,
+                            "min": 0
+                        }
+                    },
+                    {
+                        "name": "resolution",
+                        "type": "select",
+                        "label": "Resolution"
+                    },
+                    {
+                        "name": "style_type",
+                        "type": "select",
+                        "label": "Style Type",
+                        "validate": {
+                            "enum": [
+                                "AUTO",
+                                "GENERAL",
+                                "REALISTIC",
+                                "DESIGN",
+                                "RENDER_3D",
+                                "ANIME"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "color_palette",
+                        "spec": [
+                            {
+                                "name": "preSetOrCustom",
+                                "type": "select",
+                                "label": "PreSetOrCustom",
+                                "validate": {
+                                    "enum": [
+                                        "PRESET",
+                                        "CUSTOM"
+                                    ]
+                                }
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Color Palette"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "scenario-service:ReturnData",
+            "version": 2,
+            "parameters": {},
+            "mapper": {
+                "Imagen_URL": "{{8.url}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 251,
+                    "y": -4
+                },
+                "restore": {},
+                "expect": [
+                    {
+                        "name": "Imagen_URL",
+                        "type": "text",
+                        "label": "",
+                        "required": true
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com",
+        "notes": []
+    },
+    "io": {
+        "input_spec": [
+            {
+                "help": "El prompt para generar la imagen para la publicación",
+                "name": "Prompt",
+                "type": "text",
+                "label": "",
+                "default": "",
+                "required": true,
+                "multiline": false
+            }
+        ],
+        "output_spec": [
+            {
+                "help": "URL de la Imagen generada para la publicación",
+                "name": "Imagen_URL",
+                "type": "text",
+                "label": "",
+                "default": "",
+                "required": true,
+                "multiline": false
+            }
+        ]
+    }
+}
