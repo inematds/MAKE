@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workflows Make.com | INEMA.Make VIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: { 600: '#334155', 700: '#1e293b', 800: '#1e293b', 900: '#0f172a' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background: #0f172a; }
+    .card-hover { transition: all 0.2s ease; }
+    .card-hover:hover { transform: translateY(-2px); border-color: #38bdf8; box-shadow: 0 4px 20px rgba(56, 189, 248, 0.15); }
+    .badge-vip { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+    .badge-ai { background: linear-gradient(135deg, #ec4899, #f472b6); }
+    .scrollbar-thin::-webkit-scrollbar { width: 6px; }
+    .scrollbar-thin::-webkit-scrollbar-track { background: #1e293b; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+    .module-tag { transition: all 0.15s ease; }
+    .module-tag:hover { background: #38bdf8; color: #0f172a; }
+    .module-tag.active { background: #38bdf8; color: #0f172a; }
+    .category-item { transition: all 0.15s ease; }
+    .category-item:hover { color: #38bdf8; }
+    .category-item.active { color: #38bdf8; font-weight: 600; }
+    .modal-overlay { backdrop-filter: blur(4px); }
+    .image-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 100; display: none; }
+    .lightbox.active { display: flex; align-items: center; justify-content: center; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+  </style>
+</head>
+<body class="text-white min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-dark-800 via-dark-700 to-dark-800 border-b border-dark-600">
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-4">
+          <a href="index.html" class="text-2xl font-bold text-red-500">INEMA.Make</a>
+          <span class="text-neutral-500">|</span>
+          <span class="text-amber-400 font-medium">Biblioteca de Workflows</span>
+          <a href="https://t.me/+dN1X5kYnfgFkNmQx" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full badge-vip text-dark-900 text-sm font-bold hover:shadow-lg hover:shadow-amber-500/30 transition-all">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/>
+            </svg>
+            VIP
+          </a>
+        </div>
+        <a href="index.html" class="text-neutral-400 hover:text-white transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 gap-4 max-w-lg">
+        <div class="bg-dark-900/50 rounded-lg p-3 text-center border border-dark-600">
+          <div id="stat-workflows" class="text-2xl font-bold text-cyan-400">0</div>
+          <div class="text-xs text-neutral-400">Workflows</div>
+        </div>
+        <div class="bg-dark-900/50 rounded-lg p-3 text-center border border-dark-600">
+          <div id="stat-categories" class="text-2xl font-bold text-purple-400">0</div>
+          <div class="text-xs text-neutral-400">Categorias</div>
+        </div>
+        <div class="bg-dark-900/50 rounded-lg p-3 text-center border border-dark-600">
+          <div id="stat-modules" class="text-2xl font-bold text-pink-400">0</div>
+          <div class="text-xs text-neutral-400">Modulos</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search -->
+  <div class="max-w-7xl mx-auto px-4 py-4">
+    <div class="relative max-w-xl">
+      <input type="text" id="search-input" placeholder="Buscar workflows por nome, modulo ou categoria..."
+        class="w-full px-4 py-3 pl-12 bg-dark-700 border border-dark-600 rounded-xl text-white placeholder-neutral-500 focus:outline-none focus:border-cyan-500 transition-colors">
+      <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-4 pb-12 flex gap-6">
+
+    <!-- Sidebar -->
+    <aside class="w-72 flex-shrink-0 hidden lg:block">
+      <div class="sticky top-4 space-y-6">
+
+        <!-- Categories -->
+        <div class="bg-dark-700 rounded-xl border border-dark-600 p-4">
+          <h3 class="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-3">Categorias</h3>
+          <div id="categories-list" class="space-y-1">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Top Modules -->
+        <div class="bg-dark-700 rounded-xl border border-dark-600 p-4">
+          <h3 class="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-3">Modulos Populares</h3>
+          <div id="modules-list" class="flex flex-wrap gap-2">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Sort -->
+        <div class="bg-dark-700 rounded-xl border border-dark-600 p-4">
+          <h3 class="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-3">Ordenar</h3>
+          <select id="sort-select" class="w-full px-3 py-2 bg-dark-900 border border-dark-600 rounded-lg text-white text-sm focus:outline-none focus:border-cyan-500">
+            <option value="name-asc">Nome (A-Z)</option>
+            <option value="name-desc">Nome (Z-A)</option>
+            <option value="nodes-desc">Mais Nodes</option>
+            <option value="nodes-asc">Menos Nodes</option>
+          </select>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- Workflows Grid -->
+    <main class="flex-1">
+      <div class="flex items-center justify-between mb-4">
+        <p id="results-count" class="text-neutral-400 text-sm">Carregando...</p>
+        <button id="clear-filters" class="hidden text-sm text-cyan-400 hover:text-cyan-300 transition-colors">
+          Limpar filtros
+        </button>
+      </div>
+      <div id="workflows-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <!-- Populated by JS -->
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-black/80 modal-overlay z-50 hidden items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-dark-700 rounded-2xl border border-dark-600 max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-6 border-b border-dark-600">
+        <h2 id="modal-title" class="text-xl font-bold text-white truncate pr-4"></h2>
+        <button onclick="closeModal()" class="p-2 hover:bg-dark-600 rounded-lg transition-colors">
+          <svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="flex-1 overflow-y-auto p-6 scrollbar-thin">
+        <!-- Images -->
+        <div id="modal-images" class="image-gallery mb-6"></div>
+
+        <!-- Info -->
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <h4 class="text-sm font-semibold text-neutral-400 mb-2">Informacoes</h4>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-neutral-400">Nodes:</span>
+                <span id="modal-nodes" class="text-white font-medium"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-neutral-400">Imagens:</span>
+                <span id="modal-image-count" class="text-white font-medium"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-neutral-400">Fonte:</span>
+                <span class="text-amber-400 font-medium">INEMA VIP</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold text-neutral-400 mb-2">Categorias</h4>
+            <div id="modal-categories" class="flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+
+        <!-- Modules Used -->
+        <div class="mb-6">
+          <h4 class="text-sm font-semibold text-neutral-400 mb-2">Modulos Utilizados</h4>
+          <div id="modal-modules" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- JSON Preview -->
+        <div>
+          <h4 class="text-sm font-semibold text-neutral-400 mb-2">Preview do Blueprint</h4>
+          <pre id="modal-json" class="bg-dark-900 rounded-lg p-4 text-xs text-neutral-300 overflow-x-auto max-h-64 scrollbar-thin"></pre>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="flex items-center justify-between p-6 border-t border-dark-600 bg-dark-800">
+        <a href="https://t.me/+dN1X5kYnfgFkNmQx" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg badge-vip text-dark-900 font-semibold hover:shadow-lg transition-all">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/>
+          </svg>
+          Acessar no Telegram VIP
+        </a>
+        <div class="flex gap-2">
+          <button id="btn-copy" class="px-4 py-2 bg-dark-600 hover:bg-dark-500 text-white rounded-lg transition-colors text-sm">
+            Copiar JSON
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+    <button class="absolute top-4 right-4 p-2 bg-dark-700 rounded-full hover:bg-dark-600 transition-colors">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    let allWorkflows = [];
+    let filteredWorkflows = [];
+    let currentCategory = null;
+    let selectedModules = new Set();
+    let currentWorkflow = null;
+
+    // Load data
+    async function loadData() {
+      try {
+        const response = await fetch('workflow_inventory.json');
+        const data = await response.json();
+
+        allWorkflows = data.workflows;
+        filteredWorkflows = [...allWorkflows];
+
+        // Update stats
+        document.getElementById('stat-workflows').textContent = data.metadata.total_workflows;
+        document.getElementById('stat-categories').textContent = data.metadata.total_categories;
+        document.getElementById('stat-modules').textContent = data.top_modules.length;
+
+        // Populate categories
+        const categoriesList = document.getElementById('categories-list');
+        categoriesList.innerHTML = `
+          <button onclick="filterByCategory(null)" class="category-item w-full text-left px-3 py-2 rounded-lg hover:bg-dark-600 text-neutral-300 active">
+            Todas <span class="text-neutral-500">(${data.metadata.total_workflows})</span>
+          </button>
+        `;
+        Object.entries(data.categories).forEach(([cat, count]) => {
+          categoriesList.innerHTML += `
+            <button onclick="filterByCategory('${cat}')" class="category-item w-full text-left px-3 py-2 rounded-lg hover:bg-dark-600 text-neutral-300" data-category="${cat}">
+              ${cat} <span class="text-neutral-500">(${count})</span>
+            </button>
+          `;
+        });
+
+        // Populate modules
+        const modulesList = document.getElementById('modules-list');
+        data.top_modules.slice(0, 15).forEach(mod => {
+          modulesList.innerHTML += `
+            <button onclick="toggleModule('${mod.name}')" class="module-tag px-3 py-1 bg-dark-600 text-neutral-300 rounded-full text-xs hover:bg-cyan-500" data-module="${mod.name}">
+              ${mod.name}
+            </button>
+          `;
+        });
+
+        renderWorkflows();
+      } catch (error) {
+        console.error('Error loading data:', error);
+        document.getElementById('results-count').textContent = 'Erro ao carregar dados';
+      }
+    }
+
+    // Render workflows
+    function renderWorkflows() {
+      const grid = document.getElementById('workflows-grid');
+      const count = document.getElementById('results-count');
+
+      if (filteredWorkflows.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-12">
+            <p class="text-neutral-400">Nenhum workflow encontrado</p>
+          </div>
+        `;
+        count.textContent = '0 workflows';
+        return;
+      }
+
+      count.textContent = `${filteredWorkflows.length} workflows`;
+
+      grid.innerHTML = filteredWorkflows.map(wf => `
+        <div onclick="openModal('${wf.id}')" class="bg-dark-700 rounded-xl border border-dark-600 overflow-hidden cursor-pointer card-hover">
+          ${wf.thumbnail ? `
+            <div class="aspect-video bg-dark-800 overflow-hidden">
+              <img src="${wf.thumbnail}" alt="${wf.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'flex items-center justify-center h-full text-neutral-500\\'>Make</div>'">
+            </div>
+          ` : `
+            <div class="aspect-video bg-dark-800 flex items-center justify-center">
+              <span class="text-2xl font-bold text-neutral-600">Make</span>
+            </div>
+          `}
+          <div class="p-4">
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <h3 class="font-semibold text-white text-sm line-clamp-2">${wf.name}</h3>
+              <span class="flex-shrink-0 px-2 py-0.5 text-xs font-bold rounded badge-vip text-dark-900">VIP</span>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-neutral-400 mb-3">
+              <span class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                ${wf.node_count} nodes
+              </span>
+              ${wf.image_count > 0 ? `
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  ${wf.image_count}
+                </span>
+              ` : ''}
+            </div>
+            <div class="flex flex-wrap gap-1">
+              ${wf.categories.slice(0, 2).map(cat => `
+                <span class="px-2 py-0.5 bg-dark-600 text-neutral-400 text-xs rounded">${cat}</span>
+              `).join('')}
+            </div>
+            <div class="flex flex-wrap gap-1 mt-2">
+              ${wf.module_types.slice(0, 4).map(mod => `
+                <span class="px-2 py-0.5 bg-cyan-500/20 text-cyan-400 text-xs rounded">${mod}</span>
+              `).join('')}
+              ${wf.module_types.length > 4 ? `<span class="px-2 py-0.5 text-neutral-500 text-xs">+${wf.module_types.length - 4}</span>` : ''}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Filter by category
+    function filterByCategory(category) {
+      currentCategory = category;
+      applyFilters();
+
+      // Update UI
+      document.querySelectorAll('.category-item').forEach(el => {
+        el.classList.remove('active');
+        if ((category === null && !el.dataset.category) || el.dataset.category === category) {
+          el.classList.add('active');
+        }
+      });
+    }
+
+    // Toggle module filter
+    function toggleModule(module) {
+      if (selectedModules.has(module)) {
+        selectedModules.delete(module);
+      } else {
+        selectedModules.add(module);
+      }
+      applyFilters();
+
+      // Update UI
+      document.querySelectorAll('.module-tag').forEach(el => {
+        if (selectedModules.has(el.dataset.module)) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      });
+    }
+
+    // Apply all filters
+    function applyFilters() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const sortValue = document.getElementById('sort-select').value;
+
+      filteredWorkflows = allWorkflows.filter(wf => {
+        // Category filter
+        if (currentCategory && !wf.categories.includes(currentCategory)) {
+          return false;
+        }
+
+        // Module filter
+        if (selectedModules.size > 0) {
+          const hasModule = [...selectedModules].some(mod => wf.module_types.includes(mod));
+          if (!hasModule) return false;
+        }
+
+        // Search filter
+        if (searchTerm) {
+          const searchText = (wf.name + ' ' + wf.categories.join(' ') + ' ' + wf.module_types.join(' ')).toLowerCase();
+          if (!searchText.includes(searchTerm)) return false;
+        }
+
+        return true;
+      });
+
+      // Sort
+      filteredWorkflows.sort((a, b) => {
+        switch (sortValue) {
+          case 'name-asc': return a.name.localeCompare(b.name);
+          case 'name-desc': return b.name.localeCompare(a.name);
+          case 'nodes-desc': return b.node_count - a.node_count;
+          case 'nodes-asc': return a.node_count - b.node_count;
+          default: return 0;
+        }
+      });
+
+      // Show/hide clear button
+      const clearBtn = document.getElementById('clear-filters');
+      if (currentCategory || selectedModules.size > 0 || searchTerm) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+
+      renderWorkflows();
+    }
+
+    // Clear all filters
+    function clearFilters() {
+      currentCategory = null;
+      selectedModules.clear();
+      document.getElementById('search-input').value = '';
+      document.getElementById('sort-select').value = 'name-asc';
+
+      document.querySelectorAll('.category-item').forEach((el, i) => {
+        el.classList.toggle('active', i === 0);
+      });
+      document.querySelectorAll('.module-tag').forEach(el => {
+        el.classList.remove('active');
+      });
+
+      filteredWorkflows = [...allWorkflows];
+      renderWorkflows();
+      document.getElementById('clear-filters').classList.add('hidden');
+    }
+
+    // Open modal
+    function openModal(workflowId) {
+      const workflow = allWorkflows.find(wf => wf.id === workflowId);
+      if (!workflow) return;
+
+      currentWorkflow = workflow;
+
+      document.getElementById('modal-title').textContent = workflow.name;
+      document.getElementById('modal-nodes').textContent = workflow.node_count;
+      document.getElementById('modal-image-count').textContent = workflow.image_count;
+
+      // Categories
+      document.getElementById('modal-categories').innerHTML = workflow.categories.map(cat =>
+        `<span class="px-3 py-1 bg-dark-600 text-neutral-300 rounded-full text-sm">${cat}</span>`
+      ).join('');
+
+      // Modules
+      document.getElementById('modal-modules').innerHTML = workflow.modules.map(mod =>
+        `<span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">${mod.app}:${mod.action}</span>`
+      ).join('');
+
+      // Images
+      document.getElementById('modal-images').innerHTML = workflow.images.map(img =>
+        `<img src="${img.path}" alt="${img.name}" class="rounded-lg cursor-pointer hover:opacity-80 transition-opacity" onclick="openLightbox('${img.path}')" loading="lazy" onerror="this.style.display='none'">`
+      ).join('');
+
+      // JSON preview
+      document.getElementById('modal-json').textContent = JSON.stringify({
+        name: workflow.name,
+        file: workflow.file,
+        path: workflow.path,
+        node_count: workflow.node_count,
+        modules: workflow.modules.slice(0, 5),
+        categories: workflow.categories
+      }, null, 2);
+
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+      document.getElementById('modal').classList.remove('flex');
+      document.body.style.overflow = '';
+      currentWorkflow = null;
+    }
+
+    // Lightbox
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+      event.stopPropagation();
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Copy JSON
+    document.getElementById('btn-copy').addEventListener('click', async () => {
+      if (!currentWorkflow) return;
+      try {
+        await navigator.clipboard.writeText(JSON.stringify(currentWorkflow, null, 2));
+        document.getElementById('btn-copy').textContent = 'Copiado!';
+        setTimeout(() => {
+          document.getElementById('btn-copy').textContent = 'Copiar JSON';
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+
+    // Event listeners
+    document.getElementById('search-input').addEventListener('input', applyFilters);
+    document.getElementById('sort-select').addEventListener('change', applyFilters);
+    document.getElementById('clear-filters').addEventListener('click', clearFilters);
+
+    // Close modal on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (document.getElementById('lightbox').classList.contains('active')) {
+          closeLightbox();
+        } else {
+          closeModal();
+        }
+      }
+    });
+
+    // Close modal on outside click
+    document.getElementById('modal').addEventListener('click', (e) => {
+      if (e.target.id === 'modal') {
+        closeModal();
+      }
+    });
+
+    // Initialize
+    loadData();
+  </script>
+
+</body>
+</html>
